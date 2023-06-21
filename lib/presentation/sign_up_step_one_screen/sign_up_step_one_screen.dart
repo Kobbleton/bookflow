@@ -128,6 +128,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                   style: AppStyle.txtOpenSansBold16.copyWith(
                                       letterSpacing: getHorizontalSize(0.2))),
                               TextField(
+                                style: AppStyle.txtOpenSansBold20,
                                 controller: fullNameController,
                                 decoration: InputDecoration(
                                   hintText: 'Enter Full Name',
@@ -166,8 +167,8 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                           child: CustomImageView(
                                               svgPath:
                                                   ImageConstant.imgArrowdown)),
-                                      hintText: "United States",
-                                      margin: getMargin(top: 15),
+                                      hintText: "Choose country",
+                                      margin: getMargin(top: 16),
                                       items: countriesList,
                                       onChanged: (value) {})
                                 ]))

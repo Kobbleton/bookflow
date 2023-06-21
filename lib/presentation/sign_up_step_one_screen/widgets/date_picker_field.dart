@@ -69,6 +69,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
             },
             child: AbsorbPointer(
               child: TextField(
+                style: AppStyle.txtOpenSansBold20,
                 controller: dateController,
                 decoration: InputDecoration(
                   hintText: '1/01/2023',
