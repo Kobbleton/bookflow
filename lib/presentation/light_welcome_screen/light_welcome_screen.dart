@@ -5,7 +5,7 @@ import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
-import '../light_welcome_screen/widgets/slidergreeting_item_widget.dart';
+import 'widgets/slider_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
