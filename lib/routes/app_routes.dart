@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
-import '../presentation/light_sign_up_step_one_screen/sign_up_step_one_screen.dart';
+import '../presentation/sign_up_step_two_screen/sign_up_step_two_screen.dart';
 import '../presentation/sign_up_step_one_screen/sign_up_step_one_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/welcome_screen/welcome_screen.dart';

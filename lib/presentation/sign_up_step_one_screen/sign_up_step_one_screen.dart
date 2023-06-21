@@ -1,6 +1,7 @@
+import 'package:bookflow/presentation/sign_up_step_one_screen/widgets/custom_textfield.dart';
+import 'package:flutter/material.dart';
 import 'package:bookflow/core/utils/countries_list.dart';
 import 'package:bookflow/presentation/sign_up_step_one_screen/widgets/date_picker_field.dart';
-
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -10,7 +11,6 @@ import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_image_view.dart';
-import 'package:flutter/material.dart';
 
 class SignUpStepOneScreen extends StatefulWidget {
   const SignUpStepOneScreen({Key? key}) : super(key: key);
@@ -20,17 +20,20 @@ class SignUpStepOneScreen extends StatefulWidget {
 }
 
 class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
+  // Declaring text editing controllers to control the full name and date input fields.
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
 
   @override
   void dispose() {
+    // Disposing of the fullNameController when the widget is disposed of.
     fullNameController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Creating the UI of the SignUpStepOneScreen inside the SafeArea to ensure no overlap with system UI.
     return SafeArea(
         child: Scaffold(
             backgroundColor: ColorConstant.white,
@@ -42,9 +45,11 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        // Header Row with a back button and a progress indicator.
                         Padding(
                             padding: getPadding(top: 26, right: 83),
                             child: Row(children: [
+                              // Back button with custom image.
                               CustomImageView(
                                   svgPath: ImageConstant.imgArrowleft,
                                   height: getSize(28),
@@ -52,6 +57,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                   onTap: () {
                                     onTapImgArrowleft(context);
                                   }),
+                              // Progress indicator to show the progress of the signup process.
                               Expanded(
                                   child: Padding(
                                       padding: getPadding(
@@ -78,6 +84,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                                           ColorConstant
                                                               .cyan700))))))
                             ])),
+                        // Title text.
                         Container(
                             width: getHorizontalSize(352),
                             margin: getMargin(top: 38, right: 30),
@@ -85,6 +92,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                 maxLines: null,
                                 textAlign: TextAlign.center,
                                 style: AppStyle.txtOpenSansBold32)),
+                        // Subtitle text.
                         Container(
                             width: getHorizontalSize(376),
                             margin: getMargin(top: 13, right: 5),
@@ -94,6 +102,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                 textAlign: TextAlign.center,
                                 style: AppStyle.txtOpenSansRegular18.copyWith(
                                     letterSpacing: getHorizontalSize(0.2)))),
+                        // User profile image with an edit icon on the bottom right corner.
                         Align(
                             alignment: Alignment.center,
                             child: Container(
@@ -103,6 +112,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                 child: Stack(
                                     alignment: Alignment.bottomRight,
                                     children: [
+                                      // User profile image.
                                       CustomImageView(
                                           imagePath: ImageConstant.robotAvatar,
                                           height: getSize(100),
@@ -110,42 +120,25 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                           radius: BorderRadius.circular(
                                               getHorizontalSize(50)),
                                           alignment: Alignment.center),
+                                      // Edit icon.
                                       CustomImageView(
                                           svgPath: ImageConstant.imgEdit,
                                           height: getSize(25),
                                           width: getSize(25),
                                           alignment: Alignment.bottomRight)
                                     ]))),
+                        // Full Name text field.
                         Padding(
                           padding: getPadding(top: 62),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text("Full Name",
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                  style: AppStyle.txtOpenSansBold16.copyWith(
-                                      letterSpacing: getHorizontalSize(0.2))),
-                              TextField(
-                                style: AppStyle.txtOpenSansBold20,
-                                controller: fullNameController,
-                                decoration: InputDecoration(
-                                  hintText: 'Enter Full Name',
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: ColorConstant.cyan700),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: ColorConstant.cyan700),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          child: CustomTextField(
+                            fullNameController: fullNameController,
+                            hintText: 'Enter Full Name',
+                            labelText: 'Full Name',
                           ),
                         ),
+                        // Date picker field.
                         const DatePickerField(),
+                        // Country dropdown field.
                         Padding(
                             padding: getPadding(top: 26),
                             child: Column(
@@ -181,6 +174,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      // Continue button that navigates to the next screen.
                       CustomButton(
                           height: getVerticalSize(58),
                           text: "Continue",
@@ -190,19 +184,12 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                     ]))));
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
+  // Method for handling the onTap event of the back button, which navigates back to the previous screen.
   onTapImgArrowleft(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Navigates to the lightSignUpStepFiveScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the `Navigator` widget
-  /// to push the named route for the lightSignUpStepFiveScreen.
+  // Method for handling the onTap event of the Continue button, which navigates to the next screen.
   onTapContinue(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.signUpStepTwoScreen);
   }

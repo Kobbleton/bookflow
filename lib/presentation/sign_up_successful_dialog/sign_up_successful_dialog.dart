@@ -2,16 +2,46 @@ import 'package:flutter/material.dart';
 
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
+import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_image_view.dart';
 
 // ignore_for_file: must_be_immutable
-class LightSignUpSuccessfulDialog extends StatelessWidget {
+class LightSignUpSuccessfulDialog extends StatefulWidget {
   const LightSignUpSuccessfulDialog({Key? key})
       : super(
           key: key,
         );
+
+  @override
+  State<LightSignUpSuccessfulDialog> createState() =>
+      _LightSignUpSuccessfulDialogState();
+}
+
+class _LightSignUpSuccessfulDialogState
+    extends State<LightSignUpSuccessfulDialog>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1, milliseconds: 500),
+      vsync: this,
+    )..repeat();
+
+    Future.delayed(const Duration(seconds: 6), () {
+      Navigator.pushNamed(context, AppRoutes.welcomeScreen);
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +103,17 @@ class LightSignUpSuccessfulDialog extends StatelessWidget {
               ),
             ),
           ),
-          CustomImageView(
-            imagePath: ImageConstant.imgVector,
-            height: getSize(
-              60,
-            ),
-            width: getSize(
-              60,
-            ),
-            margin: getMargin(
-              top: 28,
+          Padding(padding: getPadding(top: 28)),
+          RotationTransition(
+            turns: _controller,
+            child: CustomImageView(
+              imagePath: ImageConstant.imgVector,
+              height: getSize(
+                60,
+              ),
+              width: getSize(
+                60,
+              ),
             ),
           ),
         ],
