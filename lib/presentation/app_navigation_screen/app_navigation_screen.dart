@@ -5,7 +5,7 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
-import '../light_sign_up_successful_dialog/light_sign_up_successful_dialog.dart';
+import '../sign_up_successful_dialog/sign_up_successful_dialog.dart';
 
 class AppNavigationScreen extends StatelessWidget {
   const AppNavigationScreen({Key? key}) : super(key: key);
@@ -299,7 +299,7 @@ class AppNavigationScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the `Navigator` widget
   /// to push the named route for the lightSignUpStepFourScreen.
   onTapLightsignupstepFour(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.lightSignUpStepFourScreen);
+    Navigator.pushNamed(context, AppRoutes.signUpStepOneScreen);
   }
 
   /// Navigates to the lightSplashScreen when the action is triggered.
@@ -308,7 +308,7 @@ class AppNavigationScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the `Navigator` widget
   /// to push the named route for the lightSplashScreen.
   onTapLightsplashscreen(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.lightSplashScreen);
+    Navigator.pushNamed(context, AppRoutes.splashScreen);
   }
 
   /// Navigates to the lightWelcomeScreen when the action is triggered.
@@ -317,7 +317,7 @@ class AppNavigationScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the `Navigator` widget
   /// to push the named route for the lightWelcomeScreen.
   onTapLightwelcomescreen(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.lightWelcomeScreen);
+    Navigator.pushNamed(context, AppRoutes.welcomeScreen);
   }
 
   /// Navigates to the lightSignUpStepFiveScreen when the action is triggered.
@@ -326,7 +326,7 @@ class AppNavigationScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the `Navigator` widget
   /// to push the named route for the lightSignUpStepFiveScreen.
   onTapLightsignupstepFive(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.lightSignUpStepFiveScreen);
+    Navigator.pushNamed(context, AppRoutes.signUpStepTwoScreen);
   }
 
   /// Displays an [AlertDialog] with a custom content widget using the

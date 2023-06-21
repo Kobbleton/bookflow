@@ -1,3 +1,6 @@
+import 'package:bookflow/presentation/light_sign_up_step_one_screen/widgets/listformtitle1_item_widget.dart';
+import 'package:bookflow/presentation/light_sign_up_step_one_screen/widgets/listpasswordtyp_item_widget.dart';
+
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -6,14 +9,13 @@ import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
-import '../light_sign_up_step_five_screen/widgets/listformtitle1_item_widget.dart';
-import '../light_sign_up_step_five_screen/widgets/listpasswordtyp_item_widget.dart';
+
 import 'package:flutter/material.dart';
 
-import '../light_sign_up_successful_dialog/light_sign_up_successful_dialog.dart';
+import '../sign_up_successful_dialog/sign_up_successful_dialog.dart';
 
-class LightSignUpStepFiveScreen extends StatelessWidget {
-  const LightSignUpStepFiveScreen({Key? key}) : super(key: key);
+class SignUpStepTwoScreen extends StatelessWidget {
+  const SignUpStepTwoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

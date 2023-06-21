@@ -10,15 +10,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+//todo 1 - implement Continue with the Google
+//todo 2 - implement I already have an account
+
 // ignore_for_file: must_be_immutable
-class LightWelcomeScreen extends StatefulWidget {
-  const LightWelcomeScreen({Key? key}) : super(key: key);
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<LightWelcomeScreen> createState() => _LightWelcomeScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _LightWelcomeScreenState extends State<LightWelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   int sliderIndex = 0;
 
   @override
@@ -234,6 +237,6 @@ class _LightWelcomeScreenState extends State<LightWelcomeScreen> {
   /// When the action is triggered, this function uses the `Navigator` widget
   /// to push the named route for the lightSignUpStepFourScreen.
   onTapGetstarted(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.lightSignUpStepFourScreen);
+    Navigator.pushNamed(context, AppRoutes.signUpStepOneScreen);
   }
 }

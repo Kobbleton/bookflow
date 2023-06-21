@@ -20,7 +20,7 @@ class ListformtitleItemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            "",
+            "Name",
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
             style: AppStyle.txtOpenSansBold16.copyWith(
@@ -34,7 +34,7 @@ class ListformtitleItemWidget extends StatelessWidget {
               top: 20,
             ),
             child: Text(
-              "",
+              "Surname",
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
               style: AppStyle.txtOpenSansBold20,

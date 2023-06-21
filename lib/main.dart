@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       title: 'booksflow_ui',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.lightSplashScreen,
+      initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,
     );
   }

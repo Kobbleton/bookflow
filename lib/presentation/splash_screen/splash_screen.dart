@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
+import '../../routes/app_routes.dart';
 import '../../theme/app_style.dart';
-import '../light_welcome_screen/light_welcome_screen.dart';
 
-class LightSplashScreen extends StatefulWidget {
-  const LightSplashScreen({Key? key})
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key})
       : super(
           key: key,
         );
 
   @override
-  State<LightSplashScreen> createState() => _LightSplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _LightSplashScreenState extends State<LightSplashScreen>
+class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
@@ -29,12 +29,7 @@ class _LightSplashScreenState extends State<LightSplashScreen>
     )..repeat();
 
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => LightWelcomeScreen(),
-        ),
-      );
+      Navigator.pushNamed(context, AppRoutes.welcomeScreen);
     });
   }
 
