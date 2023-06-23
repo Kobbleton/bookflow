@@ -5,13 +5,13 @@ import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
 
 // Custom TextField widget to be used throughout the application for uniform styling and properties
-class CustomTextField extends StatelessWidget {
+class CustomTextField_old extends StatelessWidget {
   // Constructor of the CustomTextField class
   // It accepts three required parameters:
   // fullNameController for controlling the text field,
   // labelText for the label to be shown above the text field
   // and hintText for the hint to be displayed inside the text field.
-  const CustomTextField({
+  const CustomTextField_old({
     Key? key,
     required this.fullNameController,
     required this.labelText,

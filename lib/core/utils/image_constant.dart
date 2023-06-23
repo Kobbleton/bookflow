@@ -27,4 +27,12 @@ class ImageConstant {
   static String imgCalendar = 'assets/images/img_calendar.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String lockIcon = 'assets/images/lock.svg';
+
+  static String profileIcon = 'assets/images/profile.svg';
+
+  static String emailIcon = 'assets/images/message.svg';
+
+  static String hideIcon = 'assets/images/hide.svg';
 }

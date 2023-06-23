@@ -1,7 +1,7 @@
-import 'package:bookflow/presentation/sign_up_step_one_screen/widgets/custom_textfield.dart';
+import 'package:bookflow/widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:bookflow/core/utils/countries_list.dart';
-import 'package:bookflow/presentation/sign_up_step_one_screen/widgets/date_picker_field.dart';
+import 'package:bookflow/presentation/signup_one_screen/widgets/date_picker_field.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -129,13 +129,30 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                     ]))),
                         // Full Name text field.
                         Padding(
-                          padding: getPadding(top: 62),
-                          child: CustomTextField(
-                            fullNameController: fullNameController,
-                            hintText: 'Enter Full Name',
-                            labelText: 'Full Name',
-                          ),
-                        ),
+                            padding: getPadding(top: 62),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: getPadding(left: 0),
+                                  child: Text("Full Name",
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.left,
+                                      style: AppStyle.txtOpenSansBold16
+                                          .copyWith(
+                                              letterSpacing:
+                                                  getHorizontalSize(0.2))),
+                                ),
+                                Padding(
+                                  padding: getPadding(top: 16),
+                                ),
+                                CustomTextField(
+                                  hintText: 'hintText',
+                                  iconPath: ImageConstant.profileIcon,
+                                ),
+                              ],
+                            )),
                         // Date picker field.
                         const DatePickerField(),
                         // Country dropdown field.
@@ -145,13 +162,14 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text("Country",
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle.txtOpenSansBold16
-                                          .copyWith(
-                                              letterSpacing:
-                                                  getHorizontalSize(0.2))),
+                                  Text(
+                                    "Country",
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.left,
+                                    style: AppStyle.txtOpenSansBold16.copyWith(
+                                      letterSpacing: getHorizontalSize(0.2),
+                                    ),
+                                  ),
                                   CustomDropDown(
                                       focusNode: FocusNode(),
                                       autofocus: true,

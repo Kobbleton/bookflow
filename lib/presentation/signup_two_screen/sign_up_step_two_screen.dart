@@ -1,5 +1,5 @@
-import 'package:bookflow/presentation/sign_up_step_one_screen/widgets/custom_textfield.dart';
-import 'package:bookflow/presentation/sign_up_step_two_screen/widgets/custom_password_field.dart';
+import 'package:bookflow/presentation/signup_one_screen/widgets/custom_textfield.dart';
+import 'package:bookflow/presentation/signup_two_screen/widgets/custom_password_field.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -84,7 +84,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                         //user
                         Padding(
                           padding: getPadding(top: 29),
-                          child: CustomTextField(
+                          child: CustomTextField_old(
                               fullNameController: usernameController,
                               labelText: 'Username',
                               hintText: 'Enter username'),
@@ -92,7 +92,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                         //email
                         Padding(
                           padding: getPadding(top: 23),
-                          child: CustomTextField(
+                          child: CustomTextField_old(
                               fullNameController: emailController,
                               labelText: 'Email',
                               hintText: 'Enter email'),
