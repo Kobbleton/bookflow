@@ -1,4 +1,4 @@
-import 'package:bookflow/widgets/custom_image_view.dart';
+import '../../widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';

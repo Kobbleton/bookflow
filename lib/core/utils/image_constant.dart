@@ -35,4 +35,6 @@ class ImageConstant {
   static String emailIcon = 'assets/images/message.svg';
 
   static String hideIcon = 'assets/images/hide.svg';
+
+  static String flagIcon = 'assets/images/flag.svg';
 }

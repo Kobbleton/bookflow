@@ -127,7 +127,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                                         text: "BookFlow 👋 ",
                                                         style: TextStyle(
                                                           color: ColorConstant
-                                                              .cyan700,
+                                                              .cyan500,
                                                           fontSize: getFontSize(
                                                             32,
                                                           ),
@@ -180,7 +180,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                                             spacing: 8,
                                                             activeDotColor:
                                                                 ColorConstant
-                                                                    .cyan700,
+                                                                    .cyan500,
                                                             dotColor:
                                                                 ColorConstant
                                                                     .gray300,

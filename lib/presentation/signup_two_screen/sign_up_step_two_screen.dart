@@ -1,5 +1,4 @@
-import 'package:bookflow/presentation/signup_one_screen/widgets/custom_textfield.dart';
-import 'package:bookflow/presentation/signup_two_screen/widgets/custom_password_field.dart';
+import '../../widgets/custom_input_field.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -47,7 +46,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: getPadding(right: 83),
+                            padding: getPadding(right: 84),
                             child: Row(children: [
                               CustomImageView(
                                   svgPath: ImageConstant.imgArrowleft,
@@ -60,9 +59,9 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                                   height: getVerticalSize(12),
                                   width: getHorizontalSize(216),
                                   margin:
-                                      getMargin(left: 55, top: 8, bottom: 8),
+                                      getMargin(left: 56, top: 8, bottom: 8),
                                   decoration: BoxDecoration(
-                                      color: ColorConstant.cyan700,
+                                      color: ColorConstant.cyan500,
                                       borderRadius: BorderRadius.circular(
                                           getHorizontalSize(6))))
                             ])),
@@ -81,37 +80,97 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                                 textAlign: TextAlign.left,
                                 style: AppStyle.txtOpenSansRegular18.copyWith(
                                     letterSpacing: getHorizontalSize(0.2)))),
+                        Padding(
+                          padding: getPadding(top: 20),
+                        ),
                         //user
                         Padding(
-                          padding: getPadding(top: 29),
-                          child: CustomTextField_old(
-                              fullNameController: usernameController,
-                              labelText: 'Username',
-                              hintText: 'Enter username'),
+                          padding: getPadding(left: 0),
+                          child: Text(
+                            "Username",
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: AppStyle.txtOpenSansBold16.copyWith(
+                              letterSpacing: getHorizontalSize(0.2),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: getPadding(top: 14),
+                        ),
+                        CustomTextField(
+                          hintText: 'Select username',
+                          iconPath: ImageConstant.profileIcon,
+                          controller: usernameController,
                         ),
                         //email
                         Padding(
-                          padding: getPadding(top: 23),
-                          child: CustomTextField_old(
-                              fullNameController: emailController,
-                              labelText: 'Email',
-                              hintText: 'Enter email'),
+                          padding: getPadding(top: 20),
+                        ),
+                        Padding(
+                          padding: getPadding(left: 0),
+                          child: Text(
+                            "Email",
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: AppStyle.txtOpenSansBold16.copyWith(
+                              letterSpacing: getHorizontalSize(0.2),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: getPadding(top: 14),
+                        ),
+                        CustomTextField(
+                          hintText: 'Enter email',
+                          iconPath: ImageConstant.emailIcon,
+                          controller: emailController,
                         ),
                         //password
                         Padding(
-                          padding: getPadding(top: 23),
-                          child: CustomPasswordField(
-                              hintText: 'Enter password',
-                              labelText: 'Password',
-                              passwordController: passwordController),
+                          padding: getPadding(top: 20),
+                        ),
+                        Padding(
+                          padding: getPadding(left: 0),
+                          child: Text(
+                            "Password",
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: AppStyle.txtOpenSansBold16.copyWith(
+                              letterSpacing: getHorizontalSize(0.2),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: getPadding(top: 14),
+                        ),
+                        CustomTextField(
+                          hintText: 'Enter password',
+                          iconPath: ImageConstant.lockIcon,
+                          controller: passwordController,
                         ),
                         //confirm password
                         Padding(
-                          padding: getPadding(top: 23),
-                          child: CustomPasswordField(
-                              hintText: 'Confirm password',
-                              labelText: 'Confirm password',
-                              passwordController: confirmPasswordController),
+                          padding: getPadding(top: 20),
+                        ),
+                        Padding(
+                          padding: getPadding(left: 0),
+                          child: Text(
+                            "Confirm Password",
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: AppStyle.txtOpenSansBold16.copyWith(
+                              letterSpacing: getHorizontalSize(0.2),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: getPadding(top: 14),
+                        ),
+                        CustomTextField(
+                          hintText: 'Re-enter password',
+                          iconPath: ImageConstant.lockIcon,
+                          controller: confirmPasswordController,
                         ),
                         Padding(
                             padding: getPadding(top: 23, bottom: 5),

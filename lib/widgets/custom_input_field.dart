@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-
-import 'package:bookflow/core/utils/color_constant.dart';
-import 'package:bookflow/core/utils/size_utils.dart';
-import 'package:bookflow/theme/app_style.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../core/utils/color_constant.dart';
+import '../core/utils/size_utils.dart';
+import '../theme/app_style.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;
   final String iconPath;
+  final TextEditingController controller;
 
   const CustomTextField({
     Key? key,
     required this.hintText,
     required this.iconPath,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,6 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);
 
@@ -50,14 +51,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
             height: 56,
             decoration: BoxDecoration(
               border: hasFocus
-                  ? Border.all(color: ColorConstant.cyan700, width: 1)
+                  ? Border.all(color: ColorConstant.cyan500, width: 1)
                   : Border.all(style: BorderStyle.none),
               color: hasFocus ? Colors.cyan.shade50 : ColorConstant.gray200,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Center(
               child: TextField(
-                controller: _controller,
+                controller: widget.controller,
                 focusNode: _focusNode,
                 style: AppStyle.txtOpenSansBold18,
                 decoration: InputDecoration(
@@ -66,8 +67,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     child: SvgPicture.asset(
                       widget.iconPath,
                       color: hasFocus
-                          ? ColorConstant.cyan700
-                          : ColorConstant.black900,
+                          ? ColorConstant.cyan500
+                          : ColorConstant.black,
                       width: 10,
                       height: 10,
                     ),

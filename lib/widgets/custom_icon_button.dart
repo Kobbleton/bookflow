@@ -4,7 +4,8 @@ import '../core/utils/size_utils.dart';
 
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton(
-      {super.key, this.shape,
+      {super.key,
+      this.shape,
       this.padding,
       this.variant,
       this.alignment,
@@ -84,7 +85,7 @@ class CustomIconButton extends StatelessWidget {
   _setColor() {
     switch (variant) {
       default:
-        return ColorConstant.cyan700;
+        return ColorConstant.cyan500;
     }
   }
 

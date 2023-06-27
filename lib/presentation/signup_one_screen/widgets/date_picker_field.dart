@@ -1,12 +1,12 @@
 // date_picker_field.dart
+import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../core/utils/color_constant.dart';
-import '../../../core/utils/image_constant.dart';
-import '../../../theme/app_style.dart';
 import '../../../core/utils/size_utils.dart';
-import '../../../widgets/custom_image_view.dart';
+import '../../../theme/app_style.dart';
 
 // class DatePickerField extends StatefulWidget {
 //   const DatePickerField({Key? key}) : super(key: key);
@@ -135,119 +135,96 @@ class _DatePickerFieldState extends State<DatePickerField> {
     super.dispose();
   }
 
+  Future<void> selectDate(BuildContext context) async {
+    _focusNode.requestFocus(); // Request focus when date picker opens
+    DateTime? picked;
+    if (Theme.of(context).platform == TargetPlatform.iOS) {
+      await showModalBottomSheet(
+        context: context,
+        builder: (BuildContext builder) {
+          return SizedBox(
+            height: MediaQuery.of(context).copyWith().size.height / 3,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              onDateTimeChanged: (pickedDate) {
+                picked = pickedDate;
+              },
+              initialDateTime: DateTime.now(),
+              minimumYear: 1900,
+              maximumYear: DateTime.now().year,
+            ),
+          );
+        },
+      );
+    } else {
+      picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+      );
+    }
+    if (picked != null) {
+      dateController.text = "${picked!.month}/${picked!.day}/${picked!.year}";
+    }
+    _focusNode.unfocus(); // Unfocus when date picker is closed
+    setState(() {}); // Call setState to refresh
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
         valueListenable: _isFocused,
         builder: (BuildContext context, bool hasFocus, Widget? child) {
           return GestureDetector(
-            onTap: () async {
-              GestureDetector(
-                onTap: () async {
-                  DateTime? picked;
-                  if (Theme.of(context).platform == TargetPlatform.iOS) {
-                    await showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext builder) {
-                        return SizedBox(
-                          height:
-                              MediaQuery.of(context).copyWith().size.height / 3,
-                          child: CupertinoDatePicker(
-                            mode: CupertinoDatePickerMode.date,
-                            onDateTimeChanged: (pickedDate) {
-                              picked = pickedDate;
-                            },
-                            initialDateTime: DateTime.now(),
-                            minimumYear: 1900,
-                            maximumYear: DateTime.now().year,
-                          ),
-                        );
-                      },
-                    );
-                  } else {
-                    picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                    );
-                  }
-                  if (picked != null) {
-                    dateController.text =
-                        "${picked?.month}/${picked?.day}/${picked?.year}";
-                    setState(() {}); // call setState to refresh
-                  }
-                },
-                child: AbsorbPointer(
-                  child: TextField(
-                    style: AppStyle.txtOpenSansBold20,
-                    controller: dateController,
-                    decoration: InputDecoration(
-                      hintText: '1/01/2023',
-                      labelStyle: AppStyle.txtOpenSansRegular18,
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: ColorConstant.cyan700),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: ColorConstant.cyan700),
-                      ),
-                      suffixIcon: SizedBox(
-                        height: getSize(28),
-                        width: getSize(28),
-                        child: CustomImageView(
-                          svgPath: ImageConstant.imgCalendar,
-                          height: getSize(12),
-                          width: getSize(12),
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
+            onTap: () => selectDate(context),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               width: 382,
               height: 56,
               decoration: BoxDecoration(
                 border: hasFocus
-                    ? Border.all(color: ColorConstant.cyan700, width: 1)
+                    ? Border.all(color: ColorConstant.cyan500, width: 1)
                     : Border.all(style: BorderStyle.none),
                 color: hasFocus ? Colors.cyan.shade50 : ColorConstant.gray200,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: AbsorbPointer(
-                child: TextField(
-                  controller: dateController,
-                  focusNode: _focusNode,
-                  style: AppStyle.txtOpenSansBold20,
-                  decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SvgPicture.asset(
-                        widget.iconPath,
-                        color: hasFocus
-                            ? ColorConstant.cyan700
-                            : ColorConstant.black900,
-                        width: 10,
-                        height: 10,
+                child: Padding(
+                  padding: getPadding(top: 4, left: 2),
+                  child: TextField(
+                    controller: dateController,
+                    focusNode: _focusNode,
+                    style: AppStyle.txtOpenSansBold18,
+                    decoration: InputDecoration(
+                      prefixIcon: Padding(
+                        padding:
+                            getPadding(left: 10, right: 10, bottom: 10, top: 6),
+                        child: SvgPicture.asset(
+                          ImageConstant.imgCalendar,
+                          color: hasFocus
+                              ? ColorConstant.cyan500
+                              : ColorConstant.black,
+                          width: 10,
+                          height: 10,
+                        ),
                       ),
-                    ),
-                    contentPadding: getPadding(left: 16, top: 6, bottom: 6),
-                    filled: true,
-                    fillColor:
-                        hasFocus ? Colors.cyan.shade50 : ColorConstant.gray200,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    hintText: widget.hintText,
-                    hintStyle: const TextStyle(
-                      color: Color(0xFF9E9E9E),
-                      fontSize: 16,
-                      fontFamily: 'Open Sans',
-                      fontWeight: FontWeight.w400,
+                      contentPadding: getPadding(left: 16, top: 6, bottom: 6),
+                      filled: true,
+                      fillColor: hasFocus
+                          ? Colors.cyan.shade50
+                          : ColorConstant.gray200,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      hintText: widget.hintText,
+                      hintStyle: const TextStyle(
+                        color: Color(0xFF9E9E9E),
+                        fontSize: 16,
+                        fontFamily: 'Open Sans',
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),

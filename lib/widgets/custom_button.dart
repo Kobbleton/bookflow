@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../core/utils/color_constant.dart';
 import '../core/utils/size_utils.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton(
-      {this.shape,
+  const CustomButton(
+      {super.key,
+      this.shape,
       this.padding,
       this.variant,
       this.fontStyle,
@@ -121,11 +123,11 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.outlineGray200:
         return ColorConstant.white;
       case ButtonVariant.fillCyan700:
-        return ColorConstant.cyan700;
+        return ColorConstant.cyan500;
       case ButtonVariant.fillCyan50:
-        return ColorConstant.cyan50;
+        return ColorConstant.cyan100;
       default:
-        return ColorConstant.cyan700;
+        return ColorConstant.cyan500;
     }
   }
 
@@ -154,7 +156,7 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.fillCyan50:
         return null;
       default:
-        return ColorConstant.cyan7003f;
+        return ColorConstant.cyan500;
     }
   }
 
@@ -184,7 +186,7 @@ class CustomButton extends StatelessWidget {
         );
       case ButtonFontStyle.openSansBold16Cyan700:
         return TextStyle(
-          color: ColorConstant.cyan700,
+          color: ColorConstant.cyan500,
           fontSize: getFontSize(
             16,
           ),

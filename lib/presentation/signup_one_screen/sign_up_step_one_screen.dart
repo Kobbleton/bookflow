@@ -1,7 +1,7 @@
-import 'package:bookflow/widgets/custom_input_field.dart';
+import '../../widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
-import 'package:bookflow/core/utils/countries_list.dart';
-import 'package:bookflow/presentation/signup_one_screen/widgets/date_picker_field.dart';
+import '../../core/utils/countries_list.dart';
+import 'widgets/date_picker_field.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -76,7 +76,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                                 value: 0.5,
                                 backgroundColor: ColorConstant.gray200,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                    ColorConstant.cyan700),
+                                    ColorConstant.cyan500),
                               ),
                             ),
                           ),
@@ -137,7 +137,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                 ),
                 // Full Name text field.
                 Padding(
-                  padding: getPadding(top: 24),
+                  padding: getPadding(top: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -154,18 +154,19 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                         ),
                       ),
                       Padding(
-                        padding: getPadding(top: 16),
+                        padding: getPadding(top: 14),
                       ),
                       CustomTextField(
-                        hintText: 'hintText',
+                        hintText: 'Enter your name',
                         iconPath: ImageConstant.profileIcon,
+                        controller: fullNameController,
                       ),
                     ],
                   ),
                 ),
                 // Date picker field.
                 Padding(
-                  padding: getPadding(top: 24),
+                  padding: getPadding(top: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,17 +183,17 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                         ),
                       ),
                       Padding(
-                        padding: getPadding(top: 16),
+                        padding: getPadding(top: 14),
                       ),
                       DatePickerField(
-                          hintText: '1/01/23',
+                          hintText: 'Enter birth date',
                           iconPath: ImageConstant.hideIcon),
                     ],
                   ),
                 ),
                 // Country dropdown field.
                 Padding(
-                  padding: getPadding(top: 26),
+                  padding: getPadding(top: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -205,17 +206,14 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                           letterSpacing: getHorizontalSize(0.2),
                         ),
                       ),
-                      CustomDropDown(
-                          focusNode: FocusNode(),
-                          autofocus: true,
-                          icon: Container(
-                              margin: getMargin(left: 30),
-                              child: CustomImageView(
-                                  svgPath: ImageConstant.imgArrowdown)),
-                          hintText: "Choose country",
-                          margin: getMargin(top: 16),
-                          items: countriesList,
-                          onChanged: (value) {})
+                      Padding(
+                        padding: getPadding(top: 14),
+                      ),
+                      DropdownField(
+                        hintText: 'Select Country',
+                        iconPath: ImageConstant.imgArrowdown,
+                        dropdownItems: countriesList,
+                      ),
                     ],
                   ),
                 )

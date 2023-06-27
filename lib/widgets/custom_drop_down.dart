@@ -1,167 +1,117 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/svg.dart';
 import '../core/utils/color_constant.dart';
 import '../core/utils/size_utils.dart';
+import '../theme/app_style.dart';
 
-class CustomDropDown extends StatelessWidget {
-  const CustomDropDown(
-      {super.key,
-      this.padding,
-      this.variant,
-      this.fontStyle,
-      this.alignment,
-      this.width,
-      this.margin,
-      this.focusNode,
-      this.autofocus = false,
-      this.icon,
-      this.hintText,
-      this.prefix,
-      this.prefixConstraints,
-      this.items,
-      this.onChanged,
-      this.validator});
+class DropdownField extends StatefulWidget {
+  final String hintText;
+  final String iconPath;
+  final List<String> dropdownItems;
 
-  final DropDownPadding? padding;
+  const DropdownField({
+    Key? key,
+    required this.hintText,
+    required this.iconPath,
+    required this.dropdownItems,
+  }) : super(key: key);
 
-  final DropDownVariant? variant;
+  @override
+  _DropdownFieldState createState() => _DropdownFieldState();
+}
 
-  final DropDownFontStyle? fontStyle;
+class _DropdownFieldState extends State<DropdownField> {
+  final TextEditingController dropdownController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);
 
-  final Alignment? alignment;
+  String dropdownValue = '';
 
-  final double? width;
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      _isFocused.value = _focusNode.hasFocus;
+    });
+  }
 
-  final EdgeInsetsGeometry? margin;
-
-  final FocusNode? focusNode;
-
-  final bool? autofocus;
-
-  final Widget? icon;
-
-  final String? hintText;
-
-  final Widget? prefix;
-
-  final BoxConstraints? prefixConstraints;
-
-  final List<String>? items;
-
-  final Function(String)? onChanged;
-
-  final FormFieldValidator<String>? validator;
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _isFocused.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: _buildDropDownWidget(),
-          )
-        : _buildDropDownWidget();
-  }
-
-  _buildDropDownWidget() {
-    return Container(
-      width: width ?? double.maxFinite,
-      margin: margin,
-      child: DropdownButtonFormField(
-        focusNode: focusNode,
-        autofocus: autofocus!,
-        icon: icon,
-        style: _setFontStyle(),
-        decoration: _buildDecoration(),
-        items: items?.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              value,
-              overflow: TextOverflow.ellipsis,
+    return ValueListenableBuilder<bool>(
+      valueListenable: _isFocused,
+      builder: (BuildContext context, bool hasFocus, Widget? child) {
+        return GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(_focusNode);
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: 382,
+            height: 56,
+            decoration: BoxDecoration(
+              border: hasFocus
+                  ? Border.all(color: ColorConstant.cyan500, width: 1)
+                  : Border.all(style: BorderStyle.none),
+              color: hasFocus ? Colors.cyan.shade50 : ColorConstant.gray200,
+              borderRadius: BorderRadius.circular(16),
             ),
-          );
-        }).toList(),
-        onChanged: (value) {
-          onChanged!(value.toString());
-        },
-        validator: validator,
-      ),
+            child: DropdownButtonHideUnderline(
+              child: Padding(
+                padding: getPadding(left: 14),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  focusNode: _focusNode,
+                  value: dropdownValue.isEmpty ? null : dropdownValue,
+                  icon: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SvgPicture.asset(
+                      widget.iconPath,
+                      color: hasFocus
+                          ? ColorConstant.cyan500
+                          : ColorConstant.black,
+                      width: 26,
+                      height: 26,
+                    ),
+                  ),
+                  items: widget.dropdownItems.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: AppStyle.txtOpenSansBold18,
+                      ),
+                    );
+                  }).toList(),
+                  hint: Padding(
+                    padding: getPadding(left: 16),
+                    child: Text(
+                      widget.hintText,
+                      style: const TextStyle(
+                        color: Color(0xFF9E9E9E),
+                        fontSize: 16,
+                        fontFamily: 'Open Sans',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
-
-  _buildDecoration() {
-    return InputDecoration(
-      hintText: hintText ?? "",
-      hintStyle: _setFontStyle(),
-      border: _setBorderStyle(),
-      enabledBorder: _setBorderStyle(),
-      focusedBorder: _setBorderStyle(),
-      prefixIcon: prefix,
-      prefixIconConstraints: prefixConstraints,
-      filled: _setFilled(),
-      isDense: true,
-      contentPadding: _setPadding(),
-    );
-  }
-
-  _setFontStyle() {
-    switch (fontStyle) {
-      default:
-        return TextStyle(
-          color: ColorConstant.gray900,
-          fontSize: getFontSize(
-            20,
-          ),
-          fontFamily: 'Open Sans',
-          fontWeight: FontWeight.w700,
-        );
-    }
-  }
-
-  _setBorderStyle() {
-    switch (variant) {
-      case DropDownVariant.none:
-        return InputBorder.none;
-      default:
-        return UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorConstant.cyan700,
-          ),
-        );
-    }
-  }
-
-  _setFilled() {
-    switch (variant) {
-      case DropDownVariant.underLineCyan700:
-        return false;
-      case DropDownVariant.none:
-        return false;
-      default:
-        return false;
-    }
-  }
-
-  _setPadding() {
-    switch (padding) {
-      default:
-        return getPadding(
-          top: 1,
-          bottom: 1,
-        );
-    }
-  }
-}
-
-enum DropDownPadding {
-  paddingT1,
-}
-
-enum DropDownVariant {
-  none,
-  underLineCyan700,
-}
-
-enum DropDownFontStyle {
-  openSansBold20,
 }

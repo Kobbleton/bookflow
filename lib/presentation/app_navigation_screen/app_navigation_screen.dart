@@ -53,7 +53,7 @@ class AppNavigationScreen extends StatelessWidget {
                                     child: Divider(
                                         height: getVerticalSize(1),
                                         thickness: getVerticalSize(1),
-                                        color: ColorConstant.black900))
+                                        color: ColorConstant.black))
                               ])),
                       Expanded(
                           child: SingleChildScrollView(

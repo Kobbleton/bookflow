@@ -52,10 +52,10 @@ class CustomTextField_old extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorConstant.cyan700),
+              borderSide: BorderSide(color: ColorConstant.cyan500),
             ),
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorConstant.cyan700),
+              borderSide: BorderSide(color: ColorConstant.cyan500),
             ),
           ),
         ),
