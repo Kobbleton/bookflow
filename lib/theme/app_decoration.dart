@@ -15,12 +15,29 @@ class AppDecoration {
           ),
         ),
       );
+
+  static BoxDecoration get outlineGray200 => BoxDecoration(
+        color: ColorConstant.white,
+        border: Border.all(
+          color: ColorConstant.gray200,
+          width: getHorizontalSize(
+            1,
+          ),
+        ),
+      );
+
   static BoxDecoration get fillWhiteA700 => BoxDecoration(
         color: ColorConstant.white,
       );
 }
 
 class BorderRadiusStyle {
+  static BorderRadius circleBorder30 = BorderRadius.circular(
+    getHorizontalSize(
+      30,
+    ),
+  );
+
   static BorderRadius circleBorder50 = BorderRadius.circular(
     getHorizontalSize(
       50,

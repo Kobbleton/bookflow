@@ -87,4 +87,13 @@ class AppStyle {
     fontFamily: 'Open Sans',
     fontWeight: FontWeight.w600,
   );
+
+  static TextStyle txtOpenSansSemiBold18Gray700 = TextStyle(
+    color: ColorConstant.gray700,
+    fontSize: getFontSize(
+      18,
+    ),
+    fontFamily: 'Open Sans',
+    fontWeight: FontWeight.w600,
+  );
 }

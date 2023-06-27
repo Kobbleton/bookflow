@@ -1,3 +1,4 @@
+import 'package:bookflow/presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
@@ -7,18 +8,29 @@ import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/welcome_screen/welcome_screen.dart';
 
 class AppRoutes {
-  static const String signUpStepOneScreen = '/light_sign_up_step_four_screen';
-
   static const String splashScreen = '/light_splash_screen';
 
   static const String welcomeScreen = '/light_welcome_screen';
 
+  static const String signUpStepOneScreen = 'sign_up_step_one_screen';
+
   static const String signUpStepTwoScreen = '/light_sign_up_step_five_screen';
+
+  static const String signInScreen = '/sign_in_screen';
+
+  static const String forgotPasswordScreen = '/light_forgot_password_screen';
+
+  static const String otpCodeVerificationScreen =
+      '/light_otp_code_verification_screen';
+
+  static const String createNewPasswordScreen =
+      '/light_create_new_password_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
   static Map<String, WidgetBuilder> routes = {
-    signUpStepOneScreen: (context) => SignUpStepOneScreen(),
+    signUpStepOneScreen: (context) => const SignUpStepOneScreen(),
+    signInScreen: (context) => const SignInScreen(),
     splashScreen: (context) => const SplashScreen(),
     welcomeScreen: (context) => const WelcomeScreen(),
     signUpStepTwoScreen: (context) => const SignUpStepTwoScreen(),

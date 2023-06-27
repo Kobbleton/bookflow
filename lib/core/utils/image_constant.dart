@@ -37,4 +37,10 @@ class ImageConstant {
   static String hideIcon = 'assets/images/hide.svg';
 
   static String flagIcon = 'assets/images/flag.svg';
+
+  static String appleLogo =
+      'assets/images/img_autolayouthorizontal_black_900.svg';
+
+  static String facebookLogo =
+      'assets/images/img_autolayouthorizontal_white_a700.png';
 }

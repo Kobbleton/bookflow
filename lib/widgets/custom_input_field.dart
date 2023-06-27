@@ -9,12 +9,14 @@ class CustomTextField extends StatefulWidget {
   final String hintText;
   final String iconPath;
   final TextEditingController controller;
+  final bool isObscured;
 
   const CustomTextField({
     Key? key,
     required this.hintText,
     required this.iconPath,
     required this.controller,
+    required this.isObscured,
   }) : super(key: key);
 
   @override
@@ -58,6 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             child: Center(
               child: TextField(
+                obscureText: widget.isObscured,
                 controller: widget.controller,
                 focusNode: _focusNode,
                 style: AppStyle.txtOpenSansBold18,

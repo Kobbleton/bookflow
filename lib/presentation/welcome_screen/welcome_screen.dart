@@ -209,7 +209,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                                                 .googleLogo))),
                                                 CustomButton(
                                                     height: getVerticalSize(58),
-                                                    text: "Get Started",
+                                                    text: "Get Started reg",
                                                     margin: getMargin(top: 16),
                                                     variant: ButtonVariant
                                                         .fillCyan700,
@@ -217,6 +217,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                                       onTapGetstarted(context);
                                                     }),
                                                 CustomButton(
+                                                    onTap: () {
+                                                      onTapLogin(context);
+                                                    },
                                                     height: getVerticalSize(58),
                                                     text:
                                                         "I Already Have an Account",
@@ -238,5 +241,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   /// to push the named route for the lightSignUpStepFourScreen.
   onTapGetstarted(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.signUpStepOneScreen);
+  }
+
+  /// Navigates to the loginScreen when the action is triggered.
+  onTapLogin(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.signInScreen);
   }
 }

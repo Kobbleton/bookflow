@@ -102,6 +102,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                           hintText: 'Select username',
                           iconPath: ImageConstant.profileIcon,
                           controller: usernameController,
+                          isObscured: false,
                         ),
                         //email
                         Padding(
@@ -122,6 +123,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                           padding: getPadding(top: 14),
                         ),
                         CustomTextField(
+                          isObscured: false,
                           hintText: 'Enter email',
                           iconPath: ImageConstant.emailIcon,
                           controller: emailController,
@@ -145,6 +147,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                           padding: getPadding(top: 14),
                         ),
                         CustomTextField(
+                          isObscured: true,
                           hintText: 'Enter password',
                           iconPath: ImageConstant.lockIcon,
                           controller: passwordController,
@@ -168,6 +171,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                           padding: getPadding(top: 14),
                         ),
                         CustomTextField(
+                          isObscured: true,
                           hintText: 'Re-enter password',
                           iconPath: ImageConstant.lockIcon,
                           controller: confirmPasswordController,

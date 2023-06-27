@@ -157,6 +157,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                         padding: getPadding(top: 14),
                       ),
                       CustomTextField(
+                        isObscured: false,
                         hintText: 'Enter your name',
                         iconPath: ImageConstant.profileIcon,
                         controller: fullNameController,
