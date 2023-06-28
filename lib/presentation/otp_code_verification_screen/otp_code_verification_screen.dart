@@ -5,6 +5,7 @@ import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
+import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
@@ -189,22 +190,37 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                           ),
                         ),
                         TextSpan(
-                            text: " s",
-                            style: TextStyle(
-                                color: ColorConstant.gray900,
-                                fontSize: getFontSize(18),
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: getHorizontalSize(0.2)))
+                          text: " s",
+                          style: TextStyle(
+                            color: ColorConstant.gray900,
+                            fontSize: getFontSize(18),
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: getHorizontalSize(0.2),
+                          ),
+                        ),
                       ],
                     ),
                     textAlign: TextAlign.left),
               ),
             ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: getMargin(
+          left: 24,
+          right: 24,
+          bottom: 106,
+        ),
+        decoration: AppDecoration.outlineGray100,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             CustomButton(
               height: getVerticalSize(58),
               text: "Confirm",
-              margin: getMargin(top: 47, bottom: 5),
               onTap: () {
                 onTapConfirm(context);
               },
