@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/countries_list.dart';
 import '../../core/utils/image_constant.dart';
@@ -10,7 +9,6 @@ import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_image_view.dart';
-import '../../widgets/custom_input_field.dart';
 import '../../widgets/custom_input_field_full.dart';
 import 'widgets/date_picker_field.dart';
 
@@ -30,6 +28,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
   void dispose() {
     // Disposing of the fullNameController when the widget is disposed of.
     fullNameController.dispose();
+    dateController.dispose();
     super.dispose();
   }
 
@@ -138,10 +137,12 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                   ),
                 ),
                 // Full Name text field.
-                custom_input_field_full(
-                  fullNameController: fullNameController,
+                CustomInputFieldFull(
+                  inputController: fullNameController,
                   headerText: "Full Name",
                   hintText: 'Enter your name',
+                  iconPath: ImageConstant.profileIcon,
+                  isObscured: false,
                 ),
                 // Date picker field.
                 Padding(
@@ -231,5 +232,3 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
     Navigator.pushNamed(context, AppRoutes.signUpStepTwoScreen);
   }
 }
-
-

@@ -1,4 +1,3 @@
-import '../../widgets/custom_input_field.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -8,6 +7,7 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/custom_input_field_full.dart';
 import '../sign_up_successful_dialog/sign_up_successful_dialog.dart';
 
 class SignUpStepTwoScreen extends StatefulWidget {
@@ -23,6 +23,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
   @override
   void dispose() {
     usernameController.dispose();
@@ -81,100 +82,39 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                                 style: AppStyle.txtOpenSansRegular18.copyWith(
                                     letterSpacing: getHorizontalSize(0.2)))),
                         Padding(
-                          padding: getPadding(top: 20),
+                          padding: getPadding(top: 10),
                         ),
                         //user
-                        Padding(
-                          padding: getPadding(left: 0),
-                          child: Text(
-                            "Username",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold16.copyWith(
-                              letterSpacing: getHorizontalSize(0.2),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(top: 14),
-                        ),
-                        CustomTextField(
-                          hintText: 'Select username',
+                        CustomInputFieldFull(
+                          inputController: usernameController,
+                          headerText: "Username",
+                          hintText: "Select username",
                           iconPath: ImageConstant.profileIcon,
-                          controller: usernameController,
                           isObscured: false,
                         ),
                         //email
-                        Padding(
-                          padding: getPadding(top: 20),
-                        ),
-                        Padding(
-                          padding: getPadding(left: 0),
-                          child: Text(
-                            "Email",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold16.copyWith(
-                              letterSpacing: getHorizontalSize(0.2),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(top: 14),
-                        ),
-                        CustomTextField(
-                          isObscured: false,
-                          hintText: 'Enter email',
+                        CustomInputFieldFull(
+                          inputController: emailController,
+                          headerText: "Email",
+                          hintText: "Enter email",
                           iconPath: ImageConstant.emailIcon,
-                          controller: emailController,
+                          isObscured: false,
                         ),
                         //password
-                        Padding(
-                          padding: getPadding(top: 20),
-                        ),
-                        Padding(
-                          padding: getPadding(left: 0),
-                          child: Text(
-                            "Password",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold16.copyWith(
-                              letterSpacing: getHorizontalSize(0.2),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(top: 14),
-                        ),
-                        CustomTextField(
-                          isObscured: true,
-                          hintText: 'Enter password',
+                        CustomInputFieldFull(
+                          inputController: passwordController,
+                          headerText: "Password",
+                          hintText: "Enter password",
                           iconPath: ImageConstant.lockIcon,
-                          controller: passwordController,
+                          isObscured: true,
                         ),
                         //confirm password
-                        Padding(
-                          padding: getPadding(top: 20),
-                        ),
-                        Padding(
-                          padding: getPadding(left: 0),
-                          child: Text(
-                            "Confirm Password",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold16.copyWith(
-                              letterSpacing: getHorizontalSize(0.2),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(top: 14),
-                        ),
-                        CustomTextField(
-                          isObscured: true,
-                          hintText: 'Re-enter password',
+                        CustomInputFieldFull(
+                          inputController: confirmPasswordController,
+                          headerText: "Confirm password",
+                          hintText: "Re-enter password",
                           iconPath: ImageConstant.lockIcon,
-                          controller: confirmPasswordController,
+                          isObscured: true,
                         ),
                         Padding(
                             padding: getPadding(top: 23, bottom: 5),

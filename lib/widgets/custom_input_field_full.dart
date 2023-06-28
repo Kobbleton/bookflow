@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../core/utils/image_constant.dart';
 import '../core/utils/size_utils.dart';
 import '../theme/app_style.dart';
 import 'custom_input_field.dart';
 
-class custom_input_field_full extends StatelessWidget {
-  const custom_input_field_full({
+class CustomInputFieldFull extends StatelessWidget {
+  const CustomInputFieldFull({
     Key? key,
-    required this.fullNameController,
+    required this.inputController,
     required this.headerText,
     required this.hintText,
+    required this.isObscured,
+    required this.iconPath,
   }) : super(key: key);
 
-  final TextEditingController fullNameController;
+  final TextEditingController inputController;
   final String headerText;
   final String hintText;
+  final bool isObscured;
+  final String iconPath;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +43,10 @@ class custom_input_field_full extends StatelessWidget {
             padding: getPadding(top: 14),
           ),
           CustomTextField(
-            isObscured: false,
+            isObscured: isObscured,
             hintText: hintText,
-            iconPath: ImageConstant.profileIcon,
-            controller: fullNameController,
+            iconPath: iconPath,
+            controller: inputController,
           ),
         ],
       ),
