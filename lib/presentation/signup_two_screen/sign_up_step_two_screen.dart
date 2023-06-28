@@ -35,122 +35,128 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: ColorConstant.white,
-            body: Container(
-                width: double.maxFinite,
-                padding: getPadding(left: 24, top: 26, right: 24, bottom: 26),
-                child: SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                            padding: getPadding(right: 84),
-                            child: Row(children: [
-                              CustomImageView(
-                                  svgPath: ImageConstant.imgArrowleft,
-                                  height: getSize(28),
-                                  width: getSize(28),
-                                  onTap: () {
-                                    onTapImgArrowleft(context);
-                                  }),
-                              Container(
-                                  height: getVerticalSize(12),
-                                  width: getHorizontalSize(216),
-                                  margin:
-                                      getMargin(left: 56, top: 8, bottom: 8),
-                                  decoration: BoxDecoration(
-                                      color: ColorConstant.cyan500,
-                                      borderRadius: BorderRadius.circular(
-                                          getHorizontalSize(6))))
-                            ])),
-                        Padding(
-                            padding: getPadding(top: 36),
-                            child: Text("Create an Account 🔐",
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansBold32)),
-                        Container(
-                            width: getHorizontalSize(367),
-                            margin: getMargin(top: 16, right: 14),
-                            child: Text(
-                                "Enter your username, email & password. Don't worry if you forget it, we'll send you a new one.",
-                                maxLines: null,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansRegular18.copyWith(
-                                    letterSpacing: getHorizontalSize(0.2)))),
-                        Padding(
-                          padding: getPadding(top: 10),
-                        ),
-                        //user
-                        CustomInputFieldFull(
-                          inputController: usernameController,
-                          headerText: "Username",
-                          hintText: "Select username",
-                          iconPath: ImageConstant.profileIcon,
-                          isObscured: false,
-                        ),
-                        //email
-                        CustomInputFieldFull(
-                          inputController: emailController,
-                          headerText: "Email",
-                          hintText: "Enter email",
-                          iconPath: ImageConstant.emailIcon,
-                          isObscured: false,
-                        ),
-                        //password
-                        CustomInputFieldFull(
-                          inputController: passwordController,
-                          headerText: "Password",
-                          hintText: "Enter password",
-                          iconPath: ImageConstant.lockIcon,
-                          isObscured: true,
-                        ),
-                        //confirm password
-                        CustomInputFieldFull(
-                          inputController: confirmPasswordController,
-                          headerText: "Confirm password",
-                          hintText: "Re-enter password",
-                          iconPath: ImageConstant.lockIcon,
-                          isObscured: true,
-                        ),
-                        Padding(
-                            padding: getPadding(top: 23, bottom: 5),
-                            child: Row(children: [
-                              CustomIconButton(
-                                  height: 24,
-                                  width: 24,
-                                  child: CustomImageView(
-                                      svgPath:
-                                          ImageConstant.imgCheckmarkWhiteA700)),
-                              Padding(
-                                  padding: getPadding(left: 16),
-                                  child: Text("Remember me",
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle.txtOpenSansSemiBold18
-                                          .copyWith(
-                                              letterSpacing:
-                                                  getHorizontalSize(0.2))))
-                            ]))
-                      ]),
-                )),
-            bottomNavigationBar: Container(
-                margin: getMargin(left: 24, right: 24, bottom: 36),
-                decoration: AppDecoration.outlineGray100,
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CustomButton(
-                          height: getVerticalSize(58),
-                          text: "Sign Up",
-                          onTap: () {
-                            onTapSignup(context);
-                          })
-                    ]))));
+    return Scaffold(
+        backgroundColor: ColorConstant.white,
+        body: Container(
+            width: double.maxFinite,
+            padding: getPadding(
+              left: 24,
+              right: 24,
+              top: 40,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: getPadding(right: 84, top: 26),
+                        child: Row(children: [
+                          CustomImageView(
+                              svgPath: ImageConstant.imgArrowleft,
+                              height: getSize(28),
+                              width: getSize(28),
+                              onTap: () {
+                                onTapImgArrowleft(context);
+                              }),
+                          Container(
+                              height: getVerticalSize(12),
+                              width: getHorizontalSize(216),
+                              margin: getMargin(left: 56, top: 8, bottom: 8),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.cyan500,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(6))))
+                        ])),
+                    Padding(
+                        padding: getPadding(top: 36),
+                        child: Text("Create an Account 🔐",
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: AppStyle.txtOpenSansBold32)),
+                    Container(
+                        width: getHorizontalSize(367),
+                        margin: getMargin(top: 16, right: 14),
+                        child: Text(
+                            "Enter your username, email & password. Don't worry if you forget it, we'll send you a new one.",
+                            maxLines: null,
+                            textAlign: TextAlign.left,
+                            style: AppStyle.txtOpenSansRegular18.copyWith(
+                                letterSpacing: getHorizontalSize(0.2)))),
+                    Padding(
+                      padding: getPadding(top: 10),
+                    ),
+                    //user
+                    CustomInputFieldFull(
+                      inputController: usernameController,
+                      headerText: "Username",
+                      hintText: "Select username",
+                      iconPath: ImageConstant.profileIcon,
+                      isObscured: false,
+                    ),
+                    //email
+                    CustomInputFieldFull(
+                      inputController: emailController,
+                      headerText: "Email",
+                      hintText: "Enter email",
+                      iconPath: ImageConstant.emailIcon,
+                      isObscured: false,
+                    ),
+                    //password
+                    CustomInputFieldFull(
+                      inputController: passwordController,
+                      headerText: "Password",
+                      hintText: "Enter password",
+                      iconPath: ImageConstant.lockIcon,
+                      isObscured: true,
+                    ),
+                    //confirm password
+                    CustomInputFieldFull(
+                      inputController: confirmPasswordController,
+                      headerText: "Confirm password",
+                      hintText: "Re-enter password",
+                      iconPath: ImageConstant.lockIcon,
+                      isObscured: true,
+                    ),
+                    Padding(
+                        padding: getPadding(top: 23, bottom: 5),
+                        child: Row(children: [
+                          CustomIconButton(
+                              height: 24,
+                              width: 24,
+                              child: CustomImageView(
+                                  svgPath:
+                                      ImageConstant.imgCheckmarkWhiteA700)),
+                          Padding(
+                              padding: getPadding(left: 16),
+                              child: Text("Remember me",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtOpenSansSemiBold18
+                                      .copyWith(
+                                          letterSpacing:
+                                              getHorizontalSize(0.2))))
+                        ]))
+                  ]),
+            )),
+        bottomNavigationBar: Container(
+            margin: getMargin(
+              left: 24,
+              right: 24,
+              bottom: 106,
+            ),
+            decoration: AppDecoration.outlineGray100,
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CustomButton(
+                      height: getVerticalSize(58),
+                      text: "Sign Up",
+                      onTap: () {
+                        onTapSignup(context);
+                      })
+                ])));
   }
 
   /// Navigates back to the previous screen.
