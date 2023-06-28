@@ -1,8 +1,7 @@
-import '../../widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
-import '../../core/utils/countries_list.dart';
-import 'widgets/date_picker_field.dart';
+
 import '../../core/utils/color_constant.dart';
+import '../../core/utils/countries_list.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
@@ -11,6 +10,9 @@ import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_image_view.dart';
+import '../../widgets/custom_input_field.dart';
+import '../../widgets/custom_input_field_full.dart';
+import 'widgets/date_picker_field.dart';
 
 class SignUpStepOneScreen extends StatefulWidget {
   const SignUpStepOneScreen({Key? key}) : super(key: key);
@@ -136,34 +138,10 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                   ),
                 ),
                 // Full Name text field.
-                Padding(
-                  padding: getPadding(top: 18),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: getPadding(left: 0),
-                        child: Text(
-                          "Full Name",
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: AppStyle.txtOpenSansBold16.copyWith(
-                            letterSpacing: getHorizontalSize(0.2),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: getPadding(top: 14),
-                      ),
-                      CustomTextField(
-                        isObscured: false,
-                        hintText: 'Enter your name',
-                        iconPath: ImageConstant.profileIcon,
-                        controller: fullNameController,
-                      ),
-                    ],
-                  ),
+                custom_input_field_full(
+                  fullNameController: fullNameController,
+                  headerText: "Full Name",
+                  hintText: 'Enter your name',
                 ),
                 // Date picker field.
                 Padding(
@@ -253,3 +231,5 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
     Navigator.pushNamed(context, AppRoutes.signUpStepTwoScreen);
   }
 }
+
+
