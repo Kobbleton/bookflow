@@ -62,7 +62,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                         }),
                     Container(
                       height: getVerticalSize(12),
-                      width: getHorizontalSize(216),
+                      width: getHorizontalSize(208),
                       margin: getMargin(left: 56, top: 8, bottom: 8),
                       decoration: BoxDecoration(
                         color: ColorConstant.cyan500,

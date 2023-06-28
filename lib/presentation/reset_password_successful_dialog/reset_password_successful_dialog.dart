@@ -8,11 +8,51 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 
 // ignore_for_file: must_be_immutable
-class ResetPasswordSuccessfulDialog extends StatelessWidget {
+class ResetPasswordSuccessfulDialog extends StatefulWidget {
   const ResetPasswordSuccessfulDialog({Key? key})
       : super(
           key: key,
         );
+
+  @override
+  State<ResetPasswordSuccessfulDialog> createState() =>
+      _ResetPasswordSuccessfulDialogState();
+}
+
+class _ResetPasswordSuccessfulDialogState
+    extends State<ResetPasswordSuccessfulDialog>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+
+    _animation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    )..addListener(() {
+        setState(() {});
+      });
+
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -268,24 +308,26 @@ class ResetPasswordSuccessfulDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          height: getSize(
-                            15,
-                          ),
-                          width: getSize(
-                            15,
-                          ),
-                          decoration: BoxDecoration(
-                            color: ColorConstant.teal200,
-                            borderRadius: BorderRadius.circular(
-                              getHorizontalSize(
-                                7,
+                          alignment: Alignment.centerRight,
+                          child: Transform.scale(
+                            scale: _animation.value,
+                            child: Container(
+                              height: getSize(
+                                15,
+                              ),
+                              width: getSize(
+                                15,
+                              ),
+                              decoration: BoxDecoration(
+                                color: ColorConstant.teal200,
+                                borderRadius: BorderRadius.circular(
+                                  getHorizontalSize(
+                                    7,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
+                          )),
                       Container(
                         height: getSize(
                           5,
