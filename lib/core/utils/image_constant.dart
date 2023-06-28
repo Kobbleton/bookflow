@@ -42,4 +42,6 @@ class ImageConstant {
       'assets/images/img_autolayouthorizontal_black_900.svg';
 
   static String facebookLogo = 'assets/images/facebook_logo.svg';
+
+  static String successLogo = 'assets/images/img_checkmark_white_a700_49x49.svg';
 }

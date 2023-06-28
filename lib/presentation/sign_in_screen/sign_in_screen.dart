@@ -43,8 +43,8 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               CustomImageView(
                   svgPath: ImageConstant.imgArrowleft,
-                  height: getSize(28),
-                  width: getSize(28),
+                  height: getSize(36),
+                  width: getSize(36),
                   onTap: () {
                     onTapImgArrowleft(context);
                   }),
@@ -122,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Text("Forgot Password?",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold18),
+                        style: AppStyle.txtOpenSansBold18Cyan500),
                   ),
                 ),
               ),

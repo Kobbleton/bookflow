@@ -1,6 +1,9 @@
+import 'package:bookflow/presentation/create_new_password_screen/create_new_password_screen.dart';
 import 'package:bookflow/presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
+import '../presentation/forgot_password_screen/forgot_password_screen.dart';
+import '../presentation/otp_code_verification_screen/otp_code_verification_screen.dart';
 import '../presentation/signup_one_screen/sign_up_step_one_screen.dart';
 import '../presentation/signup_two_screen/sign_up_step_two_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
@@ -17,13 +20,13 @@ class AppRoutes {
 
   static const String signInScreen = '/sign_in_screen';
 
-  static const String forgotPasswordScreen = '/light_forgot_password_screen';
+  static const String forgotPasswordScreen = '/forgot_password_screen';
 
   static const String otpCodeVerificationScreen =
-      '/light_otp_code_verification_screen';
+      '/otp_code_verification_screen';
 
   static const String createNewPasswordScreen =
-      '/light_create_new_password_screen';
+      '/create_new_password_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
@@ -33,6 +36,9 @@ class AppRoutes {
     splashScreen: (context) => const SplashScreen(),
     welcomeScreen: (context) => const WelcomeScreen(),
     signUpStepTwoScreen: (context) => const SignUpStepTwoScreen(),
-    appNavigationScreen: (context) => const AppNavigationScreen()
+    appNavigationScreen: (context) => const AppNavigationScreen(),
+    forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
+    otpCodeVerificationScreen: (context) => const OtpCodeVerificationScreen(),
+    createNewPasswordScreen: (context) => const CreateNewPasswordScreen()
   };
 }

@@ -57,8 +57,8 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                     // Back button with custom image.
                     CustomImageView(
                         svgPath: ImageConstant.imgArrowleft,
-                        height: getSize(28),
-                        width: getSize(28),
+                        height: getSize(36),
+                        width: getSize(36),
                         onTap: () {
                           onTapImgArrowleft(context);
                         }),

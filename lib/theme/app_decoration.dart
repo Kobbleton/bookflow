@@ -4,6 +4,23 @@ import '../core/utils/color_constant.dart';
 import '../core/utils/size_utils.dart';
 
 class AppDecoration {
+  static BoxDecoration get gradientCyan700Teal300 => BoxDecoration(
+        gradient: LinearGradient(
+          begin: const Alignment(
+            1,
+            1,
+          ),
+          end: const Alignment(
+            0,
+            0,
+          ),
+          colors: [
+            ColorConstant.cyan500,
+            ColorConstant.teal300,
+          ],
+        ),
+      );
+
   static BoxDecoration get outlineGray100 => BoxDecoration(
         color: ColorConstant.white,
         border: Border(
@@ -38,15 +55,21 @@ class BorderRadiusStyle {
     ),
   );
 
+  static BorderRadius roundedBorder40 = BorderRadius.circular(
+    getHorizontalSize(
+      40,
+    ),
+  );
+
   static BorderRadius circleBorder50 = BorderRadius.circular(
     getHorizontalSize(
       50,
     ),
   );
 
-  static BorderRadius roundedBorder40 = BorderRadius.circular(
+  static BorderRadius roundedBorder70 = BorderRadius.circular(
     getHorizontalSize(
-      40,
+      70,
     ),
   );
 }
