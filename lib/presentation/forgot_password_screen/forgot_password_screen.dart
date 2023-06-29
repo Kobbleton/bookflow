@@ -9,18 +9,34 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_input_field_full.dart';
 
+// The ForgotPasswordScreen is a StatefulWidget that allows the user to reset their password.
+// It takes an email address as input, then navigates to the lightOtpCodeVerificationScreen.
 class ForgotPasswordScreen extends StatefulWidget {
+  // Key is an optional parameter that can be used to keep track of widgets in the widget tree.
   const ForgotPasswordScreen({Key? key}) : super(key: key);
 
+  // createState is overridden to return an instance of _ForgotPasswordScreenState
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  // emailController is a TextEditingController that controls the text field for the email input
   final TextEditingController emailController = TextEditingController();
 
+  // The dispose method is overridden to free up resources when they are no longer needed.
+  // Here, it is used to dispose of the TextEditingController when it is no longer needed.
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
+  // build is overridden to construct the user interface for the widget
   @override
   Widget build(BuildContext context) {
+    // The UI is wrapped inside a Scaffold widget, which provides a framework to implement the basic material design layout.
+    // The body of the Scaffold is a Container that contains a Column of widgets.
     return Scaffold(
       backgroundColor: ColorConstant.white,
       body: Container(
@@ -89,19 +105,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
+  /// This function is triggered when the back arrow image is tapped.
+  /// It uses the Navigator.pop method to remove the current route (this screen)
+  /// and go back to the previous screen.
   onTapImgArrowleft(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Navigates to the lightOtpCodeVerificationScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the `Navigator` widget
-  /// to push the named route for the lightOtpCodeVerificationScreen.
+  /// This function is triggered when the "Continue" button is tapped.
+  /// It uses the Navigator.pushNamed method to navigate to the OTP Code Verification Screen.
+  /// The route name is defined in the AppRoutes class.
   onTapContinue(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.otpCodeVerificationScreen);
   }

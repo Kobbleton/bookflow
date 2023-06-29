@@ -20,6 +20,8 @@ class CreateNewPasswordScreen extends StatefulWidget {
 
 class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -45,8 +47,8 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
           children: [
             CustomImageView(
                 svgPath: ImageConstant.imgArrowleft,
-                height: getSize(28),
-                width: getSize(28),
+                height: getSize(36),
+                width: getSize(36),
                 onTap: () {
                   onTapImgArrowleft(context);
                 }),
@@ -75,18 +77,18 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 headerText: "New Password",
                 hintText: "Enter new password",
                 inputController: passwordController,
-                iconPath: ImageConstant.profileIcon,
-                isObscured: false,
+                iconPath: ImageConstant.lockIcon,
+                isObscured: true,
               ),
             ),
             Padding(
               padding: getPadding(top: 10),
               child: CustomInputFieldFull(
                 hintText: "Confirm new password",
-                inputController: passwordController,
+                inputController: confirmPasswordController,
                 headerText: "Confirm Password",
-                iconPath: ImageConstant.profileIcon,
-                isObscured: false,
+                iconPath: ImageConstant.lockIcon,
+                isObscured: true,
               ),
             ),
             Padding(
@@ -94,10 +96,11 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
               child: Row(
                 children: [
                   CustomIconButton(
-                      height: 24,
-                      width: 24,
-                      child: CustomImageView(
-                          svgPath: ImageConstant.imgCheckmarkWhiteA700)),
+                    height: 24,
+                    width: 24,
+                    child: CustomImageView(
+                        svgPath: ImageConstant.imgCheckmarkWhiteA700),
+                  ),
                   Padding(
                     padding: getPadding(left: 16),
                     child: Text(

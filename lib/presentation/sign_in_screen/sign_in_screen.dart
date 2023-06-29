@@ -1,3 +1,4 @@
+// Importing necessary libraries and modules
 import 'package:bookflow/presentation/sign_in_screen/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
@@ -11,36 +12,50 @@ import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_input_field_full.dart';
 
+// SignInScreen is a stateful widget because it has mutable state that could change over time.
 class SignInScreen extends StatefulWidget {
+  // Constructor
   const SignInScreen({Key? key}) : super(key: key);
 
+  // createState is called when we want to create a new instance of the state associated with this widget.
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
+// _SignInScreenState is the mutable state for a SignInScreen instance.
 class _SignInScreenState extends State<SignInScreen> {
+  // TextEditingControllers are used to interact with and control TextFields
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  // Dispose method to free up resources when this object is removed from the tree.
   @override
   void dispose() {
+    // Dispose of controllers when the widget is disposed.
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
+  // The build method is called every time we need to redraw our SignInScreen widget.
   @override
   Widget build(BuildContext context) {
+    // Scaffold is the primary container for material design apps
     return Scaffold(
+      // Setting up a white background
       backgroundColor: ColorConstant.white,
+      // SingleChildScrollView provides scrolling to a widget that would otherwise expand beyond the screen size.
       body: SingleChildScrollView(
         child: Container(
           width: double.maxFinite,
+          // Padding applied to the container
           padding: getPadding(left: 24, top: 68, right: 24, bottom: 26),
+          // Column allows arranging its children vertically.
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              // CustomImageView for a back button, onTap is used to navigate back
               CustomImageView(
                   svgPath: ImageConstant.imgArrowleft,
                   height: getSize(36),
@@ -48,12 +63,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   onTap: () {
                     onTapImgArrowleft(context);
                   }),
+              // Welcome text
               Padding(
                   padding: getPadding(top: 36),
                   child: Text("Hello there 👋",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: AppStyle.txtOpenSansBold32)),
+              // Instruction for signing in
               Container(
                 width: getHorizontalSize(332),
                 margin: getMargin(top: 17, right: 49),
@@ -66,6 +83,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
               ),
+              // CustomInputFieldFull for inputting username/email
               Padding(
                 padding: getPadding(top: 10),
                 child: CustomInputFieldFull(
@@ -76,6 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   isObscured: false,
                 ),
               ),
+              // CustomInputFieldFull for inputting password
               Padding(
                 padding: getPadding(top: 0),
                 child: CustomInputFieldFull(
@@ -86,6 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   isObscured: true,
                 ),
               ),
+              // "Remember me" option
               Padding(
                 padding: getPadding(top: 23),
                 child: Row(
@@ -105,12 +125,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   ],
                 ),
               ),
+              // Divider line
               Padding(
                   padding: getPadding(top: 24),
                   child: Divider(
                       height: getVerticalSize(1),
                       thickness: getVerticalSize(1),
                       color: ColorConstant.gray200)),
+              // "Forgot password" option
               Align(
                 alignment: Alignment.center,
                 child: GestureDetector(
@@ -126,6 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
               ),
+              // Social sign-in options
               Padding(
                 padding: getPadding(top: 33),
                 child: Row(
@@ -180,6 +203,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
       ),
+      // Bottom navigation bar with sign-in button
       bottomNavigationBar: Container(
         margin: getMargin(
           left: 24,
@@ -198,19 +222,12 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
+  // Function to handle back navigation
   onTapImgArrowleft(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Navigates to the lightForgotPasswordScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the `Navigator` widget
-  /// to push the named route for the lightForgotPasswordScreen.
+  // Function to handle forgotten password navigation
   onTapTxtForgotpassword(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.forgotPasswordScreen);
   }
