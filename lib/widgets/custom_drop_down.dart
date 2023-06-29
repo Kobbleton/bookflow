@@ -17,10 +17,10 @@ class DropdownField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DropdownFieldState createState() => _DropdownFieldState();
+  DropdownFieldState createState() => DropdownFieldState();
 }
 
-class _DropdownFieldState extends State<DropdownField> {
+class DropdownFieldState extends State<DropdownField> {
   final TextEditingController dropdownController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);

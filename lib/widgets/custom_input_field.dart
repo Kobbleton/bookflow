@@ -20,10 +20,10 @@ class CustomTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  CustomTextFieldState createState() => CustomTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class CustomTextFieldState extends State<CustomTextField> {
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);
 

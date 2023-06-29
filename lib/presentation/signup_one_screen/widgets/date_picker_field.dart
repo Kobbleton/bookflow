@@ -112,10 +112,10 @@ class DatePickerField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DatePickerFieldState createState() => _DatePickerFieldState();
+  DatePickerFieldState createState() => DatePickerFieldState();
 }
 
-class _DatePickerFieldState extends State<DatePickerField> {
+class DatePickerFieldState extends State<DatePickerField> {
   final TextEditingController dateController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);

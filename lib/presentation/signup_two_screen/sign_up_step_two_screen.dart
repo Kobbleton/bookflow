@@ -10,20 +10,26 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_input_field_full.dart';
 import '../sign_up_successful_dialog/sign_up_successful_dialog.dart';
 
+// This class represents the second step of the sign up process.
+// It's a stateful widget because it needs to maintain the state of form fields.
 class SignUpStepTwoScreen extends StatefulWidget {
   const SignUpStepTwoScreen({Key? key}) : super(key: key);
 
+  // Creating the state for this widget.
   @override
   State<SignUpStepTwoScreen> createState() => _SignUpStepTwoScreenState();
 }
 
 class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
+  // Define the controllers for each of the input fields.
+  // These controllers allow us to read and write the text fields' values.
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  // Dispose the controllers when we are done with them to free up resources.
   @override
   void dispose() {
     usernameController.dispose();
@@ -33,6 +39,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
     super.dispose();
   }
 
+  // Build the UI of the widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +60,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 padding: getPadding(right: 84, top: 26),
                 child: Row(
                   children: [
+                    // Back button with custom image
                     CustomImageView(
                         svgPath: ImageConstant.imgArrowleft,
                         height: getSize(36),
@@ -74,12 +82,14 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                   ],
                 ),
               ),
+              // Text instructions for the sign up process
               Padding(
-                  padding: getPadding(top: 36),
-                  child: Text("Create an Account 🔐",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansBold32)),
+                padding: getPadding(top: 36),
+                child: Text("Create an Account 🔐",
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtOpenSansBold32),
+              ),
               Container(
                 width: getHorizontalSize(367),
                 margin: getMargin(top: 16, right: 14),
@@ -92,10 +102,11 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                   ),
                 ),
               ),
+              // Form fields for username, email, password and password confirmation.
               Padding(
                 padding: getPadding(top: 10),
               ),
-              //user
+              // Custom Input field for Username
               CustomInputFieldFull(
                 inputController: usernameController,
                 headerText: "Username",
@@ -103,7 +114,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 iconPath: ImageConstant.profileIcon,
                 isObscured: false,
               ),
-              //email
+              // Custom Input field for Email
               CustomInputFieldFull(
                 inputController: emailController,
                 headerText: "Email",
@@ -111,7 +122,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 iconPath: ImageConstant.emailIcon,
                 isObscured: false,
               ),
-              //password
+              // Custom Input field for Password
               CustomInputFieldFull(
                 inputController: passwordController,
                 headerText: "Password",
@@ -119,7 +130,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 iconPath: ImageConstant.lockIcon,
                 isObscured: true,
               ),
-              //confirm password
+              // Custom Input field for Confirm Password
               CustomInputFieldFull(
                 inputController: confirmPasswordController,
                 headerText: "Confirm password",
@@ -127,6 +138,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 iconPath: ImageConstant.lockIcon,
                 isObscured: true,
               ),
+              // Remember me toggle switch
               Padding(
                 padding: getPadding(top: 23, bottom: 5),
                 child: Row(
@@ -155,6 +167,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
           ),
         ),
       ),
+      // Sign up button at the bottom
       bottomNavigationBar: Container(
         margin: getMargin(
           left: 24,
@@ -166,6 +179,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            // Custom button for Sign up, onTap shows success dialog
             CustomButton(
                 height: getVerticalSize(58),
                 text: "Sign Up",
@@ -178,20 +192,12 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
     );
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
+  // This function is triggered when the back arrow image is clicked. It navigates back to the previous screen.
   onTapImgArrowleft(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Displays an [AlertDialog] with a custom content widget using the
-  /// provided [BuildContext].
-  ///
-  /// The custom content is created using the [LightSignUpSuccessfulDialog]
-  /// method and is displayed in an [AlertDialog] that fills the entire screen
-  /// with no padding.
+  // This function is triggered when the sign up button is clicked. It shows a success dialog.
   onTapSignup(BuildContext context) {
     showDialog(
         context: context,

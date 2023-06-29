@@ -79,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
               Padding(
                 padding: getPadding(top: 0),
                 child: CustomInputFieldFull(
-                  inputController: usernameController,
+                  inputController: passwordController,
                   headerText: "Password",
                   hintText: "Enter password",
                   iconPath: ImageConstant.lockIcon,
