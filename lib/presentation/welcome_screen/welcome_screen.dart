@@ -10,10 +10,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-//todo 1 - implement Continue with the Google
-//todo 2 - implement I already have an account
-
-// ignore_for_file: must_be_immutable
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
@@ -23,6 +19,11 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   int sliderIndex = 0;
+  List<Widget> sliders = const [
+    SlidergreetingItemWidget(),
+    SlidergreetingItemWidget2(),
+    // More slider widgets can be added here easily in the future
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -131,11 +132,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     }),
                                 itemCount: 2,
                                 itemBuilder: (context, index, realIndex) {
-                                  if (index == 0) {
-                                    return const SlidergreetingItemWidget();
-                                  } else {
-                                    return const SlidergreetingItemWidget2();
-                                  }
+                                  return sliders[index];
                                 }),
                             Container(
                               height: getVerticalSize(8),
@@ -154,27 +151,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             ),
                             CustomButton(
-                                height: getVerticalSize(60),
-                                text: "Continue with Google",
-                                margin: getMargin(top: 32),
-                                variant: ButtonVariant.outlineGray200,
-                                padding: ButtonPadding.paddingT19,
-                                fontStyle: ButtonFontStyle.openSansSemiBold16,
-                                prefixWidget: Container(
-                                    margin: getMargin(right: 12),
-                                    child: CustomImageView(
-                                        svgPath: ImageConstant.googleLogo))),
+                              height: getVerticalSize(58),
+                              text: "Continue with Google",
+                              margin: getMargin(top: 32),
+                              variant: ButtonVariant.outlineGray200,
+                              padding: ButtonPadding.paddingT19,
+                              fontStyle: ButtonFontStyle.openSansSemiBold16,
+                              prefixWidget: Container(
+                                margin: getMargin(right: 12),
+                                child: CustomImageView(
+                                    svgPath: ImageConstant.googleLogo),
+                              ),
+                            ),
                             CustomButton(
                                 height: getVerticalSize(58),
                                 text: "Get Started",
                                 margin: getMargin(top: 16),
                                 variant: ButtonVariant.fillCyan700,
                                 onTap: () {
-                                  onTapGetstarted(context);
+                                  navigateToSignUpStepOne(context);
                                 }),
                             CustomButton(
                                 onTap: () {
-                                  onTapLogin(context);
+                                  navigateToLogin(context);
                                 },
                                 height: getVerticalSize(58),
                                 text: "I Already Have an Account",
@@ -201,12 +200,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   /// The [BuildContext] parameter is used to build the navigation stack.
   /// When the action is triggered, this function uses the `Navigator` widget
   /// to push the named route for the lightSignUpStepFourScreen.
-  onTapGetstarted(BuildContext context) {
+  navigateToSignUpStepOne(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.signUpStepOneScreen);
   }
 
   /// Navigates to the loginScreen when the action is triggered.
-  onTapLogin(BuildContext context) {
+  navigateToLogin(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.signInScreen);
   }
 }
