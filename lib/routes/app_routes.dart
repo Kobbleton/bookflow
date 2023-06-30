@@ -1,5 +1,5 @@
-import 'package:bookflow/presentation/create_new_password_screen/create_new_password_screen.dart';
-import 'package:bookflow/presentation/sign_in_screen/sign_in_screen.dart';
+import '../presentation/create_new_password_screen/create_new_password_screen.dart';
+import '../presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/forgot_password_screen/forgot_password_screen.dart';

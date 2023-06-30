@@ -49,9 +49,12 @@ class ColorConstant {
   static Color teal300 = fromHex('#5fb6bf');
 
   static Color black = fromHex('#000000');
+  static Color black90014 = fromHex('#1404060f');
+  static Color black9001e = fromHex('#1e000000');
   static Color white = fromHex('#ffffff');
   static Color whiteA70000 = fromHex('#00ffffff');
   static Color whiteA700F2 = fromHex('#f2ffffff');
+  static Color whiteA70084 = fromHex('#84ffffff');
 
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();

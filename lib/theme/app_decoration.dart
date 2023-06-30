@@ -21,6 +21,28 @@ class AppDecoration {
         ),
       );
 
+  static BoxDecoration get outline => BoxDecoration(
+        color: ColorConstant.whiteA70084,
+        boxShadow: [
+          BoxShadow(
+            color: ColorConstant.black90014,
+            spreadRadius: getHorizontalSize(
+              2,
+            ),
+            blurRadius: getHorizontalSize(
+              2,
+            ),
+            offset: const Offset(
+              0,
+              4,
+            ),
+          ),
+        ],
+      );
+  static BoxDecoration get fillWhiteA700 => BoxDecoration(
+        color: ColorConstant.white,
+      );
+
   static BoxDecoration get outlineGray100 => BoxDecoration(
         color: ColorConstant.white,
         border: Border(
@@ -43,15 +65,42 @@ class AppDecoration {
         ),
       );
 
-  static BoxDecoration get fillWhiteA700 => BoxDecoration(
+  static BoxDecoration get outlineBlack9001e => BoxDecoration(
         color: ColorConstant.white,
+        boxShadow: [
+          BoxShadow(
+            color: ColorConstant.black9001e,
+            spreadRadius: getHorizontalSize(
+              2,
+            ),
+            blurRadius: getHorizontalSize(
+              2,
+            ),
+            offset: const Offset(
+              2,
+              4,
+            ),
+          ),
+        ],
       );
 }
 
 class BorderRadiusStyle {
+  static BorderRadius circleBorder14 = BorderRadius.circular(
+    getHorizontalSize(
+      14,
+    ),
+  );
+
   static BorderRadius circleBorder30 = BorderRadius.circular(
     getHorizontalSize(
       30,
+    ),
+  );
+
+  static BorderRadius roundedBorder18 = BorderRadius.circular(
+    getHorizontalSize(
+      18,
     ),
   );
 

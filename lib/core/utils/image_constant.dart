@@ -15,6 +15,7 @@ class ImageConstant {
   static String googleLogo = 'assets/images/img_frame.svg';
 
   static String logoBig = 'assets/images/img_group1.svg';
+  static String logoSmall = 'assets/images/logo.svg';
 
   static String img2lightwelcome = 'assets/images/img_2lightwelcome.png';
 
@@ -43,5 +44,18 @@ class ImageConstant {
 
   static String facebookLogo = 'assets/images/facebook_logo.svg';
 
-  static String successLogo = 'assets/images/img_checkmark_white_a700_49x49.svg';
+  static String successLogo =
+      'assets/images/img_checkmark_white_a700_49x49.svg';
+
+  static String bookCover1 = 'assets/images/bookcover1.png';
+  static String bookCover2 = 'assets/images/bookcover2.png';
+  static String bookCover3 = 'assets/images/bookcover3.png';
+  static String bookCover4 = 'assets/images/bookcover4.png';
+  static String bookCover5 = 'assets/images/bookcover5.png';
+  static String bookCover6 = 'assets/images/bookcover6.png';
+
+  static String gradientMain = 'assets/images/gradient_main_card.svg';
+
+  static String searchIcon = 'assets/images/search.svg';
+  static String bellIcon = 'assets/images/bell.svg';
 }
