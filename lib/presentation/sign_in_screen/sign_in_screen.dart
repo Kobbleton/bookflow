@@ -137,7 +137,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
-                    onTapTxtForgotpassword(context);
+                    gotoMainScreen(context);
                   },
                   child: Padding(
                     padding: getPadding(top: 26),
@@ -215,7 +215,13 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CustomButton(height: getVerticalSize(58), text: "Sign In")
+            CustomButton(
+              height: getVerticalSize(58),
+              text: "Sign In",
+              onTap: () {
+                gotoMainScreen(context);
+              },
+            )
           ],
         ),
       ),
@@ -230,5 +236,10 @@ class _SignInScreenState extends State<SignInScreen> {
   // Function to handle forgotten password navigation
   onTapTxtForgotpassword(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.forgotPasswordScreen);
+  }
+
+// Function to handle forgotten password navigation
+  gotoMainScreen(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.homeScreen);
   }
 }

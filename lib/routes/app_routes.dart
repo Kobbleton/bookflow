@@ -1,3 +1,5 @@
+import 'package:bookflow/presentation/home_screen/home_screen.dart';
+
 import '../presentation/create_new_password_screen/create_new_password_screen.dart';
 import '../presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +27,11 @@ class AppRoutes {
   static const String otpCodeVerificationScreen =
       '/otp_code_verification_screen';
 
-  static const String createNewPasswordScreen =
-      '/create_new_password_screen';
+  static const String createNewPasswordScreen = '/create_new_password_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
+
+  static const String homeScreen = '/home_screen';
 
   static Map<String, WidgetBuilder> routes = {
     signUpStepOneScreen: (context) => const SignUpStepOneScreen(),
@@ -39,6 +42,7 @@ class AppRoutes {
     appNavigationScreen: (context) => const AppNavigationScreen(),
     forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
     otpCodeVerificationScreen: (context) => const OtpCodeVerificationScreen(),
-    createNewPasswordScreen: (context) => const CreateNewPasswordScreen()
+    createNewPasswordScreen: (context) => const CreateNewPasswordScreen(),
+    homeScreen: (context) => const HomeScreen()
   };
 }
