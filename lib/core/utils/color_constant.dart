@@ -56,6 +56,11 @@ class ColorConstant {
   static Color whiteA700F2 = fromHex('#f2ffffff');
   static Color whiteA70084 = fromHex('#84ffffff');
 
+  static Color yellowA400 = fromHex('#f2e900');
+  static Color cyan60000 = fromHex('#0013a8ba');
+  static Color cyan600 = fromHex('#13a8ba');
+
+
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');

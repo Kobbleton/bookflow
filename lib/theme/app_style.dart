@@ -24,6 +24,25 @@ class AppStyle {
   );
 
   ///BOLD
+
+  static TextStyle txtOpenSansBold12 = TextStyle(
+    color: ColorConstant.gray700,
+    fontSize: getFontSize(
+      12,
+    ),
+    fontFamily: 'Open Sans',
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle txtOpenSansBold14 = TextStyle(
+    color: ColorConstant.gray900,
+    fontSize: getFontSize(
+      14,
+    ),
+    fontFamily: 'Open Sans',
+    fontWeight: FontWeight.w700,
+  );
+
   static TextStyle txtOpenSansBold16 = TextStyle(
     color: ColorConstant.gray900,
     fontSize: getFontSize(
@@ -37,6 +56,15 @@ class AppStyle {
     color: ColorConstant.gray900,
     fontSize: getFontSize(
       18,
+    ),
+    fontFamily: 'Open Sans',
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle txtOpenSansBold12Cyan500 = TextStyle(
+    color: ColorConstant.cyan500,
+    fontSize: getFontSize(
+      12,
     ),
     fontFamily: 'Open Sans',
     fontWeight: FontWeight.w700,

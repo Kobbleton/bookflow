@@ -1,4 +1,6 @@
+import 'package:bookflow/presentation/home_screen/widgets/gridrectanglesi_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
@@ -7,6 +9,7 @@ import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/app_bar/appbar_image.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
+import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 
 class LightHomeFullPageScreen extends StatelessWidget {
@@ -181,17 +184,17 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                           ColorConstant.cyan600,
                                         ],
                                       ),
-                                      corners: Corners(
-                                        topLeft: const Radius.circular(
+                                      corners: const Corners(
+                                        topLeft: Radius.circular(
                                           18,
                                         ),
-                                        topRight: const Radius.circular(
+                                        topRight: Radius.circular(
                                           18,
                                         ),
-                                        bottomLeft: const Radius.circular(
+                                        bottomLeft: Radius.circular(
                                           18,
                                         ),
-                                        bottomRight: const Radius.circular(
+                                        bottomRight: Radius.circular(
                                           18,
                                         ),
                                       ),
@@ -208,7 +211,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                           children: [
                                             CustomImageView(
                                               imagePath:
-                                                  ImageConstant.imgRectangle68,
+                                                  ImageConstant.bookCover1,
                                               height: getVerticalSize(
                                                 184,
                                               ),
@@ -282,7 +285,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: AppStyle
-                                                              .txtOpenSansBold12Cyan700
+                                                              .txtOpenSansBold12Cyan500
                                                               .copyWith(
                                                             letterSpacing:
                                                                 getHorizontalSize(
@@ -321,7 +324,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: AppStyle
-                                                              .txtOpenSansBold12Cyan700
+                                                              .txtOpenSansBold12Cyan500
                                                               .copyWith(
                                                             letterSpacing:
                                                                 getHorizontalSize(
@@ -365,7 +368,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: AppStyle
-                                                                .txtOpenSansBold12Cyan700
+                                                                .txtOpenSansBold12Cyan500
                                                                 .copyWith(
                                                               letterSpacing:
                                                                   getHorizontalSize(
@@ -417,7 +420,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: AppStyle
-                                                                .txtOpenSansBold12Cyan700
+                                                                .txtOpenSansBold12Cyan500
                                                                 .copyWith(
                                                               letterSpacing:
                                                                   getHorizontalSize(
@@ -462,7 +465,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: AppStyle
-                                                                .txtOpenSansBold12Cyan700
+                                                                .txtOpenSansBold12Cyan500
                                                                 .copyWith(
                                                               letterSpacing:
                                                                   getHorizontalSize(
@@ -514,7 +517,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: AppStyle
-                                                                .txtOpenSansBold12Cyan700
+                                                                .txtOpenSansBold12Cyan500
                                                                 .copyWith(
                                                               letterSpacing:
                                                                   getHorizontalSize(
@@ -544,7 +547,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                                                       ),
                                                       child: CustomImageView(
                                                         svgPath: ImageConstant
-                                                            .imgMenu,
+                                                            .menuIcon,
                                                       ),
                                                     ),
                                                   ),
@@ -596,7 +599,7 @@ class LightHomeFullPageScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 8,
                       itemBuilder: (context, index) {
-                        return GridrectanglesiItemWidget();
+                        return const GridrectanglesiItemWidget();
                       },
                     ),
                   ),
