@@ -19,7 +19,7 @@ class ReadingNowBlock extends StatelessWidget {
     return SizedBox(
       width: double.maxFinite,
       child: Container(
-        // decoration: AppDecoration.fillWhiteA700,
+        decoration: AppDecoration.fillWhiteA700,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -149,47 +149,47 @@ class ReadingNowBlock extends StatelessWidget {
                                       padding: getPadding(bottom: 4),
                                       child: styledText(
                                         'Statistics',
-                                        AppStyle.txtOpenSansBold16,
+                                        AppStyle.txtOpenSansBold18,
                                       ),
                                     ),
                                     statsRow(
                                       'Total words:',
                                       '10386',
-                                      AppStyle.txtOpenSansBold12,
-                                      AppStyle.txtOpenSansBold12Cyan500,
+                                      AppStyle.txtOpenSansBold13,
+                                      AppStyle.txtOpenSansBold13Cyan500,
                                     ),
                                     statsRow(
                                       'Words read:',
                                       '3486',
-                                      AppStyle.txtOpenSansBold12,
-                                      AppStyle.txtOpenSansBold12Cyan500,
+                                      AppStyle.txtOpenSansBold13,
+                                      AppStyle.txtOpenSansBold13Cyan500,
                                     ),
                                     statsRow(
                                       'Reading speed:',
                                       '304wpm',
-                                      AppStyle.txtOpenSansBold12,
-                                      AppStyle.txtOpenSansBold12Cyan500,
+                                      AppStyle.txtOpenSansBold13,
+                                      AppStyle.txtOpenSansBold13Cyan500,
                                     ),
                                     statsRow(
                                       'Time spent:',
                                       '2h 43m',
-                                      AppStyle.txtOpenSansBold12,
-                                      AppStyle.txtOpenSansBold12Cyan500,
+                                      AppStyle.txtOpenSansBold13,
+                                      AppStyle.txtOpenSansBold13Cyan500,
                                     ),
                                     statsRow(
                                       'Time left:',
                                       '5h 34m',
-                                      AppStyle.txtOpenSansBold12,
-                                      AppStyle.txtOpenSansBold12Cyan500,
+                                      AppStyle.txtOpenSansBold13,
+                                      AppStyle.txtOpenSansBold13Cyan500,
                                     ),
                                     statsRow(
                                       'Completed:',
                                       '34%',
-                                      AppStyle.txtOpenSansBold12,
-                                      AppStyle.txtOpenSansBold12Cyan500,
+                                      AppStyle.txtOpenSansBold13,
+                                      AppStyle.txtOpenSansBold13Cyan500,
                                     ),
                                     Padding(
-                                      padding: getPadding(bottom: 12),
+                                      padding: getPadding(bottom: 6),
                                     ),
                                     ContinueCustomButton(
                                       text: 'Continue',
@@ -225,8 +225,6 @@ class ReadingNowBlock extends StatelessWidget {
     );
   }
 }
-
-
 
 Text styledText(String text, TextStyle style, {double letterSpacing = 0.2}) {
   return Text(
