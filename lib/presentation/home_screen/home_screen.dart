@@ -1,3 +1,4 @@
+import 'package:bookflow/presentation/home_screen/widgets/gradient_card_background.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:bookflow/presentation/home_screen/widgets/reading_now.dart';
 import 'package:bookflow/presentation/home_screen/widgets/recent_books.dart';
@@ -18,10 +19,16 @@ class HomeScreen extends StatelessWidget {
       appBar: const HomeScreenAppBar(),
       body: Column(
         children: [
-          Padding(
-            padding: getPadding(left: 24, right: 24, bottom: 6, top: 22),
-            child: const ReadingNowBlock(),
-          ),
+          Stack(children: [
+            Padding(
+              padding: getPadding(top: 34),
+              child: const GradientBackgound(),
+            ),
+            Padding(
+              padding: getPadding(left: 24, right: 24, bottom: 6, top: 8),
+              child: const ReadingNowBlock(),
+            ),
+          ]),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(

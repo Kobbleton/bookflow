@@ -1,3 +1,4 @@
+import 'package:bookflow/presentation/home_screen/widgets/continue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
@@ -6,7 +7,6 @@ import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_decoration.dart';
 import '../../../theme/app_style.dart';
-import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_image_view.dart';
 
 class ReadingNowBlock extends StatelessWidget {
@@ -19,7 +19,7 @@ class ReadingNowBlock extends StatelessWidget {
     return SizedBox(
       width: double.maxFinite,
       child: Container(
-        decoration: AppDecoration.fillWhiteA700,
+        // decoration: AppDecoration.fillWhiteA700,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -43,19 +43,20 @@ class ReadingNowBlock extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  CustomImageView(
-                    svgPath: ImageConstant.gradientMain,
-                    height: getVerticalSize(
-                      207,
-                    ),
-                    width: getHorizontalSize(
-                      351,
-                    ),
-                    alignment: Alignment.bottomRight,
-                    margin: getMargin(
-                      right: 2,
-                    ),
-                  ),
+                  // CustomImageView(
+                  //   svgPath: ImageConstant.gradientMain,
+                  //   height: getVerticalSize(
+                  //     207,
+                  //   ),
+                  //   width: getHorizontalSize(
+                  //     351,
+                  //   ),
+                  //   alignment: Alignment.bottomRight,
+                  //   margin: getMargin(
+                  //     right: 2,
+                  //   ),
+                  // ),
+
                   Align(
                     alignment: Alignment.center,
                     child: Container(
@@ -187,27 +188,14 @@ class ReadingNowBlock extends StatelessWidget {
                                       AppStyle.txtOpenSansBold12,
                                       AppStyle.txtOpenSansBold12Cyan500,
                                     ),
-                                    CustomButton(
-                                      height: getVerticalSize(
-                                        38,
-                                      ),
-                                      width: getHorizontalSize(
-                                        128,
-                                      ),
-                                      text: "Conti",
-                                      margin: getMargin(
-                                        left: 2,
-                                        top: 8,
-                                      ),
-                                      suffixWidget: Container(
-                                        margin: getMargin(
-                                          left: 16,
-                                        ),
-                                        child: CustomImageView(
-                                          svgPath: ImageConstant.menuIcon,
-                                        ),
-                                      ),
+                                    Padding(
+                                      padding: getPadding(bottom: 12),
                                     ),
+                                    ContinueCustomButton(
+                                      text: 'Continue',
+                                      onPressed: () {},
+                                      svgPath: ImageConstant.menuIcon,
+                                    )
                                   ],
                                 ),
                               ),
@@ -237,6 +225,8 @@ class ReadingNowBlock extends StatelessWidget {
     );
   }
 }
+
+
 
 Text styledText(String text, TextStyle style, {double letterSpacing = 0.2}) {
   return Text(
