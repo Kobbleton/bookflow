@@ -53,6 +53,8 @@ class ImageConstant {
   static String bookCover4 = 'assets/images/bookcover4.png';
   static String bookCover5 = 'assets/images/bookcover5.png';
   static String bookCover6 = 'assets/images/bookcover6.png';
+  static String bookCover7 = 'assets/images/bookcover7.png';
+  static String bookCover8 = 'assets/images/bookcover8.png';
 
   static String gradientMain = 'assets/images/gradient_main_card.svg';
 

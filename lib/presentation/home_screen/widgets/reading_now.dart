@@ -1,7 +1,6 @@
 import 'package:bookflow/presentation/home_screen/widgets/continue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
-
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
@@ -19,7 +18,7 @@ class ReadingNowBlock extends StatelessWidget {
     return SizedBox(
       width: double.maxFinite,
       child: Container(
-        decoration: AppDecoration.fillWhiteA700,
+        decoration: AppDecoration.fillWhiteOpacity50,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -43,20 +42,6 @@ class ReadingNowBlock extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  // CustomImageView(
-                  //   svgPath: ImageConstant.gradientMain,
-                  //   height: getVerticalSize(
-                  //     207,
-                  //   ),
-                  //   width: getHorizontalSize(
-                  //     351,
-                  //   ),
-                  //   alignment: Alignment.bottomRight,
-                  //   margin: getMargin(
-                  //     right: 2,
-                  //   ),
-                  // ),
-
                   Align(
                     alignment: Alignment.center,
                     child: Container(

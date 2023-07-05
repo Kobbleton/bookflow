@@ -42,6 +42,9 @@ class AppDecoration {
   static BoxDecoration get fillWhiteA700 => BoxDecoration(
         color: ColorConstant.white,
       );
+  static BoxDecoration get fillWhiteOpacity50 => BoxDecoration(
+        color: ColorConstant.white.withOpacity(0.7),
+      );
 
   static BoxDecoration get outlineGray100 => BoxDecoration(
         color: ColorConstant.white,

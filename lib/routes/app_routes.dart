@@ -43,6 +43,6 @@ class AppRoutes {
     forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
     otpCodeVerificationScreen: (context) => const OtpCodeVerificationScreen(),
     createNewPasswordScreen: (context) => const CreateNewPasswordScreen(),
-    homeScreen: (context) => const HomeScreen()
+    homeScreen: (context) =>  HomeScreen()
   };
 }

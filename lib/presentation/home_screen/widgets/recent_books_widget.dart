@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_decoration.dart';
-import 'gridrectanglesi_item_widget.dart';
+import 'grid_item_widget.dart';
 
 class RecentBooksBlock extends StatelessWidget {
+  final List<String> imagePaths;
+
   const RecentBooksBlock({
-    super.key,
-  });
+    Key? key,
+    required this.imagePaths,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,9 @@ class RecentBooksBlock extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 8,
               itemBuilder: (context, index) {
-                return const GridrectanglesiItemWidget();
+                return GridrectanglesiItemWidget(
+                  imagePath: imagePaths[index],
+                );
               },
             ),
           ),

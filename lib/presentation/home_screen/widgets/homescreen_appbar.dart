@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
@@ -16,7 +15,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return CustomAppBar(
       height: getVerticalSize(
-        70,
+        60,
       ),
       leadingWidth: 52,
       leading: CustomImageView(
