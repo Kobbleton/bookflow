@@ -1,46 +1,102 @@
 import 'package:bookflow/core/utils/image_constant.dart';
-import 'package:flutter/material.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
-import 'package:bookflow/presentation/home_screen/widgets/recent_books_widget.dart';
+import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
+import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
+import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/size_utils.dart';
+import '../../theme/app_style.dart';
 
 class LibraryScreen extends StatelessWidget {
-  final List<String> imagePaths = [
-    ImageConstant.bookCover1,
-    ImageConstant.bookCover2,
-    ImageConstant.bookCover3,
-    ImageConstant.bookCover4,
-    ImageConstant.bookCover5,
-    ImageConstant.bookCover6,
-    ImageConstant.bookCover7,
-    ImageConstant.bookCover8,
-  ];
-
-  LibraryScreen({
-    Key? key,
-  }) : super(key: key);
+  const LibraryScreen({Key? key})
+      : super(
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorConstant.white,
-      appBar: const HomeScreenAppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: getPadding(left: 24, right: 24),
-                child: RecentBooksBlock(imagePaths: imagePaths),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: ColorConstant.whiteA70000,
+        body: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const HomeScreenAppBar(),
+              Padding(
+                padding: getPadding(
+                  top: 10,
+                  left: 28,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "Library",
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtOpenSansBold24,
+                  ),
+                ),
               ),
-            ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: getPadding(
+                    top: 12,
+                  ),
+                  child: Padding(
+                    padding: getPadding(
+                      left: 24,
+                      right: 21,
+                      bottom: 5,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const AddBookButton(),
+                            CustomCard(
+                              imagePath: ImageConstant.magicCover1,
+                              text: 'Start here',
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: getPadding(
+                            top: 22,
+                            right: 0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomCard(
+                                imagePath: ImageConstant.magicCover2,
+                                text: 'FAQ',
+                              ),
+                              CustomCard(
+                                imagePath: ImageConstant.magicCover3,
+                                text: 'Whats new',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 20,
+                  color: ColorConstant.cyan500,
+                ),
+              ),
+            ],
           ),
-          Container(
-            height: 20,
-            color: ColorConstant.cyan500,
-          )
-        ],
+        ),
       ),
     );
   }

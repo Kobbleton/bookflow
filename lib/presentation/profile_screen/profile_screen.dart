@@ -12,9 +12,12 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorConstant.white,
       appBar: const HomeScreenAppBar(),
-      body: Container(
-        height: 20,
-        color: ColorConstant.cyan500,
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: 20,
+          color: ColorConstant.cyan500,
+        ),
       ),
     );
   }

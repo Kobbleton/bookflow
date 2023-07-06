@@ -115,6 +115,15 @@ class AppStyle {
     fontWeight: FontWeight.w700,
   );
 
+  static TextStyle txtOpenSansBold20white = TextStyle(
+    color: ColorConstant.white,
+    fontSize: getFontSize(
+      20,
+    ),
+    fontFamily: 'Open Sans',
+    fontWeight: FontWeight.w700,
+  );
+
   static TextStyle txtOpenSansBold24 = TextStyle(
     color: ColorConstant.gray900,
     fontSize: getFontSize(

@@ -1,6 +1,8 @@
 class ImageConstant {
   static String imgVector = 'assets/images/img_vector.png';
 
+  static String imgAdd = 'assets/images/img_add.svg';
+
   static String imgArrowleft = 'assets/images/img_arrowleft.svg';
 
   static String imgArrowdown = 'assets/images/img_arrowdown.svg';
@@ -55,6 +57,10 @@ class ImageConstant {
   static String bookCover6 = 'assets/images/bookcover6.png';
   static String bookCover7 = 'assets/images/bookcover7.png';
   static String bookCover8 = 'assets/images/bookcover8.png';
+
+  static String magicCover1 = 'assets/images/bookmagic1.png';
+  static String magicCover2 = 'assets/images/bookmagic2.png';
+  static String magicCover3 = 'assets/images/bookmagic3.png';
 
   static String gradientMain = 'assets/images/gradient_main_card.svg';
 

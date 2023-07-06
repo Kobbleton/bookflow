@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // The first page of the application
     const HomePage(),
     // The second page of the application (LibraryScreen)
-    LibraryScreen(),
+    const LibraryScreen(),
     // The third page of the application (ProfileScreen)
     const ProfileScreen(),
   ];
