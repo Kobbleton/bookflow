@@ -137,7 +137,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
-                    gotoMainScreen(context);
+                    onTapTxtForgotpassword(context);
                   },
                   child: Padding(
                     padding: getPadding(top: 26),

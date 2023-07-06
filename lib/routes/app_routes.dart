@@ -1,6 +1,8 @@
 import 'package:bookflow/presentation/home_screen/home_screen.dart';
 
 import '../presentation/create_new_password_screen/create_new_password_screen.dart';
+import '../presentation/library_screen/library_screen.dart';
+import '../presentation/profile_screen/profile_screen.dart';
 import '../presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
@@ -33,6 +35,10 @@ class AppRoutes {
 
   static const String homeScreen = '/home_screen';
 
+  static const String libraryScreen = '/library_screen';
+
+  static const String profileScreen = '/profile_screen';
+
   static Map<String, WidgetBuilder> routes = {
     signUpStepOneScreen: (context) => const SignUpStepOneScreen(),
     signInScreen: (context) => const SignInScreen(),
@@ -43,6 +49,8 @@ class AppRoutes {
     forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
     otpCodeVerificationScreen: (context) => const OtpCodeVerificationScreen(),
     createNewPasswordScreen: (context) => const CreateNewPasswordScreen(),
-    homeScreen: (context) =>  HomeScreen()
+    homeScreen: (context) => HomeScreen(),
+    profileScreen: (context) => const ProfileScreen(),
+    libraryScreen: (context) => LibraryScreen(),
   };
 }
