@@ -72,10 +72,10 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                           decoration: BoxDecoration(
                               color: ColorConstant.gray200,
                               borderRadius:
-                                  BorderRadius.circular(getHorizontalSize(6))),
+                                  BorderRadius.circular(getHorizontalSize(6),),),
                           child: ClipRRect(
                             borderRadius:
-                                BorderRadius.circular(getHorizontalSize(6)),
+                                BorderRadius.circular(getHorizontalSize(6),),
                             child: LinearProgressIndicator(
                               value: 0.5,
                               backgroundColor: ColorConstant.gray200,

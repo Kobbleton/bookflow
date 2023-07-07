@@ -67,4 +67,6 @@ class ImageConstant {
   static String searchIcon = 'assets/images/search.svg';
   static String bellIcon = 'assets/images/bell.svg';
   static String menuIcon = 'assets/images/menu.svg';
+
+  static String settingsImage1 = 'assets/images/menu.svg';
 }
