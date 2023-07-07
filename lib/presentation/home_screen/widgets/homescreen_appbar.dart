@@ -42,7 +42,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
           left: 16,
         ),
         child: Text(
-          "The Loop",
+          "BookFlow",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
           style: AppStyle.txtOpenSansBold24,

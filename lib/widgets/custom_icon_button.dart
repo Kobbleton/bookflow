@@ -85,12 +85,30 @@ class CustomIconButton extends StatelessWidget {
 
   _setColor() {
     switch (variant) {
+      case IconButtonVariant.fillBlueA70014:
+        return ColorConstant.blueA70014;
+      case IconButtonVariant.fillRedA20014:
+        return ColorConstant.redA20014;
+      case IconButtonVariant.fillDeeppurpleA20014:
+        return ColorConstant.deepPurpleA20014;
+      case IconButtonVariant.fillGreenA70014:
+        return ColorConstant.greenA70014;
+      case IconButtonVariant.fillOrangeA40014:
+        return ColorConstant.orangeA40014;
       default:
         return ColorConstant.cyan500;
     }
   }
 
   _setBorderRadius() {
+    if (variant == IconButtonVariant.fillBlueA70014 ||
+        variant == IconButtonVariant.fillRedA20014 ||
+        variant == IconButtonVariant.fillDeeppurpleA20014 ||
+        variant == IconButtonVariant.fillGreenA70014 ||
+        variant == IconButtonVariant.fillOrangeA40014) {
+      return BorderRadius.circular(height! / 2);
+    }
+
     switch (shape) {
       default:
         return BorderRadius.circular(
@@ -112,4 +130,9 @@ enum IconButtonPadding {
 
 enum IconButtonVariant {
   fillCyan700,
+  fillBlueA70014,
+  fillRedA20014,
+  fillDeeppurpleA20014,
+  fillGreenA70014,
+  fillOrangeA40014,
 }

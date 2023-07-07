@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:theloopsettings/core/app_export.dart';
+
+// ignore: must_be_immutable
+class ListformtitleItemWidget extends StatelessWidget {
+  const ListformtitleItemWidget({Key? key})
+      : super(
+          key: key,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            "",
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+            style: AppStyle.txtOpenSansBold16.copyWith(
+              letterSpacing: getHorizontalSize(
+                0.2,
+              ),
+            ),
+          ),
+          Padding(
+            padding: getPadding(
+              top: 20,
+            ),
+            child: Text(
+              "",
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.left,
+              style: AppStyle.txtOpenSansBold20,
+            ),
+          ),
+          Padding(
+            padding: getPadding(
+              top: 7,
+            ),
+            child: Divider(
+              height: getVerticalSize(
+                1,
+              ),
+              thickness: getVerticalSize(
+                1,
+              ),
+              color: ColorConstant.cyan700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

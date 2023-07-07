@@ -2,8 +2,8 @@ import 'package:bookflow/presentation/home_screen/widgets/home_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
+import '../account_page_screen/account_page_screen.dart';
 import '../library_screen/library_screen.dart';
-import '../profile_screen/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // The second page of the application (LibraryScreen)
     const LibraryScreen(),
     // The third page of the application (ProfileScreen)
-    const ProfileScreen(),
+    const AccountPageScreen(),
   ];
 
   @override

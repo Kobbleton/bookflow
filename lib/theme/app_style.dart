@@ -169,4 +169,13 @@ class AppStyle {
     fontFamily: 'Open Sans',
     fontWeight: FontWeight.w600,
   );
+
+  static TextStyle txtOpenSansBold20RedA200 = TextStyle(
+    color: ColorConstant.redA200,
+    fontSize: getFontSize(
+      20,
+    ),
+    fontFamily: 'Open Sans',
+    fontWeight: FontWeight.w700,
+  );
 }

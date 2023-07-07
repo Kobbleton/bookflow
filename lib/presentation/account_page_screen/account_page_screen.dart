@@ -1,603 +1,285 @@
+import 'package:bookflow/presentation/account_page_screen/widgets/avatar_info_row.dart';
+import 'package:bookflow/presentation/account_page_screen/widgets/custom_settings_row.dart';
+import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../theme/app_style.dart';
-import '../../widgets/app_bar/appbar_image.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
+import '../home_screen/widgets/custom_switch.dart';
 
-
-class AccountPageScreen extends StatelessWidget {
-  AccountPageScreen({Key? key})
+class AccountPageScreen extends StatefulWidget {
+  const AccountPageScreen({Key? key})
       : super(
           key: key,
         );
 
+  @override
+  State<AccountPageScreen> createState() => _AccountPageScreenState();
+}
+
+class _AccountPageScreenState extends State<AccountPageScreen> {
   bool isSelectedSwitch = false;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: ColorConstant.white,
-        appBar: CustomAppBar(
-          height: getVerticalSize(
-            68,
-          ),
-          leadingWidth: 52,
-          leading: CustomImageView(
-            svgPath: ImageConstant.logoSmall,
-            height: getSize(
-              28,
-            ),
-            width: getSize(
-              28,
-            ),
-            radius: BorderRadius.circular(
-              getHorizontalSize(
-                14,
-              ),
-            ),
-            margin: getMargin(
-              left: 24,
-              top: 13,
-              bottom: 14,
-            ),
-          ),
-          title: AppbarTitle(
-            text: "Account",
-            margin: getMargin(
-              left: 16,
-            ),
-          ),
-          actions: [
-            AppbarImage(
-              height: getSize(
-                28,
-              ),
-              width: getSize(
-                28,
-              ),
-              svgPath: ImageConstant.imgCalendar,
-              margin: getMargin(
-                left: 24,
-                top: 13,
-                right: 24,
-                bottom: 14,
-              ),
-            ),
-          ],
-        ),
-        body: SizedBox(
-          width: size.width,
-          child: SingleChildScrollView(
-            padding: getPadding(
-              top: 20,
-            ),
-            child: Padding(
+    return Scaffold(
+      // backgroundColor: ColorConstant.white,
+      appBar: const HomeScreenAppBar(),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
               padding: getPadding(
-                left: 24,
-                right: 24,
-                bottom: 5,
+                top: 20,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgEdit,
-                        height: getSize(
-                          56,
-                        ),
-                        width: getSize(
-                          56,
-                        ),
-                        radius: BorderRadius.circular(
-                          getHorizontalSize(
-                            28,
-                          ),
-                        ),
-                        margin: getMargin(
-                          bottom: 2,
-                        ),
+              child: Padding(
+                padding: getPadding(
+                  left: 24,
+                  right: 24,
+                  bottom: 5,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const AvatarInfoRow(),
+                    //Divider
+                    Padding(
+                      padding: getPadding(
+                        top: 22,
                       ),
-                      Padding(
-                        padding: getPadding(
-                          left: 20,
-                          top: 3,
+                      child: Divider(
+                        height: getVerticalSize(
+                          1,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Andrew Ainsley",
+                        thickness: getVerticalSize(
+                          1,
+                        ),
+                        color: ColorConstant.gray200,
+                      ),
+                    ),
+                    //Settings
+
+                    //Personal info
+                    CustomSettingRow(
+                      buttonVariant: IconButtonVariant.fillBlueA70014,
+                      text: 'Personal Info',
+                      imagePath: ImageConstant.settingsImageInfo,
+                    ),
+                    //Notification
+                    CustomSettingRow(
+                      buttonVariant: IconButtonVariant.fillRedA20014,
+                      text: 'Notification',
+                      imagePath: ImageConstant.settingsImageBell,
+                    ),
+                    //Preferences
+                    CustomSettingRow(
+                      buttonVariant: IconButtonVariant.fillDeeppurpleA20014,
+                      text: 'Preferences',
+                      imagePath: ImageConstant.settingsImagePrefs,
+                    ),
+                    //Security
+                    CustomSettingRow(
+                      buttonVariant: IconButtonVariant.fillGreenA70014,
+                      text: 'Security',
+                      imagePath: ImageConstant.settingsImageSecurity,
+                    ),
+                    //Language
+                    Padding(
+                      padding: getPadding(
+                        top: 24,
+                      ),
+                      child: Row(
+                        children: [
+                          CustomIconButton(
+                            height: 56,
+                            width: 56,
+                            variant: IconButtonVariant.fillOrangeA40014,
+                            child: CustomImageView(
+                              height: 30,
+                              width: 30,
+                              imagePath: ImageConstant.settingsImageLanguage,
+                            ),
+                          ),
+                          Padding(
+                            padding: getPadding(
+                              left: 20,
+                              top: 17,
+                              bottom: 10,
+                            ),
+                            child: Text(
+                              "Language",
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle.txtOpenSansBold20,
                             ),
-                            Padding(
-                              padding: getPadding(
-                                top: 6,
-                              ),
-                              child: Text(
-                                "andrew_ainsley@yourdomain.com",
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansBold14.copyWith(
-                                  letterSpacing: getHorizontalSize(
-                                    0.2,
-                                  ),
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding: getPadding(
+                              top: 17,
+                              bottom: 13,
+                            ),
+                            child: Text(
+                              "English (US)",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: AppStyle.txtOpenSansSemiBold18.copyWith(
+                                letterSpacing: getHorizontalSize(
+                                  0.2,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      CustomImageView(
-                        svgPath: ImageConstant.imgEdit,
-                        height: getSize(
-                          24,
-                        ),
-                        width: getSize(
-                          24,
-                        ),
-                        margin: getMargin(
-                          left: 36,
-                          top: 16,
-                          bottom: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 22,
-                    ),
-                    child: Divider(
-                      height: getVerticalSize(
-                        1,
-                      ),
-                      thickness: getVerticalSize(
-                        1,
-                      ),
-                      color: ColorConstant.gray200,
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 23,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal,
                           ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 14,
-                            bottom: 13,
-                          ),
-                          child: Text(
-                            "Personal Info",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillRedA20014,
-                          child: CustomImageView(
-                            imagePath:
-                                ImageConstant.imgAutolayouthorizontal56x56,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 14,
-                            bottom: 13,
-                          ),
-                          child: Text(
-                            "Notification",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillDeeppurpleA20014,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal1,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 14,
-                            bottom: 13,
-                          ),
-                          child: Text(
-                            "Preferences",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillGreenA70014,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal2,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 16,
-                            bottom: 11,
-                          ),
-                          child: Text(
-                            "Security",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillOrangeA40014,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal3,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 17,
-                            bottom: 10,
-                          ),
-                          child: Text(
-                            "Language",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: getPadding(
-                            top: 17,
-                            bottom: 13,
-                          ),
-                          child: Text(
-                            "English (US)",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                              letterSpacing: getHorizontalSize(
-                                0.2,
-                              ),
+                          CustomImageView(
+                            svgPath: ImageConstant.imgArrowright,
+                            height: getSize(
+                              20,
+                            ),
+                            width: getSize(
+                              20,
+                            ),
+                            margin: getMargin(
+                              left: 20,
+                              top: 18,
+                              bottom: 18,
                             ),
                           ),
-                        ),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            left: 20,
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal4,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 14,
-                            bottom: 13,
-                          ),
-                          child: Text(
-                            "Dark Mode",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomSwitch(
-                          margin: getMargin(
-                            top: 16,
-                            bottom: 16,
-                          ),
-                          value: isSelectedSwitch,
-                          onChanged: (value) {
-                            isSelectedSwitch = value;
-                          },
-                        ),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            left: 20,
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Divider(
-                      height: getVerticalSize(
-                        1,
+                        ],
                       ),
-                      thickness: getVerticalSize(
-                        1,
+                    ),
+                    //Dark Mode
+                    Padding(
+                      padding: getPadding(
+                        top: 24,
                       ),
-                      color: ColorConstant.gray200,
+                      child: Row(
+                        children: [
+                          CustomIconButton(
+                            variant: IconButtonVariant.fillBlueA70014,
+                            height: 56,
+                            width: 56,
+                            child: CustomImageView(
+                              height: 30,
+                              width: 30,
+                              imagePath: ImageConstant.settingsImageDarkMode,
+                            ),
+                          ),
+                          Padding(
+                            padding: getPadding(
+                              left: 20,
+                              top: 14,
+                              bottom: 13,
+                            ),
+                            child: Text(
+                              "Dark Mode",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: AppStyle.txtOpenSansBold20,
+                            ),
+                          ),
+                          const Spacer(),
+                          CustomSwitch(
+                            margin: getMargin(
+                              top: 16,
+                              bottom: 16,
+                            ),
+                            value: isSelectedSwitch,
+                            onChanged: (value) {
+                              setState(() {
+                                isSelectedSwitch = value;
+                              });
+                            },
+                          ),
+                          CustomImageView(
+                            svgPath: ImageConstant.imgArrowright,
+                            height: getSize(
+                              20,
+                            ),
+                            width: getSize(
+                              20,
+                            ),
+                            margin: getMargin(
+                              left: 20,
+                              top: 18,
+                              bottom: 18,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 23,
+                    Padding(
+                      padding: getPadding(
+                        top: 22,
+                      ),
+                      child: Divider(
+                        height: getVerticalSize(
+                          1,
+                        ),
+                        thickness: getVerticalSize(
+                          1,
+                        ),
+                        color: ColorConstant.gray200,
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillGreenA70014,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal5,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 16,
-                            bottom: 11,
-                          ),
-                          child: Text(
-                            "Help Center",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
+                    //Help Center
+                    CustomSettingRow(
+                      buttonVariant: IconButtonVariant.fillGreenA70014,
+                      text: 'Help Center',
+                      imagePath: ImageConstant.settingsImageHelpCenter,
                     ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
+                    //About
+
+                    CustomSettingRow(
+                      buttonVariant: IconButtonVariant.fillOrangeA40014,
+                      text: 'About BookFlow',
+                      imagePath: ImageConstant.settingsImageAbout,
                     ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillOrangeA40014,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal6,
+                    Padding(
+                      padding: getPadding(
+                        top: 24,
+                      ),
+                      child: Row(
+                        children: [
+                          CustomIconButton(
+                            height: 56,
+                            width: 56,
+                            variant: IconButtonVariant.fillRedA20014,
+                            child: CustomImageView(
+                              height: 30,
+                              width: 30,
+                              imagePath: ImageConstant.settingsImageLogout,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 14,
-                            bottom: 13,
+                          Padding(
+                            padding: getPadding(
+                              left: 20,
+                              top: 17,
+                              bottom: 10,
+                            ),
+                            child: Text(
+                              "Logout",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: AppStyle.txtOpenSansBold20RedA200,
+                            ),
                           ),
-                          child: Text(
-                            "About BookFlow",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20,
-                          ),
-                        ),
-                        Spacer(),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowright,
-                          height: getSize(
-                            20,
-                          ),
-                          width: getSize(
-                            20,
-                          ),
-                          margin: getMargin(
-                            top: 18,
-                            bottom: 18,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 24,
-                    ),
-                    child: Row(
-                      children: [
-                        CustomIconButton(
-                          height: 56,
-                          width: 56,
-                          variant: IconButtonVariant.FillRedA20014,
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgAutolayouthorizontal7,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 20,
-                            top: 17,
-                            bottom: 10,
-                          ),
-                          child: Text(
-                            "Logout",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20RedA200,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+          Container(
+            height: 20,
+            color: ColorConstant.cyan500,
+          )
+        ],
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:bookflow/presentation/home_screen/home_screen.dart';
 
+import '../presentation/account_page_screen/account_page_screen.dart';
 import '../presentation/create_new_password_screen/create_new_password_screen.dart';
 import '../presentation/library_screen/library_screen.dart';
-import '../presentation/profile_screen/profile_screen.dart';
 import '../presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
@@ -50,7 +50,7 @@ class AppRoutes {
     otpCodeVerificationScreen: (context) => const OtpCodeVerificationScreen(),
     createNewPasswordScreen: (context) => const CreateNewPasswordScreen(),
     homeScreen: (context) => const HomeScreen(),
-    profileScreen: (context) => const ProfileScreen(),
     libraryScreen: (context) => const LibraryScreen(),
+    profileScreen: (context) => AccountPageScreen(),
   };
 }

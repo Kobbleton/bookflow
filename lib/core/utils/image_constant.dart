@@ -5,6 +5,8 @@ class ImageConstant {
 
   static String imgArrowleft = 'assets/images/img_arrowleft.svg';
 
+  static String imgArrowright = 'assets/images/img_arrowright.svg';
+
   static String imgArrowdown = 'assets/images/img_arrowdown.svg';
 
   static String imgVectorTeal200 = 'assets/images/img_vector_teal_200.svg';
@@ -68,5 +70,13 @@ class ImageConstant {
   static String bellIcon = 'assets/images/bell.svg';
   static String menuIcon = 'assets/images/menu.svg';
 
-  static String settingsImage1 = 'assets/images/menu.svg';
+  static String settingsImagePrefs = 'assets/images/settings_img_1.png';
+  static String settingsImageSecurity = 'assets/images/settings_img_2.png';
+  static String settingsImageLanguage = 'assets/images/settings_img_3.png';
+  static String settingsImageDarkMode = 'assets/images/settings_img_4.png';
+  static String settingsImageHelpCenter = 'assets/images/settings_img_5.png';
+  static String settingsImageAbout = 'assets/images/settings_img_6.png';
+  static String settingsImageLogout = 'assets/images/settings_img_7.png';
+  static String settingsImageBell = 'assets/images/settings_img_8.png';
+  static String settingsImageInfo = 'assets/images/settings_img_9.png';
 }
