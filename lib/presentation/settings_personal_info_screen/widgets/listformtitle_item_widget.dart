@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:theloopsettings/core/app_export.dart';
+
+import '../../../core/utils/color_constant.dart';
+import '../../../core/utils/size_utils.dart';
+import '../../../theme/app_style.dart';
 
 // ignore: must_be_immutable
 class ListformtitleItemWidget extends StatelessWidget {
@@ -48,7 +51,7 @@ class ListformtitleItemWidget extends StatelessWidget {
               thickness: getVerticalSize(
                 1,
               ),
-              color: ColorConstant.cyan700,
+              color: ColorConstant.cyan500,
             ),
           ),
         ],

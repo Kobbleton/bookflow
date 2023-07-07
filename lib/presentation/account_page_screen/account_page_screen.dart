@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
+import '../../routes/app_routes.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
@@ -64,10 +65,16 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                     //Settings
 
                     //Personal info
-                    CustomSettingRow(
-                      buttonVariant: IconButtonVariant.fillBlueA70014,
-                      text: 'Personal Info',
-                      imagePath: ImageConstant.settingsImageInfo,
+                    InkWell(
+                      onTap: () {
+                        // Navigator.pushNamed(
+                        //     context, '/settings_personal_info_screen');
+                      },
+                      child: CustomSettingRow(
+                        buttonVariant: IconButtonVariant.fillBlueA70014,
+                        text: 'Personal Info',
+                        imagePath: ImageConstant.settingsImageInfo,
+                      ),
                     ),
                     //Notification
                     CustomSettingRow(
@@ -282,5 +289,13 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
         ],
       ),
     );
+  }
+
+  /// Navigates to the info screen.
+  ///
+  /// This function takes a [BuildContext] object as a parameter, which is used
+  /// to navigate back to the info screen.
+  onTapArrowleft(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.profileSettingsScreen);
   }
 }
