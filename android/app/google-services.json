@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358852197792",
+    "project_id": "bookflow-6043b",
+    "storage_bucket": "bookflow-6043b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358852197792:android:6bb748123c13c9e38c78c5",
+        "android_client_info": {
+          "package_name": "com.example.bookflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358852197792-6nht1u21epjts6iolih14604rabn8svr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANLcpJkyifqvEMkeslUrZeDh6a2Kxzkq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358852197792-6nht1u21epjts6iolih14604rabn8svr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
