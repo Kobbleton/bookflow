@@ -5,22 +5,18 @@ import 'package:equatable/equatable.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final FirebaseAuth _firebaseAuth;
 
-  AuthenticationBloc(this._firebaseAuth) : super(AuthenticationInitial());
-
-  Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event) async* {
-    if (event is AppStarted) {
+  AuthenticationBloc(this._firebaseAuth) : super(AuthenticationInitial()) {
+    on<AppStarted>((event, emit) async {
       final isSignedIn = _firebaseAuth.currentUser != null;
       if (isSignedIn) {
-        yield AuthenticationAuthenticated();
+        emit(AuthenticationAuthenticated());
       } else {
-        yield AuthenticationUnauthenticated();
+        emit(AuthenticationUnauthenticated());
       }
-    }
+    });
   }
 }
