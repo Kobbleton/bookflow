@@ -1,7 +1,11 @@
+import 'package:bookflow/bloc/authentification/authentication_state.dart';
 import 'package:bookflow/presentation/account_page_screen/widgets/avatar_info_row.dart';
 import 'package:bookflow/presentation/account_page_screen/widgets/custom_settings_row.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/authentification/authentication_bloc.dart';
+import '../../bloc/authentification/authentication_event.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -26,267 +30,281 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: ColorConstant.white,
-      appBar: const HomeScreenAppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: getPadding(
-                top: 20,
-              ),
-              child: Padding(
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (state is AuthenticationUnauthenticated) {
+          Navigator.of(context).pushReplacementNamed(AppRoutes.welcomeScreen);
+        }
+      },
+      child: Scaffold(
+        // backgroundColor: ColorConstant.white,
+        appBar: const HomeScreenAppBar(),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 padding: getPadding(
-                  left: 24,
-                  right: 24,
-                  bottom: 5,
+                  top: 20,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const AvatarInfoRow(),
-                    //Divider
-                    Padding(
-                      padding: getPadding(
-                        top: 22,
-                      ),
-                      child: Divider(
-                        height: getVerticalSize(
-                          1,
+                child: Padding(
+                  padding: getPadding(
+                    left: 24,
+                    right: 24,
+                    bottom: 5,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const AvatarInfoRow(),
+                      //Divider
+                      Padding(
+                        padding: getPadding(
+                          top: 22,
                         ),
-                        thickness: getVerticalSize(
-                          1,
+                        child: Divider(
+                          height: getVerticalSize(
+                            1,
+                          ),
+                          thickness: getVerticalSize(
+                            1,
+                          ),
+                          color: ColorConstant.gray200,
                         ),
-                        color: ColorConstant.gray200,
                       ),
-                    ),
-                    //Settings
+                      //Settings
 
-                    //Personal info
-                    InkWell(
-                      onTap: () {
-                        // Navigator.pushNamed(
-                        //     context, '/settings_personal_info_screen');
-                      },
-                      child: CustomSettingRow(
-                        buttonVariant: IconButtonVariant.fillBlueA70014,
-                        text: 'Personal Info',
-                        imagePath: ImageConstant.settingsImageInfo,
+                      //Personal info
+                      InkWell(
+                        onTap: () {
+                          // Navigator.pushNamed(
+                          //     context, '/settings_personal_info_screen');
+                        },
+                        child: CustomSettingRow(
+                          buttonVariant: IconButtonVariant.fillBlueA70014,
+                          text: 'Personal Info',
+                          imagePath: ImageConstant.settingsImageInfo,
+                        ),
                       ),
-                    ),
-                    //Notification
-                    CustomSettingRow(
-                      buttonVariant: IconButtonVariant.fillRedA20014,
-                      text: 'Notification',
-                      imagePath: ImageConstant.settingsImageBell,
-                    ),
-                    //Preferences
-                    CustomSettingRow(
-                      buttonVariant: IconButtonVariant.fillDeeppurpleA20014,
-                      text: 'Preferences',
-                      imagePath: ImageConstant.settingsImagePrefs,
-                    ),
-                    //Security
-                    CustomSettingRow(
-                      buttonVariant: IconButtonVariant.fillGreenA70014,
-                      text: 'Security',
-                      imagePath: ImageConstant.settingsImageSecurity,
-                    ),
-                    //Language
-                    Padding(
-                      padding: getPadding(
-                        top: 24,
+                      //Notification
+                      CustomSettingRow(
+                        buttonVariant: IconButtonVariant.fillRedA20014,
+                        text: 'Notification',
+                        imagePath: ImageConstant.settingsImageBell,
                       ),
-                      child: Row(
-                        children: [
-                          CustomIconButton(
-                            height: 56,
-                            width: 56,
-                            variant: IconButtonVariant.fillOrangeA40014,
-                            child: CustomImageView(
-                              height: 30,
-                              width: 30,
-                              imagePath: ImageConstant.settingsImageLanguage,
+                      //Preferences
+                      CustomSettingRow(
+                        buttonVariant: IconButtonVariant.fillDeeppurpleA20014,
+                        text: 'Preferences',
+                        imagePath: ImageConstant.settingsImagePrefs,
+                      ),
+                      //Security
+                      CustomSettingRow(
+                        buttonVariant: IconButtonVariant.fillGreenA70014,
+                        text: 'Security',
+                        imagePath: ImageConstant.settingsImageSecurity,
+                      ),
+                      //Language
+                      Padding(
+                        padding: getPadding(
+                          top: 24,
+                        ),
+                        child: Row(
+                          children: [
+                            CustomIconButton(
+                              height: 56,
+                              width: 56,
+                              variant: IconButtonVariant.fillOrangeA40014,
+                              child: CustomImageView(
+                                height: 30,
+                                width: 30,
+                                imagePath: ImageConstant.settingsImageLanguage,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: getPadding(
-                              left: 20,
-                              top: 17,
-                              bottom: 10,
+                            Padding(
+                              padding: getPadding(
+                                left: 20,
+                                top: 17,
+                                bottom: 10,
+                              ),
+                              child: Text(
+                                "Language",
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: AppStyle.txtOpenSansBold20,
+                              ),
                             ),
-                            child: Text(
-                              "Language",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: AppStyle.txtOpenSansBold20,
-                            ),
-                          ),
-                          const Spacer(),
-                          Padding(
-                            padding: getPadding(
-                              top: 17,
-                              bottom: 13,
-                            ),
-                            child: Text(
-                              "English (US)",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                                letterSpacing: getHorizontalSize(
-                                  0.2,
+                            const Spacer(),
+                            Padding(
+                              padding: getPadding(
+                                top: 17,
+                                bottom: 13,
+                              ),
+                              child: Text(
+                                "English (US)",
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: AppStyle.txtOpenSansSemiBold18.copyWith(
+                                  letterSpacing: getHorizontalSize(
+                                    0.2,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          CustomImageView(
-                            svgPath: ImageConstant.imgArrowright,
-                            height: getSize(
-                              20,
+                            CustomImageView(
+                              svgPath: ImageConstant.imgArrowright,
+                              height: getSize(
+                                20,
+                              ),
+                              width: getSize(
+                                20,
+                              ),
+                              margin: getMargin(
+                                left: 20,
+                                top: 18,
+                                bottom: 18,
+                              ),
                             ),
-                            width: getSize(
-                              20,
-                            ),
-                            margin: getMargin(
-                              left: 20,
-                              top: 18,
-                              bottom: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Dark Mode
-                    Padding(
-                      padding: getPadding(
-                        top: 24,
-                      ),
-                      child: Row(
-                        children: [
-                          CustomIconButton(
-                            variant: IconButtonVariant.fillBlueA70014,
-                            height: 56,
-                            width: 56,
-                            child: CustomImageView(
-                              height: 30,
-                              width: 30,
-                              imagePath: ImageConstant.settingsImageDarkMode,
-                            ),
-                          ),
-                          Padding(
-                            padding: getPadding(
-                              left: 20,
-                              top: 14,
-                              bottom: 13,
-                            ),
-                            child: Text(
-                              "Dark Mode",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: AppStyle.txtOpenSansBold20,
-                            ),
-                          ),
-                          const Spacer(),
-                          CustomSwitch(
-                            margin: getMargin(
-                              top: 16,
-                              bottom: 16,
-                            ),
-                            value: isSelectedSwitch,
-                            onChanged: (value) {
-                              setState(() {
-                                isSelectedSwitch = value;
-                              });
-                            },
-                          ),
-                          CustomImageView(
-                            svgPath: ImageConstant.imgArrowright,
-                            height: getSize(
-                              20,
-                            ),
-                            width: getSize(
-                              20,
-                            ),
-                            margin: getMargin(
-                              left: 20,
-                              top: 18,
-                              bottom: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: getPadding(
-                        top: 22,
-                      ),
-                      child: Divider(
-                        height: getVerticalSize(
-                          1,
+                          ],
                         ),
-                        thickness: getVerticalSize(
-                          1,
-                        ),
-                        color: ColorConstant.gray200,
                       ),
-                    ),
-                    //Help Center
-                    CustomSettingRow(
-                      buttonVariant: IconButtonVariant.fillGreenA70014,
-                      text: 'Help Center',
-                      imagePath: ImageConstant.settingsImageHelpCenter,
-                    ),
-                    //About
+                      //Dark Mode
+                      Padding(
+                        padding: getPadding(
+                          top: 24,
+                        ),
+                        child: Row(
+                          children: [
+                            CustomIconButton(
+                              variant: IconButtonVariant.fillBlueA70014,
+                              height: 56,
+                              width: 56,
+                              child: CustomImageView(
+                                height: 30,
+                                width: 30,
+                                imagePath: ImageConstant.settingsImageDarkMode,
+                              ),
+                            ),
+                            Padding(
+                              padding: getPadding(
+                                left: 20,
+                                top: 14,
+                                bottom: 13,
+                              ),
+                              child: Text(
+                                "Dark Mode",
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: AppStyle.txtOpenSansBold20,
+                              ),
+                            ),
+                            const Spacer(),
+                            CustomSwitch(
+                              margin: getMargin(
+                                top: 16,
+                                bottom: 16,
+                              ),
+                              value: isSelectedSwitch,
+                              onChanged: (value) {
+                                setState(() {
+                                  isSelectedSwitch = value;
+                                });
+                              },
+                            ),
+                            CustomImageView(
+                              svgPath: ImageConstant.imgArrowright,
+                              height: getSize(
+                                20,
+                              ),
+                              width: getSize(
+                                20,
+                              ),
+                              margin: getMargin(
+                                left: 20,
+                                top: 18,
+                                bottom: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: getPadding(
+                          top: 22,
+                        ),
+                        child: Divider(
+                          height: getVerticalSize(
+                            1,
+                          ),
+                          thickness: getVerticalSize(
+                            1,
+                          ),
+                          color: ColorConstant.gray200,
+                        ),
+                      ),
+                      //Help Center
+                      CustomSettingRow(
+                        buttonVariant: IconButtonVariant.fillGreenA70014,
+                        text: 'Help Center',
+                        imagePath: ImageConstant.settingsImageHelpCenter,
+                      ),
+                      //About
 
-                    CustomSettingRow(
-                      buttonVariant: IconButtonVariant.fillOrangeA40014,
-                      text: 'About BookFlow',
-                      imagePath: ImageConstant.settingsImageAbout,
-                    ),
-                    Padding(
-                      padding: getPadding(
-                        top: 24,
+                      CustomSettingRow(
+                        buttonVariant: IconButtonVariant.fillOrangeA40014,
+                        text: 'About BookFlow',
+                        imagePath: ImageConstant.settingsImageAbout,
                       ),
-                      child: Row(
-                        children: [
-                          CustomIconButton(
-                            height: 56,
-                            width: 56,
-                            variant: IconButtonVariant.fillRedA20014,
-                            child: CustomImageView(
-                              height: 30,
-                              width: 30,
-                              imagePath: ImageConstant.settingsImageLogout,
+                      Padding(
+                        padding: getPadding(
+                          top: 24,
+                        ),
+                        child: Row(
+                          children: [
+                            CustomIconButton(
+                              height: 56,
+                              width: 56,
+                              variant: IconButtonVariant.fillRedA20014,
+                              child: CustomImageView(
+                                height: 30,
+                                width: 30,
+                                imagePath: ImageConstant.settingsImageLogout,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: getPadding(
-                              left: 20,
-                              top: 17,
-                              bottom: 10,
+                            Padding(
+                              padding: getPadding(
+                                left: 20,
+                                top: 17,
+                                bottom: 10,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<AuthenticationBloc>()
+                                      .add(LoggedOut());
+                                },
+                                child: Text(
+                                  "Logout",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtOpenSansBold20RedA200,
+                                ),
+                              ),
                             ),
-                            child: Text(
-                              "Logout",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: AppStyle.txtOpenSansBold20RedA200,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(
-            height: 20,
-            color: ColorConstant.cyan500,
-          )
-        ],
+            Container(
+              height: 20,
+              color: ColorConstant.cyan500,
+            )
+          ],
+        ),
       ),
     );
   }

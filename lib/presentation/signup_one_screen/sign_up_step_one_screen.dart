@@ -1,15 +1,18 @@
+import 'package:bookflow/bloc/signup/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/countries_list.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
-import '../../routes/app_routes.dart';
+import '../../repository/auth_repository.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_input_field_full.dart';
+import '../signup_two_screen/sign_up_step_two_screen.dart';
 import 'widgets/date_picker_field.dart';
 
 class SignUpStepOneScreen extends StatefulWidget {
@@ -23,6 +26,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
   // Declaring text editing controllers to control the full name and date input fields.
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
+  String? selectedCountry;
 
   @override
   void dispose() {
@@ -70,12 +74,15 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                           height: getVerticalSize(12),
                           width: getHorizontalSize(216),
                           decoration: BoxDecoration(
-                              color: ColorConstant.gray200,
-                              borderRadius:
-                                  BorderRadius.circular(getHorizontalSize(6),),),
+                            color: ColorConstant.gray200,
+                            borderRadius: BorderRadius.circular(
+                              getHorizontalSize(6),
+                            ),
+                          ),
                           child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(getHorizontalSize(6),),
+                            borderRadius: BorderRadius.circular(
+                              getHorizontalSize(6),
+                            ),
                             child: LinearProgressIndicator(
                               value: 0.5,
                               backgroundColor: ColorConstant.gray200,
@@ -168,6 +175,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                       padding: getPadding(top: 14),
                     ),
                     DatePickerField(
+                        dateController: dateController,
                         hintText: 'Enter birth date',
                         iconPath: ImageConstant.hideIcon),
                   ],
@@ -195,6 +203,11 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                       hintText: 'Select Country',
                       iconPath: ImageConstant.imgArrowdown,
                       dropdownItems: countriesList,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedCountry = newValue;
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -233,7 +246,54 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
   }
 
   // Method for handling the onTap event of the Continue button, which navigates to the next screen.
+
   onTapContinue(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.signUpStepTwoScreen);
+    if (fullNameController.text.isEmpty ||
+        dateController.text.isEmpty ||
+        (selectedCountry == null || selectedCountry!.isEmpty)) {
+      const snackBar = SnackBar(
+        backgroundColor: Colors.red,
+        content: Text('Please fill out all fields.'),
+      );
+
+      // Find the Scaffold in the widget tree and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                SignUpBloc(authRepository: context.read<AuthRepository>()),
+            child: SignUpStepTwoScreen(
+              fullName: fullNameController.text,
+              birthDate: dateController.text,
+              country: selectedCountry!,
+              // and so on for the rest of your data
+            ),
+          ),
+        ),
+      );
+    }
   }
+
+//   onTapContinue(BuildContext context) {
+//     print(dateController.text);
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//         builder: (context) => BlocProvider(
+//           create: (context) =>
+//               SignUpBloc(authRepository: context.read<AuthRepository>()),
+//           child: SignUpStepTwoScreen(
+//             fullName: fullNameController.text,
+//             birthDate: dateController.text,
+//             country: selectedCountry!,
+//             // and so on for the rest of your data
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 }

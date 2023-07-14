@@ -1,8 +1,9 @@
 // date_picker_field.dart
-import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'package:bookflow/core/utils/image_constant.dart';
 
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/size_utils.dart';
@@ -104,11 +105,13 @@ import '../../../theme/app_style.dart';
 class DatePickerField extends StatefulWidget {
   final String hintText;
   final String iconPath;
+  final TextEditingController dateController;
 
   const DatePickerField({
     Key? key,
     required this.hintText,
     required this.iconPath,
+    required this.dateController,
   }) : super(key: key);
 
   @override
@@ -116,7 +119,6 @@ class DatePickerField extends StatefulWidget {
 }
 
 class DatePickerFieldState extends State<DatePickerField> {
-  final TextEditingController dateController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);
 
@@ -132,6 +134,7 @@ class DatePickerFieldState extends State<DatePickerField> {
   void dispose() {
     _focusNode.dispose();
     _isFocused.dispose();
+
     super.dispose();
   }
 
@@ -165,7 +168,8 @@ class DatePickerFieldState extends State<DatePickerField> {
       );
     }
     if (picked != null) {
-      dateController.text = "${picked!.month}/${picked!.day}/${picked!.year}";
+      widget.dateController.text =
+          "${picked!.month}/${picked!.day}/${picked!.year}";
     }
     _focusNode.unfocus(); // Unfocus when date picker is closed
     setState(() {}); // Call setState to refresh
@@ -193,7 +197,7 @@ class DatePickerFieldState extends State<DatePickerField> {
                 child: Padding(
                   padding: getPadding(top: 4, left: 2),
                   child: TextField(
-                    controller: dateController,
+                    controller: widget.dateController,
                     focusNode: _focusNode,
                     style: AppStyle.txtOpenSansBold18,
                     decoration: InputDecoration(

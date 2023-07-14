@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class SignUpState extends Equatable {
   const SignUpState();
@@ -11,6 +12,15 @@ class SignUpInitial extends SignUpState {}
 
 class SignUpLoading extends SignUpState {}
 
+class SignUpSuccess extends SignUpState {
+  final UserCredential userCredential;
+
+  const SignUpSuccess({required this.userCredential});
+
+  @override
+  List<Object> get props => [userCredential];
+}
+
 class SignUpFailure extends SignUpState {
   final String error;
 
@@ -19,5 +29,3 @@ class SignUpFailure extends SignUpState {
   @override
   List<Object> get props => [error];
 }
-
-class SignUpSuccess extends SignUpState {}

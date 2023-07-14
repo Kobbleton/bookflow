@@ -7,7 +7,7 @@ import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 
-// ignore_for_file: must_be_immutable
+
 class ResetPasswordSuccessfulDialog extends StatefulWidget {
   const ResetPasswordSuccessfulDialog({Key? key})
       : super(

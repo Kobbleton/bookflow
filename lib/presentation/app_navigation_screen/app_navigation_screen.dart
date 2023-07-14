@@ -332,14 +332,14 @@ class AppNavigationScreen extends StatelessWidget {
   /// Displays an [AlertDialog] with a custom content widget using the
   /// provided [BuildContext].
   ///
-  /// The custom content is created using the [LightSignUpSuccessfulDialog]
+  /// The custom content is created using the [SignUpSuccessfulDialog]
   /// method and is displayed in an [AlertDialog] that fills the entire screen
   /// with no padding.
   onTapLightsignupsuccessful(BuildContext context) {
     showDialog(
         context: context,
         builder: (_) => const AlertDialog(
-              content: LightSignUpSuccessfulDialog(),
+              content: SignUpSuccessfulDialog(),
               backgroundColor: Colors.transparent,
               contentPadding: EdgeInsets.zero,
               insetPadding: EdgeInsets.only(left: 0),

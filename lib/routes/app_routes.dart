@@ -10,7 +10,6 @@ import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/forgot_password_screen/forgot_password_screen.dart';
 import '../presentation/otp_code_verification_screen/otp_code_verification_screen.dart';
 import '../presentation/signup_one_screen/sign_up_step_one_screen.dart';
-import '../presentation/signup_two_screen/sign_up_step_two_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/welcome_screen/welcome_screen.dart';
 
@@ -47,7 +46,7 @@ class AppRoutes {
     signInScreen: (context) => const SignInScreen(),
     splashScreen: (context) => const SplashScreen(),
     welcomeScreen: (context) => const WelcomeScreen(),
-    signUpStepTwoScreen: (context) => const SignUpStepTwoScreen(),
+    // signUpStepTwoScreen: (context) =>  SignUpStepTwoScreen(),
     appNavigationScreen: (context) => const AppNavigationScreen(),
     forgotPasswordScreen: (context) => const ForgotPasswordScreen(),
     otpCodeVerificationScreen: (context) => const OtpCodeVerificationScreen(),

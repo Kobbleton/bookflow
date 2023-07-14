@@ -7,31 +7,41 @@ abstract class SignUpEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FullNameUpdated extends SignUpEvent {
+class EmailUpdated extends SignUpEvent {
+  final String email;
+
+  const EmailUpdated({required this.email});
+
+  @override
+  List<Object> get props => [email];
+}
+
+class PasswordUpdated extends SignUpEvent {
+  final String password;
+
+  const PasswordUpdated({required this.password});
+
+  @override
+  List<Object> get props => [password];
+}
+
+class Submitted extends SignUpEvent {
+    final String email;
+  final String password;
   final String fullName;
-
-  const FullNameUpdated({required this.fullName});
-
-  @override
-  List<Object> get props => [fullName];
-}
-
-class BirthDateUpdated extends SignUpEvent {
-  final DateTime birthDate;
-
-  const BirthDateUpdated({required this.birthDate});
-
-  @override
-  List<Object> get props => [birthDate];
-}
-
-class CountrySelected extends SignUpEvent {
+  final String birthDate;
+  final String username;
   final String country;
 
-  const CountrySelected({required this.country});
+  const Submitted({
+   required this.email,
+    required this.password,
+    required this.fullName,
+    required this.birthDate,
+    required this.username,
+    required this.country,
+  });
 
   @override
-  List<Object> get props => [country];
+  List<Object> get props => [email, password, fullName, birthDate, username, country];
 }
-
-class Submitted extends SignUpEvent {}

@@ -9,12 +9,14 @@ class DropdownField extends StatefulWidget {
   final String hintText;
   final String iconPath;
   final List<String> dropdownItems;
+  final ValueChanged<String?>? onChanged;
 
   const DropdownField({
     Key? key,
     required this.hintText,
     required this.iconPath,
     required this.dropdownItems,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class DropdownFieldState extends State<DropdownField> {
   final TextEditingController dropdownController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);
+  
 
   String dropdownValue = '';
 
@@ -102,10 +105,14 @@ class DropdownFieldState extends State<DropdownField> {
                       ),
                     ),
                   ),
-                  onChanged: (String? newValue) {
+                  onChanged: (newValue) {
                     setState(() {
-                      dropdownValue = newValue!;
+                      dropdownValue = newValue ?? '';
                     });
+
+                    if (widget.onChanged != null) {
+                      widget.onChanged!(dropdownValue);
+                    }
                   },
                 ),
               ),

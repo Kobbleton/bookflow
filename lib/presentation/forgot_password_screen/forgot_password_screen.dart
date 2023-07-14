@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/authentification/authentication_bloc.dart';
+import '../../bloc/authentification/authentication_event.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -116,6 +119,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   /// It uses the Navigator.pushNamed method to navigate to the OTP Code Verification Screen.
   /// The route name is defined in the AppRoutes class.
   onTapContinue(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.otpCodeVerificationScreen);
+    if (emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter your email'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else {
+      context.read<AuthenticationBloc>().add(
+            PasswordResetRequested(emailController.text),
+          );
+      Navigator.pushNamed(context, AppRoutes.otpCodeVerificationScreen);
+    }
   }
 }
