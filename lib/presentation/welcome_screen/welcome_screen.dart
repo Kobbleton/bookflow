@@ -3,8 +3,10 @@ import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
+import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
+import '../sign_in_screen/widgets/social_login_button.dart';
 import 'widgets/slider_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 3,
+                      flex: 2,
                       child: SizedBox(
                         height: getVerticalSize(522),
                         width: double.maxFinite,
@@ -150,17 +152,71 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 ),
                               ),
                             ),
-                            CustomButton(
-                              height: getVerticalSize(58),
-                              text: "Continue with Google",
-                              margin: getMargin(top: 32),
-                              variant: ButtonVariant.outlineGray200,
-                              padding: ButtonPadding.paddingT19,
-                              fontStyle: ButtonFontStyle.openSansSemiBold16,
-                              prefixWidget: Container(
-                                margin: getMargin(right: 12),
-                                child: CustomImageView(
-                                    svgPath: ImageConstant.googleLogo),
+                            //todo wide custom button. if other social registr implemented on the screen - delete
+                            // CustomButton(
+                            //   height: getVerticalSize(58),
+                            //   text: "Continue with Google",
+                            //   margin: getMargin(top: 32),
+                            //   variant: ButtonVariant.outlineGray200,
+                            //   padding: ButtonPadding.paddingT19,
+                            //   fontStyle: ButtonFontStyle.openSansSemiBold16,
+                            //   prefixWidget: Container(
+                            //     margin: getMargin(right: 12),
+                            //     child: CustomImageView(
+                            //         svgPath: ImageConstant.googleLogo),
+                            //   ),
+                            // ),
+                            Padding(
+                              padding: getPadding(top: 33),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: getPadding(top: 12, bottom: 11),
+                                    child: SizedBox(
+                                      width: getHorizontalSize(103),
+                                      child: Divider(
+                                          height: getVerticalSize(1),
+                                          thickness: getVerticalSize(1),
+                                          color: ColorConstant.gray200),
+                                    ),
+                                  ),
+                                  Text("or continue with",
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.left,
+                                      style: AppStyle
+                                          .txtOpenSansSemiBold18Gray700),
+                                  Padding(
+                                    padding: getPadding(top: 12, bottom: 11),
+                                    child: SizedBox(
+                                      width: getHorizontalSize(103),
+                                      child: Divider(
+                                          height: getVerticalSize(1),
+                                          thickness: getVerticalSize(1),
+                                          color: ColorConstant.gray200),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: getPadding(top: 26, bottom: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SocialLoginButton(
+                                    icon: ImageConstant.googleLogo,
+                                  ),
+                                  SocialLoginButton(
+                                    icon: ImageConstant.appleLogo,
+                                  ),
+                                  SocialLoginButton(
+                                    icon: ImageConstant.facebookLogo,
+                                  ),
+                                ],
                               ),
                             ),
                             CustomButton(

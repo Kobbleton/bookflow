@@ -12,7 +12,6 @@ import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_input_field_full.dart';
 
@@ -124,25 +123,29 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 // "Remember me" option
-                Padding(
-                  padding: getPadding(top: 23),
-                  child: Row(
-                    children: [
-                      CustomIconButton(
-                          height: 24,
-                          width: 24,
-                          child: CustomImageView(
-                              svgPath: ImageConstant.imgCheckmarkWhiteA700)),
-                      Padding(
-                          padding: getPadding(left: 16),
-                          child: Text("Remember me",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                                  letterSpacing: getHorizontalSize(0.2))))
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: getPadding(top: 23),
+                //   child: Row(
+                //     children: [
+                //       CustomIconButton(
+                //           height: 24,
+                //           width: 24,
+                //           child: CustomImageView(
+                //               svgPath: ImageConstant.imgCheckmarkWhiteA700)),
+                //       Padding(
+                //         padding: getPadding(left: 16),
+                //         child: Text(
+                //           "Remember me",
+                //           overflow: TextOverflow.ellipsis,
+                //           textAlign: TextAlign.left,
+                //           style: AppStyle.txtOpenSansSemiBold18.copyWith(
+                //             letterSpacing: getHorizontalSize(0.2),
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 // Divider line
                 Padding(
                     padding: getPadding(top: 24),

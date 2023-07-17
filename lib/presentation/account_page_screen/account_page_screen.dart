@@ -279,9 +279,32 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                               ),
                               child: GestureDetector(
                                 onTap: () {
-                                  context
-                                      .read<AuthenticationBloc>()
-                                      .add(LoggedOut());
+                                  showDialog<bool>(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text('Logout'),
+                                      content: const Text(
+                                          'Are you sure you want to logout?'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Cancel'),
+                                          onPressed: () => Navigator.of(context)
+                                              .pop(false), // returns false
+                                        ),
+                                        TextButton(
+                                          child: const Text('OK'),
+                                          onPressed: () => Navigator.of(context)
+                                              .pop(true), // returns true
+                                        ),
+                                      ],
+                                    ),
+                                  ).then((shouldLogout) {
+                                    if (shouldLogout == true) {
+                                      context
+                                          .read<AuthenticationBloc>()
+                                          .add(LoggedOut());
+                                    }
+                                  });
                                 },
                                 child: Text(
                                   "Logout",
