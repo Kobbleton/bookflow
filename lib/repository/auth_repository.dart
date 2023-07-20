@@ -1,4 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
 import '../exceptions/custom_exception.dart';
 
 class AuthRepository {
@@ -71,16 +75,96 @@ class AuthRepository {
     }
   }
 
+  Future<UserCredential> signInWithGoogle() async {
+    print("signInWithGoogle called"); // Add debug print here
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Check if googleUser is null (which happens if the user cancels the sign-in process)
+    if (googleUser == null) {
+      print("Google sign-in was cancelled");
+      throw FirebaseAuthException(
+        code: "ERROR_ABORTED_BY_USER",
+        message: "Sign in aborted by user",
+      );
+    }
+
+    print("Google user: $googleUser"); // Add debug print here
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    print("Google auth: $googleAuth"); // Add debug print here
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await _firebaseAuth.signInWithCredential(credential);
+  }
+
+  Future<UserCredential> signInWithApple() async {
+    print(
+        "signInWithApple called"); // This will print when the function is called
+    try {
+      final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+      print(
+          'Got Apple ID credential: $appleIdCredential'); // This will print when the Apple ID credential is obtained
+
+      final oAuthProvider = OAuthProvider('apple.com');
+      final credential = oAuthProvider.credential(
+        idToken: appleIdCredential.identityToken,
+        accessToken: appleIdCredential.authorizationCode,
+      );
+      print(
+          'Got OAuth credential: $credential'); // This will print when the OAuth credential is obtained
+
+      return await _firebaseAuth.signInWithCredential(credential);
+    } catch (e) {
+      print(
+          'Error while signing in with Apple: $e'); // This will print any errors that occur during the Sign in with Apple process
+      rethrow;
+    }
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    print("signInWithFacebook called");
+
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      final OAuthCredential credential = FacebookAuthProvider.credential(
+        result.accessToken!.token,
+      );
+      print('Got Facebook credential: $credential');
+
+      return await _firebaseAuth.signInWithCredential(credential);
+    } catch (e) {
+      print('Error while signing in with Facebook: $e');
+      rethrow;
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();
     } catch (e) {
+      print('Error while signing in with Facebook: $e');
       // You can handle sign out errors here if necessary
       rethrow;
     }
   }
 
   Future<void> sendPasswordResetEmail(String email) async {
-  return _firebaseAuth.sendPasswordResetEmail(email: email);
-}
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }

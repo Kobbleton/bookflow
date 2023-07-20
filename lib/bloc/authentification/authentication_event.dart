@@ -8,6 +8,11 @@ class UserLoggedIn extends AuthenticationEvent {}
 
 class UserLoggedOut extends AuthenticationEvent {}
 
+class SignInWithGoogle extends AuthenticationEvent {}
+
+class SignInWithAppleEvent extends AuthenticationEvent {}
+
+class SignInWithFacebookEvent extends AuthenticationEvent {}
 
 
 class LogIn extends AuthenticationEvent {

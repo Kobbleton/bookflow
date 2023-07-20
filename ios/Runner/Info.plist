@@ -47,5 +47,28 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.358852197792-d09c28osque21720058157fef11d4kmt</string>
+				<string>fb286816194011487</string> <!-- Replace with your Facebook App ID prefixed with "fb" -->
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>286816194011487</string> <!-- Replace with your Facebook App ID -->
+	<key>FacebookDisplayName</key>
+	<string>Bookflow</string> <!-- Replace with your Facebook App Name -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 </dict>
 </plist>

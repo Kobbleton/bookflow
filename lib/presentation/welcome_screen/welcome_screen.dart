@@ -1,3 +1,7 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/authentification/authentication_bloc.dart';
+import '../../bloc/authentification/authentication_event.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -208,12 +212,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SocialLoginButton(
+                                    onTap: () {
+                                      print(
+                                          "SocialLoginButton tapped"); // Add debug print here
+                                      context
+                                          .read<AuthenticationBloc>()
+                                          .add(SignInWithGoogle());
+                                    },
                                     icon: ImageConstant.googleLogo,
                                   ),
                                   SocialLoginButton(
+                                    onTap: () {
+                                      print(
+                                          "SocialLoginButton tapped"); // Add debug print here
+                                      context
+                                          .read<AuthenticationBloc>()
+                                          .add(SignInWithAppleEvent());
+                                    },
                                     icon: ImageConstant.appleLogo,
                                   ),
                                   SocialLoginButton(
+                                    onTap: () {
+                                      print(
+                                          "SocialLoginButton tapped"); // Add debug print here
+                                      context
+                                          .read<AuthenticationBloc>()
+                                          .add(SignInWithFacebookEvent());
+                                    },
                                     icon: ImageConstant.facebookLogo,
                                   ),
                                 ],

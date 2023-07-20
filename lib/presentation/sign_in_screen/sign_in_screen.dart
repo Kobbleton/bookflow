@@ -209,12 +209,27 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SocialLoginButton(
+                        onTap: () {
+                          context
+                              .read<AuthenticationBloc>()
+                              .add(SignInWithGoogle());
+                        },
                         icon: ImageConstant.googleLogo,
                       ),
                       SocialLoginButton(
+                        onTap: () {
+                          context
+                              .read<AuthenticationBloc>()
+                              .add(SignInWithAppleEvent());
+                        },
                         icon: ImageConstant.appleLogo,
                       ),
                       SocialLoginButton(
+                        onTap: () {
+                          context
+                              .read<AuthenticationBloc>()
+                              .add(SignInWithFacebookEvent());
+                        },
                         icon: ImageConstant.facebookLogo,
                       ),
                     ],
