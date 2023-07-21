@@ -89,9 +89,14 @@ class LibraryScreen extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 20,
-                  color: ColorConstant.cyan500,
+                child: Padding(
+                  padding: getPadding(
+                    bottom: 0,
+                  ),
+                  child: Container(
+                    height: 20,
+                    color: ColorConstant.cyan500,
+                  ),
                 ),
               ),
             ],

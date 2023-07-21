@@ -1,4 +1,5 @@
 // Importing necessary libraries and modules
+import 'dart:io' show Platform;
 import 'package:bookflow/bloc/authentification/authentication_state.dart';
 import 'package:bookflow/presentation/sign_in_screen/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
@@ -203,38 +204,48 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: getPadding(top: 26, bottom: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SocialLoginButton(
-                        onTap: () {
-                          context
-                              .read<AuthenticationBloc>()
-                              .add(SignInWithGoogle());
-                        },
-                        icon: ImageConstant.googleLogo,
-                      ),
-                      SocialLoginButton(
-                        onTap: () {
-                          context
-                              .read<AuthenticationBloc>()
-                              .add(SignInWithAppleEvent());
-                        },
-                        icon: ImageConstant.appleLogo,
-                      ),
-                      SocialLoginButton(
-                        onTap: () {
-                          context
-                              .read<AuthenticationBloc>()
-                              .add(SignInWithFacebookEvent());
-                        },
-                        icon: ImageConstant.facebookLogo,
-                      ),
-                    ],
+                if (Platform.isAndroid)
+                  CustomButton(
+                    height: getVerticalSize(58),
+                    text: "Continue with Google",
+                    margin: getMargin(top: 32),
+                    variant: ButtonVariant.outlineGray200,
+                    padding: ButtonPadding.paddingT19,
+                    fontStyle: ButtonFontStyle.openSansSemiBold16,
+                    prefixWidget: Container(
+                      margin: getMargin(right: 12),
+                      child: CustomImageView(svgPath: ImageConstant.googleLogo),
+                    ),
                   ),
-                ),
+                if (Platform.isIOS)
+                  Padding(
+                    padding: getPadding(top: 26, bottom: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SocialLoginButton(
+                          onTap: () {
+                            print(
+                                "SocialLoginButton tapped"); // Add debug print here
+                            context
+                                .read<AuthenticationBloc>()
+                                .add(SignInWithGoogle());
+                          },
+                          icon: ImageConstant.googleLogo,
+                        ),
+                        SocialLoginButton(
+                          onTap: () {
+                            print(
+                                "SocialLoginButton tapped"); // Add debug print here
+                            context
+                                .read<AuthenticationBloc>()
+                                .add(SignInWithAppleEvent());
+                          },
+                          icon: ImageConstant.appleLogo,
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),

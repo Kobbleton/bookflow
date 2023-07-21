@@ -156,8 +156,42 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: getPadding(top: 33),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: getPadding(top: 12, bottom: 11),
+                                    child: SizedBox(
+                                      width: getHorizontalSize(103),
+                                      child: Divider(
+                                          height: getVerticalSize(1),
+                                          thickness: getVerticalSize(1),
+                                          color: ColorConstant.gray200),
+                                    ),
+                                  ),
+                                  Text("or continue with",
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.left,
+                                      style: AppStyle
+                                          .txtOpenSansSemiBold18Gray700),
+                                  Padding(
+                                    padding: getPadding(top: 12, bottom: 11),
+                                    child: SizedBox(
+                                      width: getHorizontalSize(103),
+                                      child: Divider(
+                                          height: getVerticalSize(1),
+                                          thickness: getVerticalSize(1),
+                                          color: ColorConstant.gray200),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                             if (Platform.isAndroid)
-                              //todo wide custom button. if other social registr implemented on the screen - delete
                               CustomButton(
                                 height: getVerticalSize(58),
                                 text: "Continue with Google",
@@ -169,42 +203,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   margin: getMargin(right: 12),
                                   child: CustomImageView(
                                       svgPath: ImageConstant.googleLogo),
-                                ),
-                              ),
-                            if (Platform.isIOS)
-                              Padding(
-                                padding: getPadding(top: 33),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: getPadding(top: 12, bottom: 11),
-                                      child: SizedBox(
-                                        width: getHorizontalSize(103),
-                                        child: Divider(
-                                            height: getVerticalSize(1),
-                                            thickness: getVerticalSize(1),
-                                            color: ColorConstant.gray200),
-                                      ),
-                                    ),
-                                    Text("or continue with",
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        style: AppStyle
-                                            .txtOpenSansSemiBold18Gray700),
-                                    Padding(
-                                      padding: getPadding(top: 12, bottom: 11),
-                                      child: SizedBox(
-                                        width: getHorizontalSize(103),
-                                        child: Divider(
-                                            height: getVerticalSize(1),
-                                            thickness: getVerticalSize(1),
-                                            color: ColorConstant.gray200),
-                                      ),
-                                    )
-                                  ],
                                 ),
                               ),
                             if (Platform.isIOS)
@@ -233,16 +231,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                             .add(SignInWithAppleEvent());
                                       },
                                       icon: ImageConstant.appleLogo,
-                                    ),
-                                    SocialLoginButton(
-                                      onTap: () {
-                                        print(
-                                            "SocialLoginButton tapped"); // Add debug print here
-                                        context
-                                            .read<AuthenticationBloc>()
-                                            .add(SignInWithFacebookEvent());
-                                      },
-                                      icon: ImageConstant.facebookLogo,
                                     ),
                                   ],
                                 ),

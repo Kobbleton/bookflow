@@ -32,7 +32,7 @@ class SocialLoginButton extends StatelessWidget {
             borderRadius: BorderRadiusStyle.circleBorder30),
         child: Container(
           height: getVerticalSize(60),
-          width: getHorizontalSize(116),
+          width: getHorizontalSize(180),
           padding: getPadding(left: 46, top: 18, right: 46, bottom: 18),
           decoration: AppDecoration.outlineGray200
               .copyWith(borderRadius: BorderRadiusStyle.circleBorder30),

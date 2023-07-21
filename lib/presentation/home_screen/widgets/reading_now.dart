@@ -18,7 +18,6 @@ class ReadingNowBlock extends StatelessWidget {
     return SizedBox(
       width: double.maxFinite,
       child: Container(
-        decoration: AppDecoration.fillWhiteOpacity50,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -46,6 +45,7 @@ class ReadingNowBlock extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Container(
                       decoration: AppDecoration.outline.copyWith(
+                        color: ColorConstant.white.withOpacity(0.7),
                         borderRadius: BorderRadiusStyle.roundedBorder18,
                       ),
                       child: OutlineGradientButton(
@@ -83,16 +83,16 @@ class ReadingNowBlock extends StatelessWidget {
                         ),
                         corners: const Corners(
                           topLeft: Radius.circular(
-                            18,
+                            16,
                           ),
                           topRight: Radius.circular(
-                            18,
+                            16,
                           ),
                           bottomLeft: Radius.circular(
-                            18,
+                            16,
                           ),
                           bottomRight: Radius.circular(
-                            18,
+                            16,
                           ),
                         ),
                         child: Padding(
