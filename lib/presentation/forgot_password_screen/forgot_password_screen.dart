@@ -1,3 +1,4 @@
+import 'package:bookflow/presentation/forgot_password_screen/widgets/password_reset_email_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentification/authentication_bloc.dart';
@@ -5,7 +6,6 @@ import '../../bloc/authentification/authentication_event.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
-import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
@@ -130,7 +130,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       context.read<AuthenticationBloc>().add(
             PasswordResetRequested(emailController.text),
           );
-      Navigator.pushNamed(context, AppRoutes.otpCodeVerificationScreen);
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          content: ForgetPassEmailSentSuccessDialog(),
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          insetPadding: EdgeInsets.only(left: 0),
+        ),
+      );
     }
   }
 }
