@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -136,23 +136,23 @@ class AuthRepository {
     }
   }
 
-  Future<UserCredential> signInWithFacebook() async {
-    print("signInWithFacebook called");
+  // Future<UserCredential> signInWithFacebook() async {
+  //   print("signInWithFacebook called");
 
-    try {
-      final LoginResult result = await FacebookAuth.instance.login();
+  //   try {
+  //     final LoginResult result = await FacebookAuth.instance.login();
 
-      final OAuthCredential credential = FacebookAuthProvider.credential(
-        result.accessToken!.token,
-      );
-      print('Got Facebook credential: $credential');
+  //     final OAuthCredential credential = FacebookAuthProvider.credential(
+  //       result.accessToken!.token,
+  //     );
+  //     print('Got Facebook credential: $credential');
 
-      return await _firebaseAuth.signInWithCredential(credential);
-    } catch (e) {
-      print('Error while signing in with Facebook: $e');
-      rethrow;
-    }
-  }
+  //     return await _firebaseAuth.signInWithCredential(credential);
+  //   } catch (e) {
+  //     print('Error while signing in with Facebook: $e');
+  //     rethrow;
+  //   }
+  // }
 
   Future<void> signOut() async {
     try {

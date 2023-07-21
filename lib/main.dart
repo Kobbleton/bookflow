@@ -8,7 +8,7 @@ import 'bloc/authentification/authentication_event.dart';
 import 'bloc/signup/sign_up_bloc.dart';
 import 'firebase_options.dart';
 import 'routes/app_routes.dart';
-import 'repository/auth_repository.dart'; // import your AuthRepository
+import 'repository/auth_repository.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +44,7 @@ void main() async {
                 AppStarted(),
               ),
           ),
-        ], child: const MyApp())),
+        ], child: const MyApp(),),),
   );
 }
 

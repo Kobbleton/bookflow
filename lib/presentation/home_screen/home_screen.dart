@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CurvedNavigationBar(
         animationCurve: Curves.easeOutExpo,
         animationDuration: const Duration(milliseconds: 600),
-        height: 75,
+        height: 55,
         backgroundColor: ColorConstant.cyan500,
         items: <Widget>[
           Icon(Icons.home_filled, size: 32, color: ColorConstant.gray700),

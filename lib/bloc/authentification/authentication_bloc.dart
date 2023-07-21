@@ -15,7 +15,7 @@ class AuthenticationBloc
     on<PasswordResetRequested>(_onPasswordResetRequested);
     on<SignInWithGoogle>(_onSignInWithGoogle);
     on<SignInWithAppleEvent>(_onSignInWithApple);
-    on<SignInWithFacebookEvent>(_onSignInWithFacebook);
+    // on<SignInWithFacebookEvent>(_onSignInWithFacebook);
   }
 
   Future<void> _onAppStarted(
@@ -84,18 +84,18 @@ class AuthenticationBloc
     }
   }
 
-  Future<void> _onSignInWithFacebook(
-      SignInWithFacebookEvent event, Emitter<AuthenticationState> emit) async {
-    print(
-        "Starting Sign In with Facebook"); // This will print when the function is called
-    emit(AuthenticationLoading());
-    try {
-      await _authRepository.signInWithFacebook();
-      emit(AuthenticationAuthenticated());
-    } catch (e) {
-      emit(AuthenticationError('Failed to sign in with Facebook.'));
-    }
-  }
+  // Future<void> _onSignInWithFacebook(
+  //     SignInWithFacebookEvent event, Emitter<AuthenticationState> emit) async {
+  //   print(
+  //       "Starting Sign In with Facebook"); // This will print when the function is called
+  //   emit(AuthenticationLoading());
+  //   try {
+  //     await _authRepository.signInWithFacebook();
+  //     emit(AuthenticationAuthenticated());
+  //   } catch (e) {
+  //     emit(AuthenticationError('Failed to sign in with Facebook.'));
+  //   }
+  // }
 
   Future<void> _onPasswordResetRequested(
       PasswordResetRequested event, Emitter<AuthenticationState> emit) async {

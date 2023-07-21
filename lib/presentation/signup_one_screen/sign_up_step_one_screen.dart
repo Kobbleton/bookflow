@@ -220,7 +220,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
         margin: getMargin(
           left: 24,
           right: 24,
-          bottom: 106,
+          bottom: 56,
         ),
         decoration: AppDecoration.outlineGray100,
         child: Column(
