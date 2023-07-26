@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
 import '../../bloc/authentification/authentication_state.dart';
-import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
@@ -81,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
           top: false,
           bottom: false,
           child: Scaffold(
-            backgroundColor: ColorConstant.white,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: SizedBox(
               width: double.maxFinite,
               child: Column(
@@ -108,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen>
                       "BookFlow",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansBold48,
+                      style: AppStyle.txtOpenSansBold48(context),
                     ),
                   ),
                   RotationTransition(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
 import '../account_page_screen/account_page_screen.dart';
 import '../library_screen/library_screen.dart';
+import 'dart:io' show Platform;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -41,14 +42,35 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? ColorConstant.dark1
+            : ColorConstant.white,
         animationCurve: Curves.easeOutExpo,
         animationDuration: const Duration(milliseconds: 600),
-        height: 55,
+        height: Platform.isIOS ? 70 : 55,
         backgroundColor: ColorConstant.cyan500,
         items: <Widget>[
-          Icon(Icons.home_filled, size: 32, color: ColorConstant.gray700),
-          Icon(Icons.auto_stories, size: 32, color: ColorConstant.gray700),
-          Icon(Icons.person, size: 32, color: ColorConstant.gray700),
+          Icon(
+            Icons.home_filled,
+            size: 32,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? ColorConstant.white
+                : ColorConstant.gray700,
+          ),
+          Icon(
+            Icons.auto_stories,
+            size: 32,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? ColorConstant.white
+                : ColorConstant.gray700,
+          ),
+          Icon(
+            Icons.person,
+            size: 32,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? ColorConstant.white
+                : ColorConstant.gray700,
+          ),
         ],
         onTap: (index) {
           setState(() {

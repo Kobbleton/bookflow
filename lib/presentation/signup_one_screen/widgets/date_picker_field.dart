@@ -199,7 +199,7 @@ class DatePickerFieldState extends State<DatePickerField> {
                   child: TextField(
                     controller: widget.dateController,
                     focusNode: _focusNode,
-                    style: AppStyle.txtOpenSansBold18,
+                    style: AppStyle.txtOpenSansBold18(context),
                     decoration: InputDecoration(
                       prefixIcon: Padding(
                         padding:

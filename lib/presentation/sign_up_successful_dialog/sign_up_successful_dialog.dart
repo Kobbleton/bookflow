@@ -482,7 +482,7 @@ class _SignUpSuccessfulDialogState extends State<SignUpSuccessfulDialog>
               "Your account has been created!",
               maxLines: null,
               textAlign: TextAlign.center,
-              style: AppStyle.txtOpenSansBold24,
+              style: AppStyle.txtOpenSansBold24(context),
             ),
           ),
           Container(
@@ -496,11 +496,7 @@ class _SignUpSuccessfulDialogState extends State<SignUpSuccessfulDialog>
               "You can move to the main screen now.",
               maxLines: null,
               textAlign: TextAlign.center,
-              style: AppStyle.txtOpenSansRegular16.copyWith(
-                letterSpacing: getHorizontalSize(
-                  0.2,
-                ),
-              ),
+              style: AppStyle.txtOpenSansRegular16(context),
             ),
           ),
           CustomButton(

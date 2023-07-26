@@ -37,7 +37,7 @@ class AppNavigationScreen extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.center,
                                             style:
-                                                AppStyle.txtOpenSansBold20))),
+                                                AppStyle.txtOpenSansBold20(context),),),),
                                 Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
@@ -47,7 +47,7 @@ class AppNavigationScreen extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.center,
                                             style:
-                                                AppStyle.txtOpenSansBold18))),
+                                                AppStyle.txtOpenSansBold18(context),),),),
                                 Padding(
                                     padding: getPadding(top: 5),
                                     child: Divider(
@@ -94,7 +94,7 @@ class AppNavigationScreen extends StatelessWidget {
                                                                       TextAlign
                                                                           .center,
                                                                   style: AppStyle
-                                                                      .txtOpenSansBold18))),
+                                                                      .txtOpenSansBold18(context),),),),
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 5),
@@ -139,7 +139,7 @@ class AppNavigationScreen extends StatelessWidget {
                                                                       TextAlign
                                                                           .center,
                                                                   style: AppStyle
-                                                                      .txtOpenSansBold20))),
+                                                                      .txtOpenSansBold20(context),))),
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 5),
@@ -184,7 +184,7 @@ class AppNavigationScreen extends StatelessWidget {
                                                                       TextAlign
                                                                           .center,
                                                                   style: AppStyle
-                                                                      .txtOpenSansBold20))),
+                                                                      .txtOpenSansBold20(context),))),
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 5),
@@ -229,7 +229,7 @@ class AppNavigationScreen extends StatelessWidget {
                                                                       TextAlign
                                                                           .center,
                                                                   style: AppStyle
-                                                                      .txtOpenSansBold20))),
+                                                                      .txtOpenSansBold20(context),))),
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 5),
@@ -275,7 +275,7 @@ class AppNavigationScreen extends StatelessWidget {
                                                                       TextAlign
                                                                           .center,
                                                                   style: AppStyle
-                                                                      .txtOpenSansBold20))),
+                                                                      .txtOpenSansBold20(context),))),
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 5),

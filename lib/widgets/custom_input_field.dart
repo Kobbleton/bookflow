@@ -63,7 +63,7 @@ class CustomTextFieldState extends State<CustomTextField> {
                 obscureText: widget.isObscured,
                 controller: widget.controller,
                 focusNode: _focusNode,
-                style: AppStyle.txtOpenSansBold18,
+                style: AppStyle.txtOpenSansBold18(context),
                 decoration: InputDecoration(
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(10.0),

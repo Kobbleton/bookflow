@@ -83,11 +83,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     }),
                 // Welcome text
                 Padding(
-                    padding: getPadding(top: 36),
-                    child: Text("Hello there 👋",
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold32)),
+                  padding: getPadding(top: 36),
+                  child: Text(
+                    "Hello there 👋",
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtOpenSansBold32(context),
+                  ),
+                ),
                 // Instruction for signing in
                 Container(
                   width: getHorizontalSize(332),
@@ -96,9 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     "Please enter your username/email and password to sign in.",
                     maxLines: null,
                     textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansRegular18.copyWith(
-                      letterSpacing: getHorizontalSize(0.2),
-                    ),
+                    style: AppStyle.txtOpenSansRegular18(context),
                   ),
                 ),
                 // CustomInputFieldFull for inputting username/email
@@ -163,10 +164,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     },
                     child: Padding(
                       padding: getPadding(top: 26),
-                      child: Text("Forgot Password?",
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: AppStyle.txtOpenSansBold18Cyan500),
+                      child: Text(
+                        "Forgot Password?",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        style: AppStyle.txtOpenSansBold18Cyan500(context),
+                      ),
                     ),
                   ),
                 ),
@@ -187,10 +190,12 @@ class _SignInScreenState extends State<SignInScreen> {
                               color: ColorConstant.gray200),
                         ),
                       ),
-                      Text("or continue with",
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: AppStyle.txtOpenSansSemiBold18Gray700),
+                      Text(
+                        "or continue with",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        style: AppStyle.txtOpenSansSemiBold18Gray700(context),
+                      ),
                       Padding(
                         padding: getPadding(top: 12, bottom: 11),
                         child: SizedBox(

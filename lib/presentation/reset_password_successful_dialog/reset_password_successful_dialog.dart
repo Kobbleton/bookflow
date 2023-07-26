@@ -364,7 +364,7 @@ class _ResetPasswordSuccessfulDialogState
               "Reset Password Successful!",
               maxLines: null,
               textAlign: TextAlign.center,
-              style: AppStyle.txtOpenSansBold24,
+              style: AppStyle.txtOpenSansBold24(context),
             ),
           ),
           Container(
@@ -378,11 +378,7 @@ class _ResetPasswordSuccessfulDialogState
               "Your password has been successfully changed.",
               maxLines: null,
               textAlign: TextAlign.center,
-              style: AppStyle.txtOpenSansRegular16.copyWith(
-                letterSpacing: getHorizontalSize(
-                  0.2,
-                ),
-              ),
+              style: AppStyle.txtOpenSansRegular16(context),
             ),
           ),
           CustomButton(

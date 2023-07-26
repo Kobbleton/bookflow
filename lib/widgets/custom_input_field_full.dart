@@ -34,9 +34,7 @@ class CustomInputFieldFull extends StatelessWidget {
               headerText,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
-              style: AppStyle.txtOpenSansBold16.copyWith(
-                letterSpacing: getHorizontalSize(0.2),
-              ),
+              style: AppStyle.txtOpenSansBold16(context),
             ),
           ),
           Padding(

@@ -28,11 +28,7 @@ class SlidergreetingItemWidget extends StatelessWidget {
             "The Number One Best Speed Reading Application in this Century",
             maxLines: null,
             textAlign: TextAlign.center,
-            style: AppStyle.txtOpenSansSemiBold18.copyWith(
-              letterSpacing: getHorizontalSize(
-                0.2,
-              ),
-            ),
+            style: AppStyle.txtOpenSansSemiBold18(context),
           ),
         ),
       ],
@@ -64,11 +60,7 @@ class SlidergreetingItemWidget2 extends StatelessWidget {
             "Read Faster Than You Think You Can. Impress yourself.",
             maxLines: null,
             textAlign: TextAlign.center,
-            style: AppStyle.txtOpenSansSemiBold18.copyWith(
-              letterSpacing: getHorizontalSize(
-                0.2,
-              ),
-            ),
+            style: AppStyle.txtOpenSansSemiBold18(context),
           ),
         ),
       ],

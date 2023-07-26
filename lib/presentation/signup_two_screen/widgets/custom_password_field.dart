@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/color_constant.dart';
-import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
 
 // Custom PasswordField widget to be used throughout the application for uniform styling and properties
@@ -38,11 +37,12 @@ class CustomPasswordField extends StatelessWidget {
         // The overflow property is set to ellipsis so that overflowing text is indicated with an ellipsis.
         // The textAlign property is set to left so that the text aligns on the left.
         // The style is set using a pre-defined style from the application's style constants.
-        Text(labelText,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.left,
-            style: AppStyle.txtOpenSansBold16
-                .copyWith(letterSpacing: getHorizontalSize(0.2))),
+        Text(
+          labelText,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.left,
+          style: AppStyle.txtOpenSansBold16(context),
+        ),
         // Password field widget.
         // The style is set using a pre-defined style from the application's style constants.
         // The controller is set using the provided passwordController.
@@ -50,7 +50,7 @@ class CustomPasswordField extends StatelessWidget {
         // The obscureText property is set to true to hide the entered password.
         TextField(
           obscureText: true,
-          style: AppStyle.txtOpenSansBold20,
+          style: AppStyle.txtOpenSansBold20(context),
           controller: passwordController,
           decoration: InputDecoration(
             hintText: hintText,

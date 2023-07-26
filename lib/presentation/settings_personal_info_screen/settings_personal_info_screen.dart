@@ -64,9 +64,7 @@ class SettingsPersonalInfoScreen extends StatelessWidget {
                         "Date of Birth",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold16.copyWith(
-                          letterSpacing: getHorizontalSize(0.2),
-                        ),
+                        style: AppStyle.txtOpenSansBold16(context),
                       ),
                       Padding(
                         padding: getPadding(top: 18),
@@ -76,7 +74,7 @@ class SettingsPersonalInfoScreen extends StatelessWidget {
                             Text("12/27/1995",
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansBold20),
+                                style: AppStyle.txtOpenSansBold20(context),),
                             CustomImageView(
                                 svgPath: ImageConstant.imgCalendar,
                                 height: getSize(28),
@@ -104,16 +102,14 @@ class SettingsPersonalInfoScreen extends StatelessWidget {
                         "Street Address",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold16.copyWith(
-                          letterSpacing: getHorizontalSize(0.2),
-                        ),
+                        style: AppStyle.txtOpenSansBold16(context),
                       ),
                       Padding(
                         padding: getPadding(top: 20),
                         child: Text("3517 W. Gray Street, New York",
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20),
+                            style: AppStyle.txtOpenSansBold20(context),),
                       ),
                       Padding(
                         padding: getPadding(top: 7),
@@ -135,9 +131,7 @@ class SettingsPersonalInfoScreen extends StatelessWidget {
                         "Country",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold16.copyWith(
-                          letterSpacing: getHorizontalSize(0.2),
-                        ),
+                        style: AppStyle.txtOpenSansBold16(context),
                       ),
                       DropdownField(
                         hintText: 'Select Country',

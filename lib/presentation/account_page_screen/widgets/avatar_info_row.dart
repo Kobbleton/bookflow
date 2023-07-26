@@ -45,7 +45,7 @@ class AvatarInfoRow extends StatelessWidget {
                 "Andrew Ainsley",
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
-                style: AppStyle.txtOpenSansBold20,
+                style: AppStyle.txtOpenSansBold20(context),
               ),
               Padding(
                 padding: getPadding(
@@ -55,11 +55,7 @@ class AvatarInfoRow extends StatelessWidget {
                   "andrew_ainsley@yourdomain.com",
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansBold14.copyWith(
-                    letterSpacing: getHorizontalSize(
-                      0.2,
-                    ),
-                  ),
+                  style: AppStyle.txtOpenSansBold14(context),
                 ),
               ),
             ],

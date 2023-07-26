@@ -121,7 +121,7 @@ class AddBookButton extends StatelessWidget {
                           "Add Book",
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
-                          style: AppStyle.txtOpenSansBold20white,
+                          style: AppStyle.txtOpenSansBold20white(context),
                         ),
                       ),
                     ],

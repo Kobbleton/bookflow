@@ -58,7 +58,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 child: Text("Create New Password 🔐",
                     maxLines: null,
                     textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansBold32)),
+                    style: AppStyle.txtOpenSansBold32(context),),),
             Container(
               width: getHorizontalSize(353),
               margin: getMargin(top: 13, right: 28),
@@ -66,9 +66,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 "Enter your new password. If you forget it, then you have to do forgot password.",
                 maxLines: null,
                 textAlign: TextAlign.left,
-                style: AppStyle.txtOpenSansRegular18.copyWith(
-                  letterSpacing: getHorizontalSize(0.2),
-                ),
+                style: AppStyle.txtOpenSansRegular18(context),
               ),
             ),
             Padding(
@@ -107,9 +105,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                       "Remember me",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                        letterSpacing: getHorizontalSize(0.2),
-                      ),
+                      style: AppStyle.txtOpenSansSemiBold18(context),
                     ),
                   ),
                 ],

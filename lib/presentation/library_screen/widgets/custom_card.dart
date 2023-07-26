@@ -74,9 +74,7 @@ class CustomCard extends StatelessWidget {
                   text,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansBold18.copyWith(
-                    letterSpacing: getHorizontalSize(0.2),
-                  ),
+                  style: AppStyle.txtOpenSansBold18(context),
                 ),
               ),
             ),

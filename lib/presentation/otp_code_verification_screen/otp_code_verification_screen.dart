@@ -75,7 +75,7 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
               child: Text("You’ve Got Mail 📩",
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansBold32),
+                  style: AppStyle.txtOpenSansBold32(context),),
             ),
             Container(
               width: getHorizontalSize(358),
@@ -84,9 +84,7 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                 "We have sent the OTP verification code to your email address. Check your email and enter the code below.",
                 maxLines: null,
                 textAlign: TextAlign.left,
-                style: AppStyle.txtOpenSansRegular18.copyWith(
-                  letterSpacing: getHorizontalSize(0.2),
-                ),
+                style: AppStyle.txtOpenSansRegular18(context),
               ),
             ),
             Padding(
@@ -101,9 +99,7 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                   "Didn't receive email?",
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                    letterSpacing: getHorizontalSize(0.2),
-                  ),
+                  style: AppStyle.txtOpenSansSemiBold18(context),
                 ),
               ),
             ),

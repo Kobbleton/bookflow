@@ -103,7 +103,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                 child: Text("Let's Complete Your Profile 📋",
                     maxLines: null,
                     textAlign: TextAlign.center,
-                    style: AppStyle.txtOpenSansBold32),
+                    style: AppStyle.txtOpenSansBold32(context),),
               ),
               // Subtitle text.
               Container(
@@ -113,9 +113,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                   "Don't worry, only you can see your personal data. No one else will be able to see it.",
                   maxLines: null,
                   textAlign: TextAlign.center,
-                  style: AppStyle.txtOpenSansRegular18.copyWith(
-                    letterSpacing: getHorizontalSize(0.2),
-                  ),
+                  style: AppStyle.txtOpenSansRegular18(context),
                 ),
               ),
               // User profile image with an edit icon on the bottom right corner.
@@ -166,9 +164,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                         "Birth date",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold16.copyWith(
-                          letterSpacing: getHorizontalSize(0.2),
-                        ),
+                        style: AppStyle.txtOpenSansBold16(context),
                       ),
                     ),
                     Padding(
@@ -192,9 +188,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                       "Country",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansBold16.copyWith(
-                        letterSpacing: getHorizontalSize(0.2),
-                      ),
+                      style: AppStyle.txtOpenSansBold16(context),
                     ),
                     Padding(
                       padding: getPadding(top: 14),

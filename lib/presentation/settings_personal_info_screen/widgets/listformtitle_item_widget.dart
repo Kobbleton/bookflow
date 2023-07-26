@@ -23,11 +23,7 @@ class ListformtitleItemWidget extends StatelessWidget {
             "",
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
-            style: AppStyle.txtOpenSansBold16.copyWith(
-              letterSpacing: getHorizontalSize(
-                0.2,
-              ),
-            ),
+            style: AppStyle.txtOpenSansBold16(context),
           ),
           Padding(
             padding: getPadding(
@@ -37,7 +33,7 @@ class ListformtitleItemWidget extends StatelessWidget {
               "",
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
-              style: AppStyle.txtOpenSansBold20,
+              style: AppStyle.txtOpenSansBold20(context),
             ),
           ),
           Padding(

@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/authentification/authentication_bloc.dart';
 import 'bloc/authentification/authentication_event.dart';
 import 'bloc/signup/sign_up_bloc.dart';
+import 'bloc/themecubit/theme_cubit.dart';
 import 'firebase_options.dart';
 import 'routes/app_routes.dart';
-import 'repository/auth_repository.dart'; 
+import 'repository/auth_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final isDarkTheme = prefs.getBool('isDarkTheme') ??
+      false; // default to false if no value found
 
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -26,15 +31,16 @@ void main() async {
 
   runApp(
     MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<FirebaseAuth>(
+          create: (context) => firebaseAuth,
+        ),
+        RepositoryProvider<AuthRepository>(
+          create: (context) => authRepository, // provide AuthRepository
+        ),
+      ],
+      child: MultiBlocProvider(
         providers: [
-          RepositoryProvider<FirebaseAuth>(
-            create: (context) => firebaseAuth,
-          ),
-          RepositoryProvider<AuthRepository>(
-            create: (context) => authRepository, // provide AuthRepository
-          ),
-        ],
-        child: MultiBlocProvider(providers: [
           BlocProvider<SignUpBloc>(
             create: (context) => SignUpBloc(authRepository: authRepository),
           ),
@@ -44,7 +50,13 @@ void main() async {
                 AppStarted(),
               ),
           ),
-        ], child: const MyApp(),),),
+          BlocProvider<ThemeCubit>(
+            create: (context) => ThemeCubit(isDarkTheme), // provide ThemeCubit
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    ),
   );
 }
 
@@ -53,14 +65,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        visualDensity: VisualDensity.standard,
-      ),
-      title: 'booksflow_ui',
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splashScreen,
-      routes: AppRoutes.routes,
+    return BlocBuilder<ThemeCubit, bool>(
+      builder: (context, isDarkTheme) {
+        return MaterialApp(
+          theme: isDarkTheme
+              ? ThemeData.dark()
+              : ThemeData
+                  .light(), // Here we use isDarkTheme to decide the theme
+          title: 'booksflow_ui',
+          debugShowCheckedModeBanner: false,
+          initialRoute: AppRoutes.splashScreen,
+          routes: AppRoutes.routes,
+        );
+      },
     );
   }
 }

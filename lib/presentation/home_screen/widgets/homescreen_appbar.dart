@@ -45,7 +45,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
           "BookFlow",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          style: AppStyle.txtOpenSansBold24,
+          style: AppStyle.txtOpenSansBold24(context),
         ),
       ),
       actions: [
@@ -60,23 +60,25 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
           margin: getMargin(
             left: 24,
             top: 11,
-            right: 16,
+            right: 22,
           ),
         ),
-        AppbarImage(
-          height: getSize(
-            28,
-          ),
-          width: getSize(
-            28,
-          ),
-          svgPath: ImageConstant.bellIcon,
-          margin: getMargin(
-            left: 20,
-            top: 11,
-            right: 40,
-          ),
-        ),
+
+        /// Notification button if needed
+        // AppbarImage(
+        //   height: getSize(
+        //     28,
+        //   ),
+        //   width: getSize(
+        //     28,
+        //   ),
+        //   svgPath: ImageConstant.bellIcon,
+        //   margin: getMargin(
+        //     left: 20,
+        //     top: 11,
+        //     right: 40,
+        //   ),
+        // ),
       ],
     );
   }

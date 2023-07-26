@@ -135,10 +135,12 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 // Text instructions for the sign up process
                 Padding(
                   padding: getPadding(top: 36),
-                  child: Text("Create an Account 🔐",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansBold32),
+                  child: Text(
+                    "Create an Account 🔐",
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtOpenSansBold32(context),
+                  ),
                 ),
                 Container(
                   width: getHorizontalSize(367),
@@ -147,9 +149,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                     "Enter your username, email & password. Don't worry if you forget it, we'll send you a new one.",
                     maxLines: null,
                     textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansRegular18.copyWith(
-                      letterSpacing: getHorizontalSize(0.2),
-                    ),
+                    style: AppStyle.txtOpenSansRegular18(context),
                   ),
                 ),
                 // Form fields for username, email, password and password confirmation.

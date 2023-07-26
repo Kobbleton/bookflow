@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
+import '../../bloc/themecubit/theme_cubit.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -29,6 +30,17 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
   bool isSelectedSwitch = false;
 
   @override
+  void initState() {
+    super.initState();
+    isSelectedSwitch = context.read<ThemeCubit>().state;
+  }
+
+  bool isDarkTheme(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    return brightness == Brightness.dark;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
@@ -37,7 +49,7 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
         }
       },
       child: Scaffold(
-        // backgroundColor: ColorConstant.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: const HomeScreenAppBar(),
         body: Column(
           children: [
@@ -131,7 +143,7 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                                 "Language",
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansBold20,
+                                style: AppStyle.txtOpenSansBold20(context),
                               ),
                             ),
                             const Spacer(),
@@ -144,14 +156,14 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                                 "English (US)",
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                                  letterSpacing: getHorizontalSize(
-                                    0.2,
-                                  ),
-                                ),
+                                style: AppStyle.txtOpenSansSemiBold18(context),
                               ),
                             ),
                             CustomImageView(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? ColorConstant.white
+                                  : ColorConstant.black,
                               svgPath: ImageConstant.imgArrowright,
                               height: getSize(
                                 20,
@@ -195,23 +207,31 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                                 "Dark Mode",
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansBold20,
+                                style: AppStyle.txtOpenSansBold20(context),
                               ),
                             ),
                             const Spacer(),
-                            CustomSwitch(
-                              margin: getMargin(
-                                top: 16,
-                                bottom: 16,
-                              ),
-                              value: isSelectedSwitch,
-                              onChanged: (value) {
-                                setState(() {
-                                  isSelectedSwitch = value;
-                                });
+                            BlocBuilder<ThemeCubit, bool>(
+                              builder: (context, isDarkMode) {
+                                return CustomSwitch(
+                                  margin: getMargin(
+                                    top: 16,
+                                    bottom: 16,
+                                  ),
+                                  value: isDarkMode,
+                                  onChanged: (value) {
+                                    context
+                                        .read<ThemeCubit>()
+                                        .changeTheme(value);
+                                  },
+                                );
                               },
                             ),
                             CustomImageView(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? ColorConstant.white
+                                  : ColorConstant.black,
                               svgPath: ImageConstant.imgArrowright,
                               height: getSize(
                                 20,
@@ -310,7 +330,8 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                                   "Logout",
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.left,
-                                  style: AppStyle.txtOpenSansBold20RedA200,
+                                  style: AppStyle.txtOpenSansBold20RedA200(
+                                      context),
                                 ),
                               ),
                             ),

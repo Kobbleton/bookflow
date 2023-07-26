@@ -62,7 +62,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               child: Text("Forgot Password 🔑",
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansBold32),
+                  style: AppStyle.txtOpenSansBold32(context),),
             ),
             Container(
               width: getHorizontalSize(357),
@@ -71,9 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 "Enter your email address. We will send an OTP code for verification in the next step.",
                 maxLines: null,
                 textAlign: TextAlign.left,
-                style: AppStyle.txtOpenSansRegular18.copyWith(
-                  letterSpacing: getHorizontalSize(0.2),
-                ),
+                style: AppStyle.txtOpenSansRegular18(context),
               ),
             ),
             Padding(

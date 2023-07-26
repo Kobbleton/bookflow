@@ -89,7 +89,7 @@ class DropdownFieldState extends State<DropdownField> {
                       value: value,
                       child: Text(
                         value,
-                        style: AppStyle.txtOpenSansBold18,
+                        style: AppStyle.txtOpenSansBold18(context),
                       ),
                     );
                   }).toList(),

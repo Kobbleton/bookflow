@@ -177,7 +177,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left,
                                       style: AppStyle
-                                          .txtOpenSansSemiBold18Gray700),
+                                          .txtOpenSansSemiBold18Gray700(context),),
                                   Padding(
                                     padding: getPadding(top: 12, bottom: 11),
                                     child: SizedBox(

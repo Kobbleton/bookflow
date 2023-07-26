@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
@@ -45,11 +46,14 @@ class CustomSettingRow extends StatelessWidget {
               text,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
-              style: AppStyle.txtOpenSansBold20,
+              style: AppStyle.txtOpenSansBold20(context),
             ),
           ),
           const Spacer(),
           CustomImageView(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? ColorConstant.white
+                : ColorConstant.black,
             svgPath: ImageConstant.imgArrowright,
             height: getSize(
               20,

@@ -17,7 +17,7 @@ class LibraryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorConstant.whiteA70000,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -35,7 +35,7 @@ class LibraryScreen extends StatelessWidget {
                     "Library",
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansBold24,
+                    style: AppStyle.txtOpenSansBold24(context),
                   ),
                 ),
               ),
