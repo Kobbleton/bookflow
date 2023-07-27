@@ -6,7 +6,6 @@ import '../../bloc/signup/sign_up_state.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
-import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
@@ -93,7 +92,8 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: ColorConstant.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
         body: Container(
           width: double.maxFinite,
           padding: getPadding(
@@ -112,6 +112,9 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                     children: [
                       // Back button with custom image
                       CustomImageView(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? ColorConstant.white
+                              : ColorConstant.black,
                           svgPath: ImageConstant.imgArrowleft,
                           height: getSize(36),
                           width: getSize(36),
@@ -224,7 +227,6 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
             right: 24,
             bottom: 56,
           ),
-          decoration: AppDecoration.outlineGray100,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,

@@ -8,7 +8,7 @@ import '../presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/forgot_password_screen/forgot_password_screen.dart';
-import '../presentation/otp_code_verification_screen/otp_code_verification_screen.dart';
+import '../presentation/_Feature_otp_code_verification_screen/otp_code_verification_screen.dart';
 import '../presentation/signup_one_screen/sign_up_step_one_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/welcome_screen/welcome_screen.dart';

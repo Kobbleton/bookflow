@@ -44,7 +44,12 @@ class ImageConstant {
   static String flagIcon = 'assets/images/flag.svg';
 
   static String appleLogo =
-      'assets/images/img_autolayouthorizontal_black_900.svg';
+      'assets/images/img_autolayouthorizontal_black_900.svg';  
+      
+      static String appleLogoWhite =
+      'assets/images/apple_logo_white.svg';
+
+      
 
   static String facebookLogo = 'assets/images/facebook_logo.svg';
 
@@ -63,6 +68,9 @@ class ImageConstant {
   static String magicCover1 = 'assets/images/bookmagic1.png';
   static String magicCover2 = 'assets/images/bookmagic2.png';
   static String magicCover3 = 'assets/images/bookmagic3.png';
+  static String darkMagicCoverQ = 'assets/images/dark_theme_card1.png';
+  static String darkMagicCoverNew = 'assets/images/dark_theme_card2.png';
+  static String darkMagicCoverStart = 'assets/images/dark_theme_card3.png';
 
   static String gradientMain = 'assets/images/gradient_main_card.svg';
 

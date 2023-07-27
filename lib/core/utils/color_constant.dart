@@ -31,6 +31,11 @@ class ColorConstant {
   static Color dark3 = fromHex('#1F222A');
   static Color dark4 = fromHex('#35383F');
 
+  static Color dark2A70000 = fromHex('#001F222A');
+  static Color dark2A700F2 = fromHex('#f21F222A');
+  static Color dark2FullyTransparent = Color(int.parse("00" + "1F222A", radix: 16));
+
+
   static Color transparentOrange = fromHex('#F8930014');
   static Color transparentGreen = fromHex('#1BAC4B14');
   static Color transparentYellow = fromHex('#FFD30014');
@@ -64,7 +69,7 @@ class ColorConstant {
   static Color greenA70014 = fromHex('#141bac4b');
   static Color deepPurpleA20014 = fromHex('#146949ff');
   static Color cyan60000 = fromHex('#0013a8ba');
-  static Color cyan600 = fromHex('#13a8ba');
+  static Color cyan600 = fromHex('#13A8BA');
   static Color cyan7003f = fromHex('#3f0097a7');
 
   static Color fromHex(String hexString) {

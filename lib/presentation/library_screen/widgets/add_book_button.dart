@@ -32,7 +32,9 @@ class AddBookButton extends StatelessWidget {
                 borderRadius: BorderRadiusStyle.circleBorder18,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withOpacity(0.5)
+                        : Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 2,
                     offset: const Offset(2, 4), // changes position of shadow
@@ -63,13 +65,13 @@ class AddBookButton extends StatelessWidget {
                     0,
                   ),
                   end: const Alignment(
-                    0.98,
-                    0.97,
+                    0.4,
+                    0.2,
                   ),
                   colors: [
                     ColorConstant.yellowA400,
-                    ColorConstant.cyan60000,
-                    ColorConstant.cyan600,
+                    // ColorConstant.cyan60000,
+                    ColorConstant.cyan300,
                   ],
                 ),
                 corners: const Corners(
@@ -94,7 +96,9 @@ class AddBookButton extends StatelessWidget {
                     bottom: 88,
                   ),
                   decoration: AppDecoration.outline.copyWith(
-                    color: ColorConstant.cyan500,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? ColorConstant.cyan500.withOpacity(0.5)
+                        : ColorConstant.cyan500,
                     borderRadius: BorderRadiusStyle.roundedBorder18,
                   ),
                   child: Column(

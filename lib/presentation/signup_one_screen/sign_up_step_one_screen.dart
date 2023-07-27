@@ -6,7 +6,6 @@ import '../../core/utils/countries_list.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../repository/auth_repository.dart';
-import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down.dart';
@@ -40,7 +39,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
   Widget build(BuildContext context) {
     // Creating the UI of the SignUpStepOneScreen inside the SafeArea to ensure no overlap with system UI.
     return Scaffold(
-      backgroundColor: ColorConstant.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
         width: double.maxFinite,
         padding: getPadding(
@@ -60,6 +59,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                   children: [
                     // Back button with custom image.
                     CustomImageView(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ColorConstant.white
+                            : ColorConstant.black,
                         svgPath: ImageConstant.imgArrowleft,
                         height: getSize(36),
                         width: getSize(36),
@@ -100,10 +102,12 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
               Container(
                 width: getHorizontalSize(352),
                 margin: getMargin(top: 38, right: 30),
-                child: Text("Let's Complete Your Profile 📋",
-                    maxLines: null,
-                    textAlign: TextAlign.center,
-                    style: AppStyle.txtOpenSansBold32(context),),
+                child: Text(
+                  "Let's Complete Your Profile 📋",
+                  maxLines: null,
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtOpenSansBold32(context),
+                ),
               ),
               // Subtitle text.
               Container(
@@ -164,7 +168,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                         "Birth date",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold16(context),
+                        style: AppStyle.txtOpenSansBold18(context),
                       ),
                     ),
                     Padding(
@@ -216,7 +220,6 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
           right: 24,
           bottom: 56,
         ),
-        decoration: AppDecoration.outlineGray100,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,

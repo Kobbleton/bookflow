@@ -64,9 +64,13 @@ class _ForgetPassEmailSentSuccessDialogState
       padding: getPadding(
         all: 32,
       ),
-      decoration: AppDecoration.fillWhiteA700.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder40,
-      ),
+      decoration: Theme.of(context).brightness == Brightness.dark
+          ? AppDecoration.fillDialogDark.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder40,
+            )
+          : AppDecoration.fillDialogWhite.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder40,
+            ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,

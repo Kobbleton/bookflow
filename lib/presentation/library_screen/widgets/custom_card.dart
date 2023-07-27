@@ -28,7 +28,10 @@ class CustomCard extends StatelessWidget {
                 borderRadius: BorderRadiusStyle.circleBorder18,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withOpacity(0.5)
+                        : Colors.grey.withOpacity(0.5),
+
                     spreadRadius: 3,
                     blurRadius: 3,
                     offset: const Offset(2, 4), // changes position of shadow
@@ -39,14 +42,17 @@ class CustomCard extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 elevation: 0,
                 margin: const EdgeInsets.all(0),
-                color: ColorConstant.whiteA70000,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusStyle.circleBorder18,
                 ),
                 child: Container(
+                  // color: Colors.blue,
                   height: getVerticalSize(276),
                   width: getHorizontalSize(180),
                   decoration: AppDecoration.outlineBlack9001e.copyWith(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? ColorConstant.dark3
+                        : ColorConstant.white,
                     borderRadius: BorderRadiusStyle.circleBorder18,
                   ),
                   child: Stack(

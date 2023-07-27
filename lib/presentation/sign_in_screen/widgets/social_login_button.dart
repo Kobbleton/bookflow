@@ -23,7 +23,9 @@ class SocialLoginButton extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         elevation: 0,
         margin: const EdgeInsets.all(0),
-        color: ColorConstant.white,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? ColorConstant.dark4
+            : ColorConstant.white,
         shape: RoundedRectangleBorder(
             side: BorderSide(
               color: ColorConstant.gray200,
@@ -34,8 +36,12 @@ class SocialLoginButton extends StatelessWidget {
           height: getVerticalSize(60),
           width: getHorizontalSize(180),
           padding: getPadding(left: 46, top: 18, right: 46, bottom: 18),
-          decoration: AppDecoration.outlineGray200
-              .copyWith(borderRadius: BorderRadiusStyle.circleBorder30),
+          decoration: AppDecoration.outlineGray200.copyWith(
+            borderRadius: BorderRadiusStyle.circleBorder30,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? ColorConstant.dark4
+                : ColorConstant.white,
+          ),
           child: Stack(
             children: [
               CustomImageView(

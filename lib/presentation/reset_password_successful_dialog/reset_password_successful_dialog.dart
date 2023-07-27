@@ -7,7 +7,6 @@ import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 
-
 class ResetPasswordSuccessfulDialog extends StatefulWidget {
   const ResetPasswordSuccessfulDialog({Key? key})
       : super(
@@ -63,9 +62,13 @@ class _ResetPasswordSuccessfulDialogState
       padding: getPadding(
         all: 32,
       ),
-      decoration: AppDecoration.fillWhiteA700.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder40,
-      ),
+      decoration: Theme.of(context).brightness == Brightness.dark
+          ? AppDecoration.fillDialogDark.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder40,
+            )
+          : AppDecoration.fillDialogDark.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder40,
+            ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,

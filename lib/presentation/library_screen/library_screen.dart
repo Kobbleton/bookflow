@@ -58,7 +58,10 @@ class LibraryScreen extends StatelessWidget {
                           children: [
                             const AddBookButton(),
                             CustomCard(
-                              imagePath: ImageConstant.magicCover1,
+                              imagePath: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? ImageConstant.darkMagicCoverStart
+                                  : ImageConstant.magicCover1,
                               text: 'Start here',
                             )
                           ],
@@ -72,11 +75,17 @@ class LibraryScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomCard(
-                                imagePath: ImageConstant.magicCover2,
+                                imagePath: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? ImageConstant.darkMagicCoverQ
+                                    : ImageConstant.magicCover1,
                                 text: 'FAQ',
                               ),
                               CustomCard(
-                                imagePath: ImageConstant.magicCover3,
+                                imagePath: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? ImageConstant.darkMagicCoverNew
+                                    : ImageConstant.magicCover1,
                                 text: 'Whats new',
                               ),
                             ],

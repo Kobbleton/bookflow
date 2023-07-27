@@ -42,12 +42,22 @@ class AppDecoration {
   static BoxDecoration get fillWhiteA700 => BoxDecoration(
         color: ColorConstant.white,
       );
+
+  static BoxDecoration get fillDialogWhite => BoxDecoration(
+        color: ColorConstant.white,
+      );
+  static BoxDecoration get fillDialogDark => BoxDecoration(
+        color: ColorConstant.dark4,
+      );
+  static BoxDecoration get fillDark2 => BoxDecoration(
+        color: ColorConstant.dark2,
+      );
   static BoxDecoration get fillWhiteOpacity50 => BoxDecoration(
         color: ColorConstant.white.withOpacity(0.7),
       );
 
   static BoxDecoration get outlineGray100 => BoxDecoration(
-        color: ColorConstant.white,
+        color: Colors.transparent,
         border: Border(
           top: BorderSide(
             color: ColorConstant.gray100,

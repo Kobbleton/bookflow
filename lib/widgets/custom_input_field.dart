@@ -55,7 +55,13 @@ class CustomTextFieldState extends State<CustomTextField> {
               border: hasFocus
                   ? Border.all(color: ColorConstant.cyan500, width: 1)
                   : Border.all(style: BorderStyle.none),
-              color: hasFocus ? Colors.cyan.shade50 : ColorConstant.gray200,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? hasFocus
+                      ? Colors.cyan.shade50
+                      : ColorConstant.gray200
+                  : hasFocus
+                      ? Colors.cyan.shade50
+                      : ColorConstant.gray200,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Center(
@@ -63,7 +69,7 @@ class CustomTextFieldState extends State<CustomTextField> {
                 obscureText: widget.isObscured,
                 controller: widget.controller,
                 focusNode: _focusNode,
-                style: AppStyle.txtOpenSansBold18(context),
+                style: AppStyle.txtOpenSansBold18static(context),
                 decoration: InputDecoration(
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -78,8 +84,13 @@ class CustomTextFieldState extends State<CustomTextField> {
                   ),
                   contentPadding: getPadding(left: 16, top: 6, bottom: 6),
                   filled: true,
-                  fillColor:
-                      hasFocus ? Colors.cyan.shade50 : ColorConstant.gray200,
+                  fillColor: Theme.of(context).brightness == Brightness.dark
+                      ? hasFocus
+                          ? Colors.cyan.shade50
+                          : ColorConstant.gray200
+                      : hasFocus
+                          ? Colors.cyan.shade50
+                          : ColorConstant.gray200,
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(16),

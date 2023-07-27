@@ -312,7 +312,12 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                                               .pop(false), // returns false
                                         ),
                                         TextButton(
-                                          child: const Text('OK'),
+                                          child: const Text(
+                                            'OK',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          ),
                                           onPressed: () => Navigator.of(context)
                                               .pop(true), // returns true
                                         ),

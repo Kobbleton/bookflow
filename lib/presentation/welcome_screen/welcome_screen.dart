@@ -39,7 +39,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: Scaffold(
         extendBody: false,
         extendBodyBehindAppBar: false,
-        backgroundColor: ColorConstant.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SizedBox(
           width: size.width,
           height: size.height,
@@ -72,11 +72,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 gradient: LinearGradient(
                                   begin: const Alignment(0.5, 0),
                                   end: const Alignment(0.5, 1.1),
-                                  colors: [
-                                    ColorConstant.whiteA70000,
-                                    ColorConstant.whiteA700F2,
-                                    ColorConstant.white
-                                  ],
+                                  colors: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? [
+                                          ColorConstant.dark2FullyTransparent,
+                                          // ColorConstant.dark2A70000,
+                                          ColorConstant.dark2
+                                        ]
+                                      : [
+                                          ColorConstant.whiteA70000,
+                                          ColorConstant.whiteA700F2,
+                                          ColorConstant.white
+                                        ],
                                 ),
                               ),
                             ),
@@ -89,7 +96,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Container(
                         padding:
                             getPadding(left: 24, top: 0, right: 24, bottom: 38),
-                        decoration: AppDecoration.fillWhiteA700,
+                        decoration:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? AppDecoration.fillDark2
+                                : AppDecoration.fillWhiteA700,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -100,7 +110,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   TextSpan(
                                     text: "Welcome to ",
                                     style: TextStyle(
-                                      color: ColorConstant.gray900,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? ColorConstant.white
+                                          : ColorConstant.gray900,
                                       fontSize: getFontSize(
                                         32,
                                       ),
@@ -173,11 +186,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                           color: ColorConstant.gray200),
                                     ),
                                   ),
-                                  Text("or continue with",
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle
-                                          .txtOpenSansSemiBold18Gray700(context),),
+                                  Text(
+                                    "or continue with",
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.left,
+                                    style: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AppStyle.txtOpenSansSemiBold18White(
+                                            context)
+                                        : AppStyle.txtOpenSansSemiBold18Gray700(
+                                            context),
+                                  ),
                                   Padding(
                                     padding: getPadding(top: 12, bottom: 11),
                                     child: SizedBox(
@@ -230,7 +249,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                             .read<AuthenticationBloc>()
                                             .add(SignInWithAppleEvent());
                                       },
-                                      icon: ImageConstant.appleLogo,
+                                      icon: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? ImageConstant.appleLogoWhite
+                                          : ImageConstant.appleLogo,
                                     ),
                                   ],
                                 ),

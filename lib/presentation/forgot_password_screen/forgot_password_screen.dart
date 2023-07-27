@@ -6,7 +6,6 @@ import '../../bloc/authentification/authentication_event.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
-import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
@@ -41,7 +40,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     // The UI is wrapped inside a Scaffold widget, which provides a framework to implement the basic material design layout.
     // The body of the Scaffold is a Container that contains a Column of widgets.
     return Scaffold(
-      backgroundColor: ColorConstant.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
         width: double.maxFinite,
         padding: getPadding(left: 24, top: 68, right: 24, bottom: 26),
@@ -50,6 +49,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomImageView(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? ColorConstant.white
+                  : ColorConstant.black,
               svgPath: ImageConstant.imgArrowleft,
               height: getSize(36),
               width: getSize(36),
@@ -59,10 +61,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             Padding(
               padding: getPadding(top: 38),
-              child: Text("Forgot Password 🔑",
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansBold32(context),),
+              child: Text(
+                "Forgot Password 🔑",
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: AppStyle.txtOpenSansBold32(context),
+              ),
             ),
             Container(
               width: getHorizontalSize(357),
@@ -89,7 +93,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
       bottomNavigationBar: Container(
         margin: getMargin(left: 24, right: 24, bottom: 106),
-        decoration: AppDecoration.outlineGray100,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,

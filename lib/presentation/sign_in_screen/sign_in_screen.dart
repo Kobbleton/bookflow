@@ -10,7 +10,6 @@ import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
-import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
@@ -60,8 +59,8 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       },
       child: Scaffold(
-        // Setting up a white background
-        backgroundColor: ColorConstant.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
         // SingleChildScrollView provides scrolling to a widget that would otherwise expand beyond the screen size.
         body: SingleChildScrollView(
           child: Container(
@@ -75,6 +74,9 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 // CustomImageView for a back button, onTap is used to navigate back
                 CustomImageView(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? ColorConstant.white
+                        : ColorConstant.black,
                     svgPath: ImageConstant.imgArrowleft,
                     height: getSize(36),
                     width: getSize(36),
@@ -194,7 +196,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         "or continue with",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansSemiBold18Gray700(context),
+                        style: Theme.of(context).brightness == Brightness.dark
+                            ? AppStyle.txtOpenSansSemiBold18White(context)
+                            : AppStyle.txtOpenSansSemiBold18Gray700(context),
                       ),
                       Padding(
                         padding: getPadding(top: 12, bottom: 11),
@@ -215,7 +219,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     text: "Continue with Google",
                     margin: getMargin(top: 32),
                     variant: ButtonVariant.outlineGray200,
-                    padding: ButtonPadding.paddingT19,
+                    padding: ButtonPadding.paddingAll18,
                     fontStyle: ButtonFontStyle.openSansSemiBold16,
                     prefixWidget: Container(
                       margin: getMargin(right: 12),
@@ -246,7 +250,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 .read<AuthenticationBloc>()
                                 .add(SignInWithAppleEvent());
                           },
-                          icon: ImageConstant.appleLogo,
+                          icon: ImageConstant.appleLogoWhite,
                         ),
                       ],
                     ),
@@ -273,7 +277,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 right: 24,
                 bottom: 106,
               ),
-              decoration: AppDecoration.outlineGray100,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,

@@ -27,7 +27,6 @@ class DropdownFieldState extends State<DropdownField> {
   final TextEditingController dropdownController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final ValueNotifier<bool> _isFocused = ValueNotifier<bool>(false);
-  
 
   String dropdownValue = '';
 
@@ -70,6 +69,7 @@ class DropdownFieldState extends State<DropdownField> {
               child: Padding(
                 padding: getPadding(left: 14),
                 child: DropdownButton<String>(
+                  dropdownColor: ColorConstant.gray200,
                   isExpanded: true,
                   focusNode: _focusNode,
                   value: dropdownValue.isEmpty ? null : dropdownValue,
@@ -89,7 +89,7 @@ class DropdownFieldState extends State<DropdownField> {
                       value: value,
                       child: Text(
                         value,
-                        style: AppStyle.txtOpenSansBold18(context),
+                        style: AppStyle.txtOpenSansBold18static(context),
                       ),
                     );
                   }).toList(),
@@ -97,12 +97,7 @@ class DropdownFieldState extends State<DropdownField> {
                     padding: getPadding(left: 16),
                     child: Text(
                       widget.hintText,
-                      style: const TextStyle(
-                        color: Color(0xFF9E9E9E),
-                        fontSize: 16,
-                        fontFamily: 'Open Sans',
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: AppStyle.txtOpenSansBold16hint(context),
                     ),
                   ),
                   onChanged: (newValue) {
