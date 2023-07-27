@@ -45,7 +45,9 @@ class ReadingNowBlock extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Container(
                       decoration: AppDecoration.outline.copyWith(
-                        color: ColorConstant.white.withOpacity(0.7),
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ColorConstant.white.withOpacity(0.1)
+                            : ColorConstant.white.withOpacity(0.7),
                         borderRadius: BorderRadiusStyle.roundedBorder18,
                       ),
                       child: OutlineGradientButton(
@@ -72,8 +74,8 @@ class ReadingNowBlock extends StatelessWidget {
                             0,
                           ),
                           end: const Alignment(
-                            0.98,
-                            0.97,
+                            0.4,
+                            0.6,
                           ),
                           colors: [
                             ColorConstant.yellowA400,
@@ -141,37 +143,43 @@ class ReadingNowBlock extends StatelessWidget {
                                       'Total words:',
                                       '10386',
                                       AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(context),
+                                      AppStyle.txtOpenSansBold13Cyan500(
+                                          context),
                                     ),
                                     statsRow(
                                       'Words read:',
                                       '3486',
                                       AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(context),
+                                      AppStyle.txtOpenSansBold13Cyan500(
+                                          context),
                                     ),
                                     statsRow(
                                       'Reading speed:',
                                       '304wpm',
                                       AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(context),
+                                      AppStyle.txtOpenSansBold13Cyan500(
+                                          context),
                                     ),
                                     statsRow(
                                       'Time spent:',
                                       '2h 43m',
                                       AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(context),
+                                      AppStyle.txtOpenSansBold13Cyan500(
+                                          context),
                                     ),
                                     statsRow(
                                       'Time left:',
                                       '5h 34m',
                                       AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(context),
+                                      AppStyle.txtOpenSansBold13Cyan500(
+                                          context),
                                     ),
                                     statsRow(
                                       'Completed:',
                                       '34%',
                                       AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(context),
+                                      AppStyle.txtOpenSansBold13Cyan500(
+                                          context),
                                     ),
                                     Padding(
                                       padding: getPadding(bottom: 6),

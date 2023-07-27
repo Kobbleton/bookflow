@@ -21,10 +21,15 @@ class GradientBackgound extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
-                  colors: [
-                    const Color(0xFF12A8BA),
-                    const Color(0xFF12A8BA).withOpacity(0.0),
-                  ],
+                  colors: Theme.of(context).brightness == Brightness.dark
+                      ? [
+                          const Color(0xFF12A8BA).withOpacity(0.5),
+                          const Color(0xFF12A8BA).withOpacity(0.0),
+                        ]
+                      : [
+                          const Color(0xFF12A8BA).withOpacity(0.7),
+                          const Color(0xFF12A8BA).withOpacity(0.0),
+                        ],
                 ),
               ),
             ),
@@ -38,10 +43,15 @@ class GradientBackgound extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
-                  colors: [
-                    const Color(0xFFF2E900),
-                    const Color(0xFFF2E900).withOpacity(0.0),
-                  ],
+                  colors: Theme.of(context).brightness == Brightness.dark
+                      ? [
+                          const Color(0xFFF2E900).withOpacity(0.5),
+                          const Color(0xFFF2E900).withOpacity(0.0),
+                        ]
+                      : [
+                          const Color(0xFFF2E900).withOpacity(0.8),
+                          const Color(0xFFF2E900).withOpacity(0.0),
+                        ],
                 ),
               ),
             ),

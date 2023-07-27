@@ -65,13 +65,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, bool>(
-      builder: (context, isDarkTheme) {
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, themeState) {
         return MaterialApp(
-          theme: isDarkTheme
-              ? ThemeData.dark()
-              : ThemeData
-                  .light(), // Here we use isDarkTheme to decide the theme
+          theme: themeState.themeData,
           title: 'booksflow_ui',
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splashScreen,

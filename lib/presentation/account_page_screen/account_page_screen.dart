@@ -32,7 +32,7 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
   @override
   void initState() {
     super.initState();
-    isSelectedSwitch = context.read<ThemeCubit>().state;
+    isSelectedSwitch = context.read<ThemeCubit>().state.isDarkTheme;
   }
 
   bool isDarkTheme(BuildContext context) {
@@ -211,14 +211,14 @@ class _AccountPageScreenState extends State<AccountPageScreen> {
                               ),
                             ),
                             const Spacer(),
-                            BlocBuilder<ThemeCubit, bool>(
-                              builder: (context, isDarkMode) {
+                            BlocBuilder<ThemeCubit, ThemeState>(
+                              builder: (context, themeState) {
                                 return CustomSwitch(
                                   margin: getMargin(
                                     top: 16,
                                     bottom: 16,
                                   ),
-                                  value: isDarkMode,
+                                  value: themeState.isDarkTheme,
                                   onChanged: (value) {
                                     context
                                         .read<ThemeCubit>()
