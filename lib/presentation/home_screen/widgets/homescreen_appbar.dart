@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
-import '../../../widgets/app_bar/appbar_image.dart';
-import '../../../widgets/app_bar/custom_app_bar.dart';
-import '../../../widgets/custom_image_view.dart';
+import '../../widgets/app_bar/appbar_image.dart';
+import '../../widgets/app_bar/custom_app_bar.dart';
+import '../../widgets/custom_image_view.dart';
 
 class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeScreenAppBar({

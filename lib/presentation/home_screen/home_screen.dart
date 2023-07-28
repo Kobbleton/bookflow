@@ -1,8 +1,9 @@
 import 'package:bookflow/presentation/home_screen/widgets/home_page.dart';
+import 'package:bookflow/presentation/profile_and_settings_screen/profile_and_settings_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
-import '../account_page_screen/account_page_screen.dart';
+
 import '../library_screen/library_screen.dart';
 import 'dart:io' show Platform;
 
@@ -35,50 +36,76 @@ class _HomeScreenState extends State<HomeScreen> {
     // The second page of the application (LibraryScreen)
     const LibraryScreen(),
     // The third page of the application (ProfileScreen)
-    const AccountPageScreen(),
+    const ProfileAndSettingsScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? ColorConstant.dark1
-            : ColorConstant.white,
-        animationCurve: Curves.easeOutExpo,
-        animationDuration: const Duration(milliseconds: 600),
-        height: Platform.isIOS ? 70 : 55,
-        backgroundColor: ColorConstant.cyan500,
-        items: <Widget>[
-          Icon(
-            Icons.home_filled,
-            size: 32,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? ColorConstant.white
-                : ColorConstant.gray700,
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: Platform.isIOS
+                      ? 92
+                      : 78), // adjust this value according to the height of your nav bar and container
+              child: _pages[_currentIndex],
+            ),
           ),
-          Icon(
-            Icons.auto_stories,
-            size: 32,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? ColorConstant.white
-                : ColorConstant.gray700,
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: Platform.isIOS ? 92 : 78,
+              color: ColorConstant.cyan500,
+            ),
           ),
-          Icon(
-            Icons.person,
-            size: 32,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? ColorConstant.white
-                : ColorConstant.gray700,
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CurvedNavigationBar(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? ColorConstant.dark1
+                  : ColorConstant.white,
+              animationCurve: Curves.easeOutExpo,
+              animationDuration: const Duration(milliseconds: 600),
+              height: Platform.isIOS ? 70 : 55,
+              backgroundColor: ColorConstant.cyan500,
+              items: <Widget>[
+                Icon(
+                  Icons.home_filled,
+                  size: 32,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? ColorConstant.white
+                      : ColorConstant.gray700,
+                ),
+                Icon(
+                  Icons.auto_stories,
+                  size: 32,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? ColorConstant.white
+                      : ColorConstant.gray700,
+                ),
+                Icon(
+                  Icons.person,
+                  size: 32,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? ColorConstant.white
+                      : ColorConstant.gray700,
+                ),
+              ],
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
           ),
         ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
-      body: _pages[_currentIndex],
     );
   }
 }

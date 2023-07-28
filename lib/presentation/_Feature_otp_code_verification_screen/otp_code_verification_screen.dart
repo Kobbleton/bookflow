@@ -8,8 +8,8 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/custom_image_view.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_image_view.dart';
 import 'widgets/custom_pin_code_field.dart';
 
 class OtpCodeVerificationScreen extends StatefulWidget {

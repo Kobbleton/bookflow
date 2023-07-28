@@ -5,7 +5,7 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
-import '../sign_up_successful_dialog/sign_up_successful_dialog.dart';
+import '../login_and_registration_screens/signup_successful_dialog/sign_up_successful_dialog.dart';
 
 class AppNavigationScreen extends StatelessWidget {
   const AppNavigationScreen({Key? key}) : super(key: key);

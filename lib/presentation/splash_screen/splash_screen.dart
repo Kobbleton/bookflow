@@ -7,7 +7,7 @@ import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_style.dart';
-import '../../widgets/custom_image_view.dart';
+import '../widgets/custom_image_view.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key})

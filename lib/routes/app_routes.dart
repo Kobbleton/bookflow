@@ -1,15 +1,15 @@
 import 'package:bookflow/presentation/home_screen/home_screen.dart';
-
-import '../presentation/account_page_screen/account_page_screen.dart';
-import '../presentation/create_new_password_screen/create_new_password_screen.dart';
+import 'package:bookflow/presentation/profile_and_settings_screen/profile_and_settings_screen.dart';
+import '../presentation/login_and_registration_screens/create_new_password_screen/create_new_password_screen.dart';
 import '../presentation/library_screen/library_screen.dart';
+
 import '../presentation/settings_personal_info_screen/settings_personal_info_screen.dart';
-import '../presentation/sign_in_screen/sign_in_screen.dart';
+import '../presentation/login_and_registration_screens/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
-import '../presentation/forgot_password_screen/forgot_password_screen.dart';
+import '../presentation/login_and_registration_screens/forgot_password_screen/forgot_password_screen.dart';
 import '../presentation/_Feature_otp_code_verification_screen/otp_code_verification_screen.dart';
-import '../presentation/signup_one_screen/sign_up_step_one_screen.dart';
+import '../presentation/login_and_registration_screens/signup_one_screen/sign_up_step_one_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/welcome_screen/welcome_screen.dart';
 
@@ -53,7 +53,7 @@ class AppRoutes {
     createNewPasswordScreen: (context) => const CreateNewPasswordScreen(),
     homeScreen: (context) => const HomeScreen(),
     libraryScreen: (context) => const LibraryScreen(),
-    profileScreen: (context) => const AccountPageScreen(),
+    profileScreen: (context) => const ProfileAndSettingsScreen(),
     profileSettingsScreen: (context) => const SettingsPersonalInfoScreen(),
   };
 }

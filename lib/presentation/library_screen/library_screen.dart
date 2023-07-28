@@ -3,7 +3,6 @@ import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
-import '../../core/utils/color_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../theme/app_style.dart';
 
@@ -93,18 +92,6 @@ class LibraryScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: getPadding(
-                    bottom: 0,
-                  ),
-                  child: Container(
-                    height: 20,
-                    color: ColorConstant.cyan500,
                   ),
                 ),
               ),

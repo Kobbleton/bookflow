@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+
+import '../../../../core/utils/color_constant.dart';
+import '../../../../core/utils/size_utils.dart';
+import '../../../../theme/app_decoration.dart';
+import '../../../widgets/custom_image_view.dart';
+
+class SocialLoginButton extends StatelessWidget {
+  const SocialLoginButton({
+    Key? key,
+    required this.icon,
+    required this.onTap,
+  }) : super(key: key);
+
+  final String icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap, // add onTap handler here
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        elevation: 0,
+        margin: const EdgeInsets.all(0),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? ColorConstant.dark4
+            : ColorConstant.white,
+        shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: ColorConstant.gray200,
+              width: getHorizontalSize(1),
+            ),
+            borderRadius: BorderRadiusStyle.circleBorder30),
+        child: Container(
+          height: getVerticalSize(60),
+          width: getHorizontalSize(180),
+          padding: getPadding(left: 46, top: 18, right: 46, bottom: 18),
+          decoration: AppDecoration.outlineGray200.copyWith(
+            borderRadius: BorderRadiusStyle.circleBorder30,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? ColorConstant.dark4
+                : ColorConstant.white,
+          ),
+          child: Stack(
+            children: [
+              CustomImageView(
+                  svgPath: icon,
+                  height: getVerticalSize(24),
+                  width: getHorizontalSize(23),
+                  alignment: Alignment.center)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

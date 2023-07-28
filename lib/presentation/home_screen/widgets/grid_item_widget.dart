@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_decoration.dart';
-import '../../../widgets/custom_image_view.dart';
+import '../../widgets/custom_image_view.dart';
 
 class GridrectanglesiItemWidget extends StatelessWidget {
   final String imagePath;

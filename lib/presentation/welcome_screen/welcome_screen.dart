@@ -8,9 +8,9 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/custom_image_view.dart';
-import '../sign_in_screen/widgets/social_login_button.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_image_view.dart';
+import '../login_and_registration_screens/sign_in_screen/widgets/social_login_button.dart';
 import 'widgets/slider_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -212,6 +212,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             ),
                             if (Platform.isAndroid)
                               CustomButton(
+                                onTap: () {
+                                  print(
+                                      "SocialLoginButton tapped"); // Add debug print here
+                                  context
+                                      .read<AuthenticationBloc>()
+                                      .add(SignInWithGoogle());
+                                },
                                 height: getVerticalSize(58),
                                 text: "Continue with Google",
                                 margin: getMargin(top: 32),

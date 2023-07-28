@@ -1,10 +1,10 @@
-import 'package:bookflow/widgets/custom_image_view.dart';
+import 'package:bookflow/presentation/widgets/custom_image_view.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/countries_list.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../theme/app_style.dart';
-import '../../widgets/custom_drop_down.dart';
+import '../widgets/custom_drop_down.dart';
 import '../settings_personal_info_screen/widgets/listformtitle_item_widget.dart';
 import 'package:flutter/material.dart';
 

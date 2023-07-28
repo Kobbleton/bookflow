@@ -2,7 +2,6 @@ import 'package:bookflow/presentation/home_screen/widgets/reading_now.dart';
 import 'package:bookflow/presentation/home_screen/widgets/recent_books_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import 'gradient_card_background.dart';
@@ -46,10 +45,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 20,
-            color: ColorConstant.cyan500,
-          )
         ],
       ),
     );
