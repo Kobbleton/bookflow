@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "358852197792-6nht1u21epjts6iolih14604rabn8svr.apps.googleusercontent.com",
+          "client_id": "358852197792-6rp7vkqa2d23uo7ga6pg1r73u3vgfb4k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +29,13 @@
             {
               "client_id": "358852197792-6nht1u21epjts6iolih14604rabn8svr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "358852197792-d09c28osque21720058157fef11d4kmt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookflow"
+              }
             }
           ]
         }

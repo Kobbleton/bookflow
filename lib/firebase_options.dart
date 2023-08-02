@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB31AieFo_1fYOR2-_CIPr1e7SSaZ5n0dE',
-    appId: '1:358852197792:web:6908633bcaa2fba88c78c5',
-    messagingSenderId: '358852197792',
-    projectId: 'bookflow-6043b',
-    authDomain: 'bookflow-6043b.firebaseapp.com',
-    storageBucket: 'bookflow-6043b.appspot.com',
-    measurementId: 'G-JDQ6JJXBQK',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyANLcpJkyifqvEMkeslUrZeDh6a2Kxzkq0',
     appId: '1:358852197792:android:6bb748123c13c9e38c78c5',
@@ -69,15 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'bookflow-6043b.appspot.com',
     iosClientId: '358852197792-d09c28osque21720058157fef11d4kmt.apps.googleusercontent.com',
     iosBundleId: 'com.example.bookflow',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBcRuokjDVsisxKvwoxzMtmHZEbBshVaCI',
-    appId: '1:358852197792:ios:ea6f498d46e07cc98c78c5',
-    messagingSenderId: '358852197792',
-    projectId: 'bookflow-6043b',
-    storageBucket: 'bookflow-6043b.appspot.com',
-    iosClientId: '358852197792-hqrcomhs1f3dg6a5unrd3r270pus7g8d.apps.googleusercontent.com',
-    iosBundleId: 'com.example.bookflow.RunnerTests',
   );
 }

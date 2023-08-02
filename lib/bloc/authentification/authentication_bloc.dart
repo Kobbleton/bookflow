@@ -29,6 +29,7 @@ class AuthenticationBloc
   }
 
   Future<void> _onLogIn(LogIn event, Emitter<AuthenticationState> emit) async {
+    emit(AuthenticationLoading());
     try {
       await _authRepository.signIn(
           email: event.email, password: event.password);

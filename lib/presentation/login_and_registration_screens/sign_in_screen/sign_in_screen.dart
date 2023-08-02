@@ -269,14 +269,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
-                    if (state is AuthenticationLoading) {
-                      return const SizedBox(
-                        height: 50,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ); // Or any other progress indicator
-                    }
                     return Container(
                       margin: getMargin(
                         top: 18,
@@ -284,35 +276,31 @@ class _SignInScreenState extends State<SignInScreen> {
                         // right: 24,
                         bottom: 106,
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CustomButton(
-                            height: getVerticalSize(58),
-                            text: "Sign In",
-                            onTap: () {
-                              if (usernameController.text.isEmpty ||
-                                  passwordController.text.isEmpty) {
-                                // Show a snackbar if any of the fields are empty
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Both fields must be filled'),
-                                      backgroundColor: Colors.red),
-                                );
-                              } else {
-                                // If both fields are filled, proceed with logging in
-                                context.read<AuthenticationBloc>().add(
-                                      LogIn(usernameController.text,
-                                          passwordController.text),
-                                    );
-                                print('LogIn event added');
-                              }
-                            },
-                          )
-                        ],
-                      ),
+                      child: state is AuthenticationLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : CustomButton(
+                              height: getVerticalSize(58),
+                              text: "Sign In",
+                              onTap: () {
+                                if (usernameController.text.isEmpty ||
+                                    passwordController.text.isEmpty) {
+                                  // Show a snackbar if any of the fields are empty
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content:
+                                            Text('Both fields must be filled'),
+                                        backgroundColor: Colors.red),
+                                  );
+                                } else {
+                                  // If both fields are filled, proceed with logging in
+                                  context.read<AuthenticationBloc>().add(
+                                        LogIn(usernameController.text,
+                                            passwordController.text),
+                                      );
+                                  print('LogIn event added');
+                                }
+                              },
+                            ),
                     );
                   },
                 ),
