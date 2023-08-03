@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/authentification/authentication_bloc.dart';
 import 'bloc/authentification/authentication_event.dart';
+import 'bloc/personal_settings/personal_settings_bloc.dart';
 import 'bloc/signup/sign_up_bloc.dart';
 import 'bloc/themecubit/theme_cubit.dart';
 import 'firebase_options.dart';
@@ -52,6 +53,9 @@ void main() async {
           ),
           BlocProvider<ThemeCubit>(
             create: (context) => ThemeCubit(isDarkTheme), // provide ThemeCubit
+          ),
+          BlocProvider<PersonalSettingsBloc>(
+            create: (context) => PersonalSettingsBloc(authRepository),
           ),
         ],
         child: const MyApp(),

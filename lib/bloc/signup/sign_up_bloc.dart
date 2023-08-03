@@ -85,8 +85,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           .collection('users')
           .doc(userCredential.user!.uid)
           .set({
-        'full_name': event.fullName,
-        'birth_date': event.birthDate,
+        'fullName': event.fullName,
+        'birthDate': event.birthDate,
         'country': event.country,
         'username': event.username,
         'email': event.email,

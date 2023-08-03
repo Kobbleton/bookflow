@@ -89,8 +89,8 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
                       //Personal info
                       InkWell(
                         onTap: () {
-                          // Navigator.pushNamed(
-                          //     context, '/settings_personal_info_screen');
+                          Navigator.pushNamed(
+                              context, AppRoutes.settingsPersonalInfoScreen);
                         },
                         child: CustomSettingRow(
                           buttonVariant: IconButtonVariant.fillBlueA70014,
@@ -359,6 +359,6 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
   /// This function takes a [BuildContext] object as a parameter, which is used
   /// to navigate back to the info screen.
   onTapArrowleft(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.profileSettingsScreen);
+    Navigator.pushNamed(context, AppRoutes.settingsPersonalInfoScreen);
   }
 }

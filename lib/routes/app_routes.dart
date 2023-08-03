@@ -39,7 +39,8 @@ class AppRoutes {
 
   static const String profileScreen = '/profile_screen';
 
-  static const String profileSettingsScreen = '/settings_personal_info_screen';
+  static const String settingsPersonalInfoScreen =
+      '/settings_personal_info_screen';
 
   static Map<String, WidgetBuilder> routes = {
     signUpStepOneScreen: (context) => const SignUpStepOneScreen(),
@@ -54,6 +55,6 @@ class AppRoutes {
     homeScreen: (context) => const HomeScreen(),
     libraryScreen: (context) => const LibraryScreen(),
     profileScreen: (context) => const ProfileAndSettingsScreen(),
-    profileSettingsScreen: (context) => const SettingsPersonalInfoScreen(),
+    settingsPersonalInfoScreen: (context) => const SettingsPersonalInfoScreen(),
   };
 }

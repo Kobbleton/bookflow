@@ -1,3 +1,5 @@
+
+
 abstract class AuthenticationEvent {}
 
 class AppStarted extends AuthenticationEvent {}
@@ -13,7 +15,6 @@ class SignInWithGoogle extends AuthenticationEvent {}
 class SignInWithAppleEvent extends AuthenticationEvent {}
 
 class SignInWithFacebookEvent extends AuthenticationEvent {}
-
 
 class LogIn extends AuthenticationEvent {
   final String email;

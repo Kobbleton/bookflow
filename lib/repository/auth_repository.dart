@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-
 import '../exceptions/custom_exception.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth;
@@ -11,7 +10,6 @@ class AuthRepository {
   AuthRepository({FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
-  //todo use  this method in the AuthenticationBloc
   // User stream
   Stream<User?> get user {
     return _firebaseAuth.authStateChanges();
@@ -166,5 +164,49 @@ class AuthRepository {
 
   Future<void> sendPasswordResetEmail(String email) async {
     return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  //update user info
+  Future<void> updateUserInfo({
+    required String fullName,
+    required String birthDate,
+    required String username,
+    required String country,
+    // required String email,
+  }) async {
+    // Retrieve the current user.
+    final user = _firebaseAuth.currentUser;
+
+    if (user == null) {
+      throw Exception('User is not signed in.');
+    }
+
+    // Update the user's information in Firebase.
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+      'fullName': fullName,
+      'birthDate': birthDate,
+      'username': username,
+      'country': country,
+      // 'email': email,
+    });
+  }
+
+  //update email
+  Future<void> updateEmail(String email) async {
+    // Retrieve the current user.
+    final user = _firebaseAuth.currentUser;
+
+    if (user == null) {
+      throw Exception('User is not signed in.');
+    }
+
+    // Update the user's email in FirebaseAuth.
+    await user.updateEmail(email);
+  }
+
+  Future<String> getUserName(String uid) async {
+    final document =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    return document.data()?['username'] ?? 'No Name';
   }
 }

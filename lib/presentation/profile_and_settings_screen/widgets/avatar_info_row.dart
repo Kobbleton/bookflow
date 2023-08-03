@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
+import '../../../repository/auth_repository.dart';
 import '../../../theme/app_style.dart';
 import '../../widgets/custom_image_view.dart';
 
@@ -43,11 +45,23 @@ class AvatarInfoRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                user?.displayName ?? 'No Name',
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-                style: AppStyle.txtOpenSansBold20(context),
+              FutureBuilder<String>(
+                future:
+                    context.read<AuthRepository>().getUserName(user?.uid ?? ''),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    return Text(
+                      snapshot.data ?? 'No Name',
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: AppStyle.txtOpenSansBold20(context),
+                    );
+                  }
+                },
               ),
               Padding(
                 padding: getPadding(
