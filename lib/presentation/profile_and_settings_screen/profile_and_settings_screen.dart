@@ -69,7 +69,7 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const AvatarInfoRow(),
+                      AvatarInfoRow(),
                       //Divider
                       Padding(
                         padding: getPadding(
@@ -86,7 +86,6 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
                         ),
                       ),
                       //Settings
-
                       //Personal info
                       InkWell(
                         onTap: () {

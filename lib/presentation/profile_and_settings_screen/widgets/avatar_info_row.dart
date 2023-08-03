@@ -1,14 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
 import '../../widgets/custom_image_view.dart';
 
 class AvatarInfoRow extends StatelessWidget {
-  const AvatarInfoRow({
+  AvatarInfoRow({
     super.key,
   });
+
+  final User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class AvatarInfoRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Andrew Ainsley",
+                user?.displayName ?? 'No Name',
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
                 style: AppStyle.txtOpenSansBold20(context),
@@ -52,7 +54,7 @@ class AvatarInfoRow extends StatelessWidget {
                   top: 6,
                 ),
                 child: Text(
-                  "andrew_ainsley@yourdomain.com",
+                  user?.email ?? 'No Email',
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
                   style: AppStyle.txtOpenSansBold14(context),
@@ -61,20 +63,21 @@ class AvatarInfoRow extends StatelessWidget {
             ],
           ),
         ),
-        CustomImageView(
-          svgPath: ImageConstant.imgEdit,
-          height: getSize(
-            24,
-          ),
-          width: getSize(
-            24,
-          ),
-          margin: getMargin(
-            left: 36,
-            top: 16,
-            bottom: 18,
-          ),
-        ),
+        //edit icon
+        // CustomImageView(
+        //   svgPath: ImageConstant.imgEdit,
+        //   height: getSize(
+        //     24,
+        //   ),
+        //   width: getSize(
+        //     24,
+        //   ),
+        //   margin: getMargin(
+        //     left: 36,
+        //     top: 16,
+        //     bottom: 18,
+        //   ),
+        // ),
       ],
     );
   }
