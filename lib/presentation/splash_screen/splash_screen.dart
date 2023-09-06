@@ -1,3 +1,4 @@
+import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentification/authentication_bloc.dart';
@@ -8,6 +9,7 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_style.dart';
 import '../widgets/custom_image_view.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key})
@@ -110,18 +112,22 @@ class _SplashScreenState extends State<SplashScreen>
                       style: AppStyle.txtOpenSansBold48(context),
                     ),
                   ),
-                  RotationTransition(
-                    turns: _controller,
-                    child: CustomImageView(
-                      imagePath: ImageConstant.imgVector,
-                      height: getSize(
-                        60,
-                      ),
-                      width: getSize(
-                        60,
-                      ),
-                    ),
-                  ),
+                  SpinKitSpinningLines(
+                    color: ColorConstant.cyan500,
+                    size: 120,
+                  )
+                  // RotationTransition(
+                  //   turns: _controller,
+                  //   child: CustomImageView(
+                  //     imagePath: ImageConstant.imgVector,
+                  //     height: getSize(
+                  //       60,
+                  //     ),
+                  //     width: getSize(
+                  //       60,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

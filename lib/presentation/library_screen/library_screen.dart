@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
@@ -36,6 +35,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bookPaths = Map<String, String>.from(
         jsonDecode(prefs.getString('bookPaths') ?? "{}"));
+    setState(() {}); // Optional: Call setState to rebuild the widget if needed
   }
 
   void onBookClicked(String bookName, BuildContext context) async {
