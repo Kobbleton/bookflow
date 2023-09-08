@@ -1,3 +1,4 @@
+import 'package:bookflow/bloc/theloop_theme/theloop_theme_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,10 +54,13 @@ void main() async {
               ),
           ),
           BlocProvider<ThemeCubit>(
-            create: (context) => ThemeCubit(isDarkTheme), // provide ThemeCubit
+            create: (context) => ThemeCubit(isDarkTheme),
           ),
           BlocProvider<PersonalSettingsBloc>(
             create: (context) => PersonalSettingsBloc(authRepository),
+          ),
+          BlocProvider<TheloopThemeBloc>(
+            create: (context) => TheloopThemeBloc(),
           ),
         ],
         child: const MyApp(),

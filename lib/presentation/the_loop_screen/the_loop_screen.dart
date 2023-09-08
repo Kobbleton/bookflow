@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/progress_indicator.dart';
@@ -9,6 +10,9 @@ import 'package:bookflow/presentation/the_loop_screen/widgets/theloop_text.dart'
 import 'package:bookflow/presentation/the_loop_screen/widgets/wpm_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import 'logic/drag_handler.dart';
 import 'logic/timer_manager.dart';
 
@@ -149,7 +153,7 @@ class _TheloopScreenState extends State<TheloopScreen>
                       opacity: isDragging || isPaused ? 1.0 : 0.0,
                       duration: const Duration(milliseconds: 300),
                       child: Padding(
-                        padding: const EdgeInsets.all(24.0),
+                        padding: getPadding(all: 24),
                         child: Align(
                           alignment: Alignment.topRight,
                           child: WPMCounterWidget(
@@ -195,17 +199,35 @@ class _TheloopScreenState extends State<TheloopScreen>
                         alignment: Alignment.bottomRight,
                         child: Padding(
                           padding: getPadding(right: 60),
-                          child: IconButton(
-                            icon: Icon(Icons.settings,
-                                color: Colors.grey.shade300),
-                            onPressed: () {
-                              SettingsModalScreen(onColorChanged: (color) {
-                                setState(() {
-                                  backgroundColor = color;
-                                });
-                              }).show(context);
-                            },
-                          ),
+                          child: Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                //nice animations:
+                                //waveDots
+                                //threeArched Circle + Icon
+                                //Beat + Icon
+                                BlocBuilder<TheloopThemeBloc,
+                                    TheloopThemeState>(
+                                  builder: (context, state) {
+                                    return LoadingAnimationWidget.waveDots(
+                                      color: state.wpmTextColor,
+                                      size: 40,
+                                    );
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.settings_outlined,
+                                      color: Colors.transparent),
+                                  onPressed: () {
+                                    SettingsModalScreen(
+                                        onColorChanged: (color) {
+                                      setState(() {
+                                        backgroundColor = color;
+                                      });
+                                    }).show(context);
+                                  },
+                                ),
+                              ]),
                         ),
                       ),
                     );
@@ -213,7 +235,35 @@ class _TheloopScreenState extends State<TheloopScreen>
                     return const SizedBox.shrink();
                   }
                 },
-              )
+              ),
+              OrientationBuilder(builder: (context, orientation) {
+                if (orientation == Orientation.landscape) {
+                  return AnimatedOpacity(
+                    opacity: isPaused ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 300),
+                    child: Padding(
+                      padding: getPadding(all: 20),
+                      child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                        builder: (context, state) {
+                          return IconButton(
+                            icon: Icon(
+                              Icons.close,
+                              size: 30,
+                              color: state.wpmTextColor,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pop(); // Close the screen and return to library
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              }),
             ],
           ),
         ),

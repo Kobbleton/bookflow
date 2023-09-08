@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../bloc/theloop_theme/theloop_theme_bloc.dart';
+import '../../../bloc/theloop_theme/theloop_theme_state.dart';
 
 class WPMCounterWidget extends StatefulWidget {
   final int durationMilliseconds;
@@ -21,12 +25,16 @@ class _WPMCounterWidgetState extends State<WPMCounterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      '${getWPM()} WPM',
-      style: TextStyle(
-        fontSize: 24.0,
-        color: widget.isPaused ? Colors.white : Colors.grey,
-      ),
+    return BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+      builder: (context, state) {
+        return Text(
+          '${getWPM()} WPM',
+          style: TextStyle(
+            fontSize: 24.0,
+            color: widget.isPaused ? state.wpmTextColor : Colors.grey,
+          ),
+        );
+      },
     );
   }
 }

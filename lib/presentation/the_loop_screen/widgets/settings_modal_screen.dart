@@ -1,7 +1,18 @@
+import 'dart:io';
+
+import 'package:bookflow/core/utils/color_constant.dart';
+import 'package:bookflow/core/utils/size_utils.dart';
+import 'package:bookflow/theme/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../bloc/theloop_theme/theloop_theme_bloc.dart';
+import '../../../bloc/theloop_theme/theloop_theme_event.dart';
+import '../../../bloc/theloop_theme/theloop_theme_state.dart';
 
 class SettingsModalScreen {
   final Function(Color) onColorChanged;
+  double topPadding = Platform.isIOS ? 40.0 : 0.0;
 
   SettingsModalScreen({required this.onColorChanged});
 
@@ -20,29 +31,96 @@ class SettingsModalScreen {
             child: Container(
               width: MediaQuery.of(context).size.width / 3,
               height: MediaQuery.of(context).size.height,
-              color: Colors.white,
+              color: ColorConstant.dark5,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: getPadding(top: 16),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Change Background Color',
-                        style: TextStyle(fontSize: 18.0)),
-                    const SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildCircleButton(
-                            context, Colors.grey[200]!, 'Grey 200'),
-                        _buildCircleButton(
-                            context, Colors.grey[400]!, 'Grey 400'),
-                        _buildCircleButton(
-                            context, Colors.grey[600]!, 'Grey 600'),
-                        _buildCircleButton(
-                            context, Colors.grey[800]!, 'Grey 800'),
-                        _buildCircleButton(
-                            context, Colors.grey[900]!, 'Grey 900'),
-                      ],
+                    Text('Themes & Settings',
+                        style: AppStyle.txtOpenSansBold18(context)),
+                    const SizedBox(height: 24.0),
+                    Padding(
+                      padding: EdgeInsets.only(right: topPadding, left: 8),
+                      child: Wrap(
+                        spacing: 18.0, // gap between adjacent chips
+                        runSpacing: 12.0, // gap between lines
+                        alignment: WrapAlignment.start,
+                        children: [
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildCircleButton(
+                                  context,
+                                  ColorConstant.roriginalWhite,
+                                  'Aa original',
+                                  state.fontName,
+                                  ColorConstant.black,
+                                  TheloopThemeSetOriginal());
+                            },
+                          ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildCircleButton(
+                                  context,
+                                  ColorConstant.dark3,
+                                  'Aa quiet',
+                                  state.fontName,
+                                  ColorConstant.white,
+                                  TheloopThemeSetQuiet());
+                            },
+                          ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildCircleButton(
+                                  context,
+                                  ColorConstant.rpaperLight,
+                                  'Aa paper',
+                                  state.fontName,
+                                  ColorConstant.black,
+                                  TheloopThemeSetPaper());
+                            },
+                          ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildCircleButton(
+                                  context,
+                                  ColorConstant.dark4,
+                                  'Aa dark',
+                                  state.fontName,
+                                  ColorConstant.white,
+                                  TheloopThemeSetDarkLight());
+                            },
+                          ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildCircleButton(
+                                  context,
+                                  ColorConstant.rcalmBeige,
+                                  'Aa calm',
+                                  state.fontName,
+                                  ColorConstant.black,
+                                  TheloopThemeSetCalm());
+                            },
+                          ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildCircleButton(
+                                  context,
+                                  ColorConstant.rfocusBeigeLight,
+                                  'Aa focus',
+                                  state.fontName,
+                                  ColorConstant.black,
+                                  TheloopThemeSetFocus());
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -63,20 +141,36 @@ class SettingsModalScreen {
     );
   }
 
-  Widget _buildCircleButton(BuildContext context, Color color, String label) {
+  Widget _buildCircleButton(BuildContext context, Color color, String label,
+      String fontName, Color textColor, TheloopThemeEvent themeEvent) {
+    var labelParts = label
+        .split(' '); // Assuming the label is two words separated by a space
     return ElevatedButton(
       onPressed: () {
         onColorChanged(color);
+        context.read<TheloopThemeBloc>().add(themeEvent);
         Navigator.pop(context);
       },
       style: ElevatedButton.styleFrom(
-        shape: const CircleBorder(),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: color,
-        minimumSize: const Size(50, 50),
+        minimumSize: const Size(80, 60),
       ),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+        crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
+        children: [
+          Text(
+            labelParts[0], // First part 'Aa'
+            style:
+                TextStyle(fontSize: 16, fontFamily: fontName, color: textColor),
+          ),
+          Text(
+            labelParts[1], // Second part 'original'
+            style:
+                TextStyle(fontSize: 10, fontFamily: fontName, color: textColor),
+          ),
+        ],
       ),
     );
   }
