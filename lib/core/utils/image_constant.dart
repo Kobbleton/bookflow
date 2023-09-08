@@ -44,12 +44,9 @@ class ImageConstant {
   static String flagIcon = 'assets/images/flag.svg';
 
   static String appleLogo =
-      'assets/images/img_autolayouthorizontal_black_900.svg';  
-      
-      static String appleLogoWhite =
-      'assets/images/apple_logo_white.svg';
+      'assets/images/img_autolayouthorizontal_black_900.svg';
 
-      
+  static String appleLogoWhite = 'assets/images/apple_logo_white.svg';
 
   static String facebookLogo = 'assets/images/facebook_logo.svg';
 
@@ -87,4 +84,6 @@ class ImageConstant {
   static String settingsImageLogout = 'assets/images/settings_img_7.png';
   static String settingsImageBell = 'assets/images/settings_img_8.png';
   static String settingsImageInfo = 'assets/images/settings_img_9.png';
+
+  static String phoneIcon = 'assets/images/phone_icon.svg';
 }

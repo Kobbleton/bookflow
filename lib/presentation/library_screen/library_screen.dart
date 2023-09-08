@@ -45,7 +45,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SpritzReadingScreen(words: words),
+          builder: (context) => TheloopScreen(words: words),
         ),
       );
     } else {
