@@ -46,9 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
     // Scaffold is the primary container for material design apps
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        if (state is AuthenticationLoading) {
-          print("AuthenticationLoading state has been emitted.");
-        }
+        if (state is AuthenticationLoading) {}
         if (state is AuthenticationAuthenticated) {
           Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreen);
         } else if (state is AuthenticationError) {
@@ -66,7 +64,11 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Container(
             width: double.maxFinite,
             // Padding applied to the container
-            padding: getPadding(left: 24, top: 68, right: 24, bottom: 26),
+            padding: getPadding(
+              left: size.width * 0.055,
+              right: size.width * 0.055,
+              top: Platform.isIOS ? size.height * 0.065 : size.height * 0.1,
+            ),
             // Column allows arranging its children vertically.
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,28 +87,31 @@ class _SignInScreenState extends State<SignInScreen> {
                     }),
                 // Welcome text
                 Padding(
-                  padding: getPadding(top: 36),
+                  padding: getPadding(top: size.height * 0.03),
                   child: Text(
                     "Hello there 👋",
                     overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                     style: AppStyle.txtOpenSansBold32(context),
                   ),
                 ),
                 // Instruction for signing in
                 Container(
                   width: getHorizontalSize(332),
-                  margin: getMargin(top: 17, right: 49),
+                  margin: getMargin(
+                    top: size.width * 0.037,
+                  ),
                   child: Text(
                     "Please enter your username/email and password to sign in.",
-                    maxLines: null,
                     textAlign: TextAlign.left,
                     style: AppStyle.txtOpenSansRegular18(context),
                   ),
                 ),
                 // CustomInputFieldFull for inputting username/email
                 Padding(
-                  padding: getPadding(top: 10),
+                  padding: getPadding(
+                    top: size.width * 0.08,
+                  ),
                   child: CustomInputFieldFull(
                     inputController: usernameController,
                     headerText: "Username / Email",
@@ -126,37 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     isObscured: true,
                   ),
                 ),
-                // "Remember me" option
-                // Padding(
-                //   padding: getPadding(top: 23),
-                //   child: Row(
-                //     children: [
-                //       CustomIconButton(
-                //           height: 24,
-                //           width: 24,
-                //           child: CustomImageView(
-                //               svgPath: ImageConstant.imgCheckmarkWhiteA700)),
-                //       Padding(
-                //         padding: getPadding(left: 16),
-                //         child: Text(
-                //           "Remember me",
-                //           overflow: TextOverflow.ellipsis,
-                //           textAlign: TextAlign.left,
-                //           style: AppStyle.txtOpenSansSemiBold18.copyWith(
-                //             letterSpacing: getHorizontalSize(0.2),
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // Divider line
-                Padding(
-                    padding: getPadding(top: 24),
-                    child: Divider(
-                        height: getVerticalSize(1),
-                        thickness: getVerticalSize(1),
-                        color: ColorConstant.gray200)),
+
                 // "Forgot password" option
                 Align(
                   alignment: Alignment.center,
@@ -165,7 +140,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       onTapTxtForgotpassword(context);
                     },
                     child: Padding(
-                      padding: getPadding(top: 26),
+                      padding: getPadding(
+                        top: size.width * 0.08,
+                      ),
                       child: Text(
                         "Forgot Password?",
                         overflow: TextOverflow.ellipsis,
@@ -216,7 +193,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 if (Platform.isAndroid)
                   CustomButton(
                     onTap: () {
-                      print("SocialLoginButton tapped"); // Add debug print here
                       context
                           .read<AuthenticationBloc>()
                           .add(SignInWithGoogle());
@@ -244,8 +220,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         SocialLoginButton(
                           onTap: () {
-                            print(
-                                "SocialLoginButton tapped"); // Add debug print here
                             context
                                 .read<AuthenticationBloc>()
                                 .add(SignInWithGoogle());
@@ -254,8 +228,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         SocialLoginButton(
                           onTap: () {
-                            print(
-                                "SocialLoginButton tapped"); // Add debug print here
                             context
                                 .read<AuthenticationBloc>()
                                 .add(SignInWithAppleEvent());
@@ -271,10 +243,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   builder: (context, state) {
                     return Container(
                       margin: getMargin(
-                        top: 18,
-                        // left: 24,
-                        // right: 24,
-                        bottom: 106,
+                        top: size.height * 0.015,
+                        bottom: size.height * 0.02,
                       ),
                       child: state is AuthenticationLoading
                           ? const Center(child: CircularProgressIndicator())
@@ -297,7 +267,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                         LogIn(usernameController.text,
                                             passwordController.text),
                                       );
-                                  print('LogIn event added');
                                 }
                               },
                             ),

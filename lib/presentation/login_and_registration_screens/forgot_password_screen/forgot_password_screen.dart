@@ -60,7 +60,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               },
             ),
             Padding(
-              padding: getPadding(top: 38),
+              padding: getPadding(top: size.height * 0.03),
               child: Text(
                 "Forgot Password 🔑",
                 overflow: TextOverflow.ellipsis,
@@ -92,7 +92,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        margin: getMargin(left: 24, right: 24, bottom: 106),
+        margin: getMargin(
+          left: 24,
+          right: 24,
+          bottom: 106,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,

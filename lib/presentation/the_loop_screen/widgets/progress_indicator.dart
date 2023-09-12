@@ -15,7 +15,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
         barRadius: const Radius.circular(16),
         lineHeight: 16.0,
         percent: progress,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.grey[600],
         progressColor: ColorConstant.cyan500,
         center: Text(
           '${(progress * 100).toStringAsFixed(1)}%',

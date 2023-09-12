@@ -10,15 +10,19 @@ import '../../../theme/app_decoration.dart';
 import '../../../theme/app_style.dart';
 import '../../widgets/custom_image_view.dart';
 
-class AddBookButton extends StatelessWidget {
+class AddBookButton extends StatefulWidget {
   const AddBookButton({
     super.key,
     required this.onBookAdded,
   });
 
-final Function(String, String) onBookAdded;
+  final Function(String, String) onBookAdded;
 
+  @override
+  State<AddBookButton> createState() => _AddBookButtonState();
+}
 
+class _AddBookButtonState extends State<AddBookButton> {
   Future<void> pickTextFile(BuildContext context) async {
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(type: FileType.custom, allowedExtensions: ['txt']);
@@ -26,6 +30,7 @@ final Function(String, String) onBookAdded;
     if (result != null) {
       PlatformFile file = result.files.first;
       List<String> lines = await File(file.path!).readAsLines();
+      late AnimationController controller;
 
       // Get the app's local storage directory
       final directory = await getApplicationDocumentsDirectory();
@@ -35,7 +40,7 @@ final Function(String, String) onBookAdded;
       final newFile = await File(file.path!).copy(filePath);
 
       // Notify that a new book has been added.
-      onBookAdded(file.name, filePath);
+      widget.onBookAdded(file.name, file.name);
 
       showDialog(
         context: context,

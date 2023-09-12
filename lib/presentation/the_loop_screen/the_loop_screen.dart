@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
+import '../../routes/app_routes.dart';
 import 'logic/drag_handler.dart';
 import 'logic/timer_manager.dart';
 
@@ -50,6 +51,8 @@ class _TheloopScreenState extends State<TheloopScreen>
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -58,7 +61,7 @@ class _TheloopScreenState extends State<TheloopScreen>
     ]);
 
     index = 0;
-    // _timer = Timer.periodic(Duration.zero, (timer) {});
+
     timerManager = TimerManager(
         durationMilliseconds: durationMilliseconds,
         updateWord: () {
@@ -125,120 +128,120 @@ class _TheloopScreenState extends State<TheloopScreen>
           isDragging = false;
         });
       },
-      child: Scaffold(
-        backgroundColor: backgroundColor, // Dark grey background
-        body: Padding(
-          padding: getPadding(bottom: 24),
-          child: Stack(
-            children: [
-              OrientationBuilder(
-                builder: (context, orientation) {
-                  if (orientation == Orientation.landscape) {
-                    if (isPaused) {
-                      timerManager.stop();
-                    } else {
-                      timerManager.start();
-                    }
-                    return LoopText(widget: widget, index: index);
-                  } else {
-                    timerManager.stop();
-                    return const SwitchToLandacapeModeScreen();
-                  }
-                },
-              ),
-              OrientationBuilder(
-                builder: (context, orientation) {
-                  if (orientation == Orientation.landscape) {
-                    return AnimatedOpacity(
-                      opacity: isDragging || isPaused ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 300),
-                      child: Padding(
-                        padding: getPadding(all: 24),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: WPMCounterWidget(
-                            durationMilliseconds: durationMilliseconds,
-                            isPaused: isPaused,
+      child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: state.backgroundColor, // Dark grey background
+            body: Padding(
+              padding: getPadding(bottom: 24),
+              child: Stack(
+                children: [
+                  OrientationBuilder(
+                    builder: (context, orientation) {
+                      if (orientation == Orientation.landscape) {
+                        if (isPaused) {
+                          timerManager.stop();
+                        } else {
+                          timerManager.start();
+                        }
+                        return LoopText(widget: widget, index: index);
+                      } else {
+                        timerManager.stop();
+                        return const SwitchToLandacapeModeScreen();
+                      }
+                    },
+                  ),
+                  OrientationBuilder(
+                    builder: (context, orientation) {
+                      if (orientation == Orientation.landscape) {
+                        return AnimatedOpacity(
+                          opacity: isDragging || isPaused ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: Padding(
+                            padding: getPadding(all: 24),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: WPMCounterWidget(
+                                durationMilliseconds: durationMilliseconds,
+                                isPaused: isPaused,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
-              OrientationBuilder(
-                builder: (context, orientation) {
-                  if (orientation == Orientation.landscape) {
-                    return AnimatedOpacity(
-                      opacity: isPaused ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 300),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 2),
-                          child: ProgressIndicatorWidget(
-                            progress: calculateProgress(),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                  OrientationBuilder(
+                    builder: (context, orientation) {
+                      if (orientation == Orientation.landscape) {
+                        return AnimatedOpacity(
+                          opacity: isPaused ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 2),
+                              child: ProgressIndicatorWidget(
+                                progress: calculateProgress(),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
-              OrientationBuilder(
-                builder: (context, orientation) {
-                  if (orientation == Orientation.landscape) {
-                    return AnimatedOpacity(
-                      opacity: isPaused ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 300),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: getPadding(right: 60),
-                          child: Stack(
-                              alignment: AlignmentDirectional.center,
-                              children: [
-                                //nice animations:
-                                //waveDots
-                                //threeArched Circle + Icon
-                                //Beat + Icon
-                                BlocBuilder<TheloopThemeBloc,
-                                    TheloopThemeState>(
-                                  builder: (context, state) {
-                                    return LoadingAnimationWidget.waveDots(
-                                      color: state.wpmTextColor,
-                                      size: 40,
-                                    );
-                                  },
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.settings_outlined,
-                                      color: Colors.transparent),
-                                  onPressed: () {
-                                    SettingsModalScreen(
-                                        onColorChanged: (color) {
-                                      setState(() {
-                                        backgroundColor = color;
-                                      });
-                                    }).show(context);
-                                  },
-                                ),
-                              ]),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
-              OrientationBuilder(builder: (context, orientation) {
-                if (orientation == Orientation.landscape) {
-                  return AnimatedOpacity(
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                  OrientationBuilder(
+                    builder: (context, orientation) {
+                      if (orientation == Orientation.landscape) {
+                        return AnimatedOpacity(
+                          opacity: isPaused ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Padding(
+                              padding: getPadding(right: 60),
+                              child: Stack(
+                                  alignment: AlignmentDirectional.center,
+                                  children: [
+                                    //nice animations:
+                                    //waveDots
+                                    //threeArched Circle + Icon
+                                    //Beat + Icon
+                                    BlocBuilder<TheloopThemeBloc,
+                                        TheloopThemeState>(
+                                      builder: (context, state) {
+                                        return LoadingAnimationWidget.waveDots(
+                                          color: state.wpmTextColor,
+                                          size: 40,
+                                        );
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.settings_outlined,
+                                          color: Colors.transparent),
+                                      onPressed: () {
+                                        SettingsModalScreen(
+                                            onColorChanged: (color) {
+                                          setState(() {
+                                            backgroundColor = color;
+                                          });
+                                        }).show(context);
+                                      },
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                  AnimatedOpacity(
                     opacity: isPaused ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 300),
                     child: Padding(
@@ -252,21 +255,26 @@ class _TheloopScreenState extends State<TheloopScreen>
                               color: state.wpmTextColor,
                             ),
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pop(); // Close the screen and return to library
+                              SystemChrome.setPreferredOrientations([
+                                DeviceOrientation.portraitUp,
+                                DeviceOrientation.portraitDown,
+                              ]).then((_) {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.homeScreen);
+                                // Navigator.of(context)
+                                //     .pop(); // Close the screen and return to library
+                              });
                             },
                           );
                         },
                       ),
                     ),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              }),
-            ],
-          ),
-        ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

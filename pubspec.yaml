@@ -55,3 +55,18 @@ flutter:
             weight: 400
           - asset: assets/fonts/OpenSansSemiBold.ttf
             weight: 600
+      - family: SFNSDisplay
+        fonts:
+          - asset: assets/fonts/SFNSDisplayRegular.otf
+      - family: CanelaText
+        fonts:
+          - asset: assets/fonts/CanelaTextRegular.otf
+      - family: Charter
+        fonts:
+         - asset: assets/fonts/CharterRegular.otf
+      - family: Palatino
+        fonts:
+        - asset: assets/fonts/PalatinoRegular.ttf
+      - family: ProximaNova
+        fonts:
+        - asset: assets/fonts/ProximaNovaRegular.otf

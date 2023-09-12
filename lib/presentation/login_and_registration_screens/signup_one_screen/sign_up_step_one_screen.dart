@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bookflow/bloc/signup/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,9 +45,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
       body: Container(
         width: double.maxFinite,
         padding: getPadding(
-          left: 24,
-          right: 24,
-          top: 40,
+          left: size.width * 0.055,
+          right: size.width * 0.055,
+          top: Platform.isIOS ? size.height * 0.04 : size.height * 0.065,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -54,7 +56,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
             children: [
               // Header Row with a back button and a progress indicator.
               Padding(
-                padding: getPadding(top: 26, right: 83),
+                padding: getPadding(
+                  top: 26,
+                ),
                 child: Row(
                   children: [
                     // Back button with custom image.
@@ -71,7 +75,11 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                     // Progress indicator to show the progress of the signup process.
                     Expanded(
                       child: Padding(
-                        padding: getPadding(left: 56, top: 8, bottom: 8),
+                        padding: getPadding(
+                            left: size.width * 0.105,
+                            top: 8,
+                            bottom: 8,
+                            right: size.width * 0.17),
                         child: Container(
                           height: getVerticalSize(12),
                           width: getHorizontalSize(216),
@@ -100,11 +108,12 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
               ),
               // Title text.
               Container(
-                width: getHorizontalSize(352),
-                margin: getMargin(top: 38, right: 30),
+                width: size.width,
+                margin: getMargin(
+                  top: size.height * 0.04,
+                ),
                 child: Text(
                   "Let's Complete Your Profile 📋",
-                  maxLines: null,
                   textAlign: TextAlign.center,
                   style: AppStyle.txtOpenSansBold32(context),
                 ),
@@ -112,7 +121,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
               // Subtitle text.
               Container(
                 width: getHorizontalSize(376),
-                margin: getMargin(top: 13, right: 5),
+                margin: getMargin(
+                  top: size.height * 0.02,
+                ),
                 child: Text(
                   "Don't worry, only you can see your personal data. No one else will be able to see it.",
                   maxLines: null,
@@ -126,7 +137,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                 child: Container(
                   height: getSize(100),
                   width: getSize(100),
-                  margin: getMargin(top: 32),
+                  margin: getMargin(
+                    top: size.height * 0.03,
+                  ),
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
@@ -157,7 +170,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
               ),
               // Date picker field.
               Padding(
-                padding: getPadding(top: 20),
+                padding: getPadding(
+                  top: size.height * 0.02,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,11 +183,13 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                         "Birth date",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: AppStyle.txtOpenSansBold18(context),
+                        style: AppStyle.txtOpenSansBold16(context),
                       ),
                     ),
                     Padding(
-                      padding: getPadding(top: 14),
+                      padding: getPadding(
+                        top: size.height * 0.015,
+                      ),
                     ),
                     DatePickerField(
                         dateController: dateController,
@@ -183,7 +200,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
               ),
               // Country dropdown field.
               Padding(
-                padding: getPadding(top: 20),
+                padding: getPadding(top: size.height * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -195,7 +212,7 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                       style: AppStyle.txtOpenSansBold16(context),
                     ),
                     Padding(
-                      padding: getPadding(top: 14),
+                      padding: getPadding(top: size.height * 0.015),
                     ),
                     DropdownField(
                       hintText: 'Select Country',
@@ -212,10 +229,10 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
               ),
               Container(
                 margin: getMargin(
-                  top: 38,
-                  left: 24,
-                  right: 24,
-                  bottom: 56,
+                  top: size.height * 0.08,
+                  left: size.width * 0.055,
+                  right: size.width * 0.055,
+                  bottom: size.height * 0.02,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -223,7 +240,9 @@ class _SignUpStepOneScreenState extends State<SignUpStepOneScreen> {
                   children: [
                     // Continue button that navigates to the next screen.
                     CustomButton(
-                        height: getVerticalSize(58),
+                        height: Platform.isIOS
+                            ? size.height * 0.06
+                            : size.height * 0.065,
                         text: "Continue",
                         onTap: () {
                           onTapContinue(context);

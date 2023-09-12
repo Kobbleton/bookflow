@@ -124,73 +124,62 @@ class ReadingNowBlock extends StatelessWidget {
                                   bottom: 7,
                                 ),
                               ),
-                              Padding(
-                                padding: getPadding(
-                                  bottom: 0,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: getPadding(bottom: 4),
-                                      child: styledText(
-                                        'Statistics',
-                                        AppStyle.txtOpenSansBold18(context),
-                                      ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: getPadding(bottom: 4),
+                                    child: styledText(
+                                      'Statistics',
+                                      AppStyle.txtOpenSansBold18(context),
                                     ),
-                                    statsRow(
-                                      'Total words:',
-                                      '10386',
-                                      AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(
-                                          context),
-                                    ),
-                                    statsRow(
-                                      'Words read:',
-                                      '3486',
-                                      AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(
-                                          context),
-                                    ),
-                                    statsRow(
-                                      'Reading speed:',
-                                      '304wpm',
-                                      AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(
-                                          context),
-                                    ),
-                                    statsRow(
-                                      'Time spent:',
-                                      '2h 43m',
-                                      AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(
-                                          context),
-                                    ),
-                                    statsRow(
-                                      'Time left:',
-                                      '5h 34m',
-                                      AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(
-                                          context),
-                                    ),
-                                    statsRow(
-                                      'Completed:',
-                                      '34%',
-                                      AppStyle.txtOpenSansBold13(context),
-                                      AppStyle.txtOpenSansBold13Cyan500(
-                                          context),
-                                    ),
-                                    Padding(
-                                      padding: getPadding(bottom: 6),
-                                    ),
-                                    ContinueCustomButton(
-                                      text: 'Continue',
-                                      onPressed: () {},
-                                      svgPath: ImageConstant.menuIcon,
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  statsRow(
+                                    'Total words:',
+                                    '10386',
+                                    AppStyle.txtOpenSansBold13(context),
+                                    AppStyle.txtOpenSansBold13Cyan500(context),
+                                  ),
+                                  statsRow(
+                                    'Words read:',
+                                    '3486',
+                                    AppStyle.txtOpenSansBold13(context),
+                                    AppStyle.txtOpenSansBold13Cyan500(context),
+                                  ),
+                                  statsRow(
+                                    'Reading speed:',
+                                    '304wpm',
+                                    AppStyle.txtOpenSansBold13(context),
+                                    AppStyle.txtOpenSansBold13Cyan500(context),
+                                  ),
+                                  statsRow(
+                                    'Time spent:',
+                                    '2h 43m',
+                                    AppStyle.txtOpenSansBold13(context),
+                                    AppStyle.txtOpenSansBold13Cyan500(context),
+                                  ),
+                                  statsRow(
+                                    'Time left:',
+                                    '5h 34m',
+                                    AppStyle.txtOpenSansBold13(context),
+                                    AppStyle.txtOpenSansBold13Cyan500(context),
+                                  ),
+                                  statsRow(
+                                    'Completed:',
+                                    '34%',
+                                    AppStyle.txtOpenSansBold13(context),
+                                    AppStyle.txtOpenSansBold13Cyan500(context),
+                                  ),
+                                  Padding(
+                                    padding: getPadding(bottom: 6),
+                                  ),
+                                  ContinueCustomButton(
+                                    text: 'Continue',
+                                    onPressed: () {},
+                                    svgPath: ImageConstant.menuIcon,
+                                  )
+                                ],
                               ),
                             ],
                           ),

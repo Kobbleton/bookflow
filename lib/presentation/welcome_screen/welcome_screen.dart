@@ -55,18 +55,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     Expanded(
                       flex: 2,
                       child: SizedBox(
-                        height: getVerticalSize(522),
+                        height: size.height * 0.5,
                         width: double.maxFinite,
                         child: Stack(
                           alignment: Alignment.bottomCenter,
                           children: [
                             CustomImageView(
                                 imagePath: ImageConstant.imgImage1,
-                                height: getVerticalSize(522),
-                                width: getHorizontalSize(430),
+                                height: size.height * 0.5,
+                                width: size.width,
                                 alignment: Alignment.center),
                             Container(
-                              height: getVerticalSize(200),
+                              height: size.height * 0.3,
                               width: double.maxFinite,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -76,7 +76,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                           Brightness.dark
                                       ? [
                                           ColorConstant.dark2FullyTransparent,
-                                          // ColorConstant.dark2A70000,
                                           ColorConstant.dark2
                                         ]
                                       : [
@@ -94,8 +93,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     Expanded(
                       flex: 3,
                       child: Container(
-                        padding:
-                            getPadding(left: 24, top: 0, right: 24, bottom: 38),
+                        padding: getPadding(
+                          left: size.width * 0.055,
+                          top: 0,
+                          right: size.width * 0.055,
+                          bottom: size.height * 0.055,
+                        ),
                         decoration:
                             Theme.of(context).brightness == Brightness.dark
                                 ? AppDecoration.fillDark2
@@ -138,7 +141,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             ),
                             CarouselSlider.builder(
                                 options: CarouselOptions(
-                                    height: getVerticalSize(80),
+                                    height: size.height * 0.08,
                                     initialPage: 0,
                                     autoPlay: true,
                                     viewportFraction: 1.0,
@@ -155,7 +158,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 }),
                             Container(
                               height: getVerticalSize(8),
-                              margin: getMargin(top: 28),
+                              margin: getMargin(
+                                top: size.height * 0.025,
+                              ),
                               child: AnimatedSmoothIndicator(
                                 activeIndex: sliderIndex,
                                 count: 2,
@@ -170,16 +175,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             ),
                             Padding(
-                              padding: getPadding(top: 33),
+                              padding: getPadding(
+                                top: size.height * 0.025,
+                              ),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Padding(
-                                    padding: getPadding(top: 12, bottom: 11),
+                                    padding: getPadding(
+                                      top: size.height * 0.01,
+                                      bottom: size.height * 0.01,
+                                    ),
                                     child: SizedBox(
-                                      width: getHorizontalSize(103),
+                                      width: size.width * 0.25,
                                       child: Divider(
                                           height: getVerticalSize(1),
                                           thickness: getVerticalSize(1),
@@ -187,7 +197,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     ),
                                   ),
                                   Text(
-                                    "or continue with",
+                                    "continue with",
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.left,
                                     style: Theme.of(context).brightness ==
@@ -198,9 +208,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                             context),
                                   ),
                                   Padding(
-                                    padding: getPadding(top: 12, bottom: 11),
+                                    padding: getPadding(
+                                      top: size.height * 0.011,
+                                      bottom: size.height * 0.011,
+                                    ),
                                     child: SizedBox(
-                                      width: getHorizontalSize(103),
+                                      width: size.width * 0.25,
                                       child: Divider(
                                           height: getVerticalSize(1),
                                           thickness: getVerticalSize(1),
@@ -213,13 +226,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             if (Platform.isAndroid)
                               CustomButton(
                                 onTap: () {
-                                  print(
-                                      "SocialLoginButton tapped"); // Add debug print here
                                   context
                                       .read<AuthenticationBloc>()
                                       .add(SignInWithGoogle());
                                 },
-                                height: getVerticalSize(58),
+                                height: size.height * 0.065,
                                 text: "Continue with Google",
                                 margin: getMargin(top: 32),
                                 variant: ButtonVariant.outlineGray200,
@@ -233,15 +244,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             if (Platform.isIOS)
                               Padding(
-                                padding: getPadding(top: 26, bottom: 5),
+                                padding: getPadding(
+                                  top: size.height * 0.03,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     SocialLoginButton(
                                       onTap: () {
-                                        print(
-                                            "SocialLoginButton tapped"); // Add debug print here
                                         context
                                             .read<AuthenticationBloc>()
                                             .add(SignInWithGoogle());
@@ -250,8 +261,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     ),
                                     SocialLoginButton(
                                       onTap: () {
-                                        print(
-                                            "SocialLoginButton tapped"); // Add debug print here
                                         context
                                             .read<AuthenticationBloc>()
                                             .add(SignInWithAppleEvent());
@@ -265,9 +274,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 ),
                               ),
                             CustomButton(
-                                height: getVerticalSize(58),
-                                text: "Get Started",
-                                margin: getMargin(top: 16),
+                                height: Platform.isIOS
+                                    ? size.height * 0.06
+                                    : size.height * 0.065,
+                                text: "Sign Up with Email",
+                                margin: getMargin(top: size.height * 0.02),
                                 variant: ButtonVariant.fillCyan700,
                                 onTap: () {
                                   navigateToSignUpStepOne(context);
@@ -276,9 +287,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 onTap: () {
                                   navigateToLogin(context);
                                 },
-                                height: getVerticalSize(58),
-                                text: "I Already Have an Account",
-                                margin: getMargin(top: 16),
+                                height: Platform.isIOS
+                                    ? size.height * 0.06
+                                    : size.height * 0.0655,
+                                text: "Log in",
+                                margin: getMargin(top: size.height * 0.02),
                                 variant: ButtonVariant.fillCyan50,
                                 fontStyle:
                                     ButtonFontStyle.openSansBold16Cyan700)

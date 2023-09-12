@@ -5,7 +5,6 @@ import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
 import '../../bloc/authentification/authentication_state.dart';
 import '../../core/utils/image_constant.dart';
-import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_style.dart';
 import '../widgets/custom_image_view.dart';
@@ -23,15 +22,9 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 1, milliseconds: 500),
-      vsync: this,
-    )..repeat();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
@@ -43,97 +36,80 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     bool hasNavigated = false;
 
     return BlocListener<AuthenticationBloc, AuthenticationState>(
-      listener: (context, state) async {
-        var navigator =
-            Navigator.of(context); // Get NavigatorState before async gap.
+        listener: (context, state) async {
+          var navigator =
+              Navigator.of(context); // Get NavigatorState before async gap.
 
-        if (!hasNavigated) {
-          if (state is AuthenticationAuthenticated) {
-            await Future.delayed(const Duration(seconds: 2));
-            try {
-              navigator.pushReplacementNamed(AppRoutes.homeScreen);
-              hasNavigated = true;
-            } catch (e) {
-              // Navigator was disposed, handle the error appropriately.
-            }
-          } else if (state is AuthenticationUnauthenticated) {
-            await Future.delayed(const Duration(seconds: 2));
-            try {
-              navigator.pushReplacementNamed(AppRoutes.welcomeScreen);
-              hasNavigated = true;
-            } catch (e) {
-              // Navigator was disposed, handle the error appropriately.
+          if (!hasNavigated) {
+            if (state is AuthenticationAuthenticated) {
+              await Future.delayed(const Duration(seconds: 2));
+              try {
+                navigator.pushReplacementNamed(AppRoutes.homeScreen);
+                hasNavigated = true;
+              } catch (e) {
+                // Navigator was disposed, handle the error appropriately.
+              }
+            } else if (state is AuthenticationUnauthenticated) {
+              await Future.delayed(const Duration(seconds: 2));
+              try {
+                navigator.pushReplacementNamed(AppRoutes.welcomeScreen);
+                hasNavigated = true;
+              } catch (e) {
+                // Navigator was disposed, handle the error appropriately.
+              }
             }
           }
-        }
-      },
-      child: Builder(
-        builder: (innerContext) => SafeArea(
-          top: false,
-          bottom: false,
-          child: Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            body: SizedBox(
-              width: double.maxFinite,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomImageView(
-                    svgPath: ImageConstant.logoBig,
-                    height: getVerticalSize(
-                      124,
+        },
+        child: Builder(
+          builder: (innerContext) => SafeArea(
+            top: false,
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              body: SizedBox(
+                width: double.maxFinite,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomImageView(
+                      svgPath: ImageConstant.logoBig,
+                      height: MediaQuery.of(context).size.height *
+                          0.13, // 13% of screen height
+                      width: MediaQuery.of(context).size.width *
+                          0.6, // 60% of screen width
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height *
+                            0.01, // 1% of screen height
+                      ),
                     ),
-                    width: getHorizontalSize(
-                      246,
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height *
+                            0.04, // 4% of screen height
+                        bottom: MediaQuery.of(context).size.height *
+                            0.1, // 10% of screen height
+                      ),
+                      child: Text(
+                        "BookFlow",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        style: AppStyle.txtOpenSansBold48(context),
+                      ),
                     ),
-                    margin: getMargin(
-                      top: 10,
+                    SpinKitSpinningLines(
+                      color: ColorConstant.cyan500,
+                      size: MediaQuery.of(context).size.width *
+                          0.3, // 30% of screen width
                     ),
-                  ),
-                  Padding(
-                    padding: getPadding(
-                      top: 32,
-                      bottom: 80,
-                    ),
-                    child: Text(
-                      "BookFlow",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansBold48(context),
-                    ),
-                  ),
-                  SpinKitSpinningLines(
-                    color: ColorConstant.cyan500,
-                    size: 120,
-                  )
-                  // RotationTransition(
-                  //   turns: _controller,
-                  //   child: CustomImageView(
-                  //     imagePath: ImageConstant.imgVector,
-                  //     height: getSize(
-                  //       60,
-                  //     ),
-                  //     width: getSize(
-                  //       60,
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

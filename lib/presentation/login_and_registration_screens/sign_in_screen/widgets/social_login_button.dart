@@ -33,9 +33,14 @@ class SocialLoginButton extends StatelessWidget {
             ),
             borderRadius: BorderRadiusStyle.circleBorder30),
         child: Container(
-          height: getVerticalSize(60),
-          width: getHorizontalSize(180),
-          padding: getPadding(left: 46, top: 18, right: 46, bottom: 18),
+          height: size.height * 0.06,
+          width: size.width * 0.42,
+          padding: getPadding(
+            left: size.width * 0.1,
+            top: size.height * 0.01,
+            right: size.width * 0.1,
+            bottom: size.height * 0.01,
+          ),
           decoration: AppDecoration.outlineGray200.copyWith(
             borderRadius: BorderRadiusStyle.circleBorder30,
             color: Theme.of(context).brightness == Brightness.dark
@@ -46,8 +51,8 @@ class SocialLoginButton extends StatelessWidget {
             children: [
               CustomImageView(
                   svgPath: icon,
-                  height: getVerticalSize(24),
-                  width: getHorizontalSize(23),
+                  height: size.height * 0.05,
+                  width: size.width * 0.05,
                   alignment: Alignment.center)
             ],
           ),

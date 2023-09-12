@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -49,8 +51,8 @@ class CustomTextFieldState extends State<CustomTextField> {
         builder: (BuildContext context, bool hasFocus, Widget? child) {
           return AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            width: 382,
-            height: 56,
+            width: size.width * 0.95,
+            height: Platform.isIOS ? size.height * 0.06 : size.height * 0.065,
             decoration: BoxDecoration(
               border: hasFocus
                   ? Border.all(color: ColorConstant.cyan500, width: 1)

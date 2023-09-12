@@ -2,7 +2,6 @@ import 'package:bookflow/bloc/theloop_theme/theloop_theme_bloc.dart';
 import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../core/utils/size_utils.dart';
 import '../the_loop_screen.dart';
 
@@ -35,10 +34,14 @@ class LoopText extends StatelessWidget {
             duration: const Duration(milliseconds: 50),
             child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
               builder: (context, state) {
-                print("Inside BlocBuilder with state: $state");
                 return Text(
                   widget.words[index],
                   key: ValueKey<int>(index),
+                  strutStyle: StrutStyle(
+                    fontFamily: state.fontName,
+                    fontSize: 50,
+                    forceStrutHeight: true,
+                  ),
                   style: TextStyle(
                     fontSize: 50,
                     color: state.mainTextColor,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/signup/sign_up_bloc.dart';
@@ -63,10 +65,10 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
               content: SizedBox(
                 width: 60,
                 height: 60,
-                child: Padding(
-                  padding: getPadding(left: 85, right: 85),
-                  child: const CircularProgressIndicator(
+                child: Center(
+                  child: CircularProgressIndicator(
                     strokeWidth: 6,
+                    color: ColorConstant.cyan500,
                   ),
                 ),
               ),
@@ -96,9 +98,9 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
         body: Container(
           width: double.maxFinite,
           padding: getPadding(
-            left: 24,
-            right: 24,
-            top: 40,
+            left: size.width * 0.055,
+            right: size.width * 0.055,
+            top: Platform.isIOS ? size.height * 0.04 : size.height * 0.065,
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -106,7 +108,7 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: getPadding(right: 84, top: 26),
+                  padding: getPadding(top: 26),
                   child: Row(
                     children: [
                       // Back button with custom image
@@ -120,14 +122,33 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                           onTap: () {
                             onTapImgArrowleft(context);
                           }),
-                      Container(
-                        height: getVerticalSize(12),
-                        width: getHorizontalSize(208),
-                        margin: getMargin(left: 56, top: 8, bottom: 8),
-                        decoration: BoxDecoration(
-                          color: ColorConstant.cyan500,
-                          borderRadius: BorderRadius.circular(
-                            getHorizontalSize(6),
+                      Expanded(
+                        child: Padding(
+                          padding: getPadding(
+                              left: size.width * 0.105,
+                              top: 8,
+                              bottom: 8,
+                              right: size.width * 0.17),
+                          child: Container(
+                            height: getVerticalSize(12),
+                            width: getHorizontalSize(216),
+                            decoration: BoxDecoration(
+                              color: ColorConstant.gray200,
+                              borderRadius: BorderRadius.circular(
+                                getHorizontalSize(6),
+                              ),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                getHorizontalSize(6),
+                              ),
+                              child: LinearProgressIndicator(
+                                value: 1,
+                                backgroundColor: ColorConstant.gray200,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    ColorConstant.cyan500),
+                              ),
+                            ),
                           ),
                         ),
                       )
@@ -136,27 +157,28 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 ),
                 // Text instructions for the sign up process
                 Padding(
-                  padding: getPadding(top: 36),
+                  padding: getPadding(top: size.height * 0.04),
                   child: Text(
-                    "Create an Account 🔐",
+                    "   Create an Account 🔐",
                     overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                     style: AppStyle.txtOpenSansBold32(context),
                   ),
                 ),
                 Container(
-                  width: getHorizontalSize(367),
-                  margin: getMargin(top: 16, right: 14),
+                  width: getHorizontalSize(376),
+                  margin: getMargin(
+                    top: size.height * 0.02,
+                  ),
                   child: Text(
                     "Enter your username, email & password. Don't worry if you forget it, we'll send you a new one.",
-                    maxLines: null,
                     textAlign: TextAlign.left,
                     style: AppStyle.txtOpenSansRegular18(context),
                   ),
                 ),
                 // Form fields for username, email, password and password confirmation.
                 Padding(
-                  padding: getPadding(top: 10),
+                  padding: getPadding(top: size.height * 0.04),
                 ),
                 // Custom Input field for Username
                 CustomInputFieldFull(
@@ -194,10 +216,10 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                 // Sign up button at the bottom
                 Container(
                   margin: getMargin(
-                    top: 58,
-                    left: 24,
-                    right: 24,
-                    bottom: 56,
+                    top: size.height * 0.08,
+                    left: size.width * 0.055,
+                    right: size.width * 0.055,
+                    bottom: size.height * 0.02,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -205,7 +227,9 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
                     children: [
                       // Custom button for Sign up, onTap shows success dialog
                       CustomButton(
-                          height: getVerticalSize(58),
+                          height: Platform.isIOS
+                              ? size.height * 0.06
+                              : size.height * 0.065,
                           text: "Sign Up",
                           onTap: () {
                             onTapSignup(context);
@@ -252,7 +276,6 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
   }
 
   onTapSignup(BuildContext context) {
-    print("Signup button tapped");
     final email = emailController.text;
     final password = passwordController.text;
     final confirmPassword = confirmPasswordController.text;
@@ -281,7 +304,6 @@ class _SignUpStepTwoScreenState extends State<SignUpStepTwoScreen> {
       return;
     }
 
-    print('Adding Submitted event to SignUpBloc');
     context.read<SignUpBloc>().add(
           Submitted(
             email: email,

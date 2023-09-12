@@ -1,7 +1,6 @@
 import 'package:bookflow/presentation/home_screen/widgets/reading_now.dart';
 import 'package:bookflow/presentation/home_screen/widgets/recent_books_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import 'gradient_card_background.dart';
@@ -14,24 +13,34 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: const HomeScreenAppBar(),
       body: Column(
         children: [
           Stack(children: [
             Padding(
-              padding: getPadding(top: 26),
+              padding:
+                  getPadding(top: height * 0.02), // 2% of the screen height
               child: const GradientBackgound(),
             ),
             Padding(
-              padding: getPadding(left: 24, right: 24, bottom: 6, top: 0),
+              padding: getPadding(
+                  left: width * 0.06, // 6% of the screen width
+                  right: width * 0.06, // 6% of the screen width
+                  bottom: height * 0.006, // 0.6% of the screen height
+                  top: 0),
               child: const ReadingNowBlock(),
             ),
           ]),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: getPadding(left: 24, right: 24),
+                padding: getPadding(
+                    left: width * 0.06, // 6% of the screen width
+                    right: width * 0.06), // 6% of the screen width
                 child: RecentBooksBlock(imagePaths: [
                   ImageConstant.bookCover1,
                   ImageConstant.bookCover2,

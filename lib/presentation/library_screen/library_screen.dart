@@ -5,6 +5,7 @@ import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
 import '../../theme/app_style.dart';
@@ -39,7 +40,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   void onBookClicked(String bookName, BuildContext context) async {
-    String filePath = bookPaths[bookName] ?? '';
+    final directory = await getApplicationDocumentsDirectory();
+    String fileName = bookPaths[bookName] ?? '';
+    String filePath = '${directory.path}/$fileName';
+
     if (filePath.isNotEmpty) {
       List<String> words = await File(filePath).readAsLines();
       Navigator.push(
@@ -152,6 +156,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -163,8 +170,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
               const HomeScreenAppBar(),
               Padding(
                 padding: getPadding(
-                  top: 10,
-                  left: 28,
+                  top: height * 0.01, // 1% of screen height
+                  left: width * 0.07, // 7% of screen width
                 ),
                 child: SizedBox(
                   width: double.infinity,
@@ -179,20 +186,21 @@ class _LibraryScreenState extends State<LibraryScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   padding: getPadding(
-                    top: 12,
+                    top: height * 0.015, // 1.5% of screen height
                   ),
                   child: Padding(
                     padding: getPadding(
-                      left: 24,
-                      right: 21,
-                      bottom: 5,
+                      left: width * 0.06, // 6% of screen width
+                      right: width * 0.05, // 5% of screen width
+                      bottom: height * 0.005, // 0.5% of screen height
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                        Wrap(
+                          spacing: 18, // Gap between adjacent chips
+                          runSpacing: 22, // Gap between lines
+                          children: <Widget>[
                             AddBookButton(
                               onBookAdded: onBookAdded,
                             ), // Pass the callback),

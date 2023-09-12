@@ -33,15 +33,16 @@ class SettingsModalScreen {
               height: MediaQuery.of(context).size.height,
               color: ColorConstant.dark5,
               child: Padding(
-                padding: getPadding(top: 16),
+                padding: getPadding(top: 16, left: 42),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Themes & Settings',
                         style: AppStyle.txtOpenSansBold18(context)),
                     const SizedBox(height: 24.0),
                     Padding(
-                      padding: EdgeInsets.only(right: topPadding, left: 8),
+                      padding: EdgeInsets.only(right: topPadding, left: 0),
                       child: Wrap(
                         spacing: 18.0, // gap between adjacent chips
                         runSpacing: 12.0, // gap between lines
@@ -54,7 +55,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.roriginalWhite,
                                   'Aa original',
-                                  state.fontName,
+                                  "Open Sans",
                                   ColorConstant.black,
                                   TheloopThemeSetOriginal());
                             },
@@ -66,7 +67,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.dark3,
                                   'Aa quiet',
-                                  state.fontName,
+                                  "Palatino",
                                   ColorConstant.white,
                                   TheloopThemeSetQuiet());
                             },
@@ -78,7 +79,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.rpaperLight,
                                   'Aa paper',
-                                  state.fontName,
+                                  "Charter",
                                   ColorConstant.black,
                                   TheloopThemeSetPaper());
                             },
@@ -90,7 +91,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.dark4,
                                   'Aa dark',
-                                  state.fontName,
+                                  "SFNSDisplay",
                                   ColorConstant.white,
                                   TheloopThemeSetDarkLight());
                             },
@@ -102,7 +103,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.rcalmBeige,
                                   'Aa calm',
-                                  state.fontName,
+                                  "CanelaText",
                                   ColorConstant.black,
                                   TheloopThemeSetCalm());
                             },
@@ -114,7 +115,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.rfocusBeigeLight,
                                   'Aa focus',
-                                  state.fontName,
+                                  "ProximaNova",
                                   ColorConstant.black,
                                   TheloopThemeSetFocus());
                             },

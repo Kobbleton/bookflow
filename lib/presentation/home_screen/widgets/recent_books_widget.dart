@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/utils/size_utils.dart';
 import 'grid_item_widget.dart';
 
 class RecentBooksBlock extends StatelessWidget {
@@ -12,29 +11,32 @@ class RecentBooksBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    // Calculating the main axis extent dynamically based on screen height.
+    double mainAxisExtent = height * 0.3; // 30% of screen height
+
+    // Calculating the spacing dynamically based on screen width.
+    double spacing = width * 0.05; // 5% of screen width
+
     return SizedBox(
       width: double.maxFinite,
       child: SingleChildScrollView(
         child: Padding(
-          padding: getPadding(
-            top: 21,
+          padding: EdgeInsets.only(
+            top: height * 0.01, // 3% of screen height
           ),
           child: GridView.builder(
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisExtent: getVerticalSize(
-                277,
-              ),
+              mainAxisExtent: mainAxisExtent,
               crossAxisCount: 2,
-              mainAxisSpacing: getHorizontalSize(
-                22,
-              ),
-              crossAxisSpacing: getHorizontalSize(
-                22,
-              ),
+              mainAxisSpacing: spacing,
+              crossAxisSpacing: spacing,
             ),
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 8,
+            itemCount: 8, // or imagePaths.length if dynamic
             itemBuilder: (context, index) {
               return GridrectanglesiItemWidget(
                 imagePath: imagePaths[index],

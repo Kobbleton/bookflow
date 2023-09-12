@@ -23,7 +23,9 @@ class CustomInputFieldFull extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: getPadding(top: 18),
+      padding: getPadding(
+        top: size.height * 0.015,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +40,9 @@ class CustomInputFieldFull extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: getPadding(top: 14),
+            padding: getPadding(
+              top: size.height * 0.015,
+            ),
           ),
           CustomTextField(
             isObscured: isObscured,

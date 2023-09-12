@@ -3,13 +3,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 abstract class TheloopThemeState extends Equatable {
-  const TheloopThemeState(this.fontName, this.mainTextColor, this.wpmTextColor);
+  const TheloopThemeState(this.fontName, this.mainTextColor, this.wpmTextColor,
+      this.backgroundColor);
   final String fontName;
   final Color mainTextColor;
   final Color wpmTextColor;
+  final Color backgroundColor;
 
   @override
-  List<Object> get props => [fontName, mainTextColor];
+  List<Object> get props =>
+      [fontName, mainTextColor, wpmTextColor, backgroundColor];
 
   @override
   String toString() =>
@@ -20,62 +23,69 @@ abstract class TheloopThemeState extends Equatable {
 class TheloopThemeInitial extends TheloopThemeState {
   TheloopThemeInitial()
       : super(
-          "OriginalFont",
+          "Open Sans",
           ColorConstant.white,
           ColorConstant.white,
+          ColorConstant.dark2,
         );
 }
 
 class TheloopThemeOriginal extends TheloopThemeState {
   TheloopThemeOriginal()
       : super(
-          "OriginalFont",
+          "Open Sans",
           ColorConstant.black,
           ColorConstant.black,
+          ColorConstant.roriginalWhite,
         );
 }
 
 class TheloopThemeQuiet extends TheloopThemeState {
   TheloopThemeQuiet()
       : super(
-          "OriginalFont",
+          "Palatino",
           ColorConstant.gray400,
           ColorConstant.gray400,
+          ColorConstant.dark3,
         );
 }
 
 class TheloopThemePaper extends TheloopThemeState {
   TheloopThemePaper()
       : super(
-          "OriginalFont",
+          "Charter",
           ColorConstant.black,
           ColorConstant.black,
+          ColorConstant.rpaperLight,
         );
 }
 
 class TheloopThemeDarkLight extends TheloopThemeState {
   TheloopThemeDarkLight()
       : super(
-          "OriginalFont",
+          "SFNSDisplay",
           ColorConstant.white,
           ColorConstant.white,
+          ColorConstant.dark4,
         );
 }
 
 class TheloopThemeCalm extends TheloopThemeState {
   TheloopThemeCalm()
       : super(
-          "OriginalFont",
+          "CanelaText",
           ColorConstant.black,
           ColorConstant.black,
+          ColorConstant.rcalmBeige,
         );
 }
 
 class TheloopThemeFocus extends TheloopThemeState {
   TheloopThemeFocus()
       : super(
-          "OriginalFont",
+          "ProximaNova",
           ColorConstant.black,
           ColorConstant.black,
+          ColorConstant.rfocusBeigeLight,
         );
 }

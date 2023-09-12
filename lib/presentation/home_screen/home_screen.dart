@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bookflow/presentation/home_screen/widgets/home_page.dart';
 import 'package:bookflow/presentation/profile_and_settings_screen/profile_and_settings_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -5,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
 
 import '../library_screen/library_screen.dart';
-import 'dart:io' show Platform;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -41,15 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen height and width
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Calculate navbar and container height based on screen size
+    double navBarHeight = screenHeight * 0.08; // 10% of screen height
+    double containerPadding = screenHeight * 0.08; // 15% of screen height
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
           Positioned.fill(
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: Platform.isIOS
-                      ? 92
-                      : 78), // adjust this value according to the height of your nav bar and container
+              padding: EdgeInsets.only(bottom: containerPadding),
               child: _pages[_currentIndex],
             ),
           ),
@@ -58,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 0,
             right: 0,
             child: Container(
-              height: Platform.isIOS ? 92 : 78,
+              height: navBarHeight,
               color: ColorConstant.cyan500,
             ),
           ),
@@ -72,26 +77,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   : ColorConstant.white,
               animationCurve: Curves.easeOutExpo,
               animationDuration: const Duration(milliseconds: 600),
-              height: Platform.isIOS ? 70 : 55,
+              height: Platform.isIOS
+                  ? navBarHeight * 0.8
+                  : navBarHeight * 0.8, // 80% of calculated navBarHeight
               backgroundColor: ColorConstant.cyan500,
               items: <Widget>[
                 Icon(
                   Icons.home_filled,
-                  size: 32,
+                  size: Platform.isIOS
+                      ? navBarHeight * 0.4
+                      : navBarHeight * 0.4, // 40% of calculated navBarHeight
                   color: Theme.of(context).brightness == Brightness.dark
                       ? ColorConstant.white
                       : ColorConstant.gray700,
                 ),
                 Icon(
                   Icons.auto_stories,
-                  size: 32,
+                  size:
+                      Platform.isIOS ? navBarHeight * 0.4 : navBarHeight * 0.4,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? ColorConstant.white
                       : ColorConstant.gray700,
                 ),
                 Icon(
                   Icons.person,
-                  size: 32,
+                  size:
+                      Platform.isIOS ? navBarHeight * 0.4 : navBarHeight * 0.4,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? ColorConstant.white
                       : ColorConstant.gray700,

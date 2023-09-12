@@ -7,17 +7,27 @@ class GradientBackgound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    double containerWidth = width * 0.3; // 30% of screen width
+    double containerHeight = height * 0.3; // 30% of screen height
+    double backgroundWidth = width * 0.8; // 80% of screen width
+    double backgroundHeight = height * 0.3; // 30% of screen height
+    double leftPosition = width * 0.2; // 20% from left of screen
+    double topPosition = height * 0.05; // 5% from top of screen
+
     return SizedBox(
-      width: 900,
-      height: 280,
+      width: backgroundWidth,
+      height: backgroundHeight,
       child: Stack(
         children: [
           Positioned(
-            left: 200,
-            top: 14,
+            left: leftPosition,
+            top: topPosition,
             child: Container(
-              width: 250,
-              height: 250,
+              width: containerWidth,
+              height: containerHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
@@ -35,11 +45,11 @@ class GradientBackgound extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: -20,
-            top: -10,
+            left: -width * 0.03, // 3% from left of screen
+            top: -height * 0.01, // 1% from top of screen
             child: Container(
-              width: 240,
-              height: 240,
+              width: containerWidth,
+              height: containerHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
