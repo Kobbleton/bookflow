@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io' show Platform;
 import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
+import '../../bloc/authentification/authentication_state.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
@@ -33,276 +34,292 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        extendBody: false,
-        extendBodyBehindAppBar: false,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: SizedBox(
-          width: size.width,
-          height: size.height,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: size.height,
-                width: double.maxFinite,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: SizedBox(
-                        height: size.height * 0.5,
-                        width: double.maxFinite,
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            CustomImageView(
-                                imagePath: ImageConstant.imgImage1,
-                                height: size.height * 0.5,
-                                width: size.width,
-                                alignment: Alignment.center),
-                            Container(
-                              height: size.height * 0.3,
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: const Alignment(0.5, 0),
-                                  end: const Alignment(0.5, 1.1),
-                                  colors: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? [
-                                          ColorConstant.dark2FullyTransparent,
-                                          ColorConstant.dark2
-                                        ]
-                                      : [
-                                          ColorConstant.whiteA70000,
-                                          ColorConstant.whiteA700F2,
-                                          ColorConstant.white
-                                        ],
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (state is AuthenticationLoading) {}
+        if (state is AuthenticationAuthenticated) {
+          Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreen);
+        } else if (state is AuthenticationError) {
+          // Here we handle the error and show it in a Snackbar
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
+          );
+        }
+      },
+      child: SafeArea(
+        top: false,
+        bottom: false,
+        child: Scaffold(
+          extendBody: false,
+          extendBodyBehindAppBar: false,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          body: SizedBox(
+            width: size.width,
+            height: size.height,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: size.height,
+                  width: double.maxFinite,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: SizedBox(
+                          height: size.height * 0.5,
+                          width: double.maxFinite,
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              CustomImageView(
+                                  imagePath: ImageConstant.imgImage1,
+                                  height: size.height * 0.5,
+                                  width: size.width,
+                                  alignment: Alignment.center),
+                              Container(
+                                height: size.height * 0.3,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: const Alignment(0.5, 0),
+                                    end: const Alignment(0.5, 1.1),
+                                    colors: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? [
+                                            ColorConstant.dark2FullyTransparent,
+                                            ColorConstant.dark2
+                                          ]
+                                        : [
+                                            ColorConstant.whiteA70000,
+                                            ColorConstant.whiteA700F2,
+                                            ColorConstant.white
+                                          ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        padding: getPadding(
-                          left: size.width * 0.055,
-                          top: 0,
-                          right: size.width * 0.055,
-                          bottom: size.height * 0.055,
-                        ),
-                        decoration:
-                            Theme.of(context).brightness == Brightness.dark
-                                ? AppDecoration.fillDark2
-                                : AppDecoration.fillWhiteA700,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "Welcome to ",
-                                    style: TextStyle(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? ColorConstant.white
-                                          : ColorConstant.gray900,
-                                      fontSize: getFontSize(
-                                        32,
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          padding: getPadding(
+                            left: size.width * 0.055,
+                            top: 0,
+                            right: size.width * 0.055,
+                            bottom: size.height * 0.055,
+                          ),
+                          decoration:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? AppDecoration.fillDark2
+                                  : AppDecoration.fillWhiteA700,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Welcome to ",
+                                      style: TextStyle(
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? ColorConstant.white
+                                            : ColorConstant.gray900,
+                                        fontSize: getFontSize(
+                                          32,
+                                        ),
+                                        fontFamily: 'Open Sans',
+                                        fontWeight: FontWeight.w700,
                                       ),
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w700,
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text: "BookFlow 👋 ",
-                                    style: TextStyle(
-                                      color: ColorConstant.cyan500,
-                                      fontSize: getFontSize(
-                                        32,
+                                    TextSpan(
+                                      text: "BookFlow 👋 ",
+                                      style: TextStyle(
+                                        color: ColorConstant.cyan500,
+                                        fontSize: getFontSize(
+                                          32,
+                                        ),
+                                        fontFamily: 'Open Sans',
+                                        fontWeight: FontWeight.w700,
                                       ),
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w700,
                                     ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                              CarouselSlider.builder(
+                                  options: CarouselOptions(
+                                      height: size.height * 0.08,
+                                      initialPage: 0,
+                                      autoPlay: true,
+                                      viewportFraction: 1.0,
+                                      enableInfiniteScroll: true,
+                                      scrollDirection: Axis.horizontal,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          sliderIndex = index;
+                                        });
+                                      }),
+                                  itemCount: 2,
+                                  itemBuilder: (context, index, realIndex) {
+                                    return sliders[index];
+                                  }),
+                              Container(
+                                height: getVerticalSize(8),
+                                margin: getMargin(
+                                  top: size.height * 0.025,
+                                ),
+                                child: AnimatedSmoothIndicator(
+                                  activeIndex: sliderIndex,
+                                  count: 2,
+                                  axisDirection: Axis.horizontal,
+                                  effect: ScrollingDotsEffect(
+                                    spacing: 8,
+                                    activeDotColor: ColorConstant.cyan500,
+                                    dotColor: ColorConstant.gray300,
+                                    dotHeight: getVerticalSize(8),
+                                    dotWidth: getHorizontalSize(8),
                                   ),
-                                ],
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                            CarouselSlider.builder(
-                                options: CarouselOptions(
-                                    height: size.height * 0.08,
-                                    initialPage: 0,
-                                    autoPlay: true,
-                                    viewportFraction: 1.0,
-                                    enableInfiniteScroll: true,
-                                    scrollDirection: Axis.horizontal,
-                                    onPageChanged: (index, reason) {
-                                      setState(() {
-                                        sliderIndex = index;
-                                      });
-                                    }),
-                                itemCount: 2,
-                                itemBuilder: (context, index, realIndex) {
-                                  return sliders[index];
-                                }),
-                            Container(
-                              height: getVerticalSize(8),
-                              margin: getMargin(
-                                top: size.height * 0.025,
-                              ),
-                              child: AnimatedSmoothIndicator(
-                                activeIndex: sliderIndex,
-                                count: 2,
-                                axisDirection: Axis.horizontal,
-                                effect: ScrollingDotsEffect(
-                                  spacing: 8,
-                                  activeDotColor: ColorConstant.cyan500,
-                                  dotColor: ColorConstant.gray300,
-                                  dotHeight: getVerticalSize(8),
-                                  dotWidth: getHorizontalSize(8),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: getPadding(
-                                top: size.height * 0.025,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: getPadding(
-                                      top: size.height * 0.01,
-                                      bottom: size.height * 0.01,
-                                    ),
-                                    child: SizedBox(
-                                      width: size.width * 0.25,
-                                      child: Divider(
-                                          height: getVerticalSize(1),
-                                          thickness: getVerticalSize(1),
-                                          color: ColorConstant.gray200),
-                                    ),
-                                  ),
-                                  Text(
-                                    "continue with",
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.left,
-                                    style: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? AppStyle.txtOpenSansSemiBold18White(
-                                            context)
-                                        : AppStyle.txtOpenSansSemiBold18Gray700(
-                                            context),
-                                  ),
-                                  Padding(
-                                    padding: getPadding(
-                                      top: size.height * 0.011,
-                                      bottom: size.height * 0.011,
-                                    ),
-                                    child: SizedBox(
-                                      width: size.width * 0.25,
-                                      child: Divider(
-                                          height: getVerticalSize(1),
-                                          thickness: getVerticalSize(1),
-                                          color: ColorConstant.gray200),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            if (Platform.isAndroid)
-                              CustomButton(
-                                onTap: () {
-                                  context
-                                      .read<AuthenticationBloc>()
-                                      .add(SignInWithGoogle());
-                                },
-                                height: size.height * 0.065,
-                                text: "Continue with Google",
-                                margin: getMargin(top: 32),
-                                variant: ButtonVariant.outlineGray200,
-                                padding: ButtonPadding.paddingT19,
-                                fontStyle: ButtonFontStyle.openSansSemiBold16,
-                                prefixWidget: Container(
-                                  margin: getMargin(right: 12),
-                                  child: CustomImageView(
-                                      svgPath: ImageConstant.googleLogo),
-                                ),
-                              ),
-                            if (Platform.isIOS)
                               Padding(
                                 padding: getPadding(
-                                  top: size.height * 0.03,
+                                  top: size.height * 0.025,
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    SocialLoginButton(
-                                      onTap: () {
-                                        context
-                                            .read<AuthenticationBloc>()
-                                            .add(SignInWithGoogle());
-                                      },
-                                      icon: ImageConstant.googleLogo,
+                                    Padding(
+                                      padding: getPadding(
+                                        top: size.height * 0.01,
+                                        bottom: size.height * 0.01,
+                                      ),
+                                      child: SizedBox(
+                                        width: size.width * 0.25,
+                                        child: Divider(
+                                            height: getVerticalSize(1),
+                                            thickness: getVerticalSize(1),
+                                            color: ColorConstant.gray200),
+                                      ),
                                     ),
-                                    SocialLoginButton(
-                                      onTap: () {
-                                        context
-                                            .read<AuthenticationBloc>()
-                                            .add(SignInWithAppleEvent());
-                                      },
-                                      icon: Theme.of(context).brightness ==
+                                    Text(
+                                      "continue with",
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.left,
+                                      style: Theme.of(context).brightness ==
                                               Brightness.dark
-                                          ? ImageConstant.appleLogoWhite
-                                          : ImageConstant.appleLogo,
+                                          ? AppStyle.txtOpenSansSemiBold18White(
+                                              context)
+                                          : AppStyle
+                                              .txtOpenSansSemiBold18Gray700(
+                                                  context),
                                     ),
+                                    Padding(
+                                      padding: getPadding(
+                                        top: size.height * 0.011,
+                                        bottom: size.height * 0.011,
+                                      ),
+                                      child: SizedBox(
+                                        width: size.width * 0.25,
+                                        child: Divider(
+                                            height: getVerticalSize(1),
+                                            thickness: getVerticalSize(1),
+                                            color: ColorConstant.gray200),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
-                            CustomButton(
-                                height: Platform.isIOS
-                                    ? size.height * 0.06
-                                    : size.height * 0.065,
-                                text: "Sign Up with Email",
-                                margin: getMargin(top: size.height * 0.02),
-                                variant: ButtonVariant.fillCyan700,
-                                onTap: () {
-                                  navigateToSignUpStepOne(context);
-                                }),
-                            CustomButton(
-                                onTap: () {
-                                  navigateToLogin(context);
-                                },
-                                height: Platform.isIOS
-                                    ? size.height * 0.06
-                                    : size.height * 0.0655,
-                                text: "Log in",
-                                margin: getMargin(top: size.height * 0.02),
-                                variant: ButtonVariant.fillCyan50,
-                                fontStyle:
-                                    ButtonFontStyle.openSansBold16Cyan700)
-                          ],
+                              if (Platform.isAndroid)
+                                CustomButton(
+                                  onTap: () {
+                                    print("Sign in with google button pressed");
+                                    context
+                                        .read<AuthenticationBloc>()
+                                        .add(SignInWithGoogle());
+                                  },
+                                  height: size.height * 0.065,
+                                  text: "Continue with Google",
+                                  margin: getMargin(top: 32),
+                                  variant: ButtonVariant.outlineGray200,
+                                  padding: ButtonPadding.paddingT19,
+                                  fontStyle: ButtonFontStyle.openSansSemiBold16,
+                                  prefixWidget: Container(
+                                    margin: getMargin(right: 12),
+                                    child: CustomImageView(
+                                        svgPath: ImageConstant.googleLogo),
+                                  ),
+                                ),
+                              if (Platform.isIOS)
+                                Padding(
+                                  padding: getPadding(
+                                    top: size.height * 0.03,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SocialLoginButton(
+                                        onTap: () {
+                                          context
+                                              .read<AuthenticationBloc>()
+                                              .add(SignInWithGoogle());
+                                        },
+                                        icon: ImageConstant.googleLogo,
+                                      ),
+                                      SocialLoginButton(
+                                        onTap: () {
+                                          context
+                                              .read<AuthenticationBloc>()
+                                              .add(SignInWithAppleEvent());
+                                        },
+                                        icon: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? ImageConstant.appleLogoWhite
+                                            : ImageConstant.appleLogo,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              CustomButton(
+                                  height: Platform.isIOS
+                                      ? size.height * 0.06
+                                      : size.height * 0.065,
+                                  text: "Sign Up with Email",
+                                  margin: getMargin(top: size.height * 0.02),
+                                  variant: ButtonVariant.fillCyan700,
+                                  onTap: () {
+                                    print("Sign in with google button pressed");
+                                    navigateToSignUpStepOne(context);
+                                  }),
+                              CustomButton(
+                                  onTap: () {
+                                    navigateToLogin(context);
+                                  },
+                                  height: Platform.isIOS
+                                      ? size.height * 0.06
+                                      : size.height * 0.0655,
+                                  text: "Log in",
+                                  margin: getMargin(top: size.height * 0.02),
+                                  variant: ButtonVariant.fillCyan50,
+                                  fontStyle:
+                                      ButtonFontStyle.openSansBold16Cyan700)
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

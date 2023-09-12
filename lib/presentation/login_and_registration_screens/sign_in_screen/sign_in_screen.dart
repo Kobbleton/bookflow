@@ -193,6 +193,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 if (Platform.isAndroid)
                   CustomButton(
                     onTap: () {
+                      print("Sign in with google button pressed");
                       context
                           .read<AuthenticationBloc>()
                           .add(SignInWithGoogle());
@@ -220,6 +221,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         SocialLoginButton(
                           onTap: () {
+                            print("Sign in with google button pressed");
                             context
                                 .read<AuthenticationBloc>()
                                 .add(SignInWithGoogle());

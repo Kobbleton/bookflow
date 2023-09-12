@@ -134,23 +134,6 @@ class AuthRepository {
     }
   }
 
-  // Future<UserCredential> signInWithFacebook() async {
-  //   print("signInWithFacebook called");
-
-  //   try {
-  //     final LoginResult result = await FacebookAuth.instance.login();
-
-  //     final OAuthCredential credential = FacebookAuthProvider.credential(
-  //       result.accessToken!.token,
-  //     );
-  //     print('Got Facebook credential: $credential');
-
-  //     return await _firebaseAuth.signInWithCredential(credential);
-  //   } catch (e) {
-  //     print('Error while signing in with Facebook: $e');
-  //     rethrow;
-  //   }
-  // }
 
   Future<void> signOut() async {
     try {
