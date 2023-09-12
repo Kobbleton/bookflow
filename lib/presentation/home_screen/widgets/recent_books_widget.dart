@@ -15,7 +15,7 @@ class RecentBooksBlock extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     // Calculating the main axis extent dynamically based on screen height.
-    double mainAxisExtent = height * 0.3; // 30% of screen height
+    double mainAxisExtent = height * 0.27; // 30% of screen height
 
     // Calculating the spacing dynamically based on screen width.
     double spacing = width * 0.05; // 5% of screen width

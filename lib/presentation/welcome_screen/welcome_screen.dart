@@ -9,6 +9,7 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
+import '../home_screen/home_screen.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_image_view.dart';
 import '../login_and_registration_screens/sign_in_screen/widgets/social_login_button.dart';
@@ -56,7 +57,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           );
         }
         if (state is AuthenticationAuthenticated) {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreen);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (Route<dynamic> route) => false);
         } else if (state is AuthenticationError) {
           // Here we handle the error and show it in a Snackbar
           ScaffoldMessenger.of(context).showSnackBar(

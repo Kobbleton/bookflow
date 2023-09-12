@@ -29,14 +29,10 @@ class ReadingNowBlock extends StatelessWidget {
               style: AppStyle.txtOpenSansBold24(context),
             ),
             Container(
-              height: getVerticalSize(
-                220,
-              ),
-              width: getHorizontalSize(
-                382,
-              ),
+              height: size.height * 0.23,
+              width: size.width * 0.9,
               margin: getMargin(
-                top: 19,
+                top: size.height * 0.02,
               ),
               child: Stack(
                 alignment: Alignment.center,
@@ -78,7 +74,7 @@ class ReadingNowBlock extends StatelessWidget {
                             0.6,
                           ),
                           colors: [
-                            ColorConstant.yellowA400,
+                            Colors.orange.shade300,
                             ColorConstant.cyan60000,
                             ColorConstant.cyan600,
                           ],

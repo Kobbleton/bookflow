@@ -11,14 +11,13 @@ class CustomCard extends StatelessWidget {
   final String text;
   final Function onLongPress;
 
-  final Function(String) onCardTap;  
-
+  final Function(String) onCardTap;
 
   const CustomCard(
       {Key? key,
       required this.imagePath,
       required this.text,
-      required this.onLongPress, 
+      required this.onLongPress,
       required this.onCardTap})
       : super(key: key);
 
@@ -26,10 +25,10 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () => onLongPress(),
-      onTap: () => onCardTap(text), 
+      onTap: () => onCardTap(text),
       child: SizedBox(
-        height: getVerticalSize(276),
-        width: getHorizontalSize(183),
+        height: size.height * 0.28,
+        width: size.width * 0.42,
         child: Stack(
           alignment: Alignment.bottomRight,
           children: [
@@ -59,8 +58,8 @@ class CustomCard extends StatelessWidget {
                   ),
                   child: Container(
                     // color: Colors.blue,
-                    height: getVerticalSize(276),
-                    width: getHorizontalSize(180),
+                    height: size.height * 0.28,
+                    width: size.width * 0.42,
                     decoration: AppDecoration.outlineBlack9001e.copyWith(
                       color: Theme.of(context).brightness == Brightness.dark
                           ? ColorConstant.dark3
@@ -71,8 +70,8 @@ class CustomCard extends StatelessWidget {
                       children: [
                         CustomImageView(
                           imagePath: imagePath,
-                          height: getVerticalSize(230),
-                          width: getHorizontalSize(180),
+                          height: size.height * 0.24,
+                          width: size.width * 0.42,
                           radius: BorderRadius.circular(getHorizontalSize(18)),
                           alignment: Alignment.topCenter,
                         ),

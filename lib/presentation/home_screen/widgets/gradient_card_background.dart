@@ -55,12 +55,12 @@ class GradientBackgound extends StatelessWidget {
                 gradient: RadialGradient(
                   colors: Theme.of(context).brightness == Brightness.dark
                       ? [
-                          const Color(0xFFF2E900).withOpacity(0.5),
-                          const Color(0xFFF2E900).withOpacity(0.0),
+                          Colors.orange.withOpacity(0.5),
+                          Colors.orange.withOpacity(0.0),
                         ]
                       : [
-                          const Color(0xFFF2E900).withOpacity(0.8),
-                          const Color(0xFFF2E900).withOpacity(0.0),
+                          Colors.orange.withOpacity(0.8),
+                          Colors.orange.withOpacity(0.0),
                         ],
                 ),
               ),

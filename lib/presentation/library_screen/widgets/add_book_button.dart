@@ -69,8 +69,8 @@ class _AddBookButtonState extends State<AddBookButton> {
         await pickTextFile(context);
       },
       child: SizedBox(
-        height: getVerticalSize(276),
-        width: getHorizontalSize(180),
+        height: size.height * 0.28,
+        width: size.width * 0.42,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -99,11 +99,13 @@ class _AddBookButtonState extends State<AddBookButton> {
                   ),
                   strokeWidth: getHorizontalSize(2),
                   gradient: LinearGradient(
-                    begin: const Alignment(0.02, 0),
-                    end: const Alignment(0.4, 0.2),
+                    begin: const Alignment(0.25, 0.2),
+                    end: const Alignment(0.4, 0.3),
                     colors: [
-                      ColorConstant.yellowA400,
-                      // ColorConstant.cyan60000,
+                      Colors.orange.shade400,
+                      // ColorConstant.cyan100,
+                      // ColorConstant.cyan200,
+                      // ColorConstant.cyan400,
                       ColorConstant.cyan300,
                     ],
                   ),
@@ -115,10 +117,10 @@ class _AddBookButtonState extends State<AddBookButton> {
                   ),
                   child: Container(
                     padding: getPadding(
-                      left: 45,
-                      top: 100,
-                      right: 45,
-                      bottom: 88,
+                      left: size.width * 0.11,
+                      top: size.height * 0.1,
+                      right: size.width * 0.1,
+                      bottom: size.height * 0.1,
                     ),
                     decoration: AppDecoration.outline.copyWith(
                       color: Theme.of(context).brightness == Brightness.dark
