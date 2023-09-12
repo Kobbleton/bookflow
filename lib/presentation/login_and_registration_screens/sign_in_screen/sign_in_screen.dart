@@ -46,7 +46,25 @@ class _SignInScreenState extends State<SignInScreen> {
     // Scaffold is the primary container for material design apps
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        if (state is AuthenticationLoading) {}
+        if (state is AuthenticationLoading) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Signing in...'),
+              content: SizedBox(
+                width: 60,
+                height: 60,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 6,
+                    color: ColorConstant.cyan500,
+                  ),
+                ),
+              ),
+            ),
+            barrierDismissible: false,
+          );
+        }
         if (state is AuthenticationAuthenticated) {
           Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreen);
         } else if (state is AuthenticationError) {

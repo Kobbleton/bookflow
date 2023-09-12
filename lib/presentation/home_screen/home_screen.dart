@@ -18,16 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final List<String> imagePaths = [
-  //   ImageConstant.bookCover1,
-  //   ImageConstant.bookCover2,
-  //   ImageConstant.bookCover3,
-  //   ImageConstant.bookCover4,
-  //   ImageConstant.bookCover5,
-  //   ImageConstant.bookCover6,
-  //   ImageConstant.bookCover7,
-  //   ImageConstant.bookCover8,
-  // ];
+
 
   int _currentIndex = 0;
 

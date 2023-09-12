@@ -54,7 +54,7 @@ void main() async {
               ),
           ),
           BlocProvider<ThemeCubit>(
-            create: (context) => ThemeCubit(isDarkTheme),
+            create: (context) => ThemeCubit(),
           ),
           BlocProvider<PersonalSettingsBloc>(
             create: (context) => PersonalSettingsBloc(authRepository),

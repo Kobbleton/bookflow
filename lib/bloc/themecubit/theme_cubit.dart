@@ -31,13 +31,20 @@ ThemeData getLightThemeData() {
 
 // Now have ThemeCubit emit instances of ThemeState
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit(bool isDarkTheme)
+  ThemeCubit()
       : super(ThemeState(
-          themeData: isDarkTheme
-              ? getDarkThemeData()
-              : getLightThemeData(), // use custom theme data
-          isDarkTheme: isDarkTheme,
-        ));
+          themeData: getDarkThemeData(),
+          isDarkTheme: true,
+        )) {
+    _loadTheme();
+  }
+
+  void _loadTheme() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isDarkTheme =
+        prefs.getBool('isDarkTheme') ?? true; // Default to true if not set
+    changeTheme(isDarkTheme);
+  }
 
   void changeTheme(bool isDarkTheme) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
