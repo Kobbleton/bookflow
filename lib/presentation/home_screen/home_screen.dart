@@ -44,8 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned.fill(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom:
-                    Platform.isIOS ? containerPadding : containerPadding * 0.82,
+                bottom: Platform.isIOS
+                    ? containerPadding * 1.03
+                    : containerPadding * 0.82,
               ),
               child: _pages[_currentIndex],
             ),
@@ -55,8 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 0,
             right: 0,
             child: Container(
-              height:
-                  Platform.isIOS ? containerPadding : containerPadding * 0.82,
+              height: Platform.isIOS
+                  ? containerPadding * 1.03
+                  : containerPadding * 0.82,
               color: ColorConstant.cyan500,
             ),
           ),
@@ -71,14 +73,14 @@ class _HomeScreenState extends State<HomeScreen> {
               animationCurve: Curves.easeOutExpo,
               animationDuration: const Duration(milliseconds: 600),
               height: Platform.isIOS
-                  ? navBarHeight * 0.9
+                  ? navBarHeight * 0.95
                   : navBarHeight * 0.75, // 80% of calculated navBarHeight
               backgroundColor: ColorConstant.cyan500,
               items: <Widget>[
                 Icon(
                   Icons.home_filled,
                   size: Platform.isIOS
-                      ? navBarHeight * 0.35
+                      ? navBarHeight * 0.4
                       : navBarHeight * 0.35, // 40% of calculated navBarHeight
                   color: Theme.of(context).brightness == Brightness.dark
                       ? ColorConstant.white
@@ -86,18 +88,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Icon(
                   Icons.auto_stories,
-                  size: Platform.isIOS
-                      ? navBarHeight * 0.35
-                      : navBarHeight * 0.35,
+                  size:
+                      Platform.isIOS ? navBarHeight * 0.4 : navBarHeight * 0.35,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? ColorConstant.white
                       : ColorConstant.gray700,
                 ),
                 Icon(
                   Icons.person,
-                  size: Platform.isIOS
-                      ? navBarHeight * 0.35
-                      : navBarHeight * 0.35,
+                  size:
+                      Platform.isIOS ? navBarHeight * 0.4 : navBarHeight * 0.35,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? ColorConstant.white
                       : ColorConstant.gray700,

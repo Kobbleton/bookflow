@@ -121,33 +121,31 @@ class _LibraryScreenState extends State<LibraryScreen> {
       context: context,
       builder: (BuildContext bc) {
         return SafeArea(
-          child: Container(
-            child: Wrap(
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.edit),
-                  title: const Text('Rename'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _showRenameDialog(bookName);
-                  },
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.edit),
+                title: const Text('Rename'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _showRenameDialog(bookName);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.delete),
+                title: const Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.red),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.delete),
-                  title: const Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    setState(() {
-                      addedBooks.remove(bookName);
-                    });
-                    saveBooks();
-                  },
-                ),
-              ],
-            ),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    addedBooks.remove(bookName);
+                  });
+                  saveBooks();
+                },
+              ),
+            ],
           ),
         );
       },
@@ -159,124 +157,122 @@ class _LibraryScreenState extends State<LibraryScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const HomeScreenAppBar(),
-              Padding(
-                padding: getPadding(
-                  top: height * 0.01, // 1% of screen height
-                  left: width * 0.07, // 7% of screen width
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "Library",
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansBold24(context),
-                  ),
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: SizedBox(
+        width: double.maxFinite,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const HomeScreenAppBar(),
+            Padding(
+              padding: getPadding(
+                top: height * 0.005, // 1% of screen height
+                left: width * 0.07, // 7% of screen width
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  "Library",
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: AppStyle.txtOpenSansBold24(context),
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: getPadding(
+                  top: height * 0.015, // 1.5% of screen height
+                ),
+                child: Padding(
                   padding: getPadding(
-                    top: height * 0.015, // 1.5% of screen height
+                    left: width * 0.06, // 6% of screen width
+                    right: width * 0.05, // 5% of screen width
+                    bottom: height * 0.005, // 0.5% of screen height
                   ),
-                  child: Padding(
-                    padding: getPadding(
-                      left: width * 0.06, // 6% of screen width
-                      right: width * 0.05, // 5% of screen width
-                      bottom: height * 0.005, // 0.5% of screen height
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Wrap(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Wrap(
+                        spacing: 18, // Gap between adjacent chips
+                        runSpacing: 22, // Gap between lines
+                        children: <Widget>[
+                          AddBookButton(
+                            onBookAdded: onBookAdded,
+                          ), // Pass the callback),
+                          CustomCard(
+                            imagePath:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? ImageConstant.darkMagicCoverStart
+                                    : ImageConstant.magicCover1,
+                            text: 'Start here',
+                            onLongPress: () {
+                              print("Long press detected");
+                              _showContextMenu('Start here');
+                            },
+                            onCardTap: (String) {},
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: getPadding(
+                          top: 22,
+                          right: 0,
+                        ),
+                        child: Wrap(
                           spacing: 18, // Gap between adjacent chips
                           runSpacing: 22, // Gap between lines
                           children: <Widget>[
-                            AddBookButton(
-                              onBookAdded: onBookAdded,
-                            ), // Pass the callback),
                             CustomCard(
                               imagePath: Theme.of(context).brightness ==
                                       Brightness.dark
-                                  ? ImageConstant.darkMagicCoverStart
+                                  ? ImageConstant.darkMagicCoverQ
                                   : ImageConstant.magicCover1,
-                              text: 'Start here',
+                              text: 'FAQ',
                               onLongPress: () {
                                 print("Long press detected");
-                                _showContextMenu('Start here');
+                                _showContextMenu('FAQ');
                               },
                               onCardTap: (String) {},
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            top: 22,
-                            right: 0,
-                          ),
-                          child: Wrap(
-                            spacing: 18, // Gap between adjacent chips
-                            runSpacing: 22, // Gap between lines
-                            children: <Widget>[
-                              CustomCard(
-                                imagePath: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? ImageConstant.darkMagicCoverQ
-                                    : ImageConstant.magicCover1,
-                                text: 'FAQ',
-                                onLongPress: () {
-                                  print("Long press detected");
-                                  _showContextMenu('FAQ');
-                                },
-                                onCardTap: (String) {},
-                              ),
+                            CustomCard(
+                              imagePath: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? ImageConstant.darkMagicCoverNew
+                                  : ImageConstant.magicCover1,
+                              text: 'Whats new',
+                              onLongPress: () {
+                                print("Long press detected");
+                                _showContextMenu('Whats new');
+                              },
+                              onCardTap: (String) {},
+                            ),
+                            for (String bookName in addedBooks)
                               CustomCard(
                                 imagePath: Theme.of(context).brightness ==
                                         Brightness.dark
                                     ? ImageConstant.darkMagicCoverNew
                                     : ImageConstant.magicCover1,
-                                text: 'Whats new',
+                                text: bookName,
                                 onLongPress: () {
                                   print("Long press detected");
-                                  _showContextMenu('Whats new');
+                                  _showContextMenu(bookName);
                                 },
-                                onCardTap: (String) {},
+                                onCardTap: (filePath) {
+                                  // assuming you get filePath from somewhere or it's the same as bookName
+                                  onBookClicked(bookName, context);
+                                },
                               ),
-                              for (String bookName in addedBooks)
-                                CustomCard(
-                                  imagePath: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? ImageConstant.darkMagicCoverNew
-                                      : ImageConstant.magicCover1,
-                                  text: bookName,
-                                  onLongPress: () {
-                                    print("Long press detected");
-                                    _showContextMenu(bookName);
-                                  },
-                                  onCardTap: (filePath) {
-                                    // assuming you get filePath from somewhere or it's the same as bookName
-                                    onBookClicked(bookName, context);
-                                  },
-                                ),
-                            ],
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

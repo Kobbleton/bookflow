@@ -18,31 +18,29 @@ class RecentBooksBlock extends StatelessWidget {
     double mainAxisExtent = height * 0.27; // 30% of screen height
 
     // Calculating the spacing dynamically based on screen width.
-    double spacing = width * 0.05; // 5% of screen width
+    double spacing = width * 0.08; // 8% of screen width
 
     return SizedBox(
       width: double.maxFinite,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: height * 0.01, // 3% of screen height
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: height * 0.01, // 3% of screen height
+        ),
+        child: GridView.builder(
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: mainAxisExtent,
+            crossAxisCount: 2,
+            mainAxisSpacing: spacing,
+            crossAxisSpacing: spacing,
           ),
-          child: GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisExtent: mainAxisExtent,
-              crossAxisCount: 2,
-              mainAxisSpacing: spacing,
-              crossAxisSpacing: spacing,
-            ),
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 8, // or imagePaths.length if dynamic
-            itemBuilder: (context, index) {
-              return GridrectanglesiItemWidget(
-                imagePath: imagePaths[index],
-              );
-            },
-          ),
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 8, // or imagePaths.length if dynamic
+          itemBuilder: (context, index) {
+            return GridrectanglesiItemWidget(
+              imagePath: imagePaths[index],
+            );
+          },
         ),
       ),
     );

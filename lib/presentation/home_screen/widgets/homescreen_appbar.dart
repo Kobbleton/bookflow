@@ -13,73 +13,74 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBar(
-      height: getVerticalSize(
-        60,
-      ),
-      leadingWidth: 52,
-      leading: CustomImageView(
-        svgPath: ImageConstant.logoSmall,
-        height: getSize(
-          28,
-        ),
-        width: getSize(
-          28,
-        ),
-        radius: BorderRadius.circular(
-          getHorizontalSize(
-            14,
-          ),
-        ),
-        margin: getMargin(
-          left: 24,
-          top: 11,
-          bottom: 16,
-        ),
-      ),
-      title: Padding(
-        padding: getPadding(
-          left: 16,
-        ),
-        child: Text(
-          "BookFlow",
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.left,
-          style: AppStyle.txtOpenSansBold24(context),
-        ),
-      ),
-      actions: [
-        AppbarImage(
+    return Padding(
+      padding: getPadding(left: size.width * 0.016),
+      child: CustomAppBar(
+        height: size.height * 0.05,
+        leadingWidth: size.width * 0.14,
+        leading: CustomImageView(
+          svgPath: ImageConstant.logoSmall,
           height: getSize(
             28,
           ),
           width: getSize(
             28,
           ),
-          svgPath: ImageConstant.searchIcon,
+          radius: BorderRadius.circular(
+            getHorizontalSize(
+              14,
+            ),
+          ),
           margin: getMargin(
-            left: 24,
+            left: size.width * 0.02,
             top: 11,
-            right: 22,
+            bottom: 11,
           ),
         ),
+        title: Padding(
+          padding: getPadding(
+            left: 12,
+          ),
+          child: Text(
+            "BookFlow",
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+            style: AppStyle.txtOpenSansBold24(context),
+          ),
+        ),
+        actions: [
+          AppbarImage(
+            height: getSize(
+              28,
+            ),
+            width: getSize(
+              28,
+            ),
+            svgPath: ImageConstant.searchIcon,
+            margin: getMargin(
+              left: size.width * 0.05,
+              top: 11,
+              right: 22,
+            ),
+          ),
 
-        /// Notification button if needed
-        // AppbarImage(
-        //   height: getSize(
-        //     28,
-        //   ),
-        //   width: getSize(
-        //     28,
-        //   ),
-        //   svgPath: ImageConstant.bellIcon,
-        //   margin: getMargin(
-        //     left: 20,
-        //     top: 11,
-        //     right: 40,
-        //   ),
-        // ),
-      ],
+          /// Notification button if needed
+          // AppbarImage(
+          //   height: getSize(
+          //     28,
+          //   ),
+          //   width: getSize(
+          //     28,
+          //   ),
+          //   svgPath: ImageConstant.bellIcon,
+          //   margin: getMargin(
+          //     left: 20,
+          //     top: 11,
+          //     right: 40,
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 

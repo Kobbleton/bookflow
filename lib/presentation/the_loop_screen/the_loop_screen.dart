@@ -22,10 +22,10 @@ class TheloopScreen extends StatefulWidget {
   const TheloopScreen({super.key, required this.words});
 
   @override
-  _TheloopScreenState createState() => _TheloopScreenState();
+  TheloopScreenState createState() => TheloopScreenState();
 }
 
-class _TheloopScreenState extends State<TheloopScreen>
+class TheloopScreenState extends State<TheloopScreen>
     with TickerProviderStateMixin {
   late int index;
 
@@ -96,6 +96,8 @@ class _TheloopScreenState extends State<TheloopScreen>
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+    double closeButtonPadding = orientation == Orientation.landscape ? 18 : 40;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -158,7 +160,7 @@ class _TheloopScreenState extends State<TheloopScreen>
                           opacity: isDragging || isPaused ? 1.0 : 0.0,
                           duration: const Duration(milliseconds: 300),
                           child: Padding(
-                            padding: getPadding(all: 24),
+                            padding: getPadding(all: 26),
                             child: Align(
                               alignment: Alignment.topRight,
                               child: WPMCounterWidget(
@@ -245,7 +247,7 @@ class _TheloopScreenState extends State<TheloopScreen>
                     opacity: isPaused ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 300),
                     child: Padding(
-                      padding: getPadding(all: 20),
+                      padding: getPadding(top: closeButtonPadding, left: 22),
                       child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
                         builder: (context, state) {
                           return IconButton(
@@ -255,10 +257,12 @@ class _TheloopScreenState extends State<TheloopScreen>
                               color: state.wpmTextColor,
                             ),
                             onPressed: () {
+                              print('close button pressed step 1');
                               SystemChrome.setPreferredOrientations([
                                 DeviceOrientation.portraitUp,
                                 DeviceOrientation.portraitDown,
                               ]).then((_) {
+                                print('close button pressed step 2');
                                 Navigator.pushNamed(
                                     context, AppRoutes.homeScreen);
                                 // Navigator.of(context)

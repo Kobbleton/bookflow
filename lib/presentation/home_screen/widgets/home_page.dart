@@ -1,3 +1,4 @@
+import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/presentation/home_screen/widgets/reading_now.dart';
 import 'package:bookflow/presentation/home_screen/widgets/recent_books_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,14 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: const HomeScreenAppBar(),
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: ColorConstant.dark2,
+        shadowColor: Colors.transparent,
+      ),
       body: Column(
         children: [
+          const HomeScreenAppBar(),
           Stack(children: [
             Padding(
               padding:
@@ -31,7 +37,7 @@ class HomePage extends StatelessWidget {
                   left: width * 0.06, // 6% of the screen width
                   right: width * 0.06, // 6% of the screen width
                   bottom: height * 0.006, // 0.6% of the screen height
-                  top: 0),
+                  top: 4),
               child: const ReadingNowBlock(),
             ),
           ]),
