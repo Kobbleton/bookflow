@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 
 abstract class TheloopThemeState extends Equatable {
   const TheloopThemeState(this.fontName, this.mainTextColor, this.wpmTextColor,
-      this.backgroundColor);
+      this.backgroundColor,
+      [this.assetPath = 'assets/images/transparent.png']);
   final String fontName;
   final Color mainTextColor;
   final Color wpmTextColor;
   final Color backgroundColor;
+  final String assetPath;
 
   @override
   List<Object> get props =>
-      [fontName, mainTextColor, wpmTextColor, backgroundColor];
+      [fontName, mainTextColor, wpmTextColor, backgroundColor, assetPath];
 
   @override
   String toString() =>
@@ -88,4 +90,10 @@ class TheloopThemeFocus extends TheloopThemeState {
           ColorConstant.black,
           ColorConstant.rfocusBeigeLight,
         );
+}
+
+class TheLoopGradient1 extends TheloopThemeState {
+  TheLoopGradient1()
+      : super("ProximaNova", ColorConstant.white, ColorConstant.white,
+            Colors.transparent, "assets/images/gradient1.png");
 }

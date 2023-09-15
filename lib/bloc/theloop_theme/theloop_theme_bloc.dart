@@ -5,9 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
   TheloopThemeBloc() : super(TheloopThemeInitial()) {
-    print("Bloc Initialized with state: $state");
-    print("Current font: ${state.fontName}");
-
     on<TheloopThemeSetOriginal>((event, emit) {
       emit(TheloopThemeOriginal());
     });
@@ -30,6 +27,10 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
 
     on<TheloopThemeSetFocus>((event, emit) {
       emit(TheloopThemeFocus());
+    });
+
+    on<SetGradient1>((event, emit) {
+      emit(TheLoopGradient1());
     });
   }
 }

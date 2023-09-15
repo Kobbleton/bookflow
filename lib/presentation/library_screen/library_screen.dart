@@ -48,11 +48,17 @@ class _LibraryScreenState extends State<LibraryScreen> {
     if (filePath.isNotEmpty) {
       List<String> words = await File(filePath).readAsLines();
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TheloopScreen(words: words),
-        ),
-      );
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  TheloopScreen(words: words),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              }));
     } else {
       // handle the error: show an alert dialog or something similar
     }

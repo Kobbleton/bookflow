@@ -38,9 +38,38 @@ class SettingsModalScreen {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Themes & Settings',
-                        style: AppStyle.txtOpenSansBold18(context)),
-                    const SizedBox(height: 24.0),
+                    Text(
+                      'Themes & Settings',
+                      style: AppStyle.txtOpenSansBold18(context),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            // Handle Options button press
+                          },
+                          child: const Text(
+                            'Options',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                decoration: TextDecoration.underline,
+                                fontFamily: 'Open Sans',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Icon(Icons.navigate_next)
+                      ],
+                    ),
+                    const SizedBox(height: 8.0),
+                    const Text(
+                      'Themes',
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
+                    const SizedBox(height: 8.0),
                     Padding(
                       padding: EdgeInsets.only(right: topPadding, left: 0),
                       child: Wrap(
@@ -120,6 +149,19 @@ class SettingsModalScreen {
                                   TheloopThemeSetFocus());
                             },
                           ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildGradientButton(
+                                context,
+                                'assets/images/gradient1.png',
+                                'Gradient',
+                                'ProximaNova',
+                                Colors.white,
+                                SetGradient1(),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -139,6 +181,45 @@ class SettingsModalScreen {
           child: child,
         );
       },
+    );
+  }
+
+  Widget _buildGradientButton(
+      BuildContext context,
+      String imagePath,
+      String label,
+      String fontName,
+      Color textColor,
+      TheloopThemeEvent themeEvent) {
+    // Changed to TheLoopGradientEvent
+    return InkWell(
+      onTap: () {
+        context
+            .read<TheloopThemeBloc>()
+            .add(themeEvent); // Changed to TheLoopGradientBloc
+        Navigator.pop(context);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover,
+          ),
+        ),
+        width: 80,
+        height: 60,
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: fontName,
+              color: textColor,
+            ),
+          ),
+        ),
+      ),
     );
   }
 

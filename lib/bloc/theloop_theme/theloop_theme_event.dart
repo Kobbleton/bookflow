@@ -15,3 +15,5 @@ class TheloopThemeSetPaper extends TheloopThemeEvent {}
 class TheloopThemeSetDarkLight extends TheloopThemeEvent {}
 class TheloopThemeSetCalm extends TheloopThemeEvent {}
 class TheloopThemeSetFocus extends TheloopThemeEvent {}
+class SetGradient1 extends TheloopThemeEvent {}
+class SetGradient2 extends TheloopThemeEvent {}
