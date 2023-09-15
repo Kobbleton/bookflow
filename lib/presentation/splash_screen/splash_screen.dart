@@ -103,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen>
                     SpinKitSpinningLines(
                       color: ColorConstant.cyan500,
                       size: MediaQuery.of(context).size.width *
-                          0.3, // 30% of screen width
+                          0.25, // 30% of screen width
                     ),
                   ],
                 ),

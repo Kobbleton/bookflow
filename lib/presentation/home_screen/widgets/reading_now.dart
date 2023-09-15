@@ -1,5 +1,6 @@
 import 'package:bookflow/presentation/home_screen/widgets/continue_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
@@ -167,13 +168,20 @@ class ReadingNowBlock extends StatelessWidget {
                                   AppStyle.txtOpenSansBold13Cyan500(context),
                                 ),
                                 Padding(
-                                  padding: getPadding(bottom: 6),
+                                  padding: getPadding(bottom: 12),
                                 ),
                                 ContinueCustomButton(
                                   text: 'Continue',
                                   onPressed: () {},
                                   svgPath: ImageConstant.menuIcon,
                                 )
+                                    .animate(
+                                        onPlay: (controller) =>
+                                            controller.repeat())
+                                    .shimmer(
+                                        duration: 3200.ms,
+                                        color: ColorConstant.cyan300,
+                                        curve: Curves.easeOutQuad)
                               ],
                             ),
                           ],
@@ -185,17 +193,17 @@ class ReadingNowBlock extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: getPadding(
-              top: 20,
-            ),
-            child: Text(
-              "Recent",
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-              style: AppStyle.txtOpenSansBold24(context),
-            ),
-          ),
+          // Padding(
+          //   padding: getPadding(
+          //     top: 20,
+          //   ),
+          //   child: Text(
+          //     "Recent",
+          //     overflow: TextOverflow.ellipsis,
+          //     textAlign: TextAlign.left,
+          //     style: AppStyle.txtOpenSansBold24(context),
+          //   ),
+          // ),
         ],
       ),
     );

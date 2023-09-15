@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import '../../../core/utils/color_constant.dart';
@@ -117,9 +118,9 @@ class _AddBookButtonState extends State<AddBookButton> {
                   ),
                   child: Container(
                     padding: getPadding(
-                      left: size.width * 0.11,
+                      left: size.width * 0.10,
                       top: size.height * 0.1,
-                      right: size.width * 0.1,
+                      right: size.width * 0.10,
                       bottom: size.height * 0.1,
                     ),
                     decoration: AppDecoration.outline.copyWith(
@@ -141,16 +142,15 @@ class _AddBookButtonState extends State<AddBookButton> {
                           ),
                         ),
                         Padding(
-                          padding: getPadding(
-                            top: 13,
-                          ),
-                          child: Text(
-                            "Add Book",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtOpenSansBold20white(context),
-                          ),
-                        ),
+                            padding: getPadding(
+                              top: 14,
+                            ),
+                            child: Text(
+                              "Add Book",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: AppStyle.txtOpenSansBold20white(context),
+                            )),
                       ],
                     ),
                   ),
@@ -159,7 +159,11 @@ class _AddBookButtonState extends State<AddBookButton> {
             ),
           ],
         ),
-      ),
+      ).animate(onPlay: (controller) => controller.repeat()).shimmer(
+          duration: 1200.ms,
+          color: ColorConstant.cyan300,
+          curve: Curves.easeOutQuad,
+          delay: 2300.ms),
     );
   }
 }

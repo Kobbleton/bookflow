@@ -1,4 +1,7 @@
+import 'package:animate_gradient/animate_gradient.dart';
+import 'package:bookflow/presentation/welcome_screen/widgets/theloop_welcome.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'dart:io' show Platform;
 import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
@@ -7,16 +10,14 @@ import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
-import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
 import '../home_screen/home_screen.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_image_view.dart';
 import '../login_and_registration_screens/sign_in_screen/widgets/social_login_button.dart';
 import 'widgets/slider_widget.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -46,25 +47,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 width: 60,
                 height: 60,
                 child: Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 6,
-                    color: ColorConstant.cyan500,
-                  ),
+                  child: Lottie.asset('assets/animations/B.json'),
+                  // child: CircularProgressIndicator(
+                  //   strokeWidth: 6,
+                  //   color: ColorConstant.cyan500,
+                  // ),
                 ),
               ),
             ),
             barrierDismissible: false,
           );
-        }
-        if (state is AuthenticationAuthenticated) {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-              (Route<dynamic> route) => false);
-        } else if (state is AuthenticationError) {
-          // Here we handle the error and show it in a Snackbar
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
-          );
+        } else {
+          if (Navigator.of(context, rootNavigator: true).canPop()) {
+            Navigator.of(context, rootNavigator: true).pop();
+          }
+
+          if (state is AuthenticationAuthenticated) {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                (Route<dynamic> route) => false);
+          } else if (state is AuthenticationError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text(state.message), backgroundColor: Colors.red),
+            );
+          }
         }
       },
       child: SafeArea(
@@ -87,36 +94,79 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Column(
                     children: [
                       Expanded(
-                        flex: 2,
+                        flex: 10,
                         child: SizedBox(
                           height: size.height * 0.5,
                           width: double.maxFinite,
                           child: Stack(
                             alignment: Alignment.bottomCenter,
                             children: [
-                              CustomImageView(
-                                  imagePath: ImageConstant.imgImage1,
-                                  height: size.height * 0.5,
-                                  width: size.width,
-                                  alignment: Alignment.center),
-                              Container(
-                                height: size.height * 0.3,
-                                width: double.maxFinite,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: const Alignment(0.5, 0),
-                                    end: const Alignment(0.5, 1.1),
-                                    colors: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? [
-                                            ColorConstant.dark2FullyTransparent,
-                                            ColorConstant.dark2
-                                          ]
-                                        : [
-                                            ColorConstant.whiteA70000,
-                                            ColorConstant.whiteA700F2,
-                                            ColorConstant.white
-                                          ],
+                              // CustomImageView(
+                              //     imagePath: ImageConstant.imgImage1,
+                              //     height: size.height * 0.5,
+                              //     width: size.width,
+                              //     alignment: Alignment.center),
+                              AnimateGradient(
+                                reverse: true,
+                                // primaryBegin: Alignment.topLeft,
+                                // primaryEnd: Alignment.bottomLeft,
+                                // secondaryBegin: Alignment.bottomLeft,
+                                // secondaryEnd: Alignment.topRight,
+                                primaryColors: [
+                                  // Colors.pink,
+                                  // Colors.pinkAccent,
+                                  ColorConstant.cyan600,
+                                  ColorConstant.cyan200,
+
+                                  // Colors.white,
+                                ],
+                                secondaryColors: [
+                                  // Colors.white,
+                                  // Colors.blueAccent,
+                                  // Colors.blue,
+                                  Colors.orange.shade500,
+                                  Colors.orange.shade200
+                                ],
+                              ),
+                              const LoopingTextWidget(),
+                              // Container(
+                              //   height: size.height * 0.3,
+                              //   width: double.maxFinite,
+                              //   decoration: BoxDecoration(
+                              //     gradient: LinearGradient(
+                              //       begin: const Alignment(0.5, 0),
+                              //       end: const Alignment(0.5, 1.1),
+                              //       colors: Theme.of(context).brightness ==
+                              //               Brightness.dark
+                              //           ? [
+                              //               ColorConstant.dark2FullyTransparent,
+                              //               ColorConstant.dark2
+                              //             ]
+                              //           : [
+                              //               ColorConstant.whiteA70000,
+                              //               ColorConstant.whiteA700F2,
+                              //               ColorConstant.white
+                              //             ],
+                              //     ),
+                              //   ),
+                              // ),
+                              Positioned(
+                                bottom:
+                                    0, // You can adjust this value as needed
+                                left: 0,
+                                right: 0,
+                                child: Container(
+                                  height: size.height *
+                                      0.036, // Height of the container
+                                  decoration: BoxDecoration(
+                                    color:
+                                        ColorConstant.dark2, // Background color
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(
+                                          60.0), // Rounded corner
+                                      topRight: Radius.circular(
+                                          60.0), // Rounded corner
+                                    ),
                                   ),
                                 ),
                               ),
@@ -125,7 +175,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                       ),
                       Expanded(
-                        flex: 3,
+                        flex: 7,
                         child: Container(
                           padding: getPadding(
                             left: size.width * 0.055,
@@ -133,10 +183,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             right: size.width * 0.055,
                             bottom: size.height * 0.055,
                           ),
-                          decoration:
-                              Theme.of(context).brightness == Brightness.dark
-                                  ? AppDecoration.fillDark2
-                                  : AppDecoration.fillWhiteA700,
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? ColorConstant.dark2
+                                    : ColorConstant.whiteA700F2,
+                          ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -168,46 +220,53 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                         fontFamily: 'Open Sans',
                                         fontWeight: FontWeight.w700,
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                                 textAlign: TextAlign.left,
-                              ),
-                              CarouselSlider.builder(
-                                  options: CarouselOptions(
-                                      height: size.height * 0.08,
-                                      initialPage: 0,
-                                      autoPlay: true,
-                                      viewportFraction: 1.0,
-                                      enableInfiniteScroll: true,
-                                      scrollDirection: Axis.horizontal,
-                                      onPageChanged: (index, reason) {
-                                        setState(() {
-                                          sliderIndex = index;
-                                        });
-                                      }),
-                                  itemCount: 2,
-                                  itemBuilder: (context, index, realIndex) {
-                                    return sliders[index];
-                                  }),
-                              Container(
-                                height: getVerticalSize(8),
-                                margin: getMargin(
-                                  top: size.height * 0.025,
-                                ),
-                                child: AnimatedSmoothIndicator(
-                                  activeIndex: sliderIndex,
-                                  count: 2,
-                                  axisDirection: Axis.horizontal,
-                                  effect: ScrollingDotsEffect(
-                                    spacing: 8,
-                                    activeDotColor: ColorConstant.cyan500,
-                                    dotColor: ColorConstant.gray300,
-                                    dotHeight: getVerticalSize(8),
-                                    dotWidth: getHorizontalSize(8),
-                                  ),
-                                ),
-                              ),
+                              )
+                                  .animate()
+                                  .move(
+                                      begin: const Offset(0, 16),
+                                      curve: Curves.easeOutQuad)
+                                  .fadeIn(
+                                      duration: 1200.ms,
+                                      curve: Curves.easeOutQuad),
+                              // CarouselSlider.builder(
+                              //     options: CarouselOptions(
+                              //         height: size.height * 0.08,
+                              //         initialPage: 0,
+                              //         autoPlay: true,
+                              //         viewportFraction: 1.0,
+                              //         enableInfiniteScroll: true,
+                              //         scrollDirection: Axis.horizontal,
+                              //         onPageChanged: (index, reason) {
+                              //           setState(() {
+                              //             sliderIndex = index;
+                              //           });
+                              //         }),
+                              //     itemCount: 2,
+                              //     itemBuilder: (context, index, realIndex) {
+                              //       return sliders[index];
+                              //     }),
+                              // Container(
+                              //   height: getVerticalSize(8),
+                              //   margin: getMargin(
+                              //     top: size.height * 0.025,
+                              //   ),
+                              //   child: AnimatedSmoothIndicator(
+                              //     activeIndex: sliderIndex,
+                              //     count: 2,
+                              //     axisDirection: Axis.horizontal,
+                              //     effect: ScrollingDotsEffect(
+                              //       spacing: 8,
+                              //       activeDotColor: ColorConstant.cyan500,
+                              //       dotColor: ColorConstant.gray300,
+                              //       dotHeight: getVerticalSize(8),
+                              //       dotWidth: getHorizontalSize(8),
+                              //     ),
+                              //   ),
+                              // ),
                               Padding(
                                 padding: getPadding(
                                   top: size.height * 0.025,

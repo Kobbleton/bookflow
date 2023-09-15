@@ -3,6 +3,7 @@ import 'package:bookflow/presentation/profile_and_settings_screen/widgets/avatar
 import 'package:bookflow/presentation/profile_and_settings_screen/widgets/custom_settings_row.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
@@ -50,6 +51,11 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          shadowColor: Colors.transparent,
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Column(
           children: [
@@ -349,7 +355,10 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
               ),
             ),
           ],
-        ),
+        )
+            .animate()
+            .move(begin: const Offset(0, 16), curve: Curves.easeOutQuad)
+            .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad),
       ),
     );
   }

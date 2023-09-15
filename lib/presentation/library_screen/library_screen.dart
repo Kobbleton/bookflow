@@ -5,6 +5,7 @@ import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
@@ -158,6 +159,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        shadowColor: Colors.transparent,
+      ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SizedBox(
         width: double.maxFinite,
@@ -271,7 +277,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   ),
                 ),
               ),
-            ),
+            )
+                .animate()
+                .move(begin: const Offset(0, 16), curve: Curves.easeOutQuad)
+                .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad),
           ],
         ),
       ),
