@@ -162,6 +162,19 @@ class SettingsModalScreen {
                               );
                             },
                           ),
+                          BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                            builder: (context, state) {
+                              print("Inside BlocBuilder with state: $state");
+                              return _buildGradientButton(
+                                context,
+                                'assets/images/tunnel2.png',
+                                'Gradient',
+                                'ProximaNova',
+                                Colors.white,
+                                SetTunnel(),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),

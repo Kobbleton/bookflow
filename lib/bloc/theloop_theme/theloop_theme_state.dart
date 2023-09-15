@@ -97,3 +97,15 @@ class TheLoopGradient1 extends TheloopThemeState {
       : super("ProximaNova", ColorConstant.white, ColorConstant.white,
             Colors.transparent, "assets/images/gradient1.png");
 }
+
+class TheLoopGradient2 extends TheloopThemeState {
+  TheLoopGradient2()
+      : super("ProximaNova", ColorConstant.white, ColorConstant.white,
+            Colors.transparent, "assets/images/gradient1.png");
+}
+
+class TheLoopTunnel extends TheloopThemeState {
+  TheLoopTunnel()
+      : super("ProximaNova", ColorConstant.white, ColorConstant.white,
+            Colors.transparent, "assets/images/tunnel2.png");
+}

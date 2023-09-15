@@ -32,5 +32,8 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
     on<SetGradient1>((event, emit) {
       emit(TheLoopGradient1());
     });
+    on<SetTunnel>((event, emit) {
+      emit(TheLoopTunnel());
+    });
   }
 }
