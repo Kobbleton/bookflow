@@ -114,7 +114,7 @@ class LoopingTextWidgetState extends State<LoopingTextWidget> {
               padding: getPadding(bottom: 20),
             ),
             AnimatedSwitcher(
-              duration: const Duration(milliseconds: 30),
+              duration: const Duration(milliseconds: 20),
               child: Text(
                 words[index],
                 key: ValueKey<int>(index),

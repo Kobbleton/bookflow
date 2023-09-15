@@ -41,20 +41,62 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         if (state is AuthenticationLoading) {
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Signing in...'),
-              content: SizedBox(
-                width: 60,
-                height: 60,
-                child: Center(
-                  child: Lottie.asset('assets/animations/B.json'),
-                  // child: CircularProgressIndicator(
-                  //   strokeWidth: 6,
-                  //   color: ColorConstant.cyan500,
-                  // ),
+            builder: (context) => Builder(builder: (context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(36.0),
                 ),
-              ),
-            ),
+                backgroundColor: ColorConstant.dark2.withOpacity(0.9),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 100, // Sets to 100, less than 150
+                    maxHeight: 170,
+                  ),
+                  child: Container(
+                    padding: getPadding(top: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Signing in...',
+                          style: AppStyle.txtOpenSansBold22(context),
+                        ),
+                        const SizedBox(height: 20),
+                        // your Lottie animation or other content here
+                        Center(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                width: 68,
+                                height: 68,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              Padding(
+                                padding: getPadding(top: 2, right: 2),
+                                child: Lottie.asset(
+                                  'assets/animations/B.json',
+                                  width: 64,
+                                  height: 84,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
             barrierDismissible: false,
           );
         } else {

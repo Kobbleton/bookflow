@@ -4,6 +4,7 @@ import 'package:bookflow/bloc/authentification/authentication_state.dart';
 import 'package:bookflow/presentation/login_and_registration_screens/sign_in_screen/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import '../../../bloc/authentification/authentication_bloc.dart';
 import '../../../bloc/authentification/authentication_event.dart';
 import '../../../core/utils/color_constant.dart';
@@ -11,6 +12,7 @@ import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../routes/app_routes.dart';
 import '../../../theme/app_style.dart';
+import '../../home_screen/home_screen.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_input_field_full.dart';
@@ -49,29 +51,79 @@ class _SignInScreenState extends State<SignInScreen> {
         if (state is AuthenticationLoading) {
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Signing in...'),
-              content: SizedBox(
-                width: 60,
-                height: 60,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 6,
-                    color: ColorConstant.cyan500,
+            builder: (context) => Builder(builder: (context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(36.0),
+                ),
+                backgroundColor: ColorConstant.dark2.withOpacity(0.9),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 100, // Sets to 100, less than 150
+                    maxHeight: 170,
+                  ),
+                  child: Container(
+                    padding: getPadding(top: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Signing in...',
+                          style: AppStyle.txtOpenSansBold22(context),
+                        ),
+                        const SizedBox(height: 20),
+                        // your Lottie animation or other content here
+                        Center(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                width: 68,
+                                height: 68,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              Padding(
+                                padding: getPadding(top: 2, right: 2),
+                                child: Lottie.asset(
+                                  'assets/animations/B.json',
+                                  width: 64,
+                                  height: 84,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            }),
             barrierDismissible: false,
           );
-        }
-        if (state is AuthenticationAuthenticated) {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreen);
-        } else if (state is AuthenticationError) {
-          // Here we handle the error and show it in a Snackbar
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
-          );
+        } else {
+          if (Navigator.of(context, rootNavigator: true).canPop()) {
+            Navigator.of(context, rootNavigator: true).pop();
+          }
+
+          if (state is AuthenticationAuthenticated) {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                (Route<dynamic> route) => false);
+          } else if (state is AuthenticationError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text(state.message), backgroundColor: Colors.red),
+            );
+          }
         }
       },
       child: Scaffold(
