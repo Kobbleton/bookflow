@@ -176,7 +176,7 @@ class TheloopScreenState extends State<TheloopScreen>
               duration: const Duration(milliseconds: 1000),
               color: state.backgroundColor,
               child: Scaffold(
-                backgroundColor: state.backgroundColor, // Dark grey background
+                backgroundColor: Colors.transparent, // Dark grey background
                 body: Padding(
                   padding: getPadding(bottom: 24),
                   child: Stack(
