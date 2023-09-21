@@ -8,7 +8,7 @@ class TimerManager {
   Stream<int>? durationStream;
   late StreamSubscription<int> durationSubscription;
 
-  TimerManager({this.durationMilliseconds = 500, this.updateWord})
+  TimerManager({this.durationMilliseconds = 250, this.updateWord})
       : lastUpdateTime = DateTime.now();
   void start() {
     if (_timer?.isActive ?? false) {

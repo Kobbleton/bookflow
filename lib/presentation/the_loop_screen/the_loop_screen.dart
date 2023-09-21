@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
+import '../../bloc/theloop_theme/theloop_theme_event.dart';
 import '../../routes/app_routes.dart';
 import 'logic/drag_handler.dart';
 import 'logic/timer_manager.dart';
@@ -29,7 +30,7 @@ class TheloopScreenState extends State<TheloopScreen>
     with TickerProviderStateMixin {
   late int index;
 
-  int durationMilliseconds = 500; // initial speed: 500 ms per word
+  int durationMilliseconds = 250; // initial speed: 500 ms per word
   bool isPaused = true;
   WPMCounterWidget? wpmCounter;
   bool isDragging = false;
@@ -68,6 +69,21 @@ class TheloopScreenState extends State<TheloopScreen>
           if (index < widget.words.length) {
             setState(() {
               index++;
+              double progress = calculateProgress();
+              int newProgressIndex = (progress * 10).toInt();
+
+              // Fetch the current state
+              final state = context.read<TheloopThemeBloc>().state;
+
+              // Add an event to update the progress
+              context
+                  .read<TheloopThemeBloc>()
+                  .add(UpdateProgressEvent(progress));
+
+              // Check if image switch is allowed
+              if (state.allowImageSwitch) {
+                // Logic to switch the image based on the new progress
+              }
             });
           }
         });
@@ -133,11 +149,15 @@ class TheloopScreenState extends State<TheloopScreen>
       child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
         builder: (context, state) {
           return Stack(children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(state.assetPath), // Get path from state
-                  fit: BoxFit.cover,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 1000),
+              child: Container(
+                key: ValueKey<String>(state.assetPath),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(state.assetPath), // Get path from state
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

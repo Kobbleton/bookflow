@@ -167,8 +167,8 @@ class SettingsModalScreen {
                               print("Inside BlocBuilder with state: $state");
                               return _buildGradientButton(
                                 context,
-                                'assets/images/tunnel2.png',
-                                'Gradient',
+                                'assets/images/tunneld1.png',
+                                'Tunnel',
                                 'ProximaNova',
                                 Colors.white,
                                 SetTunnel(),
