@@ -339,8 +339,8 @@ class TheloopScreenState extends State<TheloopScreen>
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => const HomeScreen(
-                                            initialIndex:
-                                                1), // 1 for LibraryScreen
+                                            // initialIndex: 1
+                                            ), // 1 for LibraryScreen
                                       ),
                                     );
 

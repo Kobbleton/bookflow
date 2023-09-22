@@ -2,13 +2,14 @@ import 'dart:io';
 
 import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
-import 'package:bookflow/theme/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import '../../../bloc/theloop_theme/theloop_theme_event.dart';
 import '../../../bloc/theloop_theme/theloop_theme_state.dart';
+import '../../../theme/fonts.dart';
 
 class SettingsModalScreen {
   final Function(Color) onColorChanged;
@@ -53,22 +54,27 @@ class SettingsModalScreen {
                     Row(
                       children: [
                         InkWell(
-                          onTap: () {
-                            // Handle Options button press
-                          },
-                          child: const Text(
-                            'Options',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                decoration: TextDecoration.underline,
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                            onTap: () {
+                              // Show the second modal when Options is clicked
+                              showOptionsModal(context);
+                            },
+                            child: const Text(
+                              'Options',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline,
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.bold),
+                            )),
                         const Icon(Icons.navigate_next)
                       ],
-                    ),
+                    )
+                        .animate(onPlay: (controller) => controller.repeat())
+                        .shimmer(
+                            duration: 3200.ms,
+                            color: ColorConstant.cyan300,
+                            curve: Curves.easeOutQuad),
                     const SizedBox(height: 8.0),
                     const Text(
                       'Themes',
@@ -101,7 +107,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.dark3,
                                   'Aa quiet',
-                                  "Palatino",
+                                  "Bitter",
                                   ColorConstant.white,
                                   TheloopThemeSetQuiet());
                             },
@@ -113,7 +119,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.rpaperLight,
                                   'Aa paper',
-                                  "Charter",
+                                  "Caveat",
                                   ColorConstant.black,
                                   TheloopThemeSetPaper());
                             },
@@ -125,7 +131,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.dark4,
                                   'Aa dark',
-                                  "SFNSDisplay",
+                                  "Comfortaa",
                                   ColorConstant.white,
                                   TheloopThemeSetDarkLight());
                             },
@@ -137,7 +143,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.rcalmBeige,
                                   'Aa calm',
-                                  "CanelaText",
+                                  "Lora",
                                   ColorConstant.black,
                                   TheloopThemeSetCalm());
                             },
@@ -149,7 +155,7 @@ class SettingsModalScreen {
                                   context,
                                   ColorConstant.rfocusBeigeLight,
                                   'Aa focus',
-                                  "ProximaNova",
+                                  "Nunito",
                                   ColorConstant.black,
                                   TheloopThemeSetFocus());
                             },
@@ -161,7 +167,7 @@ class SettingsModalScreen {
                                 context,
                                 'assets/images/gradient1.png',
                                 'Gradient',
-                                'ProximaNova',
+                                'Open Sans',
                                 Colors.white,
                                 SetGradient1(),
                               );
@@ -174,7 +180,7 @@ class SettingsModalScreen {
                                 context,
                                 'assets/images/tunneld1.png',
                                 'Tunnel',
-                                'ProximaNova',
+                                'Comfortaa',
                                 Colors.white,
                                 SetTunnel(),
                               );
@@ -199,6 +205,136 @@ class SettingsModalScreen {
           child: child,
         );
       },
+    );
+  }
+
+  void showOptionsModal(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierLabel: "Options",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Material(
+            child: Container(
+              width: MediaQuery.of(context).size.width / 3,
+              height: MediaQuery.of(context).size.height,
+              color: ColorConstant.dark5,
+              child: Padding(
+                padding: getPadding(top: 16, left: 42),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Font:',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(height: 8.0),
+                    BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                      builder: (context, state) {
+                        return ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorConstant.dark4)),
+                          onPressed: () {
+                            showGeneralDialog(
+                              context: context,
+                              barrierLabel: "Options",
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              transitionDuration:
+                                  const Duration(milliseconds: 300),
+                              pageBuilder: (BuildContext buildContext,
+                                  Animation animation,
+                                  Animation secondaryAnimation) {
+                                return Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Material(
+                                    child: BlocBuilder<TheloopThemeBloc,
+                                        TheloopThemeState>(
+                                      builder: (context, state) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3, // 1/3 screen width
+                                          color: ColorConstant
+                                              .dark5, // Your color constant
+                                          child: ListView.builder(
+                                            itemCount:
+                                                availableFontNames.length,
+                                            itemBuilder: (context, index) {
+                                              return ListTile(
+                                                title: Padding(
+                                                  padding: getPadding(top: 28),
+                                                  child: Text(
+                                                    availableFontNames[index],
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily:
+                                                          availableFontNames[
+                                                              index],
+                                                    ),
+                                                  ),
+                                                ),
+                                                onTap: () {
+                                                  final theloopThemeBloc =
+                                                      BlocProvider.of<
+                                                              TheloopThemeBloc>(
+                                                          context);
+                                                  theloopThemeBloc.add(
+                                                      SetFontEvent(
+                                                          newFontName:
+                                                              availableFontNames[
+                                                                  index]));
+                                                  Navigator.pop(context);
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                state.fontName,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontFamily: state.fontName,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ); // Empty Container or your actual UI
+      },
+      // transitionBuilder: (context, anim1, anim2, child) {
+      //   return SlideTransition(
+      //     position: Tween<Offset>(
+      //       begin: const Offset(1, 0),
+      //       end: Offset.zero,
+      //     ).animate(anim1),
+      //     child: child,
+      //   );
+      // },
     );
   }
 

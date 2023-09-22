@@ -44,3 +44,12 @@ class InitializeWordsEvent extends TheloopThemeEvent {
 
   const InitializeWordsEvent(this.words);
 }
+
+class SetFontEvent extends TheloopThemeEvent {
+  final String newFontName;
+
+  const SetFontEvent({required this.newFontName});
+
+  @override
+  List<Object> get props => [newFontName];
+}

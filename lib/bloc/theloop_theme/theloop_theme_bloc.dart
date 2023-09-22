@@ -36,9 +36,26 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
       emit(TheLoopTunnel());
     });
 
-    on<InitializeWordsEvent>((event, emit) {
-      initializeWords(event.words);
-    });
+
+on<SetFontEvent>((event, emit) {
+  final currentState = state;
+  emit(
+    ConcreteTheloopThemeState(
+      event.newFontName,
+      currentState.mainTextColor,
+      currentState.wpmTextColor,
+      currentState.backgroundColor,
+      currentState.allowImageSwitch,
+      currentState.progress,
+      currentState.assetPath,
+    ),
+  );
+});
+
+
+    // on<InitializeWordsEvent>((event, emit) {
+    //   initializeWords(event.words);
+    // });
 
     on<UpdateProgressEvent>((event, emit) {
       int index = (event.progress * 10).toInt();
@@ -73,13 +90,13 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
       }
     });
   }
-  List<String> wordsList = [];
+  // List<String> wordsList = [];
 
-  void initializeWords(List<String> words) {
-    print("Initializing words: ${words.length}");
-    wordsList = words;
-    print("Initialized words: ${words.length}");
-  }
+  // void initializeWords(List<String> words) {
+  //   print("Initializing words: ${words.length}");
+  //   wordsList = words;
+  //   print("Initialized words: ${words.length}");
+  // }
 
   int lastIndex = -1;
 
@@ -95,9 +112,11 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
     'assets/images/tunneld9.png',
     'assets/images/tunneld10.png',
   ];
-  double updateReadingProgress(int index) {
-    double progress = index / wordsList.length.toDouble();
-    add(UpdateProgressEvent(progress));
-    return progress;
-  }
+  // double updateReadingProgress(int index) {
+  //   double progress = index / wordsList.length.toDouble();
+  //   add(UpdateProgressEvent(progress));
+  //   return progress;
+  // }
+
+  
 }

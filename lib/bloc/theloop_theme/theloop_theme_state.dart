@@ -59,7 +59,7 @@ class TheloopThemeOriginal extends TheloopThemeState {
 class TheloopThemeQuiet extends TheloopThemeState {
   TheloopThemeQuiet()
       : super(
-          "Palatino",
+          "Bitter",
           ColorConstant.gray400,
           ColorConstant.gray400,
           ColorConstant.dark3,
@@ -71,7 +71,7 @@ class TheloopThemeQuiet extends TheloopThemeState {
 class TheloopThemePaper extends TheloopThemeState {
   TheloopThemePaper()
       : super(
-          "Charter",
+          "Caveat",
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.rpaperLight,
@@ -83,7 +83,7 @@ class TheloopThemePaper extends TheloopThemeState {
 class TheloopThemeDarkLight extends TheloopThemeState {
   TheloopThemeDarkLight()
       : super(
-          "SFNSDisplay",
+          "Comfortaa",
           ColorConstant.white,
           ColorConstant.white,
           ColorConstant.dark4,
@@ -95,7 +95,7 @@ class TheloopThemeDarkLight extends TheloopThemeState {
 class TheloopThemeCalm extends TheloopThemeState {
   TheloopThemeCalm()
       : super(
-          "CanelaText",
+          "Lora",
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.rcalmBeige,
@@ -107,7 +107,7 @@ class TheloopThemeCalm extends TheloopThemeState {
 class TheloopThemeFocus extends TheloopThemeState {
   TheloopThemeFocus()
       : super(
-          "ProximaNova",
+          "Nunito",
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.rfocusBeigeLight,
@@ -119,7 +119,7 @@ class TheloopThemeFocus extends TheloopThemeState {
 class TheLoopGradient1 extends TheloopThemeState {
   TheLoopGradient1()
       : super(
-          "ProximaNova",
+          "Open Sans",
           ColorConstant.white,
           ColorConstant.white,
           Colors.transparent,
@@ -145,7 +145,7 @@ class TheLoopGradient2 extends TheloopThemeState {
 class TheLoopTunnel extends TheloopThemeState {
   TheLoopTunnel()
       : super(
-          "ProximaNova",
+          "Open Sans",
           ColorConstant.white,
           ColorConstant.white,
           Colors.transparent,
@@ -172,5 +172,25 @@ class TheloopThemeSwitchImage extends TheloopThemeState {
           allowImageSwitch,
           progress,
           newImagePath,
+        );
+}
+
+class ConcreteTheloopThemeState extends TheloopThemeState {
+  const ConcreteTheloopThemeState(
+    String fontName,
+    Color mainTextColor,
+    Color wpmTextColor,
+    Color backgroundColor,
+    bool allowImageSwitch,
+    double progress, [
+    String assetPath = 'assets/images/transparent.png',
+  ]) : super(
+          fontName,
+          mainTextColor,
+          wpmTextColor,
+          backgroundColor,
+          allowImageSwitch,
+          progress,
+          assetPath,
         );
 }

@@ -9,10 +9,10 @@ import '../../core/utils/color_constant.dart';
 import '../library_screen/library_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final int initialIndex;
+  // final int initialIndex;
   const HomeScreen({
     Key? key,
-    this.initialIndex = 0,
+    // this.initialIndex = 0,
   }) : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.initialIndex;
+    // _currentIndex = widget.initialIndex;
     print("Initial index: $_currentIndex");
   }
 
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 0,
             right: 0,
             child: CurvedNavigationBar(
-              key: ValueKey(_currentIndex),
+              // key: ValueKey(_currentIndex),
               color: Theme.of(context).brightness == Brightness.dark
                   ? ColorConstant.dark1
                   : ColorConstant.white,
