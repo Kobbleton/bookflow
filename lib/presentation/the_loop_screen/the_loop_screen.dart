@@ -12,9 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import '../../bloc/theloop_theme/theloop_theme_event.dart';
-import '../../routes/app_routes.dart';
+import '../home_screen/home_screen.dart';
 import 'logic/drag_handler.dart';
 import 'logic/timer_manager.dart';
 
@@ -60,9 +61,26 @@ class TheloopScreenState extends State<TheloopScreen>
   late TimerManager timerManager;
   late DragHandler dragHandler;
 
+  void _saveLastDuration(int duration) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('last_duration', duration);
+  }
+
+  void _loadLastDuration() async {
+    final prefs = await SharedPreferences.getInstance();
+    int? lastDuration = prefs.getInt('last_duration');
+
+    if (lastDuration != null) {
+      setState(() {
+        durationMilliseconds = lastDuration;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _loadLastDuration();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     SystemChrome.setPreferredOrientations([
@@ -145,6 +163,7 @@ class TheloopScreenState extends State<TheloopScreen>
           durationMilliseconds += details.delta.dy.toInt();
           if (durationMilliseconds < 100) durationMilliseconds = 100;
           durationController.add(durationMilliseconds);
+          _saveLastDuration(durationMilliseconds);
           wpmCounter = WPMCounterWidget(
             durationMilliseconds: durationMilliseconds,
             isPaused: isPaused,
@@ -316,8 +335,15 @@ class TheloopScreenState extends State<TheloopScreen>
                                     DeviceOrientation.portraitDown,
                                   ]).then((_) {
                                     print('close button pressed step 2');
-                                    Navigator.pushNamed(
-                                        context, AppRoutes.homeScreen);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomeScreen(
+                                            initialIndex:
+                                                1), // 1 for LibraryScreen
+                                      ),
+                                    );
+
                                     // Navigator.of(context)
                                     //     .pop(); // Close the screen and return to library
                                   });

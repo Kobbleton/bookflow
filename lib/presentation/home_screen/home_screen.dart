@@ -9,8 +9,10 @@ import '../../core/utils/color_constant.dart';
 import '../library_screen/library_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  final int initialIndex;
   const HomeScreen({
     Key? key,
+    this.initialIndex = 0,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   final List<Widget> _pages = [
     // The first page of the application
@@ -30,7 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+    print("Initial index: $_currentIndex");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("Bottom Navigation Key: $_bottomNavigationKey"); // Add print here
+    print("Current index before Scaffold: $_currentIndex");
     // Get the screen height and width
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -67,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 0,
             right: 0,
             child: CurvedNavigationBar(
+              key: ValueKey(_currentIndex),
               color: Theme.of(context).brightness == Brightness.dark
                   ? ColorConstant.dark1
                   : ColorConstant.white,
@@ -106,6 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: (index) {
                 setState(() {
                   _currentIndex = index;
+                  _bottomNavigationKey.currentState
+                      ?.setPage(index); // <-- Add this line
+                  print("Current index onTap: $_currentIndex");
                 });
               },
             ),

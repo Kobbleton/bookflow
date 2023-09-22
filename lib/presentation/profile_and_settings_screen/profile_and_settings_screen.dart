@@ -285,58 +285,58 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
                         padding: getPadding(
                           top: 24,
                         ),
-                        child: Row(
-                          children: [
-                            CustomIconButton(
-                              height: 56,
-                              width: 56,
-                              variant: IconButtonVariant.fillRedA20014,
-                              child: CustomImageView(
-                                height: 30,
-                                width: 30,
-                                imagePath: ImageConstant.settingsImageLogout,
-                              ),
-                            ),
-                            Padding(
-                              padding: getPadding(
-                                left: 20,
-                                top: 17,
-                                bottom: 10,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  showDialog<bool>(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text('Logout'),
-                                      content: const Text(
-                                          'Are you sure you want to logout?'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text('Cancel'),
-                                          onPressed: () => Navigator.of(context)
-                                              .pop(false), // returns false
-                                        ),
-                                        TextButton(
-                                          child: const Text(
-                                            'OK',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                          onPressed: () => Navigator.of(context)
-                                              .pop(true), // returns true
-                                        ),
-                                      ],
+                        child: GestureDetector(
+                          onTap: () {
+                            showDialog<bool>(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Logout'),
+                                content: const Text(
+                                    'Are you sure you want to logout?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(false),
+                                  ),
+                                  TextButton(
+                                    child: const Text(
+                                      'OK',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ),
                                     ),
-                                  ).then((shouldLogout) {
-                                    if (shouldLogout == true) {
-                                      context
-                                          .read<AuthenticationBloc>()
-                                          .add(LoggedOut());
-                                    }
-                                  });
-                                },
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(true),
+                                  ),
+                                ],
+                              ),
+                            ).then((shouldLogout) {
+                              if (shouldLogout == true) {
+                                context
+                                    .read<AuthenticationBloc>()
+                                    .add(LoggedOut());
+                              }
+                            });
+                          },
+                          child: Row(
+                            children: [
+                              CustomIconButton(
+                                height: 56,
+                                width: 56,
+                                variant: IconButtonVariant.fillRedA20014,
+                                child: CustomImageView(
+                                  height: 30,
+                                  width: 30,
+                                  imagePath: ImageConstant.settingsImageLogout,
+                                ),
+                              ),
+                              Padding(
+                                padding: getPadding(
+                                  left: 20,
+                                  top: 17,
+                                  bottom: 10,
+                                ),
                                 child: Text(
                                   "Logout",
                                   overflow: TextOverflow.ellipsis,
@@ -345,8 +345,8 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
                                       context),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

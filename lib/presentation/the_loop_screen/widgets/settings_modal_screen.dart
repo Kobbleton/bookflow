@@ -38,9 +38,14 @@ class SettingsModalScreen {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       'Themes & Settings',
-                      style: AppStyle.txtOpenSansBold18(context),
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
+                          fontFamily: 'Open Sans',
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 6,
