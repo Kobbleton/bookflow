@@ -5,6 +5,7 @@ import 'package:bookflow/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import '../../../bloc/theloop_theme/theloop_theme_event.dart';
@@ -39,35 +40,43 @@ class SettingsModalScreen {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      'Themes & Settings',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          decoration: TextDecoration.underline,
-                          fontFamily: 'Open Sans',
-                          fontWeight: FontWeight.bold),
-                    ),
+                    // const Text(
+                    //   'Themes & Settings',
+                    //   style: TextStyle(
+                    //       fontSize: 18,
+                    //       color: Colors.white,
+                    //       decoration: TextDecoration.underline,
+                    //       fontFamily: 'Open Sans',
+                    //       fontWeight: FontWeight.bold),
+                    // ),
                     const SizedBox(
                       height: 6,
                     ),
                     Row(
                       children: [
                         InkWell(
-                            onTap: () {
-                              // Show the second modal when Options is clicked
-                              showOptionsModal(context);
-                            },
-                            child: const Text(
-                              'Options',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  decoration: TextDecoration.underline,
-                                  fontFamily: 'Open Sans',
-                                  fontWeight: FontWeight.bold),
-                            )),
-                        const Icon(Icons.navigate_next)
+                          onTap: () {
+                            // Show the second modal when Options is clicked
+                            showOptionsModal(context);
+                          },
+                          child: const Text(
+                            'Settings',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                decoration: TextDecoration.underline,
+                                fontFamily: 'Open Sans',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: getPadding(left: 8),
+                          child: LoadingAnimationWidget.threeRotatingDots(
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                        // const Icon(Icons.navigate_next)
                       ],
                     )
                         .animate(onPlay: (controller) => controller.repeat())
@@ -76,9 +85,18 @@ class SettingsModalScreen {
                             color: ColorConstant.cyan300,
                             curve: Curves.easeOutQuad),
                     const SizedBox(height: 8.0),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.9,
+                      child: const Divider(color: Colors.white),
+                    ),
                     const Text(
                       'Themes',
-                      style: TextStyle(fontSize: 14, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontFamily: 'Open Sans',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8.0),
                     Padding(
@@ -232,15 +250,16 @@ class SettingsModalScreen {
                   children: [
                     const Text(
                       'Font:',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     const SizedBox(height: 8.0),
                     BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
                       builder: (context, state) {
                         return ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  ColorConstant.dark4)),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                ColorConstant.dark4),
+                          ),
                           onPressed: () {
                             showGeneralDialog(
                               context: context,
@@ -288,10 +307,12 @@ class SettingsModalScreen {
                                                               TheloopThemeBloc>(
                                                           context);
                                                   theloopThemeBloc.add(
-                                                      SetFontEvent(
-                                                          newFontName:
-                                                              availableFontNames[
-                                                                  index]));
+                                                    SetFontEvent(
+                                                      newFontName:
+                                                          availableFontNames[
+                                                              index],
+                                                    ),
+                                                  );
                                                   Navigator.pop(context);
                                                 },
                                               );
@@ -318,7 +339,61 @@ class SettingsModalScreen {
                           ),
                         );
                       },
-                    )
+                    ),
+                    Padding(
+                      padding: getPadding(bottom: 8),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.9,
+                      child: const Divider(color: Colors.white),
+                    ),
+                    // Font Size Selection
+                    Padding(
+                      padding: getPadding(top: 12, bottom: 12),
+                      child: const Text(
+                        'Font Size:',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                ColorConstant.dark4),
+                          ),
+                          child: const Text("Small"),
+                          onPressed: () {
+                            // Update your font size to Small
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                ColorConstant.dark4),
+                          ),
+                          child: const Text("Medium"),
+                          onPressed: () {
+                            // Update your font size to Medium
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                ColorConstant.dark4),
+                          ),
+                          child: const Text("Large"),
+                          onPressed: () {
+                            // Update your font size to Large
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
