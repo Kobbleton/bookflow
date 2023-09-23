@@ -370,6 +370,9 @@ class SettingsModalScreen {
                           child: const Text("Small"),
                           onPressed: () {
                             // Update your font size to Small
+                            BlocProvider.of<TheloopThemeBloc>(context).add(
+                                const SetFontSizeEvent(
+                                    newFontSize: FontSize.small));
                           },
                         ),
                         ElevatedButton(
@@ -380,6 +383,9 @@ class SettingsModalScreen {
                           child: const Text("Medium"),
                           onPressed: () {
                             // Update your font size to Medium
+                            BlocProvider.of<TheloopThemeBloc>(context).add(
+                                const SetFontSizeEvent(
+                                    newFontSize: FontSize.medium));
                           },
                         ),
                         ElevatedButton(
@@ -390,6 +396,9 @@ class SettingsModalScreen {
                           child: const Text("Large"),
                           onPressed: () {
                             // Update your font size to Large
+                            BlocProvider.of<TheloopThemeBloc>(context).add(
+                                const SetFontSizeEvent(
+                                    newFontSize: FontSize.big));
                           },
                         ),
                       ],

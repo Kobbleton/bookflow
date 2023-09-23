@@ -1,3 +1,4 @@
+import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TheloopThemeEvent extends Equatable {
@@ -53,3 +54,13 @@ class SetFontEvent extends TheloopThemeEvent {
   @override
   List<Object> get props => [newFontName];
 }
+
+class SetFontSizeEvent extends TheloopThemeEvent {
+  final FontSize newFontSize;
+
+  const SetFontSizeEvent({required this.newFontSize});
+
+  @override
+  List<Object> get props => [newFontSize];
+}
+

@@ -4,145 +4,25 @@ import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
-//   TheloopThemeBloc() : super(TheloopThemeInitial()) {
-//     on<TheloopThemeSetOriginal>((event, emit) {
-//       emit(TheloopThemeOriginal());
-//     });
-
-//     on<TheloopThemeSetQuiet>((event, emit) {
-//       emit(TheloopThemeQuiet());
-//     });
-
-//     on<TheloopThemeSetPaper>((event, emit) {
-//       emit(TheloopThemePaper());
-//     });
-
-//     on<TheloopThemeSetDarkLight>((event, emit) {
-//       emit(TheloopThemeDarkLight());
-//     });
-
-//     on<TheloopThemeSetCalm>((event, emit) {
-//       emit(TheloopThemeCalm());
-//     });
-
-//     on<TheloopThemeSetFocus>((event, emit) {
-//       emit(TheloopThemeFocus());
-//     });
-
-//     on<SetGradient1>((event, emit) {
-//       emit(TheLoopGradient1());
-//     });
-//     on<SetTunnel>((event, emit) {
-//       emit(TheLoopTunnel());
-//     });
-
-// on<SetFontEvent>((event, emit) {
-//   final currentState = state;
-//   emit(
-//     ConcreteTheloopThemeState(
-//       event.newFontName,
-//       currentState.mainTextColor,
-//       currentState.wpmTextColor,
-//       currentState.backgroundColor,
-//       currentState.allowImageSwitch,
-//       currentState.progress,
-//       currentState.assetPath,
-//     ),
-//   );
-// });
-
-//     // on<InitializeWordsEvent>((event, emit) {
-//     //   initializeWords(event.words);
-//     // });
-
-//     on<UpdateProgressEvent>((event, emit) {
-//       int index = (event.progress * 10).toInt();
-
-//       print('Event Progress: ${event.progress}'); // Debug line
-//       print('Calculated Index: $index'); // Debug line
-
-//       // Check if index is different from the last index
-//       if (lastIndex != index) {
-//         // Update lastIndex to the current index
-//         lastIndex = index;
-
-//         String newImagePath = backgroundImages[index % backgroundImages.length];
-//         print('New Image Path: $newImagePath'); // Debug line
-//         final currentState = state;
-
-//         if (currentState.allowImageSwitch) {
-//           String newImagePath =
-//               backgroundImages[index % backgroundImages.length];
-
-//           emit(TheloopThemeSwitchImage(
-//             currentState.fontName,
-//             currentState.mainTextColor,
-//             currentState.wpmTextColor,
-//             currentState.backgroundColor,
-//             currentState
-//                 .allowImageSwitch, // You can set this to true or derive from your state.
-//             newImagePath,
-//             event.progress,
-//           ));
-//         }
-//       }
-//     });
-//   }
-//   // List<String> wordsList = [];
-
-//   // void initializeWords(List<String> words) {
-//   //   print("Initializing words: ${words.length}");
-//   //   wordsList = words;
-//   //   print("Initialized words: ${words.length}");
-//   // }
-
-//   void _initTheme() async {
-//   final prefs = await SharedPreferences.getInstance();
-//   final savedTheme = prefs.getString('theme');
-
-//   if (savedTheme != null) {
-//     switch (savedTheme) {
-//       case 'TheloopThemeOriginal':
-//         add(TheloopThemeSetOriginal());
-//         break;
-//       case 'TheloopThemeQuiet':
-//         add(TheloopThemeSetQuiet());
-//         break;
-//       // Add other themes as cases here...
-//       default:
-//         break;
-//     }
-//   }
-// }
-
-//   int lastIndex = -1;
-
-//   final List<String> backgroundImages = [
-//     'assets/images/tunneld1.png',
-//     'assets/images/tunneld2.png',
-//     'assets/images/tunneld3.png',
-//     'assets/images/tunneld4.png',
-//     'assets/images/tunneld5.png',
-//     'assets/images/tunneld6.png',
-//     'assets/images/tunneld7.png',
-//     'assets/images/tunneld8.png',
-//     'assets/images/tunneld9.png',
-//     'assets/images/tunneld10.png',
-//   ];
-//   // double updateReadingProgress(int index) {
-//   //   double progress = index / wordsList.length.toDouble();
-//   //   add(UpdateProgressEvent(progress));
-//   //   return progress;
-//   // }
-
-// }
+double mapFontSizeEnumToDouble(FontSize fontSize) {
+  switch (fontSize) {
+    case FontSize.small:
+      return 38.0;
+    case FontSize.medium:
+      return 50.0;
+    case FontSize.big:
+      return 68.0;
+    default:
+      return 50.0; // default size, ideally never reached
+  }
+}
 
 class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
   TheloopThemeBloc() : super(TheloopThemeInitial()) {
     // Initialize theme based on saved preferences
     _initTheme();
     _initFont();
+    _initFontSize();
     on<TheloopThemeSetOriginal>((event, emit) {
       emit(TheloopThemeOriginal());
       _saveThemeToPrefs('TheloopThemeOriginal');
@@ -182,11 +62,32 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
       _saveThemeToPrefs('TheloopThemeTunnel');
     });
 
+    on<SetFontSizeEvent>((event, emit) {
+      final currentState = state;
+      double newSize = mapFontSizeEnumToDouble(event.newFontSize);
+      emit(
+        ConcreteTheloopThemeState(
+          currentState.fontName,
+          event.newFontSize,
+          currentState.mainTextColor,
+          currentState.wpmTextColor,
+          currentState.backgroundColor,
+          currentState.allowImageSwitch,
+          currentState.progress,
+          currentState.assetPath,
+        ),
+      );
+      _saveFontSizeToPrefs(newSize);
+    });
+
+// Initialize Font Size from Shared Preferences
+
     on<SetFontEvent>((event, emit) {
       final currentState = state;
       emit(
         ConcreteTheloopThemeState(
           event.newFontName,
+          currentState.fontSize,
           currentState.mainTextColor,
           currentState.wpmTextColor,
           currentState.backgroundColor,
@@ -278,6 +179,30 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
     } else {
       // Handle the case when no theme is saved in prefs; perhaps load a default theme
     }
+  }
+
+  void _initFontSize() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedSize = prefs.getDouble('fontSize');
+
+    if (savedSize != null) {
+      // Convert double to your FontSize enum
+      FontSize fontSizeEnum = FontSize.medium; // Default
+      if (savedSize == 38.0) {
+        fontSizeEnum = FontSize.small;
+      } else if (savedSize == 50.0) {
+        fontSizeEnum = FontSize.medium;
+      } else if (savedSize == 68.0) {
+        fontSizeEnum = FontSize.big;
+      }
+      add(SetFontSizeEvent(newFontSize: fontSizeEnum));
+    }
+  }
+
+  // Save to Shared Preferences
+  void _saveFontSizeToPrefs(double fontSize) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('fontSize', fontSize);
   }
 
   void _saveThemeToPrefs(String theme) async {

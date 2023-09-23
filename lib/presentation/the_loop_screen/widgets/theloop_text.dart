@@ -39,11 +39,11 @@ class LoopText extends StatelessWidget {
                   key: ValueKey<int>(index),
                   strutStyle: StrutStyle(
                     fontFamily: state.fontName,
-                    fontSize: 50,
+                    fontSize: mapFontSizeEnumToDouble(state.fontSize),
                     forceStrutHeight: true,
                   ),
                   style: TextStyle(
-                    fontSize: 50,
+                    fontSize: mapFontSizeEnumToDouble(state.fontSize),
                     color: state.mainTextColor,
                     fontFamily: state.fontName,
                   ),

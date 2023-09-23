@@ -2,11 +2,20 @@ import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+enum FontSize { small, medium, big }
+
 abstract class TheloopThemeState extends Equatable {
-  const TheloopThemeState(this.fontName, this.mainTextColor, this.wpmTextColor,
-      this.backgroundColor, this.allowImageSwitch, this.progress,
+  const TheloopThemeState(
+      this.fontName,
+      this.fontSize,
+      this.mainTextColor,
+      this.wpmTextColor,
+      this.backgroundColor,
+      this.allowImageSwitch,
+      this.progress,
       [this.assetPath = 'assets/images/transparent.png']);
   final String fontName;
+  final FontSize fontSize;
   final Color mainTextColor;
   final Color wpmTextColor;
   final Color backgroundColor;
@@ -17,6 +26,7 @@ abstract class TheloopThemeState extends Equatable {
   @override
   List<Object> get props => [
         fontName,
+        fontSize,
         mainTextColor,
         wpmTextColor,
         backgroundColor,
@@ -36,6 +46,7 @@ class TheloopThemeInitial extends TheloopThemeState {
   TheloopThemeInitial()
       : super(
           "Open Sans",
+          FontSize.medium,
           ColorConstant.white,
           ColorConstant.white,
           ColorConstant.dark2,
@@ -48,6 +59,7 @@ class TheloopThemeOriginal extends TheloopThemeState {
   TheloopThemeOriginal()
       : super(
           "Open Sans",
+          FontSize.medium,
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.roriginalWhite,
@@ -60,6 +72,7 @@ class TheloopThemeQuiet extends TheloopThemeState {
   TheloopThemeQuiet()
       : super(
           "Bitter",
+          FontSize.medium,
           ColorConstant.gray400,
           ColorConstant.gray400,
           ColorConstant.dark3,
@@ -72,6 +85,7 @@ class TheloopThemePaper extends TheloopThemeState {
   TheloopThemePaper()
       : super(
           "Caveat",
+          FontSize.medium,
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.rpaperLight,
@@ -84,6 +98,7 @@ class TheloopThemeDarkLight extends TheloopThemeState {
   TheloopThemeDarkLight()
       : super(
           "Comfortaa",
+          FontSize.medium,
           ColorConstant.white,
           ColorConstant.white,
           ColorConstant.dark4,
@@ -96,6 +111,7 @@ class TheloopThemeCalm extends TheloopThemeState {
   TheloopThemeCalm()
       : super(
           "Lora",
+          FontSize.medium,
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.rcalmBeige,
@@ -108,6 +124,7 @@ class TheloopThemeFocus extends TheloopThemeState {
   TheloopThemeFocus()
       : super(
           "Nunito",
+          FontSize.medium,
           ColorConstant.black,
           ColorConstant.black,
           ColorConstant.rfocusBeigeLight,
@@ -120,6 +137,7 @@ class TheLoopGradient1 extends TheloopThemeState {
   TheLoopGradient1()
       : super(
           "Open Sans",
+          FontSize.medium,
           ColorConstant.white,
           ColorConstant.white,
           Colors.transparent,
@@ -133,6 +151,7 @@ class TheLoopGradient2 extends TheloopThemeState {
   TheLoopGradient2()
       : super(
           "ProximaNova",
+          FontSize.medium,
           ColorConstant.white,
           ColorConstant.white,
           Colors.transparent,
@@ -146,6 +165,7 @@ class TheLoopTunnel extends TheloopThemeState {
   TheLoopTunnel()
       : super(
           "Open Sans",
+          FontSize.medium,
           ColorConstant.white,
           ColorConstant.white,
           Colors.transparent,
@@ -166,6 +186,7 @@ class TheloopThemeSwitchImage extends TheloopThemeState {
     final double progress,
   ) : super(
           fontName,
+          FontSize.medium,
           mainTextColor,
           wpmTextColor,
           backgroundColor,
@@ -178,6 +199,7 @@ class TheloopThemeSwitchImage extends TheloopThemeState {
 class ConcreteTheloopThemeState extends TheloopThemeState {
   const ConcreteTheloopThemeState(
     String fontName,
+    FontSize fontSize,
     Color mainTextColor,
     Color wpmTextColor,
     Color backgroundColor,
@@ -186,6 +208,7 @@ class ConcreteTheloopThemeState extends TheloopThemeState {
     String assetPath = 'assets/images/transparent.png',
   ]) : super(
           fontName,
+          fontSize,
           mainTextColor,
           wpmTextColor,
           backgroundColor,
