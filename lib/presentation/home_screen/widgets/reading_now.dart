@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bookflow/presentation/home_screen/widgets/continue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -126,7 +128,7 @@ class ReadingNowBlock extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: getPadding(bottom: 4),
+                                    padding: getPadding(bottom: 2),
                                     child: styledText(
                                       'Statistics',
                                       AppStyle.txtOpenSansBold18(context),
@@ -169,7 +171,8 @@ class ReadingNowBlock extends StatelessWidget {
                                     AppStyle.txtOpenSansBold13Cyan500(context),
                                   ),
                                   Padding(
-                                    padding: getPadding(bottom: 12),
+                                    padding: getPadding(
+                                        bottom: Platform.isIOS ? 12 : 0),
                                   ),
                                   ContinueCustomButton(
                                     text: 'Continue',
