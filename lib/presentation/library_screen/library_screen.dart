@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:bookflow/bloc/bookwords/bookwords_cubit.dart';
 import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
@@ -53,10 +51,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
           context,
           PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  BlocProvider(
-                    create: (context) => BookWordsCubit()..setWords(words),
-                    child: TheloopScreen(words: words),
-                  ),
+                  TheloopScreen(words: words),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(

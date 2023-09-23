@@ -351,6 +351,9 @@ class SettingsModalScreen {
         context
             .read<TheloopThemeBloc>()
             .add(themeEvent); // Changed to TheLoopGradientBloc
+        context
+            .read<TheloopThemeBloc>()
+            .add(SetFontEvent(newFontName: fontName));
         Navigator.pop(context);
       },
       child: Container(
@@ -385,6 +388,9 @@ class SettingsModalScreen {
       onPressed: () {
         onColorChanged(color);
         context.read<TheloopThemeBloc>().add(themeEvent);
+        context
+            .read<TheloopThemeBloc>()
+            .add(SetFontEvent(newFontName: fontName));
         Navigator.pop(context);
       },
       style: ElevatedButton.styleFrom(

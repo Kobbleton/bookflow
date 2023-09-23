@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
-import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/progress_indicator.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/settings_modal_screen.dart';
@@ -57,7 +56,8 @@ class TheloopScreenState extends State<TheloopScreen>
   final durationController = StreamController<int>.broadcast();
 
   double accelerationFactor = 2.2;
-  Color backgroundColor = ColorConstant.dark2;
+  // Color backgroundColor = ColorConstant.dark2;
+  late Color backgroundColor;
   late TimerManager timerManager;
   late DragHandler dragHandler;
 
@@ -77,9 +77,34 @@ class TheloopScreenState extends State<TheloopScreen>
     }
   }
 
+  void _saveTheme(String theme) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('theme', theme);
+  }
+
+  void _initTheme() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedTheme = prefs.getString('theme');
+
+    if (savedTheme != null) {
+      switch (savedTheme) {
+        case 'TheloopThemeOriginal':
+          context.read<TheloopThemeBloc>().add(TheloopThemeSetOriginal());
+          break;
+        case 'TheloopThemeQuiet':
+          context.read<TheloopThemeBloc>().add(TheloopThemeSetQuiet());
+          break;
+        // Add other themes as cases here...
+        default:
+          break;
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _initTheme();
     _loadLastDuration();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
