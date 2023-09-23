@@ -1,14 +1,13 @@
-import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import '../../bloc/authentification/authentication_bloc.dart';
 import '../../bloc/authentification/authentication_event.dart';
 import '../../bloc/authentification/authentication_state.dart';
-import '../../core/utils/image_constant.dart';
+import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_style.dart';
-import '../widgets/custom_image_view.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key})
@@ -75,36 +74,70 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomImageView(
-                      svgPath: ImageConstant.logoBig,
-                      height: MediaQuery.of(context).size.height *
-                          0.13, // 13% of screen height
-                      width: MediaQuery.of(context).size.width *
-                          0.6, // 60% of screen width
-                      margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height *
-                            0.01, // 1% of screen height
-                      ),
-                    ),
+                    // CustomImageView(
+                    //   svgPath: ImageConstant.logoBig,
+                    //   height: MediaQuery.of(context).size.height *
+                    //       0.13, // 13% of screen height
+                    //   width: MediaQuery.of(context).size.width *
+                    //       0.6, // 60% of screen width
+                    //   margin: EdgeInsets.only(
+                    //     top: MediaQuery.of(context).size.height *
+                    //         0.01, // 1% of screen height
+                    //   ),
+                    // ),
                     Padding(
                       padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height *
-                            0.04, // 4% of screen height
+                            0.00, // 4% of screen height
                         bottom: MediaQuery.of(context).size.height *
-                            0.1, // 10% of screen height
+                            0.05, // 10% of screen height
                       ),
                       child: Text(
                         "BookFlow",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: AppStyle.txtOpenSansBold48(context),
-                      ),
+                      )
+                          .animate()
+                          .move(
+                              begin: const Offset(0, -16),
+                              curve: Curves.easeOutQuad)
+                          .fadeIn(duration: 2200.ms, curve: Curves.easeOutQuad),
                     ),
-                    SpinKitSpinningLines(
-                      color: ColorConstant.cyan500,
-                      size: MediaQuery.of(context).size.width *
-                          0.25, // 30% of screen width
+                    Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.height * 0.16,
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          Padding(
+                            padding: getPadding(top: 2, right: 2),
+                            child: Lottie.asset(
+                              'assets/animations/B.json',
+                              width: MediaQuery.of(context).size.height * 0.16,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ],
+                      )
+                          .animate()
+                          .move(
+                              begin: const Offset(0, 16),
+                              curve: Curves.easeOutQuad)
+                          .fadeIn(duration: 2200.ms, curve: Curves.easeOutQuad),
                     ),
+                    // SpinKitSpinningLines(
+                    //   color: ColorConstant.cyan500,
+                    //   size: MediaQuery.of(context).size.width *
+                    //       0.25, // 30% of screen width
+                    // ),
                   ],
                 ),
               ),
