@@ -30,7 +30,7 @@ class TheloopScreenState extends State<TheloopScreen>
     with TickerProviderStateMixin {
   late int index;
 
-  int durationMilliseconds = 250; // initial speed: 500 ms per word
+  late int durationMilliseconds = 240; // initial speed: 500 ms per word
   bool isPaused = true;
   WPMCounterWidget? wpmCounter;
   bool isDragging = false;
@@ -56,7 +56,7 @@ class TheloopScreenState extends State<TheloopScreen>
   final durationController = StreamController<int>.broadcast();
 
   double accelerationFactor = 2.2;
-  // Color backgroundColor = ColorConstant.dark2;
+
   late Color backgroundColor;
   late TimerManager timerManager;
   late DragHandler dragHandler;
@@ -66,7 +66,7 @@ class TheloopScreenState extends State<TheloopScreen>
     prefs.setInt('last_duration', duration);
   }
 
-  void _loadLastDuration() async {
+  Future<void> _loadLastDuration() async {
     final prefs = await SharedPreferences.getInstance();
     int? lastDuration = prefs.getInt('last_duration');
 
@@ -75,37 +75,13 @@ class TheloopScreenState extends State<TheloopScreen>
         durationMilliseconds = lastDuration;
       });
     }
-  }
-
-  void _saveTheme(String theme) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('theme', theme);
-  }
-
-  void _initTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedTheme = prefs.getString('theme');
-
-    if (savedTheme != null) {
-      switch (savedTheme) {
-        case 'TheloopThemeOriginal':
-          context.read<TheloopThemeBloc>().add(TheloopThemeSetOriginal());
-          break;
-        case 'TheloopThemeQuiet':
-          context.read<TheloopThemeBloc>().add(TheloopThemeSetQuiet());
-          break;
-        // Add other themes as cases here...
-        default:
-          break;
-      }
-    }
+    return Future.value();
   }
 
   @override
   void initState() {
     super.initState();
-    _initTheme();
-    _loadLastDuration();
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     SystemChrome.setPreferredOrientations([
@@ -117,40 +93,43 @@ class TheloopScreenState extends State<TheloopScreen>
 
     index = 0;
 
-    timerManager = TimerManager(
-        durationMilliseconds: durationMilliseconds,
-        updateWord: () {
-          if (index < widget.words.length) {
-            setState(() {
-              index++;
-              double progress = calculateProgress();
-              int newProgressIndex = (progress * 10).toInt();
+    _loadLastDuration().then((_) {
+      timerManager = TimerManager(
+          durationMilliseconds: durationMilliseconds,
+          updateWord: () {
+            if (index < widget.words.length) {
+              setState(() {
+                index++;
+                double progress = calculateProgress();
 
-              // Fetch the current state
-              final state = context.read<TheloopThemeBloc>().state;
+                // Fetch the current state
+                final state = context.read<TheloopThemeBloc>().state;
 
-              // Add an event to update the progress
-              context
-                  .read<TheloopThemeBloc>()
-                  .add(UpdateProgressEvent(progress));
+                // Add an event to update the progress
+                context
+                    .read<TheloopThemeBloc>()
+                    .add(UpdateProgressEvent(progress));
 
-              // Check if image switch is allowed
-              if (state.allowImageSwitch) {
-                // Logic to switch the image based on the new progress
-              }
-            });
-          }
-        });
-    timerManager.listenToDurationUpdates(durationController.stream);
-    dragHandler = DragHandler(
-        index: index,
-        updateIndex: (deltaIndex) {
-          setState(() {
-            index += deltaIndex;
-            if (index < 0) index = 0;
-            if (index >= widget.words.length) index = widget.words.length - 1;
+                // Check if image switch is allowed
+                if (state.allowImageSwitch) {
+                  // Logic to switch the image based on the new progress
+                }
+              });
+            }
           });
-        });
+
+      timerManager.listenToDurationUpdates(durationController.stream);
+
+      dragHandler = DragHandler(
+          index: index,
+          updateIndex: (deltaIndex) {
+            setState(() {
+              index += deltaIndex;
+              if (index < 0) index = 0;
+              if (index >= widget.words.length) index = widget.words.length - 1;
+            });
+          });
+    });
   }
 
   @override
