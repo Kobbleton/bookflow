@@ -47,6 +47,12 @@ class AppStyle {
         fontFamily: 'Open Sans',
         fontWeight: FontWeight.w700,
       );
+  static TextStyle txtOpenSansBold15(BuildContext context) => TextStyle(
+        color: Theme.of(context).textTheme.bodyLarge?.color,
+        fontSize: getFontSize(15),
+        fontFamily: 'Open Sans',
+        fontWeight: FontWeight.w700,
+      );
 
   static TextStyle txtOpenSansBold16hint(BuildContext context) => TextStyle(
         color: const Color(0xFF9E9E9E),

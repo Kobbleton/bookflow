@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:bookflow/presentation/home_screen/widgets/continue_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
@@ -174,18 +174,55 @@ class ReadingNowBlock extends StatelessWidget {
                                     padding: getPadding(
                                         bottom: Platform.isIOS ? 12 : 0),
                                   ),
-                                  ContinueCustomButton(
-                                    text: 'Continue',
-                                    onPressed: () {},
-                                    svgPath: ImageConstant.menuIcon,
+                                  // ContinueCustomButton(
+                                  //   text: 'Continue',
+                                  //   onPressed: () {},
+                                  //   svgPath: ImageConstant.menuIcon,
+                                  // )
+                                  //     .animate(
+                                  //         onPlay: (controller) =>
+                                  //             controller.repeat())
+                                  //     .shimmer(
+                                  //         duration: 3200.ms,
+                                  //         color: ColorConstant.cyan300,
+                                  //         curve: Curves.easeOutQuad)
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Lottie.asset(
+                                          'assets/animations/start_button.json',
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.16,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.06,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Continue',
+                                              style: AppStyle.txtOpenSansBold15(
+                                                  context),
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            LoadingAnimationWidget
+                                                .threeRotatingDots(
+                                              color: Colors.white,
+                                              size: 12,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   )
-                                      .animate(
-                                          onPlay: (controller) =>
-                                              controller.repeat())
-                                      .shimmer(
-                                          duration: 3200.ms,
-                                          color: ColorConstant.cyan300,
-                                          curve: Curves.easeOutQuad)
                                 ],
                               ),
                             ],
