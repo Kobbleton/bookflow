@@ -30,10 +30,20 @@ class SettingsModalScreen {
         return Align(
           alignment: Alignment.centerRight,
           child: Material(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
             child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                ),
+                color: ColorConstant.dark5,
+              ),
               width: MediaQuery.of(context).size.width / 3,
               height: MediaQuery.of(context).size.height,
-              color: ColorConstant.dark5,
               child: Padding(
                 padding: getPadding(top: 16, left: 42),
                 child: Column(
@@ -231,179 +241,207 @@ class SettingsModalScreen {
       context: context,
       barrierLabel: "Options",
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.transparent,
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
         return Align(
           alignment: Alignment.centerRight,
-          child: Material(
-            child: Container(
-              width: MediaQuery.of(context).size.width / 3,
-              height: MediaQuery.of(context).size.height,
-              color: ColorConstant.dark5,
-              child: Padding(
-                padding: getPadding(top: 16, left: 42),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'Font:',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    const SizedBox(height: 8.0),
-                    BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
-                      builder: (context, state) {
-                        return ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
-                          ),
-                          onPressed: () {
-                            showGeneralDialog(
-                              context: context,
-                              barrierLabel: "Options",
-                              barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              transitionDuration:
-                                  const Duration(milliseconds: 300),
-                              pageBuilder: (BuildContext buildContext,
-                                  Animation animation,
-                                  Animation secondaryAnimation) {
-                                return Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Material(
-                                    child: BlocBuilder<TheloopThemeBloc,
-                                        TheloopThemeState>(
-                                      builder: (context, state) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3, // 1/3 screen width
-                                          color: ColorConstant
-                                              .dark5, // Your color constant
-                                          child: ListView.builder(
-                                            itemCount:
-                                                availableFontNames.length,
-                                            itemBuilder: (context, index) {
-                                              return ListTile(
-                                                title: Padding(
-                                                  padding: getPadding(top: 28),
-                                                  child: Text(
-                                                    availableFontNames[index],
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontFamily:
-                                                          availableFontNames[
-                                                              index],
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            child: Material(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  color: ColorConstant.dark5,
+                ),
+                width: MediaQuery.of(context).size.width / 3,
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: getPadding(top: 16, left: 42),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Font:',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      const SizedBox(height: 8.0),
+                      BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                        builder: (context, state) {
+                          return ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorConstant.dark4),
+                            ),
+                            onPressed: () {
+                              showGeneralDialog(
+                                context: context,
+                                barrierLabel: "Options",
+                                barrierDismissible: true,
+                                barrierColor: Colors.black.withOpacity(0.5),
+                                transitionDuration:
+                                    const Duration(milliseconds: 300),
+                                pageBuilder: (BuildContext buildContext,
+                                    Animation animation,
+                                    Animation secondaryAnimation) {
+                                  return Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Material(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20),
+                                      ),
+                                      child: BlocBuilder<TheloopThemeBloc,
+                                          TheloopThemeState>(
+                                        builder: (context, state) {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color: ColorConstant.dark5,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                bottomLeft: Radius.circular(20),
+                                              ),
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3, // 1/3 screen width
+
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  availableFontNames.length,
+                                              itemBuilder: (context, index) {
+                                                return ListTile(
+                                                  title: Padding(
+                                                    padding:
+                                                        getPadding(top: 28),
+                                                    child: Text(
+                                                      availableFontNames[index],
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontFamily:
+                                                            availableFontNames[
+                                                                index],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                onTap: () {
-                                                  final theloopThemeBloc =
-                                                      BlocProvider.of<
-                                                              TheloopThemeBloc>(
-                                                          context);
-                                                  theloopThemeBloc.add(
-                                                    SetFontEvent(
-                                                      newFontName:
-                                                          availableFontNames[
-                                                              index],
-                                                    ),
-                                                  );
-                                                  Navigator.pop(context);
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      },
+                                                  onTap: () {
+                                                    final theloopThemeBloc =
+                                                        BlocProvider.of<
+                                                                TheloopThemeBloc>(
+                                                            context);
+                                                    theloopThemeBloc.add(
+                                                      SetFontEvent(
+                                                        newFontName:
+                                                            availableFontNames[
+                                                                index],
+                                                      ),
+                                                    );
+                                                    Navigator.pop(context);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                state.fontName,
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontFamily: state.fontName,
-                                    color: Colors.white),
-                              ),
-                            ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                Text(
+                                  state.fontName,
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontFamily: state.fontName,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      Padding(
+                        padding: getPadding(bottom: 8),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 3.9,
+                        child: const Divider(color: Colors.white),
+                      ),
+                      // Font Size Selection
+                      Padding(
+                        padding: getPadding(top: 12, bottom: 12),
+                        child: const Text(
+                          'Font Size:',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
                           ),
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: getPadding(bottom: 8),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3.9,
-                      child: const Divider(color: Colors.white),
-                    ),
-                    // Font Size Selection
-                    Padding(
-                      padding: getPadding(top: 12, bottom: 12),
-                      child: const Text(
-                        'Font Size:',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
                         ),
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorConstant.dark4),
+                            ),
+                            child: const Text("Small"),
+                            onPressed: () {
+                              // Update your font size to Small
+                              BlocProvider.of<TheloopThemeBloc>(context).add(
+                                  const SetFontSizeEvent(
+                                      newFontSize: FontSize.small));
+                            },
                           ),
-                          child: const Text("Small"),
-                          onPressed: () {
-                            // Update your font size to Small
-                            BlocProvider.of<TheloopThemeBloc>(context).add(
-                                const SetFontSizeEvent(
-                                    newFontSize: FontSize.small));
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorConstant.dark4),
+                            ),
+                            child: const Text("Medium"),
+                            onPressed: () {
+                              // Update your font size to Medium
+                              BlocProvider.of<TheloopThemeBloc>(context).add(
+                                  const SetFontSizeEvent(
+                                      newFontSize: FontSize.medium));
+                            },
                           ),
-                          child: const Text("Medium"),
-                          onPressed: () {
-                            // Update your font size to Medium
-                            BlocProvider.of<TheloopThemeBloc>(context).add(
-                                const SetFontSizeEvent(
-                                    newFontSize: FontSize.medium));
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorConstant.dark4),
+                            ),
+                            child: const Text("Large"),
+                            onPressed: () {
+                              // Update your font size to Large
+                              BlocProvider.of<TheloopThemeBloc>(context).add(
+                                  const SetFontSizeEvent(
+                                      newFontSize: FontSize.big));
+                            },
                           ),
-                          child: const Text("Large"),
-                          onPressed: () {
-                            // Update your font size to Large
-                            BlocProvider.of<TheloopThemeBloc>(context).add(
-                                const SetFontSizeEvent(
-                                    newFontSize: FontSize.big));
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

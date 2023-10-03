@@ -55,21 +55,21 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: AppStyle.txtOpenSansBold24(context),
           ),
         ),
-        actions: [
-          AppbarImage(
-            height: getSize(
-              28,
-            ),
-            width: getSize(
-              28,
-            ),
-            svgPath: ImageConstant.searchIcon,
-            margin: getMargin(
-              left: size.width * 0.05,
-              top: 11,
-              right: 22,
-            ),
-          ),
+        actions: const [
+          // AppbarImage(
+          //   height: getSize(
+          //     28,
+          //   ),
+          //   width: getSize(
+          //     28,
+          //   ),
+          //   svgPath: ImageConstant.searchIcon,
+          //   margin: getMargin(
+          //     left: size.width * 0.05,
+          //     top: 11,
+          //     right: 22,
+          //   ),
+          // ),
 
           /// Notification button if needed
           // AppbarImage(
