@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:bookflow/core/utils/image_constant.dart';
-import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
+import 'package:bookflow/presentation/library_screen/widgets/library_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
-import '../../theme/app_style.dart';
 import '../the_loop_screen/the_loop_screen.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -176,22 +175,22 @@ class _LibraryScreenState extends State<LibraryScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const HomeScreenAppBar(),
-            Padding(
-              padding: getPadding(
-                top: height * 0.005, // 1% of screen height
-                left: width * 0.07, // 7% of screen width
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text(
-                  "Library",
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSansBold24(context),
-                ),
-              ),
-            ),
+            const LibraryAppBar(),
+            // Padding(
+            //   padding: getPadding(
+            //     top: height * 0.005, // 1% of screen height
+            //     left: width * 0.07, // 7% of screen width
+            //   ),
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: Text(
+            //       "Library",
+            //       overflow: TextOverflow.ellipsis,
+            //       textAlign: TextAlign.left,
+            //       style: AppStyle.txtOpenSansBold24(context),
+            //     ),
+            //   ),
+            // ),
             Expanded(
               child: SingleChildScrollView(
                 padding: getPadding(
