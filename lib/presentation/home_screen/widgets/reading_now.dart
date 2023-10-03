@@ -25,17 +25,17 @@ class ReadingNowBlock extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "Reading Now",
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-              style: AppStyle.txtOpenSansBold24(context),
-            ),
+            // Text(
+            //   "Reading Now",
+            //   overflow: TextOverflow.ellipsis,
+            //   textAlign: TextAlign.left,
+            //   style: AppStyle.txtOpenSansBold24(context),
+            // ),
             Container(
               height: size.height * 0.239,
               width: size.width * 0.9,
               margin: getMargin(
-                top: size.height * 0.02,
+                top: size.height * 0.01,
               ),
               child: Stack(
                 alignment: Alignment.center,

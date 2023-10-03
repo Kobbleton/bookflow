@@ -25,11 +25,12 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const HomeScreenAppBar(),
+          const HomeScreenAppBar(
+            heading: 'Reading Now',
+          ),
           Stack(children: [
             Padding(
-              padding:
-                  getPadding(top: height * 0.02), // 2% of the screen height
+              padding: getPadding(top: height * 0.0), // 2% of the screen height
               child: const GradientBackgound()
                   .animate()
                   .move(begin: const Offset(-16, 0), curve: Curves.easeOutQuad)
@@ -39,7 +40,7 @@ class HomePage extends StatelessWidget {
               padding: getPadding(
                   left: width * 0.06, // 6% of the screen width
                   right: width * 0.06, // 6% of the screen width
-                  bottom: height * 0.006, // 0.6% of the screen height
+                  bottom: height * 0, // 0.6% of the screen height
                   top: 4),
               child: const ReadingNowBlock()
                   .animate()

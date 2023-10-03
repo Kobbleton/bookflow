@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
@@ -7,14 +9,19 @@ import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_image_view.dart';
 
 class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String heading;
+
   const HomeScreenAppBar({
     Key? key,
+    required this.heading,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: getPadding(left: size.width * 0.016),
+      padding: getPadding(
+          left: size.width * 0.016,
+          top: Platform.isAndroid ? size.height * 0.01 : 0),
       child: CustomAppBar(
         height: size.height * 0.05,
         leadingWidth: size.width * 0.14,
@@ -42,7 +49,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
             left: 12,
           ),
           child: Text(
-            "BookFlow",
+            heading,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
             style: AppStyle.txtOpenSansBold24(context),

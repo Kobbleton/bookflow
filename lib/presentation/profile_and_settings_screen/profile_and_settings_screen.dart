@@ -59,7 +59,9 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Column(
           children: [
-            const HomeScreenAppBar(),
+            const HomeScreenAppBar(
+              heading: 'Settings',
+            ),
             Expanded(
               child: SingleChildScrollView(
                 padding: getPadding(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../core/utils/image_constant.dart';
@@ -14,7 +16,9 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: getPadding(left: size.width * 0.016),
+      padding: getPadding(
+          left: size.width * 0.016,
+          top: Platform.isAndroid ? size.height * 0.01 : 0),
       child: CustomAppBar(
         height: size.height * 0.05,
         leadingWidth: size.width * 0.14,
