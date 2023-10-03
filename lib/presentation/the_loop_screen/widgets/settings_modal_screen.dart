@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -273,15 +274,93 @@ class SettingsModalScreen {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      // Font Size Selection
+                      Padding(
+                        padding: getPadding(top: 8, bottom: 12),
+                        child: const Text(
+                          'Font Size:',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                        builder: (context, state) {
+                          FontSize currentFontSize = state.fontSize;
+                          return DefaultTextStyle(
+                            style: const TextStyle(
+                                color: Colors.white), // Custom Text Color
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    12), // Adjust the corner radius
+                                color: ColorConstant
+                                    .dark4, // Custom Background Color
+                              ),
+                              child: CupertinoSlidingSegmentedControl<FontSize>(
+                                thumbColor: ColorConstant.cyan500,
+                                backgroundColor: ColorConstant.dark4,
+                                children: const {
+                                  FontSize.small: SizedBox(
+                                    width: 56, // Custom Width
+                                    height: 20, // Custom Height
+                                    child: Center(child: Text("Small")),
+                                  ),
+                                  FontSize.medium: SizedBox(
+                                    width: 56,
+                                    height: 20,
+                                    child: Center(child: Text("Medium")),
+                                  ),
+                                  FontSize.big: SizedBox(
+                                    width: 56,
+                                    height: 20,
+                                    child: Center(child: Text("Large")),
+                                  ),
+                                },
+                                groupValue:
+                                    currentFontSize, // The current selected value
+                                onValueChanged: (FontSize? newSize) {
+                                  if (newSize != null) {
+                                    // Ensure the value is not null before using
+                                    // Dispatch the event to update the font size in the Bloc
+                                    BlocProvider.of<TheloopThemeBloc>(context)
+                                        .add(
+                                      SetFontSizeEvent(newFontSize: newSize),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Padding(
+                        padding: getPadding(bottom: 10),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 3.9,
+                        child: const Divider(color: Colors.white),
+                      ),
+                      Padding(
+                        padding: getPadding(bottom: 10),
+                      ),
                       const Text(
                         'Font:',
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 4.0),
                       BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
                         builder: (context, state) {
                           return ElevatedButton(
                             style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      12.0), // The corner radius, you can adjust it as you like
+                                ),
+                              ),
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   ColorConstant.dark4),
                             ),
@@ -376,69 +455,6 @@ class SettingsModalScreen {
                             ),
                           );
                         },
-                      ),
-                      Padding(
-                        padding: getPadding(bottom: 8),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 3.9,
-                        child: const Divider(color: Colors.white),
-                      ),
-                      // Font Size Selection
-                      Padding(
-                        padding: getPadding(top: 12, bottom: 12),
-                        child: const Text(
-                          'Font Size:',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  ColorConstant.dark4),
-                            ),
-                            child: const Text("Small"),
-                            onPressed: () {
-                              // Update your font size to Small
-                              BlocProvider.of<TheloopThemeBloc>(context).add(
-                                  const SetFontSizeEvent(
-                                      newFontSize: FontSize.small));
-                            },
-                          ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  ColorConstant.dark4),
-                            ),
-                            child: const Text("Medium"),
-                            onPressed: () {
-                              // Update your font size to Medium
-                              BlocProvider.of<TheloopThemeBloc>(context).add(
-                                  const SetFontSizeEvent(
-                                      newFontSize: FontSize.medium));
-                            },
-                          ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  ColorConstant.dark4),
-                            ),
-                            child: const Text("Large"),
-                            onPressed: () {
-                              // Update your font size to Large
-                              BlocProvider.of<TheloopThemeBloc>(context).add(
-                                  const SetFontSizeEvent(
-                                      newFontSize: FontSize.big));
-                            },
-                          ),
-                        ],
                       ),
                     ],
                   ),
