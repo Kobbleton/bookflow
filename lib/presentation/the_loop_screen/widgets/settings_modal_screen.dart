@@ -43,7 +43,7 @@ class SettingsModalScreen {
                 ),
                 color: ColorConstant.dark5,
               ),
-              width: MediaQuery.of(context).size.width / 3,
+              width: MediaQuery.of(context).size.width / 2.7,
               height: MediaQuery.of(context).size.height,
               child: Padding(
                 padding: getPadding(top: 16, left: 42),
@@ -97,7 +97,9 @@ class SettingsModalScreen {
                             curve: Curves.easeOutQuad),
                     const SizedBox(height: 8.0),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 3.9,
+                      width: Platform.isAndroid
+                          ? MediaQuery.of(context).size.width / 3.7
+                          : MediaQuery.of(context).size.width / 3.9,
                       child: const Divider(color: Colors.white),
                     ),
                     const Text(
@@ -266,7 +268,7 @@ class SettingsModalScreen {
                   ),
                   color: ColorConstant.dark5,
                 ),
-                width: MediaQuery.of(context).size.width / 3,
+                width: MediaQuery.of(context).size.width / 2.7,
                 height: MediaQuery.of(context).size.height,
                 child: Padding(
                   padding: getPadding(top: 16, left: 42),
@@ -301,21 +303,21 @@ class SettingsModalScreen {
                               child: CupertinoSlidingSegmentedControl<FontSize>(
                                 thumbColor: ColorConstant.cyan500,
                                 backgroundColor: ColorConstant.dark4,
-                                children: const {
+                                children: {
                                   FontSize.small: SizedBox(
-                                    width: 56, // Custom Width
+                                    width: size.width * 0.136, // Custom Width
                                     height: 20, // Custom Height
-                                    child: Center(child: Text("Small")),
+                                    child: const Center(child: Text("Small")),
                                   ),
                                   FontSize.medium: SizedBox(
-                                    width: 56,
+                                    width: size.width * 0.136,
                                     height: 20,
-                                    child: Center(child: Text("Medium")),
+                                    child: const Center(child: Text("Medium")),
                                   ),
                                   FontSize.big: SizedBox(
-                                    width: 56,
+                                    width: size.width * 0.136,
                                     height: 20,
-                                    child: Center(child: Text("Large")),
+                                    child: const Center(child: Text("Large")),
                                   ),
                                 },
                                 groupValue:
@@ -339,7 +341,9 @@ class SettingsModalScreen {
                         padding: getPadding(bottom: 10),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 3.9,
+                        width: Platform.isAndroid
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 3.8,
                         child: const Divider(color: Colors.white),
                       ),
                       Padding(
@@ -397,7 +401,7 @@ class SettingsModalScreen {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                3, // 1/3 screen width
+                                                2.7, // 1/3 screen width
 
                                             child: ListView.builder(
                                               itemCount:
@@ -405,8 +409,8 @@ class SettingsModalScreen {
                                               itemBuilder: (context, index) {
                                                 return ListTile(
                                                   title: Padding(
-                                                    padding:
-                                                        getPadding(top: 28),
+                                                    padding: getPadding(
+                                                        top: 24, left: 26),
                                                     child: Text(
                                                       availableFontNames[index],
                                                       style: TextStyle(
@@ -502,7 +506,7 @@ class SettingsModalScreen {
             fit: BoxFit.cover,
           ),
         ),
-        width: 80,
+        width: size.width * 0.24,
         height: 60,
         child: Center(
           child: Text(
@@ -534,7 +538,10 @@ class SettingsModalScreen {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: color,
-        minimumSize: const Size(80, 60),
+        minimumSize: Size(
+          size.width * 0.24,
+          60,
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, // Center vertically
