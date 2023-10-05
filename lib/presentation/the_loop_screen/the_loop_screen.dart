@@ -262,7 +262,7 @@ class TheloopScreenState extends State<TheloopScreen>
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 2),
+                                    padding: const EdgeInsets.only(bottom: 12),
                                     child: GestureDetector(
                                       onHorizontalDragUpdate: (details) {
                                         updateIndex(details.localPosition.dx);
@@ -340,7 +340,7 @@ class TheloopScreenState extends State<TheloopScreen>
                               child: Align(
                                 alignment: Alignment.bottomLeft,
                                 child: Padding(
-                                  padding: getPadding(left: 28, bottom: 0),
+                                  padding: getPadding(left: 34, bottom: 0),
                                   child: Stack(
                                       alignment: AlignmentDirectional.center,
                                       children: [
