@@ -106,6 +106,7 @@ class TheloopScreenState extends State<TheloopScreen>
           }
         });
 
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     SystemChrome.setPreferredOrientations([
