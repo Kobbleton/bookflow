@@ -305,17 +305,17 @@ class SettingsModalScreen {
                                 backgroundColor: ColorConstant.dark4,
                                 children: {
                                   FontSize.small: SizedBox(
-                                    width: size.width * 0.136, // Custom Width
+                                    width: size.width * 0.139, // Custom Width
                                     height: 20, // Custom Height
                                     child: const Center(child: Text("Small")),
                                   ),
                                   FontSize.medium: SizedBox(
-                                    width: size.width * 0.136,
+                                    width: size.width * 0.139,
                                     height: 20,
                                     child: const Center(child: Text("Medium")),
                                   ),
                                   FontSize.big: SizedBox(
-                                    width: size.width * 0.136,
+                                    width: size.width * 0.139,
                                     height: 20,
                                     child: const Center(child: Text("Large")),
                                   ),
@@ -401,8 +401,7 @@ class SettingsModalScreen {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                2.7, // 1/3 screen width
-
+                                                2.7,
                                             child: ListView.builder(
                                               itemCount:
                                                   availableFontNames.length,
@@ -410,7 +409,7 @@ class SettingsModalScreen {
                                                 return ListTile(
                                                   title: Padding(
                                                     padding: getPadding(
-                                                        top: 24, left: 26),
+                                                        top: 24, left: 0),
                                                     child: Text(
                                                       availableFontNames[index],
                                                       style: TextStyle(

@@ -288,7 +288,9 @@ class TheloopScreenState extends State<TheloopScreen>
                               child: Align(
                                 alignment: Alignment.bottomRight,
                                 child: Padding(
-                                  padding: getPadding(right: 60),
+                                  padding: getPadding(
+                                    right: 60,
+                                  ),
                                   child: Stack(
                                       alignment: AlignmentDirectional.center,
                                       children: [

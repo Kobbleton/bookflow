@@ -186,12 +186,20 @@ class IconSliderState extends State<IconSlider> {
                 opacity: showIcons ? 0 : 1,
                 child: GestureDetector(
                   child: Padding(
-                    padding: getPadding(
-                      right: 20,
-                    ),
-                    child: LoadingAnimationWidget.halfTriangleDot(
-                      color: Colors.white,
-                      size: 24,
+                    padding: getPadding(right: 20),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          width: 32, // Make this bigger or smaller as needed
+                          height: 32, // Make this bigger or smaller as needed
+                          color: Colors.transparent,
+                        ),
+                        LoadingAnimationWidget.halfTriangleDot(
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ],
                     ),
                   ),
                   onTap: () {
