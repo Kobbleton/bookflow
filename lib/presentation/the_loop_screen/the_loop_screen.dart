@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
+import 'package:bookflow/presentation/the_loop_screen/logic/timer_manager.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/progress_indicator.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/settings_modal_screen.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/switch_to_landscape.dart';
@@ -16,7 +17,6 @@ import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import '../../bloc/theloop_theme/theloop_theme_event.dart';
 import '../home_screen/home_screen.dart';
 import 'logic/drag_handler.dart';
-import 'logic/timer_manager.dart';
 
 class TheloopScreen extends StatefulWidget {
   final List<String> words; // List of words from the text to be read
@@ -58,7 +58,7 @@ class TheloopScreenState extends State<TheloopScreen>
   double accelerationFactor = 2.2;
 
   late Color backgroundColor;
-  late TimerManager timerManager;
+  late TimerManager? timerManager;
   late DragHandler dragHandler;
 
   void _saveLastDuration(int duration) async {
@@ -81,6 +81,29 @@ class TheloopScreenState extends State<TheloopScreen>
   @override
   void initState() {
     super.initState();
+    timerManager = TimerManager(
+        durationMilliseconds: durationMilliseconds,
+        updateWord: () {
+          if (index < widget.words.length) {
+            setState(() {
+              index++;
+              double progress = calculateProgress();
+
+              // Fetch the current state
+              final state = context.read<TheloopThemeBloc>().state;
+
+              // Add an event to update the progress
+              context
+                  .read<TheloopThemeBloc>()
+                  .add(UpdateProgressEvent(progress));
+
+              // Check if image switch is allowed
+              if (state.allowImageSwitch) {
+                // Logic to switch the image based on the new progress
+              }
+            });
+          }
+        });
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
@@ -94,49 +117,34 @@ class TheloopScreenState extends State<TheloopScreen>
     index = 0;
 
     _loadLastDuration().then((_) {
-      timerManager = TimerManager(
-          durationMilliseconds: durationMilliseconds,
-          updateWord: () {
-            if (index < widget.words.length) {
-              setState(() {
-                index++;
-                double progress = calculateProgress();
+      if (mounted) {
+        setState(() {
+          timerManager?.durationMilliseconds = durationMilliseconds;
+          timerManager?.updateDuration(
+              durationMilliseconds); // Updating timerManager's duration
+          timerManager?.listenToDurationUpdates(durationController.stream);
 
-                // Fetch the current state
-                final state = context.read<TheloopThemeBloc>().state;
-
-                // Add an event to update the progress
-                context
-                    .read<TheloopThemeBloc>()
-                    .add(UpdateProgressEvent(progress));
-
-                // Check if image switch is allowed
-                if (state.allowImageSwitch) {
-                  // Logic to switch the image based on the new progress
-                }
+          dragHandler = DragHandler(
+              index: index,
+              updateIndex: (deltaIndex) {
+                setState(() {
+                  index += deltaIndex;
+                  if (index < 0) index = 0;
+                  if (index >= widget.words.length) {
+                    index = widget.words.length - 1;
+                  }
+                });
               });
-            }
-          });
-
-      timerManager.listenToDurationUpdates(durationController.stream);
-
-      dragHandler = DragHandler(
-          index: index,
-          updateIndex: (deltaIndex) {
-            setState(() {
-              index += deltaIndex;
-              if (index < 0) index = 0;
-              if (index >= widget.words.length) index = widget.words.length - 1;
-            });
-          });
+        });
+      }
     });
   }
 
   @override
   void dispose() {
-    timerManager.stop();
+    timerManager?.stop();
     durationController.close();
-    timerManager.dispose();
+    timerManager?.dispose();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
@@ -147,14 +155,17 @@ class TheloopScreenState extends State<TheloopScreen>
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
     double closeButtonPadding = orientation == Orientation.landscape ? 18 : 40;
+    if (timerManager == null) {
+      return const CircularProgressIndicator(); // or some other loading widget
+    }
     return GestureDetector(
       onTap: () {
         setState(() {
           isPaused = !isPaused;
           if (isPaused) {
-            timerManager.stop();
+            timerManager?.stop();
           } else {
-            timerManager.start();
+            timerManager?.start();
           }
         });
       },
@@ -208,13 +219,13 @@ class TheloopScreenState extends State<TheloopScreen>
                         builder: (context, orientation) {
                           if (orientation == Orientation.landscape) {
                             if (isPaused) {
-                              timerManager.stop();
+                              timerManager?.stop();
                             } else {
-                              timerManager.start();
+                              timerManager?.start();
                             }
                             return LoopText(widget: widget, index: index);
                           } else {
-                            timerManager.stop();
+                            timerManager?.stop();
                             return const SwitchToLandacapeModeScreen();
                           }
                         },

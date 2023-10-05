@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
@@ -63,12 +64,17 @@ class _AddBookButtonState extends State<AddBookButton> {
     }
   }
 
+  void handleTap(BuildContext context) async {
+    HapticFeedback.heavyImpact(); // First tap
+    await Future.delayed(const Duration(milliseconds: 100)); // Wait for 100ms
+    HapticFeedback.heavyImpact(); // Second tap
+    Future.delayed(Duration.zero, () => pickTextFile(context));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        await pickTextFile(context);
-      },
+      onTap: () => handleTap(context),
       child: SizedBox(
         height: size.height * 0.28,
         width: size.width * 0.42,

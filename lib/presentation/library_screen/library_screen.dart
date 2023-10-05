@@ -4,7 +4,9 @@ import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:bookflow/presentation/library_screen/widgets/library_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +63,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
     } else {
       // handle the error: show an alert dialog or something similar
     }
+  }
+
+  void handleTap(BuildContext context) async {
+    HapticFeedback.mediumImpact(); // First tap
+    await Future.delayed(const Duration(milliseconds: 100)); // Wait for 100ms
+    HapticFeedback.mediumImpact(); // Second tap
   }
 
   Future<void> saveBooks() async {
@@ -218,11 +226,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                     ? ImageConstant.darkMagicCoverStart
                                     : ImageConstant.magicCover1,
                             text: 'Start here',
-                            onLongPress: () {
-                              print("Long press detected");
-                              _showContextMenu('Start here');
+                            // onLongPress: () {
+                            //   print("Long press detected");
+                            //   _showContextMenu('Start here');
+                            // },
+                            onCardTap: (String) {
+                              handleTap;
                             },
-                            onCardTap: (String) {},
                           ),
                         ],
                       ),
@@ -241,10 +251,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   ? ImageConstant.darkMagicCoverQ
                                   : ImageConstant.magicCover1,
                               text: 'FAQ',
-                              onLongPress: () {
-                                print("Long press detected");
-                                _showContextMenu('FAQ');
-                              },
+                              // onLongPress: () {
+                              //   print("Long press detected");
+                              //   _showContextMenu('FAQ');
+                              // },
                               onCardTap: (String) {},
                             ),
                             CustomCard(
@@ -253,31 +263,82 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   ? ImageConstant.darkMagicCoverNew
                                   : ImageConstant.magicCover1,
                               text: 'Whats new',
-                              onLongPress: () {
-                                print("Long press detected");
-                                _showContextMenu('Whats new');
-                              },
+                              // onLongPress: () {
+                              //   print("Long press detected");
+                              //   _showContextMenu('Whats new');
+                              // },
                               onCardTap: (String) {},
                             ),
                             for (String bookName in addedBooks)
-                              CustomCard(
-                                imagePath: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? ImageConstant.darkMagicCoverNew
-                                    : ImageConstant.magicCover1,
-                                text: bookName,
-                                onLongPress: () {
-                                  print("Long press detected");
-                                  _showContextMenu(bookName);
-                                },
-                                onCardTap: (filePath) {
-                                  // assuming you get filePath from somewhere or it's the same as bookName
-                                  onBookClicked(bookName, context);
-                                },
+                              CupertinoContextMenu(
+                                enableHapticFeedback: true,
+
+                                actions: <Widget>[
+                                  CupertinoContextMenuAction(
+                                    trailingIcon: Icons.edit,
+                                    child: const Text('Rename'),
+                                    onPressed: () {
+                                      Navigator.pop(
+                                          context); // To close the context menu
+                                      _showRenameDialog(bookName);
+                                    },
+                                  ),
+                                  CupertinoContextMenuAction(
+                                    trailingIcon: Icons.delete,
+                                    isDestructiveAction: true,
+                                    onPressed: () {
+                                      Navigator.pop(
+                                          context); // To close the context menu
+                                      setState(() {
+                                        addedBooks.remove(bookName);
+                                      });
+                                      saveBooks();
+                                    },
+                                    child: const Text('Delete'),
+                                  ),
+                                ],
+                                // child:
+                                //     Image.asset('assets/images/bookcover1.png'),
+                                child: CustomCard(
+                                  // onLongPress: () {},
+                                  imagePath: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? ImageConstant.darkMagicCoverNew
+                                      : ImageConstant.magicCover1,
+                                  text: bookName,
+                                  onCardTap: (filePath) {
+                                    // assuming you get filePath from somewhere or it's the same as bookName
+                                    onBookClicked(bookName, context);
+                                  },
+                                ),
                               ),
                           ],
                         ),
                       ),
+                      CupertinoContextMenu(
+                        actions: <Widget>[
+                          CupertinoContextMenuAction(
+                            trailingIcon: Icons.edit,
+                            child: const Text('Rename'),
+                            onPressed: () {
+                              Navigator.pop(
+                                  context); // To close the context menu
+                            },
+                          ),
+                          CupertinoContextMenuAction(
+                            trailingIcon: Icons.delete,
+                            isDestructiveAction: true,
+                            onPressed: () {
+                              Navigator.pop(
+                                  context); // To close the context menu
+                              setState(() {});
+                              saveBooks();
+                            },
+                            child: const Text('Delete'),
+                          ),
+                        ],
+                        child: Image.asset('assets/images/bookcover1.png'),
+                      )
                     ],
                   ),
                 ),

@@ -9,7 +9,7 @@ import '../../widgets/custom_image_view.dart';
 class CustomCard extends StatelessWidget {
   final String imagePath;
   final String text;
-  final Function onLongPress;
+  // final Function onLongPress;
 
   final Function(String) onCardTap;
 
@@ -17,14 +17,14 @@ class CustomCard extends StatelessWidget {
       {Key? key,
       required this.imagePath,
       required this.text,
-      required this.onLongPress,
+      // required this.onLongPress,
       required this.onCardTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () => onLongPress(),
+      // onLongPress: () => onLongPress(),
       onTap: () => onCardTap(text),
       child: SizedBox(
         height: size.height * 0.28,
