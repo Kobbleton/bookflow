@@ -11,7 +11,11 @@ import '../../widgets/custom_image_view.dart';
 class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LibraryAppBar({
     Key? key,
+    required this.isGridView,
+    required this.toggleView,
   }) : super(key: key);
+  final bool isGridView;
+  final VoidCallback toggleView;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +73,10 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
           // ),
           SizedBox(
             width: size.width * 0.62, // Choose a width that suits you
-            child: const IconSlider(),
+            child: IconSlider(
+              isGridView: isGridView,
+              toggleView: toggleView,
+            ),
           ),
 
           /// Notification button if needed
@@ -98,7 +105,12 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class IconSlider extends StatefulWidget {
-  const IconSlider({super.key});
+  const IconSlider(
+      {Key? key, required this.isGridView, required this.toggleView})
+      : super(key: key);
+
+  final bool isGridView;
+  final VoidCallback toggleView;
 
   @override
   IconSliderState createState() => IconSliderState();
@@ -123,6 +135,9 @@ class IconSliderState extends State<IconSlider> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
+                  const SizedBox(
+                    width: 28,
+                  ),
                   IconButton(
                     icon: const Icon(Icons.filter_list),
                     onPressed: () {
@@ -138,18 +153,18 @@ class IconSliderState extends State<IconSlider> {
                   ),
                   const SizedBox(width: 0),
                   IconButton(
-                    icon: const Icon(Icons.grid_view),
-                    onPressed: () {
-                      // Add your action here
-                    },
+                    icon: Icon(
+                        widget.isGridView ? Icons.view_list : Icons.grid_view),
+                    onPressed: widget.toggleView,
                   ),
-                  const SizedBox(width: 0),
-                  IconButton(
-                    icon: const Icon(Icons.view_list),
-                    onPressed: () {
-                      // Add your action here
-                    },
-                  ),
+
+                  // const SizedBox(width: 0),
+                  // IconButton(
+                  //   icon: const Icon(Icons.view_list),
+                  //   onPressed: () {
+                  //     // Add your action here
+                  //   },
+                  // ),
                   IconButton(
                     icon: const Icon(Icons.search),
                     onPressed: () {
@@ -169,7 +184,7 @@ class IconSliderState extends State<IconSlider> {
                   opacity: showIcons ? 1 : 0,
                   child: Padding(
                     padding: getPadding(
-                      right: 6,
+                      right: 10,
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.arrow_right), // small arrow icon

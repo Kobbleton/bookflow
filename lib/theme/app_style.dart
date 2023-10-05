@@ -110,11 +110,11 @@ class AppStyle {
         fontWeight: FontWeight.w700,
       );
   static TextStyle txtOpenSansBold22(BuildContext context) => TextStyle(
-      color: Theme.of(context).textTheme.bodyLarge?.color,
-      fontSize: getFontSize(22),
-      fontFamily: 'Open Sans',
-      fontWeight: FontWeight.w700,
-      letterSpacing: 1.1);
+        color: Theme.of(context).textTheme.bodyLarge?.color,
+        fontSize: getFontSize(22),
+        fontFamily: 'Open Sans',
+        fontWeight: FontWeight.w700,
+      );
 
   static TextStyle txtOpenSansBold20white(BuildContext context) => TextStyle(
         color: ColorConstant.white,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import '../../../core/utils/color_constant.dart';
@@ -46,18 +47,49 @@ class _AddBookButtonState extends State<AddBookButton> {
 
       showDialog(
         context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Wohoo!"),
-            content: const Text("Book Added Successfully"),
-            actions: [
-              TextButton(
-                child: const Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop(); // Closes the dialog
-                },
+        builder: (dialogContext) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            backgroundColor: ColorConstant.dark2.withOpacity(0.9),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 80, // Sets to 100, less than 150
+                maxHeight: 220,
               ),
-            ],
+              child: Container(
+                padding: getPadding(top: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Book added',
+                      style: AppStyle.txtOpenSansBold22(dialogContext),
+                    ),
+                    const SizedBox(height: 0),
+                    // your Lottie animation or other content here
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(dialogContext); // Closes the dialog
+                      },
+                      child: Center(
+                        child: Lottie.asset(
+                          'assets/animations/succes_animation.json',
+                          width: 160,
+                          height: 160,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         },
       );

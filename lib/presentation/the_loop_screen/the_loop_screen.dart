@@ -361,7 +361,7 @@ class TheloopScreenState extends State<TheloopScreen>
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      0.12,
+                                                      0.11,
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
@@ -375,7 +375,7 @@ class TheloopScreenState extends State<TheloopScreen>
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      0.12,
+                                                      0.11,
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
@@ -389,7 +389,7 @@ class TheloopScreenState extends State<TheloopScreen>
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      0.12,
+                                                      0.11,
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *

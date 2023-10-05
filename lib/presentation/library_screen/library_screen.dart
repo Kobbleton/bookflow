@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
@@ -26,6 +28,7 @@ class LibraryScreen extends StatefulWidget {
 class _LibraryScreenState extends State<LibraryScreen> {
   List<String> addedBooks = [];
   Map<String, String> bookPaths = {};
+  bool isGridView = true; // true for GridView, false for ListView
 
   @override
   void initState() {
@@ -136,6 +139,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
       builder: (BuildContext bc) {
         return SafeArea(
           child: Wrap(
+            direction: isGridView ? Axis.horizontal : Axis.vertical,
             children: [
               ListTile(
                 leading: const Icon(Icons.edit),
@@ -166,6 +170,187 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
   }
 
+  Widget buildGridView() {
+    return SingleChildScrollView(
+      padding: getPadding(
+        top: height * 0.015, // 1.5% of screen height
+      ),
+      child: Padding(
+        padding: getPadding(
+          left: width * 0.06, // 6% of screen width
+          right: width * 0.05, // 5% of screen width
+          bottom: height * 0.005, // 0.5% of screen height
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Wrap(
+              direction: isGridView ? Axis.horizontal : Axis.vertical,
+              spacing: 18, // Gap between adjacent chips
+              runSpacing: 22, // Gap between lines
+              children: <Widget>[
+                AddBookButton(
+                  onBookAdded: onBookAdded,
+                ), // Pass the callback),
+                CustomCard(
+                  imagePath: Theme.of(context).brightness == Brightness.dark
+                      ? ImageConstant.darkMagicCoverStart
+                      : ImageConstant.magicCover1,
+                  text: 'Start here',
+                  // onLongPress: () {
+                  //   print("Long press detected");
+                  //   _showContextMenu('Start here');
+                  // },
+                  onCardTap: (String) {
+                    handleTap;
+                  },
+                ),
+              ],
+            ),
+            Padding(
+              padding: getPadding(
+                top: 22,
+                right: 0,
+              ),
+              child: Wrap(
+                direction: isGridView ? Axis.horizontal : Axis.vertical,
+                spacing: 18, // Gap between adjacent chips
+                runSpacing: 22, // Gap between lines
+                children: <Widget>[
+                  CustomCard(
+                    imagePath: Theme.of(context).brightness == Brightness.dark
+                        ? ImageConstant.darkMagicCoverQ
+                        : ImageConstant.magicCover1,
+                    text: 'FAQ',
+                    // onLongPress: () {
+                    //   print("Long press detected");
+                    //   _showContextMenu('FAQ');
+                    // },
+                    onCardTap: (String) {},
+                  ),
+                  CustomCard(
+                    imagePath: Theme.of(context).brightness == Brightness.dark
+                        ? ImageConstant.darkMagicCoverNew
+                        : ImageConstant.magicCover1,
+                    text: 'Whats new',
+                    // onLongPress: () {
+                    //   print("Long press detected");
+                    //   _showContextMenu('Whats new');
+                    // },
+                    onCardTap: (String) {},
+                  ),
+                  for (String bookName in addedBooks)
+                    CupertinoContextMenu(
+                      enableHapticFeedback: true,
+
+                      actions: <Widget>[
+                        CupertinoContextMenuAction(
+                          trailingIcon: Icons.edit,
+                          child: const Text('Rename'),
+                          onPressed: () {
+                            Navigator.pop(context); // To close the context menu
+                            _showRenameDialog(bookName);
+                          },
+                        ),
+                        CupertinoContextMenuAction(
+                          trailingIcon: Icons.delete,
+                          isDestructiveAction: true,
+                          onPressed: () {
+                            Navigator.pop(context); // To close the context menu
+                            setState(() {
+                              addedBooks.remove(bookName);
+                            });
+                            saveBooks();
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ],
+                      // child:
+                      //     Image.asset('assets/images/bookcover1.png'),
+                      child: CustomCard(
+                        // onLongPress: () {},
+                        imagePath:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? ImageConstant.darkMagicCoverNew
+                                : ImageConstant.magicCover1,
+                        text: bookName,
+                        onCardTap: (filePath) {
+                          // assuming you get filePath from somewhere or it's the same as bookName
+                          onBookClicked(bookName, context);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildListView() {
+    return ListView.builder(
+      itemCount: addedBooks.length, // Replace with the length of your list
+      itemBuilder: (BuildContext context, int index) {
+        String bookName = addedBooks[index]; // Replace with your book data
+
+        return Padding(
+          padding: getPadding(
+            top: height * 0.015, // 1.5% of screen height
+            left: width * 0.06, // 6% of screen width
+            right: width * 0.05, // 5% of screen width
+            bottom: height * 0.005, // 0.5% of screen height
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              // Book Card on the left
+              CustomCard(
+                imagePath: Theme.of(context).brightness == Brightness.dark
+                    ? ImageConstant.darkMagicCoverNew
+                    : ImageConstant.magicCover1,
+                text: bookName,
+                onCardTap: (filePath) {
+                  // assuming you get filePath from somewhere or it's the same as bookName
+                  onBookClicked(bookName, context);
+                },
+              ),
+
+              // Spacing
+              const SizedBox(width: 20),
+
+              // Book name and progress indicator on the right
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      bookName,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    LinearProgressIndicator(
+                      value: 0.5, // Use your actual progress value
+                      backgroundColor: Colors.grey[200],
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(ColorConstant.cyan500),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -183,7 +368,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const LibraryAppBar(),
+            LibraryAppBar(
+              isGridView: isGridView,
+              toggleView: () {
+                setState(() {
+                  isGridView = !isGridView;
+                });
+              },
+            ),
             // Padding(
             //   padding: getPadding(
             //     top: height * 0.005, // 1% of screen height
@@ -200,125 +392,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             //   ),
             // ),
             Expanded(
-              child: SingleChildScrollView(
-                padding: getPadding(
-                  top: height * 0.015, // 1.5% of screen height
-                ),
-                child: Padding(
-                  padding: getPadding(
-                    left: width * 0.06, // 6% of screen width
-                    right: width * 0.05, // 5% of screen width
-                    bottom: height * 0.005, // 0.5% of screen height
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Wrap(
-                        spacing: 18, // Gap between adjacent chips
-                        runSpacing: 22, // Gap between lines
-                        children: <Widget>[
-                          AddBookButton(
-                            onBookAdded: onBookAdded,
-                          ), // Pass the callback),
-                          CustomCard(
-                            imagePath:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? ImageConstant.darkMagicCoverStart
-                                    : ImageConstant.magicCover1,
-                            text: 'Start here',
-                            // onLongPress: () {
-                            //   print("Long press detected");
-                            //   _showContextMenu('Start here');
-                            // },
-                            onCardTap: (String) {
-                              handleTap;
-                            },
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: getPadding(
-                          top: 22,
-                          right: 0,
-                        ),
-                        child: Wrap(
-                          spacing: 18, // Gap between adjacent chips
-                          runSpacing: 22, // Gap between lines
-                          children: <Widget>[
-                            CustomCard(
-                              imagePath: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? ImageConstant.darkMagicCoverQ
-                                  : ImageConstant.magicCover1,
-                              text: 'FAQ',
-                              // onLongPress: () {
-                              //   print("Long press detected");
-                              //   _showContextMenu('FAQ');
-                              // },
-                              onCardTap: (String) {},
-                            ),
-                            CustomCard(
-                              imagePath: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? ImageConstant.darkMagicCoverNew
-                                  : ImageConstant.magicCover1,
-                              text: 'Whats new',
-                              // onLongPress: () {
-                              //   print("Long press detected");
-                              //   _showContextMenu('Whats new');
-                              // },
-                              onCardTap: (String) {},
-                            ),
-                            for (String bookName in addedBooks)
-                              CupertinoContextMenu(
-                                enableHapticFeedback: true,
-
-                                actions: <Widget>[
-                                  CupertinoContextMenuAction(
-                                    trailingIcon: Icons.edit,
-                                    child: const Text('Rename'),
-                                    onPressed: () {
-                                      Navigator.pop(
-                                          context); // To close the context menu
-                                      _showRenameDialog(bookName);
-                                    },
-                                  ),
-                                  CupertinoContextMenuAction(
-                                    trailingIcon: Icons.delete,
-                                    isDestructiveAction: true,
-                                    onPressed: () {
-                                      Navigator.pop(
-                                          context); // To close the context menu
-                                      setState(() {
-                                        addedBooks.remove(bookName);
-                                      });
-                                      saveBooks();
-                                    },
-                                    child: const Text('Delete'),
-                                  ),
-                                ],
-                                // child:
-                                //     Image.asset('assets/images/bookcover1.png'),
-                                child: CustomCard(
-                                  // onLongPress: () {},
-                                  imagePath: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? ImageConstant.darkMagicCoverNew
-                                      : ImageConstant.magicCover1,
-                                  text: bookName,
-                                  onCardTap: (filePath) {
-                                    // assuming you get filePath from somewhere or it's the same as bookName
-                                    onBookClicked(bookName, context);
-                                  },
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              child: isGridView ? buildGridView() : buildListView(),
             )
                 .animate()
                 .move(begin: const Offset(0, 16), curve: Curves.easeOutQuad)
