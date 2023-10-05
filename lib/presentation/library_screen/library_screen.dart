@@ -315,30 +315,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                           ],
                         ),
                       ),
-                      CupertinoContextMenu(
-                        actions: <Widget>[
-                          CupertinoContextMenuAction(
-                            trailingIcon: Icons.edit,
-                            child: const Text('Rename'),
-                            onPressed: () {
-                              Navigator.pop(
-                                  context); // To close the context menu
-                            },
-                          ),
-                          CupertinoContextMenuAction(
-                            trailingIcon: Icons.delete,
-                            isDestructiveAction: true,
-                            onPressed: () {
-                              Navigator.pop(
-                                  context); // To close the context menu
-                              setState(() {});
-                              saveBooks();
-                            },
-                            child: const Text('Delete'),
-                          ),
-                        ],
-                        child: Image.asset('assets/images/bookcover1.png'),
-                      )
                     ],
                   ),
                 ),

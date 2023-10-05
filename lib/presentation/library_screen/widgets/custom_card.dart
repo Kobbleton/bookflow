@@ -72,7 +72,12 @@ class CustomCard extends StatelessWidget {
                           imagePath: imagePath,
                           height: size.height * 0.24,
                           width: size.width * 0.42,
-                          radius: BorderRadius.circular(getHorizontalSize(18)),
+                          radius: BorderRadius.only(
+                            topLeft: Radius.circular(getHorizontalSize(18)),
+                            topRight: Radius.circular(getHorizontalSize(18)),
+                            // bottomLeft: Radius.circular(getHorizontalSize(0)),
+                            // bottomRight: Radius.circular(getHorizontalSize(0)),
+                          ),
                           alignment: Alignment.topCenter,
                         ),
                       ],

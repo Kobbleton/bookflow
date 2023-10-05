@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import '../../bloc/theloop_theme/theloop_theme_event.dart';
@@ -313,6 +314,112 @@ class TheloopScreenState extends State<TheloopScreen>
                                               Icons.settings_outlined,
                                               color: Colors.transparent),
                                           onPressed: () {
+                                            SettingsModalScreen(
+                                                onColorChanged: (color) {
+                                              setState(() {
+                                                backgroundColor = color;
+                                              });
+                                            }).show(context);
+                                          },
+                                        ),
+                                      ]),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        },
+                      ),
+                      OrientationBuilder(
+                        builder: (context, orientation) {
+                          if (orientation == Orientation.landscape) {
+                            return AnimatedOpacity(
+                              opacity: isPaused ? 1.0 : 0.0,
+                              duration: const Duration(milliseconds: 300),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: getPadding(left: 28, bottom: 0),
+                                  child: Stack(
+                                      alignment: AlignmentDirectional.center,
+                                      children: [
+                                        //nice animations:
+                                        //waveDots
+                                        //threeArched Circle + Icon
+                                        //Beat + Icon
+                                        Positioned(
+                                          top: -2,
+                                          left: -22,
+                                          child: BlocBuilder<TheloopThemeBloc,
+                                              TheloopThemeState>(
+                                            builder: (context, state) {
+                                              if (state.wpmTextColor ==
+                                                  const Color(0xFFFFFFFF)) {
+                                                return Lottie.asset(
+                                                  'assets/animations/chapterslist_white.json',
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.12,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.2,
+                                                  fit: BoxFit.fill,
+                                                );
+                                              } else if (state.wpmTextColor ==
+                                                  const Color(0xFFBDBDBD)) {
+                                                return Lottie.asset(
+                                                  'assets/animations/chapterslist_grey.json',
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.12,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.2,
+                                                  fit: BoxFit.fill,
+                                                );
+                                              } else if (state.wpmTextColor ==
+                                                  const Color(0xFF000000)) {
+                                                return Lottie.asset(
+                                                  'assets/animations/chapterslist_black.json',
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.12,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.2,
+                                                  fit: BoxFit.fill,
+                                                );
+                                              }
+                                              // default case if none of the above conditions are met
+                                              return Lottie.asset(
+                                                'assets/animations/chapterslist_white.json',
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.12,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.2,
+                                                fit: BoxFit.fill,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(
+                                              Icons.settings_outlined,
+                                              color: Colors.transparent),
+                                          onPressed: () {
+                                            print(
+                                                "The color is ${state.wpmTextColor}");
                                             SettingsModalScreen(
                                                 onColorChanged: (color) {
                                               setState(() {
