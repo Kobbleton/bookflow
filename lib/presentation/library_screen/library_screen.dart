@@ -487,9 +487,33 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               fontWeight: FontWeight.normal,
                             ),
                           ),
+                          SizedBox(
+                            height: size.height * 0.01,
+                          ),
                           Expanded(
                             // Takes up all available space between text and percent indicator
                             child: Container(),
+                          ),
+                          Container(
+                            width: 76,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: ColorConstant.dark4,
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "450WPM",
+                                style: TextStyle(
+                                  color: Colors.white, // Text color
+                                  fontWeight:
+                                      FontWeight.normal, // Text thickness
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.01,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,

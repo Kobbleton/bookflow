@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_decoration.dart';
-import '../../../theme/app_style.dart';
 import '../../widgets/custom_image_view.dart';
 
 class CustomCard extends StatelessWidget {
@@ -75,7 +74,7 @@ class CustomCard extends StatelessWidget {
                         CustomImageView(
                           imagePath: imagePath,
                           height: isGridview
-                              ? size.height * 0.24
+                              ? size.height * 0.28
                               : size.height * 0.2,
                           width: isGridview
                               ? size.width * 0.42
@@ -94,23 +93,23 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding: getPadding(bottom: 8, left: 18),
-                  child: Text(
-                    text,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: isGridview
-                        ? AppStyle.txtOpenSansBold18(context)
-                        : const TextStyle(color: Colors.transparent),
-                  ),
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomLeft,
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: Padding(
+            //       padding: getPadding(bottom: 8, left: 18),
+            //       child: Text(
+            //         text,
+            //         overflow: TextOverflow.ellipsis,
+            //         textAlign: TextAlign.left,
+            //         style: isGridview
+            //             ? AppStyle.txtOpenSansBold18(context)
+            //             : const TextStyle(color: Colors.transparent),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
