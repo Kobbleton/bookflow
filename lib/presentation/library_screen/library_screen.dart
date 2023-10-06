@@ -535,7 +535,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             child: InkWell(
               borderRadius: BorderRadius.circular(25),
               onTap: () {
-                pickTextFile(onBookAdded, context);
+                handleTap(context);
               },
               hoverColor: Colors.blue[200], // Hover color change
               child: Lottie.asset(
