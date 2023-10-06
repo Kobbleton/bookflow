@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
@@ -146,14 +147,11 @@ class IconSliderState extends State<IconSlider> {
                     width: 28,
                   ),
                   IconButton(
-                    icon: const Icon(Icons.collections_bookmark),
-                    onPressed: () {
-                      // Add your action here
-                    },
-                  ),
-                  const SizedBox(width: 0),
-                  IconButton(
-                    icon: const Icon(Icons.swap_vert),
+                    icon: Icon(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ColorConstant.white
+                            : ColorConstant.dark1,
+                        Icons.collections_bookmark),
                     onPressed: () {
                       // Add your action here
                     },
@@ -161,6 +159,20 @@ class IconSliderState extends State<IconSlider> {
                   const SizedBox(width: 0),
                   IconButton(
                     icon: Icon(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ColorConstant.white
+                            : ColorConstant.dark1,
+                        Icons.swap_vert),
+                    onPressed: () {
+                      // Add your action here
+                    },
+                  ),
+                  const SizedBox(width: 0),
+                  IconButton(
+                    icon: Icon(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ColorConstant.white
+                            : ColorConstant.dark1,
                         widget.isGridView ? Icons.view_list : Icons.grid_view),
                     onPressed: () {
                       widget.saveViewState();
@@ -176,7 +188,11 @@ class IconSliderState extends State<IconSlider> {
                   //   },
                   // ),
                   IconButton(
-                    icon: const Icon(Icons.search),
+                    icon: Icon(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ColorConstant.white
+                            : ColorConstant.dark1,
+                        Icons.search),
                     onPressed: () {
                       // Add your action here
                     },
@@ -197,7 +213,11 @@ class IconSliderState extends State<IconSlider> {
                       right: 10,
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_right), // small arrow icon
+                      icon: Icon(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? ColorConstant.white
+                              : ColorConstant.dark1,
+                          Icons.arrow_right), // small arrow icon
                       onPressed: () {
                         setState(() {
                           showIcons = !showIcons;
@@ -225,7 +245,10 @@ class IconSliderState extends State<IconSlider> {
                             ..scale(-1.0, 1.0), // Flip horizontally
                           alignment: Alignment.center,
                           child: LoadingAnimationWidget.halfTriangleDot(
-                            color: Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? ColorConstant.white
+                                    : ColorConstant.dark1,
                             size: 24,
                           ),
                         ),
