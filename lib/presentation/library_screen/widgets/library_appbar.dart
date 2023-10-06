@@ -220,9 +220,14 @@ class IconSliderState extends State<IconSlider> {
                           height: 32, // Make this bigger or smaller as needed
                           color: Colors.transparent,
                         ),
-                        LoadingAnimationWidget.halfTriangleDot(
-                          color: Colors.white,
-                          size: 24,
+                        Transform(
+                          transform: Matrix4.identity()
+                            ..scale(-1.0, 1.0), // Flip horizontally
+                          alignment: Alignment.center,
+                          child: LoadingAnimationWidget.halfTriangleDot(
+                            color: Colors.white,
+                            size: 24,
+                          ),
                         ),
                       ],
                     ),

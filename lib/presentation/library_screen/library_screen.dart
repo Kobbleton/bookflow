@@ -7,14 +7,17 @@ import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dar
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:bookflow/presentation/library_screen/widgets/library_appbar.dart';
 import 'package:bookflow/presentation/widgets/custom_image_view.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
+import '../../theme/app_style.dart';
 import '../the_loop_screen/the_loop_screen.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -72,9 +75,81 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   void handleTap(BuildContext context) async {
-    HapticFeedback.mediumImpact(); // First tap
+    HapticFeedback.heavyImpact(); // First tap
     await Future.delayed(const Duration(milliseconds: 100)); // Wait for 100ms
-    HapticFeedback.mediumImpact(); // Second tap
+    HapticFeedback.heavyImpact(); // Second tap
+    Future.delayed(Duration.zero, () => pickTextFile(onBookAdded, context));
+  }
+
+  Future<void> pickTextFile(
+      Function(String, String) onBookAdded, BuildContext context) async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ['txt']);
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      List<String> lines = await File(file.path!).readAsLines();
+      late AnimationController controller;
+
+      // Get the app's local storage directory
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/${file.name}';
+
+      // Copy the file to the app's local storage directory
+      final newFile = await File(file.path!).copy(filePath);
+
+      // Notify that a new book has been added.
+      onBookAdded(file.name, file.name);
+
+      showDialog(
+        context: context,
+        builder: (dialogContext) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            backgroundColor: ColorConstant.dark2.withOpacity(0.9),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 80, // Sets to 100, less than 150
+                maxHeight: 220,
+              ),
+              child: Container(
+                padding: getPadding(top: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Book added',
+                      style: AppStyle.txtOpenSansBold22(dialogContext),
+                    ),
+                    const SizedBox(height: 0),
+                    // your Lottie animation or other content here
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(dialogContext); // Closes the dialog
+                      },
+                      child: Center(
+                        child: Lottie.asset(
+                          'assets/animations/succes_animation.json',
+                          width: 160,
+                          height: 160,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   // Function to load saved view state
@@ -207,8 +282,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
               runSpacing: 22, // Gap between lines
               children: <Widget>[
                 AddBookButton(
+                  handleTap: (context) async {
+                    handleTap(context);
+                  },
                   onBookAdded: onBookAdded,
-                ), // Pass the callback),
+                ),
                 CustomCard(
                   isGridview: isGridView,
 
@@ -341,41 +419,106 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   // Book Card on the left
-                  CustomCard(
-                    isGridview: isGridView,
-                    imagePath: 'assets/images/90dney_cover.png',
-                    text: bookName,
-                    onCardTap: (filePath) {
-                      // assuming you get filePath from somewhere or it's the same as bookName
-                      onBookClicked(bookName, context);
-                    },
+                  CupertinoContextMenu(
+                    enableHapticFeedback: true,
+                    actions: <Widget>[
+                      CupertinoContextMenuAction(
+                        trailingIcon: Icons.edit,
+                        child: const Text('Rename'),
+                        onPressed: () {
+                          Navigator.pop(context); // To close the context menu
+                          _showRenameDialog(bookName);
+                        },
+                      ),
+                      CupertinoContextMenuAction(
+                        trailingIcon: Icons.delete,
+                        isDestructiveAction: true,
+                        onPressed: () {
+                          Navigator.pop(context); // To close the context menu
+                          setState(() {
+                            addedBooks.remove(bookName);
+                          });
+                          saveBooks();
+                        },
+                        child: const Text('Delete'),
+                      ),
+                    ],
+                    child: CustomCard(
+                      isGridview: isGridView,
+                      imagePath: 'assets/images/90dney_cover.png',
+                      text: bookName,
+                      onCardTap: (filePath) {
+                        // assuming you get filePath from somewhere or it's the same as bookName
+                        onBookClicked(bookName, context);
+                      },
+                    ),
                   ),
 
                   // Spacing
                   const SizedBox(width: 20),
 
-                  // Book name and progress indicator on the right
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          bookName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                    child: SizedBox(
+                      height: size.height * 0.18,
+                      width: size.width * 0.28,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start, // Aligns items to the start
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: size.height * 0.012,
                           ),
-                        ),
-                        const SizedBox(height: 5),
-                        LinearProgressIndicator(
-                          value: 0.5, // Use your actual progress value
-                          backgroundColor: Colors.grey[200],
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                              ColorConstant.cyan500),
-                        ),
-                        const SizedBox(height: 10),
-                      ],
+                          Text(
+                            bookName,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.016,
+                          ),
+                          Text(
+                            'Жюль Верн',
+                            style: TextStyle(
+                              color: Colors.grey.shade300,
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          Expanded(
+                            // Takes up all available space between text and percent indicator
+                            child: Container(),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: LinearPercentIndicator(
+                                  padding: EdgeInsets.zero,
+                                  barRadius: const Radius.circular(16),
+                                  lineHeight: 8.0,
+                                  percent: 0.284,
+                                  backgroundColor: Colors.grey[600],
+                                  progressColor: ColorConstant.cyan500,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              const Text(
+                                '28.4%',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: size.height * 0.012,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -392,7 +535,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             child: InkWell(
               borderRadius: BorderRadius.circular(25),
               onTap: () {
-                // Your button tap action here
+                pickTextFile(onBookAdded, context);
               },
               hoverColor: Colors.blue[200], // Hover color change
               child: Lottie.asset(
