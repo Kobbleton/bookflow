@@ -13,9 +13,11 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     required this.isGridView,
     required this.toggleView,
+    required this.saveViewState,
   }) : super(key: key);
   final bool isGridView;
   final VoidCallback toggleView;
+  final VoidCallback saveViewState;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,7 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
           SizedBox(
             width: size.width * 0.62, // Choose a width that suits you
             child: IconSlider(
+              saveViewState: saveViewState,
               isGridView: isGridView,
               toggleView: toggleView,
             ),
@@ -106,11 +109,15 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class IconSlider extends StatefulWidget {
   const IconSlider(
-      {Key? key, required this.isGridView, required this.toggleView})
+      {Key? key,
+      required this.isGridView,
+      required this.toggleView,
+      required this.saveViewState})
       : super(key: key);
 
   final bool isGridView;
   final VoidCallback toggleView;
+  final VoidCallback saveViewState;
 
   @override
   IconSliderState createState() => IconSliderState();
@@ -155,7 +162,10 @@ class IconSliderState extends State<IconSlider> {
                   IconButton(
                     icon: Icon(
                         widget.isGridView ? Icons.view_list : Icons.grid_view),
-                    onPressed: widget.toggleView,
+                    onPressed: () {
+                      widget.saveViewState();
+                      widget.toggleView();
+                    },
                   ),
 
                   // const SizedBox(width: 0),

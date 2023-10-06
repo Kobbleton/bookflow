@@ -10,6 +10,7 @@ class CustomCard extends StatelessWidget {
   final String imagePath;
   final String text;
   // final Function onLongPress;
+  final bool isGridview;
 
   final Function(String) onCardTap;
 
@@ -18,7 +19,8 @@ class CustomCard extends StatelessWidget {
       required this.imagePath,
       required this.text,
       // required this.onLongPress,
-      required this.onCardTap})
+      required this.onCardTap,
+      required this.isGridview})
       : super(key: key);
 
   @override
@@ -27,8 +29,8 @@ class CustomCard extends StatelessWidget {
       // onLongPress: () => onLongPress(),
       onTap: () => onCardTap(text),
       child: SizedBox(
-        height: size.height * 0.28,
-        width: size.width * 0.42,
+        height: isGridview ? size.height * 0.28 : size.height * 0.18,
+        width: isGridview ? size.width * 0.42 : size.width * 0.28,
         child: Stack(
           alignment: Alignment.bottomRight,
           children: [
@@ -58,8 +60,9 @@ class CustomCard extends StatelessWidget {
                   ),
                   child: Container(
                     // color: Colors.blue,
-                    height: size.height * 0.28,
-                    width: size.width * 0.42,
+                    height:
+                        isGridview ? size.height * 0.28 : size.height * 0.18,
+                    width: isGridview ? size.width * 0.42 : size.width * 0.28,
                     decoration: AppDecoration.outlineBlack9001e.copyWith(
                       color: Theme.of(context).brightness == Brightness.dark
                           ? ColorConstant.dark3
@@ -67,11 +70,16 @@ class CustomCard extends StatelessWidget {
                       borderRadius: BorderRadiusStyle.circleBorder18,
                     ),
                     child: Stack(
+                      alignment: AlignmentDirectional.topCenter,
                       children: [
                         CustomImageView(
                           imagePath: imagePath,
-                          height: size.height * 0.24,
-                          width: size.width * 0.42,
+                          height: isGridview
+                              ? size.height * 0.24
+                              : size.height * 0.2,
+                          width: isGridview
+                              ? size.width * 0.42
+                              : size.width * 0.28,
                           radius: BorderRadius.only(
                             topLeft: Radius.circular(getHorizontalSize(18)),
                             topRight: Radius.circular(getHorizontalSize(18)),
@@ -96,7 +104,9 @@ class CustomCard extends StatelessWidget {
                     text,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansBold18(context),
+                    style: isGridview
+                        ? AppStyle.txtOpenSansBold18(context)
+                        : const TextStyle(color: Colors.transparent),
                   ),
                 ),
               ),

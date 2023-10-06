@@ -29,7 +29,8 @@ class CustomImageView extends StatelessWidget {
 
   ///a [CustomImageView] it can be used for showing any type of images
   /// it will shows the placeholder image if image is not found on network image
-  const CustomImageView({super.key, 
+  const CustomImageView({
+    super.key,
     this.url,
     this.imagePath,
     this.svgPath,
@@ -142,6 +143,7 @@ class CustomImageView extends StatelessWidget {
         height: height,
         width: width,
         fit: fit ?? BoxFit.cover,
+        alignment: Alignment.topCenter,
         color: color,
       );
     }

@@ -6,10 +6,12 @@ import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:bookflow/presentation/library_screen/widgets/library_appbar.dart';
+import 'package:bookflow/presentation/widgets/custom_image_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
@@ -35,6 +37,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     super.initState();
     loadBooks();
     loadBookPaths();
+    loadViewState();
   }
 
   Future<void> loadBookPaths() async {
@@ -72,6 +75,20 @@ class _LibraryScreenState extends State<LibraryScreen> {
     HapticFeedback.mediumImpact(); // First tap
     await Future.delayed(const Duration(milliseconds: 100)); // Wait for 100ms
     HapticFeedback.mediumImpact(); // Second tap
+  }
+
+  // Function to load saved view state
+  Future<void> loadViewState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isGridView = prefs.getBool('isGridView') ?? true; // default is true
+    });
+  }
+
+  // Function to save view state
+  Future<void> saveViewState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isGridView', isGridView);
   }
 
   Future<void> saveBooks() async {
@@ -193,6 +210,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   onBookAdded: onBookAdded,
                 ), // Pass the callback),
                 CustomCard(
+                  isGridview: isGridView,
+
                   imagePath: Theme.of(context).brightness == Brightness.dark
                       ? ImageConstant.darkMagicCoverStart
                       : ImageConstant.magicCover1,
@@ -218,6 +237,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 runSpacing: 22, // Gap between lines
                 children: <Widget>[
                   CustomCard(
+                    isGridview: isGridView,
+
                     imagePath: Theme.of(context).brightness == Brightness.dark
                         ? ImageConstant.darkMagicCoverQ
                         : ImageConstant.magicCover1,
@@ -229,6 +250,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     onCardTap: (String) {},
                   ),
                   CustomCard(
+                    isGridview: isGridView,
+
                     imagePath: Theme.of(context).brightness == Brightness.dark
                         ? ImageConstant.darkMagicCoverNew
                         : ImageConstant.magicCover1,
@@ -268,11 +291,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       // child:
                       //     Image.asset('assets/images/bookcover1.png'),
                       child: CustomCard(
+                        isGridview: isGridView,
                         // onLongPress: () {},
-                        imagePath:
-                            Theme.of(context).brightness == Brightness.dark
-                                ? ImageConstant.darkMagicCoverNew
-                                : ImageConstant.magicCover1,
+                        imagePath: 'assets/images/90dney_cover.png',
                         text: bookName,
                         onCardTap: (filePath) {
                           // assuming you get filePath from somewhere or it's the same as bookName
@@ -283,6 +304,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ],
               ),
             ),
+            CustomImageView(
+              imagePath: 'assets/images/90dney_cover.png',
+              height: size.height * 0.23,
+              width: size.width * 0.42,
+              radius: BorderRadius.only(
+                topLeft: Radius.circular(getHorizontalSize(18)),
+                topRight: Radius.circular(getHorizontalSize(18)),
+                // bottomLeft: Radius.circular(getHorizontalSize(0)),
+                // bottomRight: Radius.circular(getHorizontalSize(0)),
+              ),
+              alignment: Alignment.topCenter,
+            ),
           ],
         ),
       ),
@@ -290,64 +323,88 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   Widget buildListView() {
-    return ListView.builder(
-      itemCount: addedBooks.length, // Replace with the length of your list
-      itemBuilder: (BuildContext context, int index) {
-        String bookName = addedBooks[index]; // Replace with your book data
+    return Stack(
+      children: [
+        ListView.builder(
+          itemCount: addedBooks.length, // Replace with the length of your list
+          itemBuilder: (BuildContext context, int index) {
+            String bookName = addedBooks[index]; // Replace with your book data
 
-        return Padding(
-          padding: getPadding(
-            top: height * 0.015, // 1.5% of screen height
-            left: width * 0.06, // 6% of screen width
-            right: width * 0.05, // 5% of screen width
-            bottom: height * 0.005, // 0.5% of screen height
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              // Book Card on the left
-              CustomCard(
-                imagePath: Theme.of(context).brightness == Brightness.dark
-                    ? ImageConstant.darkMagicCoverNew
-                    : ImageConstant.magicCover1,
-                text: bookName,
-                onCardTap: (filePath) {
-                  // assuming you get filePath from somewhere or it's the same as bookName
-                  onBookClicked(bookName, context);
-                },
+            return Padding(
+              padding: getPadding(
+                top: height * 0.015, // 1.5% of screen height
+                left: width * 0.06, // 6% of screen width
+                right: width * 0.05, // 5% of screen width
+                bottom: height * 0.015, // 0.5% of screen height
               ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  // Book Card on the left
+                  CustomCard(
+                    isGridview: isGridView,
+                    imagePath: 'assets/images/90dney_cover.png',
+                    text: bookName,
+                    onCardTap: (filePath) {
+                      // assuming you get filePath from somewhere or it's the same as bookName
+                      onBookClicked(bookName, context);
+                    },
+                  ),
 
-              // Spacing
-              const SizedBox(width: 20),
+                  // Spacing
+                  const SizedBox(width: 20),
 
-              // Book name and progress indicator on the right
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      bookName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  // Book name and progress indicator on the right
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          bookName,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        LinearProgressIndicator(
+                          value: 0.5, // Use your actual progress value
+                          backgroundColor: Colors.grey[200],
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              ColorConstant.cyan500),
+                        ),
+                        const SizedBox(height: 10),
+                      ],
                     ),
-                    const SizedBox(height: 5),
-                    LinearProgressIndicator(
-                      value: 0.5, // Use your actual progress value
-                      backgroundColor: Colors.grey[200],
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(ColorConstant.cyan500),
-                    ),
-                    const SizedBox(height: 10),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            );
+          },
+        ),
+        Positioned(
+          bottom: 20, // distance from the bottom
+          right: 20, // distance from the right
+          child: Material(
+            color: Colors.transparent, // Button color
+            borderRadius: BorderRadius.circular(25),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(25),
+              onTap: () {
+                // Your button tap action here
+              },
+              hoverColor: Colors.blue[200], // Hover color change
+              child: Lottie.asset(
+                'assets/animations/add_button.json',
+                width: 84,
+                height: 84,
+                fit: BoxFit.fill,
+              ),
+            ),
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 
@@ -374,6 +431,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 setState(() {
                   isGridView = !isGridView;
                 });
+              },
+              saveViewState: () {
+                saveViewState();
               },
             ),
             // Padding(
