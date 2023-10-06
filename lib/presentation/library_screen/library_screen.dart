@@ -262,8 +262,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
   }
 
-  Widget buildGridView() {
+  Widget buildGridView({Key? key}) {
     return SingleChildScrollView(
+      key: key,
       padding: getPadding(
         top: height * 0.015, // 1.5% of screen height
       ),
@@ -400,8 +401,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
   }
 
-  Widget buildListView() {
+  Widget buildListView({Key? key}) {
     return Stack(
+      key: key,
       children: [
         ListView.builder(
           itemCount: addedBooks.length, // Replace with the length of your list
@@ -619,7 +621,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
             //   ),
             // ),
             Expanded(
-              child: isGridView ? buildGridView() : buildListView(),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: isGridView
+                    ? buildGridView(key: ValueKey<bool>(isGridView))
+                    : buildListView(key: ValueKey<bool>(isGridView)),
+              ),
             )
                 .animate()
                 .move(begin: const Offset(0, 16), curve: Curves.easeOutQuad)

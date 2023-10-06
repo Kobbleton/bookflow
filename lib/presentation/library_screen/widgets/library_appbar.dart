@@ -146,14 +146,14 @@ class IconSliderState extends State<IconSlider> {
                     width: 28,
                   ),
                   IconButton(
-                    icon: const Icon(Icons.filter_list),
+                    icon: const Icon(Icons.collections_bookmark),
                     onPressed: () {
                       // Add your action here
                     },
                   ),
                   const SizedBox(width: 0),
                   IconButton(
-                    icon: const Icon(Icons.sort),
+                    icon: const Icon(Icons.swap_vert),
                     onPressed: () {
                       // Add your action here
                     },
