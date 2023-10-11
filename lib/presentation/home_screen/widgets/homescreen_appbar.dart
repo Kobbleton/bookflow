@@ -50,6 +50,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                   bottom: 11,
                 ),
               ),
+              
         title: Padding(
           padding: getPadding(
             left: 12,
