@@ -297,7 +297,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   text: 'Start here',
                   // onLongPress: () {
                   //   print("Long press detected");
-                  //   _showContextMenu('Start here');
+                  //   _showContextMenu('Start here'); 
                   // },
                   onCardTap: (String) {
                     handleTap;
@@ -622,7 +622,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             // ),
             Expanded(
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 100),
                 child: isGridView
                     ? buildGridView(key: ValueKey<bool>(isGridView))
                     : buildListView(key: ValueKey<bool>(isGridView)),

@@ -86,4 +86,5 @@ class ImageConstant {
   static String settingsImageInfo = 'assets/images/settings_img_9.png';
 
   static String phoneIcon = 'assets/images/phone_icon.svg';
+  static String profilePic = 'assets/images/profile_pic.png';
 }

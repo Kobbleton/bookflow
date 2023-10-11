@@ -27,6 +27,8 @@ class HomePage extends StatelessWidget {
         children: [
           const HomeScreenAppBar(
             heading: 'Reading Now',
+            isProfileScreen: false,
+            isSettingsScreen: false,
           ),
           Stack(children: [
             Padding(

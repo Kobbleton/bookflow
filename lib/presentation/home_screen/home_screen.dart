@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bookflow/presentation/home_screen/widgets/home_page.dart';
-import 'package:bookflow/presentation/profile_and_settings_screen/profile_and_settings_screen.dart';
+import 'package:bookflow/presentation/profile_screen/profile_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/color_constant.dart';
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // The second page of the application (LibraryScreen)
     const LibraryScreen(),
     // The third page of the application (ProfileScreen)
-    const ProfileAndSettingsScreen(),
+    const ProfileScreen(),
   ];
 
   @override

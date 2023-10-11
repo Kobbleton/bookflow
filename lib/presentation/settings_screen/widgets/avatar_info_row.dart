@@ -20,7 +20,7 @@ class AvatarInfoRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomImageView(
-          imagePath: ImageConstant.robotAvatar,
+          imagePath: ImageConstant.profilePic,
           height: getSize(
             56,
           ),

@@ -1,5 +1,5 @@
 import 'package:bookflow/presentation/home_screen/home_screen.dart';
-import 'package:bookflow/presentation/profile_and_settings_screen/profile_and_settings_screen.dart';
+import 'package:bookflow/presentation/settings_screen/settings_screen.dart';
 import '../presentation/login_and_registration_screens/create_new_password_screen/create_new_password_screen.dart';
 import '../presentation/library_screen/library_screen.dart';
 
@@ -54,7 +54,7 @@ class AppRoutes {
     createNewPasswordScreen: (context) => const CreateNewPasswordScreen(),
     homeScreen: (context) => const HomeScreen(),
     libraryScreen: (context) => const LibraryScreen(),
-    profileScreen: (context) => const ProfileAndSettingsScreen(),
+    profileScreen: (context) => const SettingsScreen(),
     settingsPersonalInfoScreen: (context) => const SettingsPersonalInfoScreen(),
   };
 }
