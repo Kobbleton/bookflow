@@ -4,6 +4,7 @@ import 'package:bookflow/presentation/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
@@ -33,8 +34,12 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
         leadingWidth: size.width * 0.14,
         leading: isSettingsScreen
             ? IconButton(
-                icon:
-                    const Icon(Icons.arrow_back), // Replace with your own icon
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? ColorConstant.white
+                      : ColorConstant.black,
+                ), // Replace with your own icon
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -50,8 +55,6 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                   bottom: 11,
                 ),
               ),
-
-              
         title: Padding(
           padding: getPadding(
             left: 12,
@@ -66,7 +69,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           GestureDetector(
             child: Padding(
-              padding: getPadding(right: 20),
+              padding: getPadding(right: 12),
               child: Stack(
                 alignment: Alignment.center,
                 children: [

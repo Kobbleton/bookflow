@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/image_constant.dart';
 import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
@@ -88,15 +87,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
     if (result != null) {
       PlatformFile file = result.files.first;
-      List<String> lines = await File(file.path!).readAsLines();
-      late AnimationController controller;
+      // List<String> lines = await File(file.path!).readAsLines();
+      // late AnimationController controller;
 
       // Get the app's local storage directory
-      final directory = await getApplicationDocumentsDirectory();
-      final filePath = '${directory.path}/${file.name}';
+      // final directory = await getApplicationDocumentsDirectory();
+      // final filePath = '${directory.path}/${file.name}';
 
       // Copy the file to the app's local storage directory
-      final newFile = await File(file.path!).copy(filePath);
+      // final newFile = await File(file.path!).copy(filePath);
 
       // Notify that a new book has been added.
       onBookAdded(file.name, file.name);
@@ -297,7 +296,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   text: 'Start here',
                   // onLongPress: () {
                   //   print("Long press detected");
-                  //   _showContextMenu('Start here'); 
+                  //   _showContextMenu('Start here');
                   // },
                   onCardTap: (String) {
                     handleTap;
@@ -579,8 +578,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -631,6 +630,68 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 .animate()
                 .move(begin: const Offset(0, 16), curve: Curves.easeOutQuad)
                 .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AnimatedDialog extends StatefulWidget {
+  const AnimatedDialog({super.key});
+
+  @override
+  AnimatedDialogState createState() => AnimatedDialogState();
+}
+
+class AnimatedDialogState extends State<AnimatedDialog>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  double containerHeight = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 350),
+      vsync: this,
+    )..addListener(() {
+        setState(() {
+          containerHeight =
+              _animation.value * MediaQuery.of(context).size.height * 0.6;
+        });
+      });
+
+    _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: AnimatedContainer(
+        curve: Curves.fastEaseInToSlowEaseOut,
+        duration: const Duration(milliseconds: 350),
+        height: containerHeight + 40, // Add 50 for padding
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          color: ColorConstant.dark4,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Column(
+          children: [
+            Text('TextText Test'),
+            Text('TextText Test'),
           ],
         ),
       ),

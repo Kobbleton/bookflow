@@ -8,6 +8,7 @@ import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_image_view.dart';
+import '../library_screen.dart';
 
 class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LibraryAppBar({
@@ -153,7 +154,12 @@ class IconSliderState extends State<IconSlider> {
                             : ColorConstant.dark1,
                         Icons.collections_bookmark),
                     onPressed: () {
-                      // Add your action here
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const AnimatedDialog();
+                        },
+                      );
                     },
                   ),
                   const SizedBox(width: 0),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
+import 'package:bookflow/presentation/home_screen/home_screen.dart';
 import 'package:bookflow/presentation/the_loop_screen/logic/timer_manager.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/progress_indicator.dart';
 import 'package:bookflow/presentation/the_loop_screen/widgets/settings_modal_screen.dart';
@@ -16,7 +17,6 @@ import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
 import '../../bloc/theloop_theme/theloop_theme_event.dart';
-import '../home_screen/home_screen.dart';
 import 'logic/drag_handler.dart';
 
 class TheloopScreen extends StatefulWidget {
@@ -419,8 +419,7 @@ class TheloopScreenState extends State<TheloopScreen>
                                               Icons.settings_outlined,
                                               color: Colors.transparent),
                                           onPressed: () {
-                                            print(
-                                                "The color is ${state.wpmTextColor}");
+                                            
                                             SettingsModalScreen(
                                                 onColorChanged: (color) {
                                               setState(() {
@@ -454,12 +453,12 @@ class TheloopScreenState extends State<TheloopScreen>
                                   color: state.wpmTextColor,
                                 ),
                                 onPressed: () {
-                                  print('close button pressed step 1');
+
                                   SystemChrome.setPreferredOrientations([
                                     DeviceOrientation.portraitUp,
                                     DeviceOrientation.portraitDown,
                                   ]).then((_) {
-                                    print('close button pressed step 2');
+
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

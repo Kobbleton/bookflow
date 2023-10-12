@@ -1,6 +1,5 @@
 import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/utils/image_constant.dart';
 import '../home_screen/widgets/homescreen_appbar.dart';
 
@@ -57,7 +56,9 @@ class ProfileScreen extends StatelessWidget {
             flex: 14,
             child: Container(
               decoration: BoxDecoration(
-                color: ColorConstant.dark4,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? ColorConstant.dark4
+                    : Colors.grey.shade200,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20.0),
                   topRight: Radius.circular(20.0),
