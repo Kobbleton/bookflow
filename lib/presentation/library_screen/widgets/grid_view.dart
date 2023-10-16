@@ -1,32 +1,21 @@
 import 'package:bookflow/presentation/library_screen/widgets/rename_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../widgets/custom_image_view.dart';
-import '../library_screen.dart';
+import '../library_screen_logic.dart';
 import 'add_book_button.dart';
 import 'add_to_collection.dart';
 import 'custom_card.dart';
 
-typedef BookChangedCallback = void Function(String bookName);
-
 class LibraryGridView extends StatelessWidget {
-  final BookChangedCallback onBookRemoved;
-  final void Function(String oldBookName, String newBookName) onRename;
+  const LibraryGridView({Key? key}) : super(key: key);
 
-  final LibraryScreenLogic logic;
-  final Function(String, String) updateState;
-
-  const LibraryGridView({
-    Key? key,
-    required this.onBookRemoved,
-    required this.onRename,
-    required this.logic,
-    required this.updateState,
-  }) : super(key: key);
-
-  Widget buildGridView(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
+    var logic = Provider.of<LibraryScreenLogic>(context);
     return SingleChildScrollView(
       key: key,
       padding: getPadding(
@@ -128,7 +117,7 @@ class LibraryGridView extends StatelessWidget {
                           isDestructiveAction: true,
                           onPressed: () {
                             Navigator.pop(context); // To close the context menu
-                            onBookRemoved(bookName);
+                            logic.removeBook(bookName);
                             logic.saveBooks();
                           },
                           child: const Text('Delete'),
@@ -164,10 +153,5 @@ class LibraryGridView extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return buildGridView(context);
   }
 }
