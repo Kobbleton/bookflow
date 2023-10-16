@@ -1,14 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:bookflow/core/utils/color_constant.dart';
-import 'package:bookflow/core/utils/image_constant.dart';
-import 'package:bookflow/presentation/library_screen/widgets/add_book_button.dart';
-import 'package:bookflow/presentation/library_screen/widgets/add_to_collection.dart';
 import 'package:bookflow/presentation/library_screen/widgets/custom_card.dart';
 import 'package:bookflow/presentation/library_screen/widgets/grid_view.dart';
 import 'package:bookflow/presentation/library_screen/widgets/library_appbar.dart';
 import 'package:bookflow/presentation/library_screen/widgets/success_dialog.dart';
-import 'package:bookflow/presentation/widgets/custom_image_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/size_utils.dart';
 import '../the_loop_screen/the_loop_screen.dart';
+import 'widgets/list_view.dart';
 import 'widgets/rename_dialog.dart';
 
 class LibraryScreenLogic extends ChangeNotifier {
@@ -83,6 +80,21 @@ class LibraryScreenLogic extends ChangeNotifier {
     }
   }
 
+  void removeBook(String bookName) {
+    addedBooks.remove(bookName);
+    saveBooks(); // assuming this persists addedBooks somewhere
+    notifyListeners();
+  }
+
+  void renameBook(String oldName, String newName) {
+    int index = addedBooks.indexOf(oldName);
+    if (index != -1) {
+      addedBooks[index] = newName.trim();
+      saveBooks(); // Assuming this persists the books
+      notifyListeners();
+    }
+  }
+
 // Function to load saved view state
   Future<void> loadViewState() async {
     print("Loading View State...");
@@ -139,28 +151,27 @@ class _LibraryScreenState extends State<LibraryScreen> {
   late final LibraryScreenLogic logic;
 
   void updateState(String newBookName, String oldBookName) {
-  setState(() {
-    int index = logic.addedBooks.indexOf(oldBookName);
-    logic.addedBooks[index] = newBookName.trim();
-  });
-  logic.saveBooks();
-}
+    setState(() {
+      int index = logic.addedBooks.indexOf(oldBookName);
+      logic.addedBooks[index] = newBookName.trim();
+    });
+    logic.saveBooks();
+  }
 
-void onBookRemovedCallback(String bookName) {
-  setState(() {
-    logic.addedBooks.remove(bookName);
-  });
-  logic.saveBooks();
-}
+  void onBookRemovedCallback(String bookName) {
+    setState(() {
+      logic.addedBooks.remove(bookName);
+    });
+    logic.saveBooks();
+  }
 
-void onRenameCallback(String oldBookName, String newBookName) {
-  setState(() {
-    int index = logic.addedBooks.indexOf(oldBookName);
-    logic.addedBooks[index] = newBookName;
-  });
-  logic.saveBooks();
-}
-  
+  void onRenameCallback(String oldBookName, String newBookName) {
+    setState(() {
+      int index = logic.addedBooks.indexOf(oldBookName);
+      logic.addedBooks[index] = newBookName;
+    });
+    logic.saveBooks();
+  }
 
   @override
   void initState() {
@@ -170,8 +181,6 @@ void onRenameCallback(String oldBookName, String newBookName) {
     logic.loadBookPaths();
     logic.loadBooks();
   }
-
-
 
   Widget buildListView({Key? key}) {
     return Stack(
@@ -203,7 +212,7 @@ void onRenameCallback(String oldBookName, String newBookName) {
                         child: const Text('Rename'),
                         onPressed: () {
                           Navigator.pop(context); // To close the context menu
-                          showRenameDialog(context, setState, logic, bookName);
+                          showRenameDialog(context, logic, bookName);
                         },
                       ),
                       CupertinoContextMenuAction(
@@ -380,8 +389,12 @@ void onRenameCallback(String oldBookName, String newBookName) {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 100),
                 child: logic.isGridView
-                    ? LibraryGridView(onBookRemoved: onBookRemovedCallback , onRename: onRenameCallback, logic: logic, updateState: updateState)
-                    : buildListView(key: ValueKey<bool>(logic.isGridView)),
+                    ? LibraryGridView(
+                        onBookRemoved: onBookRemovedCallback,
+                        onRename: onRenameCallback,
+                        logic: logic,
+                        updateState: updateState)
+                    : BookListView(key: ValueKey<bool>(logic.isGridView)),
               ),
             )
                 .animate()

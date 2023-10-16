@@ -120,8 +120,7 @@ class LibraryGridView extends StatelessWidget {
                           child: const Text('Rename'),
                           onPressed: () {
                             Navigator.pop(context); // To close the context menu
-                            showRenameDialog(
-                                context, updateState, logic, bookName);
+                            showRenameDialog(context, logic, bookName);
                           },
                         ),
                         CupertinoContextMenuAction(
