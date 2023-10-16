@@ -1,9 +1,11 @@
 import 'package:bookflow/bloc/theloop_theme/theloop_theme_bloc.dart';
+import 'package:bookflow/presentation/library_screen/library_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'bloc/authentification/authentication_bloc.dart';
 import 'bloc/authentification/authentication_event.dart';
 import 'bloc/personal_settings/personal_settings_bloc.dart';
@@ -61,7 +63,10 @@ void main() async {
             create: (context) => TheloopThemeBloc(),
           ),
         ],
-        child: const MyApp(),
+        child: ChangeNotifierProvider(
+          create: (context) => LibraryScreenLogic(),
+          child: const MyApp(),
+        ),
       ),
     ),
   );

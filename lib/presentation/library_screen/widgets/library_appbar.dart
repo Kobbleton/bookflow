@@ -8,7 +8,7 @@ import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_image_view.dart';
-import '../library_screen.dart';
+import 'library_dialog.dart';
 
 class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LibraryAppBar({
@@ -157,7 +157,7 @@ class IconSliderState extends State<IconSlider> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return const AnimatedDialog();
+                          return const LibraryDialog();
                         },
                       );
                     },
