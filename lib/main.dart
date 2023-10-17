@@ -1,5 +1,5 @@
 import 'package:bookflow/bloc/theloop_theme/theloop_theme_bloc.dart';
-import 'package:bookflow/presentation/library_screen/library_screen_logic.dart';
+import 'package:bookflow/presentation/library_screen/logic/library_screen_logic.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

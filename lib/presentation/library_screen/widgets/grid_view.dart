@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../widgets/custom_image_view.dart';
-import '../library_screen_logic.dart';
+import '../logic/library_screen_logic.dart';
 import 'add_book_button.dart';
 import 'add_to_collection.dart';
 import 'custom_card.dart';

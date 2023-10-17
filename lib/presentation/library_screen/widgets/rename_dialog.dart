@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../library_screen_logic.dart';
+import '../logic/library_screen_logic.dart';
 
 void showRenameDialog(
     BuildContext context, LibraryScreenLogic logic, String bookName) async {

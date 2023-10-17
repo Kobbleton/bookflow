@@ -6,12 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../the_loop_screen/the_loop_screen.dart';
+import '../../the_loop_screen/the_loop_screen.dart';
 
 class LibraryScreenLogic extends ChangeNotifier {
   List<String> addedBooks = [];
   Map<String, String> bookPaths = {};
-  late bool isGridView = false;
+  late bool _isGridView = false;
+
+  bool get isGridView => _isGridView;
+
+  set isGridView(bool val) {
+    _isGridView = val;
+    notifyListeners();
+  }
 
   Future<void> loadBookPaths() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -85,7 +92,6 @@ class LibraryScreenLogic extends ChangeNotifier {
 
 // Function to load saved view state
   Future<void> loadViewState() async {
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isGridView = prefs.getBool('isGridView') ?? true; // default is true
 

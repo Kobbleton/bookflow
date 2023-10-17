@@ -61,52 +61,21 @@ class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         actions: [
-          // AppbarImage(
-          //   height: getSize(
-          //     28,
-          //   ),
-          //   width: getSize(
-          //     28,
-          //   ),
-          //   svgPath: ImageConstant.searchIcon,
-          //   margin: getMargin(
-          //     // left: size.width * 0.04,
-          //     top: 11,
-          //     right: 22,
-          //   ),
-          // ),
           SizedBox(
-            width: size.width * 0.62, // Choose a width that suits you
+            width: size.width * 0.62,
             child: IconSlider(
               saveViewState: saveViewState,
               isGridView: isGridView,
               toggleView: toggleView,
             ),
           ),
-
-          /// Notification button if needed
-          // AppbarImage(
-          //   height: getSize(
-          //     28,
-          //   ),
-          //   width: getSize(
-          //     28,
-          //   ),
-          //   svgPath: ImageConstant.bellIcon,
-          //   margin: getMargin(
-          //     left: 20,
-          //     top: 11,
-          //     right: 40,
-          //   ),
-          // ),
         ],
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(getVerticalSize(
-      70)); // assuming getVerticalSize(70) gives you the desired height
+  Size get preferredSize => Size.fromHeight(getVerticalSize(70));
 }
 
 class IconSlider extends StatefulWidget {
@@ -140,7 +109,7 @@ class IconSliderState extends State<IconSlider> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 600),
               curve: Curves.ease,
-              width: showIcons ? 220 : 0, // adjust the width as needed
+              width: showIcons ? 220 : 0,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -170,7 +139,7 @@ class IconSliderState extends State<IconSlider> {
                             : ColorConstant.dark1,
                         Icons.swap_vert),
                     onPressed: () {
-                      // Add your action here
+                      //TODO Add your action here
                     },
                   ),
                   const SizedBox(width: 0),
@@ -185,29 +154,19 @@ class IconSliderState extends State<IconSlider> {
                       widget.toggleView();
                     },
                   ),
-
-                  // const SizedBox(width: 0),
-                  // IconButton(
-                  //   icon: const Icon(Icons.view_list),
-                  //   onPressed: () {
-                  //     // Add your action here
-                  //   },
-                  // ),
                   IconButton(
                     icon: Icon(
                         color: Theme.of(context).brightness == Brightness.dark
                             ? ColorConstant.white
                             : ColorConstant.dark1,
                         Icons.search),
-                    onPressed: () {
-                      // Add your action here
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
             ),
           ),
-          // The settings and arrow icon
+
           Stack(
             children: [
               if (showIcons)
@@ -223,7 +182,7 @@ class IconSliderState extends State<IconSlider> {
                           color: Theme.of(context).brightness == Brightness.dark
                               ? ColorConstant.white
                               : ColorConstant.dark1,
-                          Icons.arrow_right), // small arrow icon
+                          Icons.arrow_right),
                       onPressed: () {
                         setState(() {
                           showIcons = !showIcons;
@@ -242,8 +201,8 @@ class IconSliderState extends State<IconSlider> {
                       alignment: Alignment.center,
                       children: [
                         Container(
-                          width: 32, // Make this bigger or smaller as needed
-                          height: 32, // Make this bigger or smaller as needed
+                          width: 32,
+                          height: 32,
                           color: Colors.transparent,
                         ),
                         Transform(

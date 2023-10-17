@@ -3,7 +3,7 @@ import 'package:bookflow/presentation/library_screen/widgets/library_appbar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'library_screen_logic.dart';
+import 'logic/library_screen_logic.dart';
 import 'widgets/list_view.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -42,27 +42,33 @@ class _LibraryScreenState extends State<LibraryScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            LibraryAppBar(
-              isGridView: logic.isGridView,
-              toggleView: () {
-                setState(() {
-                  logic.isGridView = !logic.isGridView;
-                });
-              },
-              saveViewState: () {
-                logic.saveViewState();
+            Consumer<LibraryScreenLogic>(
+              builder: (context, value, child) {
+                return LibraryAppBar(
+                  isGridView: logic.isGridView,
+                  toggleView: () {
+                    logic.isGridView = !logic.isGridView;
+                  },
+                  saveViewState: () {
+                    logic.saveViewState();
+                  },
+                );
               },
             ),
             Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: logic.isGridView
-                    ? LibraryGridView(
-                        key: ValueKey<bool>(logic.isGridView),
-                      )
-                    : BookListView(
-                        key: ValueKey<bool>(logic.isGridView),
-                      ),
+              child: Consumer<LibraryScreenLogic>(
+                builder: (context, logic, child) {
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: logic.isGridView
+                        ? LibraryGridView(
+                            key: ValueKey<bool>(logic.isGridView),
+                          )
+                        : BookListView(
+                            key: ValueKey<bool>(logic.isGridView),
+                          ),
+                  );
+                },
               ),
             )
                 .animate()

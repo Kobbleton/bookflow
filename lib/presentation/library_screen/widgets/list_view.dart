@@ -5,7 +5,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/size_utils.dart';
-import '../library_screen_logic.dart';
+import '../logic/library_screen_logic.dart';
 import 'custom_card.dart';
 import 'rename_dialog.dart';
 
