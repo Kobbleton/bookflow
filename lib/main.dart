@@ -12,6 +12,7 @@ import 'bloc/personal_settings/personal_settings_bloc.dart';
 import 'bloc/signup/sign_up_bloc.dart';
 import 'bloc/themecubit/theme_cubit.dart';
 import 'firebase_options.dart';
+import 'presentation/library_screen/logic/collection_provider.dart';
 import 'routes/app_routes.dart';
 import 'repository/auth_repository.dart';
 
@@ -43,31 +44,37 @@ void main() async {
         ),
       ],
       child: MultiBlocProvider(
-        providers: [
-          BlocProvider<SignUpBloc>(
-            create: (context) => SignUpBloc(authRepository: authRepository),
-          ),
-          BlocProvider<AuthenticationBloc>(
-            create: (context) => AuthenticationBloc(authRepository)
-              ..add(
-                AppStarted(),
+          providers: [
+            BlocProvider<SignUpBloc>(
+              create: (context) => SignUpBloc(authRepository: authRepository),
+            ),
+            BlocProvider<AuthenticationBloc>(
+              create: (context) => AuthenticationBloc(authRepository)
+                ..add(
+                  AppStarted(),
+                ),
+            ),
+            BlocProvider<ThemeCubit>(
+              create: (context) => ThemeCubit(),
+            ),
+            BlocProvider<PersonalSettingsBloc>(
+              create: (context) => PersonalSettingsBloc(authRepository),
+            ),
+            BlocProvider<TheloopThemeBloc>(
+              create: (context) => TheloopThemeBloc(),
+            ),
+          ],
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (context) => LibraryScreenLogic(),
               ),
-          ),
-          BlocProvider<ThemeCubit>(
-            create: (context) => ThemeCubit(),
-          ),
-          BlocProvider<PersonalSettingsBloc>(
-            create: (context) => PersonalSettingsBloc(authRepository),
-          ),
-          BlocProvider<TheloopThemeBloc>(
-            create: (context) => TheloopThemeBloc(),
-          ),
-        ],
-        child: ChangeNotifierProvider(
-          create: (context) => LibraryScreenLogic(),
-          child: const MyApp(),
-        ),
-      ),
+              ChangeNotifierProvider(
+                create: (context) => CollectionProvider(),
+              )
+            ],
+            child: const MyApp(),
+          )),
     ),
   );
 }
