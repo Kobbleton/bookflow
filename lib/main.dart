@@ -12,7 +12,6 @@ import 'bloc/personal_settings/personal_settings_bloc.dart';
 import 'bloc/signup/sign_up_bloc.dart';
 import 'bloc/themecubit/theme_cubit.dart';
 import 'firebase_options.dart';
-import 'presentation/library_screen/logic/collection_provider.dart';
 import 'routes/app_routes.dart';
 import 'repository/auth_repository.dart';
 
@@ -69,9 +68,6 @@ void main() async {
               ChangeNotifierProvider(
                 create: (context) => LibraryScreenLogic(),
               ),
-              ChangeNotifierProvider(
-                create: (context) => CollectionProvider(),
-              )
             ],
             child: const MyApp(),
           )),

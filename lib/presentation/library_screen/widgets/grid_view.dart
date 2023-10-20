@@ -1,13 +1,12 @@
+import 'package:bookflow/presentation/library_screen/widgets/add_to_collection_dialog.dart';
 import 'package:bookflow/presentation/library_screen/widgets/rename_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
-import '../../widgets/custom_image_view.dart';
 import '../logic/library_screen_logic.dart';
 import 'add_book_button.dart';
-import 'add_to_collection.dart';
 import 'custom_card.dart';
 
 class LibraryGridView extends StatelessWidget {
@@ -37,9 +36,12 @@ class LibraryGridView extends StatelessWidget {
               children: <Widget>[
                 AddBookButton(
                   handleTap: (context) async {
-                    logic.handleTap(context);
+                    logic.handleTap(context, logic.currentCollection);
                   },
-                  onBookAdded: logic.onBookAdded,
+                  onBookAdded: (String bookName, String filePath) {
+                    return logic.onBookAdded(
+                        bookName, filePath, logic.currentCollection);
+                  },
                 ),
                 CustomCard(
                   isGridview: logic.isGridView,
@@ -95,12 +97,18 @@ class LibraryGridView extends StatelessWidget {
 
                       actions: <Widget>[
                         CupertinoContextMenuAction(
+                          trailingIcon: Icons.add,
                           child: const Text('Add to Collection'),
                           onPressed: () {
                             Navigator.pop(context);
+                            // String bookID = logic.bookIDs[bookName] ?? "";
+                            // print(
+                            //     "Adding book to collection: Book ID - $bookID");
                             showDialog(
                               context: context,
-                              builder: (_) => const AddToCollectionDialog(),
+                              builder: (_) => AddToCollectionDialog(
+                                bookName: bookName,
+                              ),
                             );
                           },
                         ),
@@ -138,16 +146,6 @@ class LibraryGridView extends StatelessWidget {
                     ),
                 ],
               ),
-            ),
-            CustomImageView(
-              imagePath: 'assets/images/90dney_cover.png',
-              height: size.height * 0.23,
-              width: size.width * 0.42,
-              radius: BorderRadius.only(
-                topLeft: Radius.circular(getHorizontalSize(18)),
-                topRight: Radius.circular(getHorizontalSize(18)),
-              ),
-              alignment: Alignment.topCenter,
             ),
           ],
         ),

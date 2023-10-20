@@ -26,6 +26,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     logic.loadViewState();
     logic.loadBookPaths();
     logic.loadBooks();
+    logic.loadCollections();
   }
 
   @override
@@ -59,7 +60,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
               child: Consumer<LibraryScreenLogic>(
                 builder: (context, logic, child) {
                   return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 0),
                     child: logic.isGridView
                         ? LibraryGridView(
                             key: ValueKey<bool>(logic.isGridView),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bookflow/presentation/library_screen/widgets/select_collection_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../core/utils/color_constant.dart';
@@ -8,7 +9,6 @@ import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_style.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_image_view.dart';
-import 'add_to_collection_dialog.dart';
 
 class LibraryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LibraryAppBar({
@@ -126,7 +126,7 @@ class IconSliderState extends State<IconSlider> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return const AddToCollectionDialog();
+                          return const SelectCollectionDialog();
                         },
                       );
                     },

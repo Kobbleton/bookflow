@@ -1,13 +1,14 @@
 import 'package:bookflow/core/utils/size_utils.dart';
+import 'package:bookflow/presentation/library_screen/logic/library_screen_logic.dart';
 import 'package:bookflow/theme/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/utils/color_constant.dart';
-import '../logic/collection_provider.dart';
 
 class AddToCollectionDialog extends StatefulWidget {
-  const AddToCollectionDialog({super.key});
+  final String bookName;
+  const AddToCollectionDialog({required this.bookName, Key? key})
+      : super(key: key);
 
   @override
   AddToCollectionDialogState createState() => AddToCollectionDialogState();
@@ -24,7 +25,7 @@ class AddToCollectionDialogState extends State<AddToCollectionDialog>
   @override
   void initState() {
     super.initState();
-    Provider.of<CollectionProvider>(context, listen: false).loadCollections();
+    Provider.of<LibraryScreenLogic>(context, listen: false).loadCollections();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 350),
       vsync: this,
@@ -117,7 +118,7 @@ class AddToCollectionDialogState extends State<AddToCollectionDialog>
                         child: const Text("Add"),
                         onPressed: () {
                           var collectionProvider =
-                              Provider.of<CollectionProvider>(context,
+                              Provider.of<LibraryScreenLogic>(context,
                                   listen: false);
 
                           if (collectionProvider
@@ -160,7 +161,7 @@ class AddToCollectionDialogState extends State<AddToCollectionDialog>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CollectionProvider>(
+    return Consumer<LibraryScreenLogic>(
         builder: (context, collectionProvider, child) {
       return AnimatedBuilder(
           animation: _animation,
@@ -206,11 +207,9 @@ class AddToCollectionDialogState extends State<AddToCollectionDialog>
                                   index < collectionProvider.collections.length;
                                   index++)
                                 Dismissible(
-                                  key: ValueKey(collectionProvider.collections[
-                                      index]), // Use the actual value for uniqueness
-
+                                  key: ValueKey(
+                                      collectionProvider.collections[index]),
                                   onDismissed: (direction) {
-                                    // Implement your deletion logic here
                                     String removedItem =
                                         collectionProvider.collections[index];
                                     collectionProvider
@@ -227,19 +226,41 @@ class AddToCollectionDialogState extends State<AddToCollectionDialog>
                                       ),
                                     ),
                                   ),
-                                  child: CheckboxListTile(
+                                  child: ListTile(
+                                    leading: const Icon(Icons.list),
                                     title: Text(
                                         collectionProvider.collections[index]),
-                                    value: collectionProvider
-                                            .collectionChecklist[
-                                        collectionProvider.collections[index]],
-                                    onChanged: (bool? value) {
-                                      collectionProvider.toggleCollection(
-                                          collectionProvider.collections[index],
-                                          value!);
-                                    },
+                                    trailing: Checkbox(
+                                      value:
+                                          collectionProvider.isBookInCollection(
+                                              collectionProvider
+                                                  .collections[index],
+                                              widget.bookName),
+                                      onChanged: (bool? value) {
+                                        if (value == true) {
+                                          collectionProvider
+                                              .addBookToCollection(
+                                                  collectionProvider
+                                                      .collections[index],
+                                                  widget.bookName);
+                                        } else {
+                                          // Remove the book from the collection
+                                          // You'll need to implement this in your LibraryScreenLogic
+                                          collectionProvider
+                                              .removeBookFromCollection(
+                                                  collectionProvider
+                                                      .collections[index],
+                                                  widget.bookName);
+                                        }
+                                        collectionProvider.toggleCollection(
+                                            collectionProvider
+                                                .collections[index],
+                                            value!);
+                                      },
+                                    ),
                                   ),
                                 ),
+
                               TextButton.icon(
                                 onPressed: () =>
                                     _showNewCollectionDialog(context),
@@ -263,7 +284,31 @@ class AddToCollectionDialogState extends State<AddToCollectionDialog>
                           onPressed: showOkButton
                               ? () {
                                   Navigator.pop(context);
-                                  // Add your "OK" button functionality here
+                                  // A Map to temporarily store collections and their books
+                                  Map<String, List<String>> collectionsBooks =
+                                      {};
+                                  collectionProvider.collectionChecklist
+                                      .forEach((key, value) {
+                                    if (value) {
+                                      print(
+                                          'Books in Collection before: ${collectionProvider.getBooksInCollection(key)}');
+                                      collectionProvider.addBookToCollection(
+                                          key, widget.bookName);
+                                      print(
+                                          'Books in Collection after: ${collectionProvider.getBooksInCollection(key)}');
+
+                                      // Add to temporary map
+                                      collectionsBooks[key] = collectionProvider
+                                          .getBooksInCollection(key);
+                                    }
+                                  });
+
+                                  // Print each collection and their books
+                                  collectionsBooks.forEach((collection, books) {
+                                    print("Collection: $collection");
+                                    print("Books: ${books.join(', ')}");
+                                  });
+                                  collectionProvider.saveCollectionBooks();
                                 }
                               : null,
                           style: ButtonStyle(
