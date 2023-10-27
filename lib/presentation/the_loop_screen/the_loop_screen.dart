@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
+import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
 import 'package:bookflow/presentation/home_screen/home_screen.dart';
 import 'package:bookflow/presentation/the_loop_screen/logic/timer_manager.dart';
@@ -15,8 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../bloc/theloop_theme/theloop_theme_bloc.dart';
-import '../../bloc/theloop_theme/theloop_theme_event.dart';
+import '../../bloc/the_loop_blocs/theloop_theme/theloop_theme_bloc.dart';
+import '../../bloc/the_loop_blocs/theloop_theme/theloop_theme_event.dart';
 import 'logic/drag_handler.dart';
 
 class TheloopScreen extends StatefulWidget {

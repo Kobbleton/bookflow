@@ -1,10 +1,10 @@
-import 'package:bookflow/bloc/signup/sign_up_event.dart';
-import 'package:bookflow/bloc/signup/sign_up_state.dart';
+import 'package:bookflow/bloc/reg_auth_blocs/signup/sign_up_event.dart';
+import 'package:bookflow/bloc/reg_auth_blocs/signup/sign_up_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../exceptions/custom_exception.dart';
-import '../../repository/auth_repository.dart';
+import '../../../exceptions/custom_exception.dart';
+import '../../../repository/auth_repository.dart';
 
 // class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 //   final AuthRepository _authRepository;

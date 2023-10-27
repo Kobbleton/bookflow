@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bookflow/bloc/signup/sign_up_bloc.dart';
+import 'package:bookflow/bloc/reg_auth_blocs/signup/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/color_constant.dart';

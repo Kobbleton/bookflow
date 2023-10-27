@@ -3,9 +3,9 @@ import 'package:bookflow/presentation/welcome_screen/widgets/theloop_welcome.dar
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:io' show Platform;
-import '../../bloc/authentification/authentication_bloc.dart';
-import '../../bloc/authentification/authentication_event.dart';
-import '../../bloc/authentification/authentication_state.dart';
+import '../../bloc/reg_auth_blocs/authentification/authentication_bloc.dart';
+import '../../bloc/reg_auth_blocs/authentification/authentication_event.dart';
+import '../../bloc/reg_auth_blocs/authentification/authentication_state.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';

@@ -1,12 +1,12 @@
-import 'package:bookflow/bloc/authentification/authentication_state.dart';
+import 'package:bookflow/bloc/reg_auth_blocs/authentification/authentication_state.dart';
 import 'package:bookflow/presentation/settings_screen/widgets/avatar_info_row.dart';
 import 'package:bookflow/presentation/settings_screen/widgets/custom_settings_row.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/authentification/authentication_bloc.dart';
-import '../../bloc/authentification/authentication_event.dart';
+import '../../bloc/reg_auth_blocs/authentification/authentication_bloc.dart';
+import '../../bloc/reg_auth_blocs/authentification/authentication_event.dart';
 import '../../bloc/themecubit/theme_cubit.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';

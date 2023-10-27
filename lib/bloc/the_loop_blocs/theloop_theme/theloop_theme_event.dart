@@ -1,4 +1,4 @@
-import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
+import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TheloopThemeEvent extends Equatable {

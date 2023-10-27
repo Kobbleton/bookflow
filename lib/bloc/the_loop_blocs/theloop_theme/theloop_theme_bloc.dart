@@ -1,5 +1,5 @@
-import 'package:bookflow/bloc/theloop_theme/theloop_theme_event.dart';
-import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
+import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_event.dart';
+import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';

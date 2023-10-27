@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../bloc/theloop_theme/theloop_theme_bloc.dart';
-import '../../../bloc/theloop_theme/theloop_theme_state.dart';
+import '../../../bloc/the_loop_blocs/theloop_theme/theloop_theme_bloc.dart';
+import '../../../bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
 
 class WPMCounterWidget extends StatefulWidget {
   final int durationMilliseconds;

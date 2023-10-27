@@ -1,8 +1,8 @@
 import 'package:bookflow/presentation/login_and_registration_screens/forgot_password_screen/widgets/password_reset_email_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bloc/authentification/authentication_bloc.dart';
-import '../../../bloc/authentification/authentication_event.dart';
+import '../../../bloc/reg_auth_blocs/authentification/authentication_bloc.dart';
+import '../../../bloc/reg_auth_blocs/authentification/authentication_event.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';

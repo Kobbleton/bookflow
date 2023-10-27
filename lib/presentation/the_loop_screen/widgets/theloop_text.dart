@@ -1,5 +1,5 @@
-import 'package:bookflow/bloc/theloop_theme/theloop_theme_bloc.dart';
-import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
+import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_bloc.dart';
+import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/size_utils.dart';
