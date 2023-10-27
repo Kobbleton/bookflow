@@ -1,6 +1,6 @@
 import 'package:bookflow/bloc/authentification/authentication_state.dart';
-import 'package:bookflow/presentation/profile_and_settings_screen/widgets/avatar_info_row.dart';
-import 'package:bookflow/presentation/profile_and_settings_screen/widgets/custom_settings_row.dart';
+import 'package:bookflow/presentation/settings_screen/widgets/avatar_info_row.dart';
+import 'package:bookflow/presentation/settings_screen/widgets/custom_settings_row.dart';
 import 'package:bookflow/presentation/home_screen/widgets/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -17,18 +17,17 @@ import '../widgets/custom_icon_button.dart';
 import '../widgets/custom_image_view.dart';
 import '../home_screen/widgets/custom_switch.dart';
 
-class ProfileAndSettingsScreen extends StatefulWidget {
-  const ProfileAndSettingsScreen({Key? key})
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key})
       : super(
           key: key,
         );
 
   @override
-  State<ProfileAndSettingsScreen> createState() =>
-      _ProfileAndSettingsScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
+class _SettingsScreenState extends State<SettingsScreen> {
   bool isSelectedSwitch = false;
 
   @override
@@ -59,7 +58,11 @@ class _ProfileAndSettingsScreenState extends State<ProfileAndSettingsScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Column(
           children: [
-            const HomeScreenAppBar(),
+            const HomeScreenAppBar(
+              heading: 'Settings',
+              isProfileScreen: false,
+              isSettingsScreen: true,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 padding: getPadding(

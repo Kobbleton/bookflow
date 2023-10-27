@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/size_utils.dart';
 import '../../../theme/app_decoration.dart';
-import '../../../theme/app_style.dart';
 import '../../widgets/custom_image_view.dart';
 
 class CustomCard extends StatelessWidget {
   final String imagePath;
   final String text;
-  final Function onLongPress;
+  // final Function onLongPress;
+  final bool isGridview;
 
   final Function(String) onCardTap;
 
@@ -17,18 +17,19 @@ class CustomCard extends StatelessWidget {
       {Key? key,
       required this.imagePath,
       required this.text,
-      required this.onLongPress,
-      required this.onCardTap})
+      // required this.onLongPress,
+      required this.onCardTap,
+      required this.isGridview})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () => onLongPress(),
+      // onLongPress: () => onLongPress(),
       onTap: () => onCardTap(text),
       child: SizedBox(
-        height: size.height * 0.28,
-        width: size.width * 0.42,
+        height: isGridview ? size.height * 0.28 : size.height * 0.18,
+        width: isGridview ? size.width * 0.42 : size.width * 0.28,
         child: Stack(
           alignment: Alignment.bottomRight,
           children: [
@@ -58,8 +59,9 @@ class CustomCard extends StatelessWidget {
                   ),
                   child: Container(
                     // color: Colors.blue,
-                    height: size.height * 0.28,
-                    width: size.width * 0.42,
+                    height:
+                        isGridview ? size.height * 0.28 : size.height * 0.18,
+                    width: isGridview ? size.width * 0.42 : size.width * 0.28,
                     decoration: AppDecoration.outlineBlack9001e.copyWith(
                       color: Theme.of(context).brightness == Brightness.dark
                           ? ColorConstant.dark3
@@ -67,12 +69,22 @@ class CustomCard extends StatelessWidget {
                       borderRadius: BorderRadiusStyle.circleBorder18,
                     ),
                     child: Stack(
+                      alignment: AlignmentDirectional.topCenter,
                       children: [
                         CustomImageView(
                           imagePath: imagePath,
-                          height: size.height * 0.24,
-                          width: size.width * 0.42,
-                          radius: BorderRadius.circular(getHorizontalSize(18)),
+                          height: isGridview
+                              ? size.height * 0.28
+                              : size.height * 0.2,
+                          width: isGridview
+                              ? size.width * 0.42
+                              : size.width * 0.28,
+                          radius: BorderRadius.only(
+                            topLeft: Radius.circular(getHorizontalSize(18)),
+                            topRight: Radius.circular(getHorizontalSize(18)),
+                            // bottomLeft: Radius.circular(getHorizontalSize(0)),
+                            // bottomRight: Radius.circular(getHorizontalSize(0)),
+                          ),
                           alignment: Alignment.topCenter,
                         ),
                       ],
@@ -81,21 +93,23 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding: getPadding(bottom: 8, left: 18),
-                  child: Text(
-                    text,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: AppStyle.txtOpenSansBold18(context),
-                  ),
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomLeft,
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: Padding(
+            //       padding: getPadding(bottom: 8, left: 18),
+            //       child: Text(
+            //         text,
+            //         overflow: TextOverflow.ellipsis,
+            //         textAlign: TextAlign.left,
+            //         style: isGridview
+            //             ? AppStyle.txtOpenSansBold18(context)
+            //             : const TextStyle(color: Colors.transparent),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

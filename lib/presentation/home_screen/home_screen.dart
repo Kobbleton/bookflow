@@ -1,15 +1,17 @@
 import 'dart:io';
 
 import 'package:bookflow/presentation/home_screen/widgets/home_page.dart';
-import 'package:bookflow/presentation/profile_and_settings_screen/profile_and_settings_screen.dart';
+import 'package:bookflow/presentation/profile_screen/profile_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+
 import '../../core/utils/color_constant.dart';
 
 import '../library_screen/library_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   // final int initialIndex;
+
   const HomeScreen({
     Key? key,
     // this.initialIndex = 0,
@@ -20,8 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
-
+  int _page = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   final List<Widget> _pages = [
@@ -29,21 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomePage(),
     // The second page of the application (LibraryScreen)
     const LibraryScreen(),
-    // The third page of the application (ProfileScreen)
-    const ProfileAndSettingsScreen(),
-  ];
 
-  @override
-  void initState() {
-    super.initState();
-    // _currentIndex = widget.initialIndex;
-    print("Initial index: $_currentIndex");
-  }
+    // The third page of the application (ProfileScreen)
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     print("Bottom Navigation Key: $_bottomNavigationKey"); // Add print here
-    print("Current index before Scaffold: $_currentIndex");
+
     // Get the screen height and width
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -61,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? containerPadding * 1.03
                     : containerPadding * 0.82,
               ),
-              child: _pages[_currentIndex],
+              child: _pages[_page],
             ),
           ),
           Positioned(
@@ -80,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 0,
             right: 0,
             child: CurvedNavigationBar(
-              // key: ValueKey(_currentIndex),
+              key: _bottomNavigationKey,
+
               color: Theme.of(context).brightness == Brightness.dark
                   ? ColorConstant.dark1
                   : ColorConstant.white,
@@ -96,35 +92,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: Platform.isIOS
                       ? navBarHeight * 0.4
                       : navBarHeight * 0.35, // 40% of calculated navBarHeight
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? ColorConstant.white
-                      : ColorConstant.gray700,
+                  color: Colors.amber.shade900,
+                  // color: Theme.of(context).brightness == Brightness.dark
+                  //     ? ColorConstant.white
+                  //     : ColorConstant.gray700,
                 ),
                 Icon(
                   Icons.auto_stories,
                   size:
                       Platform.isIOS ? navBarHeight * 0.4 : navBarHeight * 0.35,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? ColorConstant.white
-                      : ColorConstant.gray700,
+                  color: Colors.purple.shade400,
+                  // color: Theme.of(context).brightness == Brightness.dark
+                  //     ? ColorConstant.white
+                  //     : ColorConstant.gray700,
                 ),
                 Icon(
                   Icons.person,
                   size:
                       Platform.isIOS ? navBarHeight * 0.4 : navBarHeight * 0.35,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? ColorConstant.white
-                      : ColorConstant.gray700,
+                  color: Colors.blueAccent,
+                  // color: Theme.of(context).brightness == Brightness.dark
+                  //     ? ColorConstant.white
+                  //     : ColorConstant.gray700,
                 ),
               ],
               onTap: (index) {
                 setState(() {
-                  _currentIndex = index;
-                  _bottomNavigationKey.currentState
-                      ?.setPage(index); // <-- Add this line
-                  print("Current index onTap: $_currentIndex");
+                  _page = index;
+                  // _bottomNavigationKey.currentState
+                  //     ?.setPage(index); // <-- Add this line
                 });
               },
+              letIndexChange: (index) => true,
             ),
           ),
         ],

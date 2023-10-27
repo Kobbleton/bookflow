@@ -17,49 +17,52 @@ class LoopText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            color: Colors.grey.shade500,
-            width: 1,
-            height: 75,
-          ), // Line above text
-          Padding(
-            padding: getPadding(top: 50),
-          ),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 50),
-            child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
-              builder: (context, state) {
-                return Text(
-                  widget.words[index],
-                  key: ValueKey<int>(index),
-                  strutStyle: StrutStyle(
-                    fontFamily: state.fontName,
-                    fontSize: mapFontSizeEnumToDouble(state.fontSize),
-                    forceStrutHeight: true,
-                  ),
-                  style: TextStyle(
-                    fontSize: mapFontSizeEnumToDouble(state.fontSize),
-                    color: state.mainTextColor,
-                    fontFamily: state.fontName,
-                  ),
-                );
-              },
+    return Padding(
+      padding: getPadding(top: 40),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              color: Colors.grey.shade500,
+              width: 1,
+              height: 65,
+            ), // Line above text
+            Padding(
+              padding: getPadding(top: 50),
             ),
-          ), // Text display
-          Padding(
-            padding: getPadding(bottom: 50),
-          ),
-          Container(
-            color: Colors.grey.shade500,
-            width: 1,
-            height: 75,
-          ), // Line below text
-        ],
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 50),
+              child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                builder: (context, state) {
+                  return Text(
+                    widget.words[index],
+                    key: ValueKey<int>(index),
+                    strutStyle: StrutStyle(
+                      fontFamily: state.fontName,
+                      fontSize: mapFontSizeEnumToDouble(state.fontSize),
+                      forceStrutHeight: true,
+                    ),
+                    style: TextStyle(
+                      fontSize: mapFontSizeEnumToDouble(state.fontSize),
+                      color: state.mainTextColor,
+                      fontFamily: state.fontName,
+                    ),
+                  );
+                },
+              ),
+            ), // Text display
+            Padding(
+              padding: getPadding(bottom: 50),
+            ),
+            Container(
+              color: Colors.grey.shade500,
+              width: 1,
+              height: 65,
+            ), // Line below text
+          ],
+        ),
       ),
     );
   }

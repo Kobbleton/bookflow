@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bookflow/core/utils/color_constant.dart';
 import 'package:bookflow/core/utils/size_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,10 +31,20 @@ class SettingsModalScreen {
         return Align(
           alignment: Alignment.centerRight,
           child: Material(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
             child: Container(
-              width: MediaQuery.of(context).size.width / 3,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                ),
+                color: ColorConstant.dark5,
+              ),
+              width: MediaQuery.of(context).size.width / 2.7,
               height: MediaQuery.of(context).size.height,
-              color: ColorConstant.dark5,
               child: Padding(
                 padding: getPadding(top: 16, left: 42),
                 child: Column(
@@ -86,7 +97,9 @@ class SettingsModalScreen {
                             curve: Curves.easeOutQuad),
                     const SizedBox(height: 8.0),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 3.9,
+                      width: Platform.isAndroid
+                          ? MediaQuery.of(context).size.width / 3.7
+                          : MediaQuery.of(context).size.width / 3.9,
                       child: const Divider(color: Colors.white),
                     ),
                     const Text(
@@ -231,179 +244,223 @@ class SettingsModalScreen {
       context: context,
       barrierLabel: "Options",
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.transparent,
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
         return Align(
           alignment: Alignment.centerRight,
-          child: Material(
-            child: Container(
-              width: MediaQuery.of(context).size.width / 3,
-              height: MediaQuery.of(context).size.height,
-              color: ColorConstant.dark5,
-              child: Padding(
-                padding: getPadding(top: 16, left: 42),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'Font:',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    const SizedBox(height: 8.0),
-                    BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
-                      builder: (context, state) {
-                        return ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            child: Material(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  color: ColorConstant.dark5,
+                ),
+                width: MediaQuery.of(context).size.width / 2.7,
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: getPadding(top: 16, left: 42),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Font Size Selection
+                      Padding(
+                        padding: getPadding(top: 8, bottom: 12),
+                        child: const Text(
+                          'Font Size:',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
                           ),
-                          onPressed: () {
-                            showGeneralDialog(
-                              context: context,
-                              barrierLabel: "Options",
-                              barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              transitionDuration:
-                                  const Duration(milliseconds: 300),
-                              pageBuilder: (BuildContext buildContext,
-                                  Animation animation,
-                                  Animation secondaryAnimation) {
-                                return Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Material(
-                                    child: BlocBuilder<TheloopThemeBloc,
-                                        TheloopThemeState>(
-                                      builder: (context, state) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3, // 1/3 screen width
-                                          color: ColorConstant
-                                              .dark5, // Your color constant
-                                          child: ListView.builder(
-                                            itemCount:
-                                                availableFontNames.length,
-                                            itemBuilder: (context, index) {
-                                              return ListTile(
-                                                title: Padding(
-                                                  padding: getPadding(top: 28),
-                                                  child: Text(
-                                                    availableFontNames[index],
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontFamily:
-                                                          availableFontNames[
-                                                              index],
-                                                    ),
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  final theloopThemeBloc =
-                                                      BlocProvider.of<
-                                                              TheloopThemeBloc>(
-                                                          context);
-                                                  theloopThemeBloc.add(
-                                                    SetFontEvent(
-                                                      newFontName:
-                                                          availableFontNames[
-                                                              index],
-                                                    ),
-                                                  );
-                                                  Navigator.pop(context);
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                state.fontName,
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontFamily: state.fontName,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: getPadding(bottom: 8),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3.9,
-                      child: const Divider(color: Colors.white),
-                    ),
-                    // Font Size Selection
-                    Padding(
-                      padding: getPadding(top: 12, bottom: 12),
-                      child: const Text(
-                        'Font Size:',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
                         ),
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
-                          ),
-                          child: const Text("Small"),
-                          onPressed: () {
-                            // Update your font size to Small
-                            BlocProvider.of<TheloopThemeBloc>(context).add(
-                                const SetFontSizeEvent(
-                                    newFontSize: FontSize.small));
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
-                          ),
-                          child: const Text("Medium"),
-                          onPressed: () {
-                            // Update your font size to Medium
-                            BlocProvider.of<TheloopThemeBloc>(context).add(
-                                const SetFontSizeEvent(
-                                    newFontSize: FontSize.medium));
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorConstant.dark4),
-                          ),
-                          child: const Text("Large"),
-                          onPressed: () {
-                            // Update your font size to Large
-                            BlocProvider.of<TheloopThemeBloc>(context).add(
-                                const SetFontSizeEvent(
-                                    newFontSize: FontSize.big));
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                      BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                        builder: (context, state) {
+                          FontSize currentFontSize = state.fontSize;
+                          return DefaultTextStyle(
+                            style: const TextStyle(
+                                color: Colors.white), // Custom Text Color
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    12), // Adjust the corner radius
+                                color: ColorConstant
+                                    .dark4, // Custom Background Color
+                              ),
+                              child: CupertinoSlidingSegmentedControl<FontSize>(
+                                thumbColor: ColorConstant.cyan500,
+                                backgroundColor: ColorConstant.dark4,
+                                children: {
+                                  FontSize.small: SizedBox(
+                                    width: size.width * 0.139, // Custom Width
+                                    height: 20, // Custom Height
+                                    child: const Center(child: Text("Small")),
+                                  ),
+                                  FontSize.medium: SizedBox(
+                                    width: size.width * 0.139,
+                                    height: 20,
+                                    child: const Center(child: Text("Medium")),
+                                  ),
+                                  FontSize.big: SizedBox(
+                                    width: size.width * 0.139,
+                                    height: 20,
+                                    child: const Center(child: Text("Large")),
+                                  ),
+                                },
+                                groupValue:
+                                    currentFontSize, // The current selected value
+                                onValueChanged: (FontSize? newSize) {
+                                  if (newSize != null) {
+                                    // Ensure the value is not null before using
+                                    // Dispatch the event to update the font size in the Bloc
+                                    BlocProvider.of<TheloopThemeBloc>(context)
+                                        .add(
+                                      SetFontSizeEvent(newFontSize: newSize),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Padding(
+                        padding: getPadding(bottom: 10),
+                      ),
+                      SizedBox(
+                        width: Platform.isAndroid
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 3.8,
+                        child: const Divider(color: Colors.white),
+                      ),
+                      Padding(
+                        padding: getPadding(bottom: 10),
+                      ),
+                      const Text(
+                        'Font:',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      const SizedBox(height: 4.0),
+                      BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
+                        builder: (context, state) {
+                          return ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      12.0), // The corner radius, you can adjust it as you like
+                                ),
+                              ),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorConstant.dark4),
+                            ),
+                            onPressed: () {
+                              showGeneralDialog(
+                                context: context,
+                                barrierLabel: "Options",
+                                barrierDismissible: true,
+                                barrierColor: Colors.black.withOpacity(0.5),
+                                transitionDuration:
+                                    const Duration(milliseconds: 300),
+                                pageBuilder: (BuildContext buildContext,
+                                    Animation animation,
+                                    Animation secondaryAnimation) {
+                                  return Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Material(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20),
+                                      ),
+                                      child: BlocBuilder<TheloopThemeBloc,
+                                          TheloopThemeState>(
+                                        builder: (context, state) {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color: ColorConstant.dark5,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                bottomLeft: Radius.circular(20),
+                                              ),
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.7,
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  availableFontNames.length,
+                                              itemBuilder: (context, index) {
+                                                return ListTile(
+                                                  title: Padding(
+                                                    padding: getPadding(
+                                                        top: 24, left: 0),
+                                                    child: Text(
+                                                      availableFontNames[index],
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontFamily:
+                                                            availableFontNames[
+                                                                index],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onTap: () {
+                                                    final theloopThemeBloc =
+                                                        BlocProvider.of<
+                                                                TheloopThemeBloc>(
+                                                            context);
+                                                    theloopThemeBloc.add(
+                                                      SetFontEvent(
+                                                        newFontName:
+                                                            availableFontNames[
+                                                                index],
+                                                      ),
+                                                    );
+                                                    Navigator.pop(context);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                Text(
+                                  state.fontName,
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontFamily: state.fontName,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -448,7 +505,7 @@ class SettingsModalScreen {
             fit: BoxFit.cover,
           ),
         ),
-        width: 80,
+        width: size.width * 0.24,
         height: 60,
         child: Center(
           child: Text(
@@ -480,7 +537,10 @@ class SettingsModalScreen {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: color,
-        minimumSize: const Size(80, 60),
+        minimumSize: Size(
+          size.width * 0.24,
+          60,
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, // Center vertically

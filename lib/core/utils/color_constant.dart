@@ -29,6 +29,7 @@ class ColorConstant {
   static Color dark1 = fromHex('#181A20');
   static Color dark2 = fromHex('#1F222A');
   static Color dark3 = fromHex('#1F222A');
+
   static Color dark4 = fromHex('#35383F');
   static Color dark5 = fromHex('#464A53');
 

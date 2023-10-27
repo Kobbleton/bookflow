@@ -13,7 +13,7 @@ class GradientBackgound extends StatelessWidget {
     double containerWidth = width * 0.3; // 30% of screen width
     double containerHeight = height * 0.3; // 30% of screen height
     double backgroundWidth = width * 0.8; // 80% of screen width
-    double backgroundHeight = height * 0.3; // 30% of screen height
+    double backgroundHeight = height * 0.27; // 30% of screen height
     double leftPosition = width * 0.2; // 20% from left of screen
     double topPosition = height * 0.05; // 5% from top of screen
 
