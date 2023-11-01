@@ -74,6 +74,12 @@ class _FrameReaderScreenState extends State<FrameReaderScreen> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return GestureDetector(
+          onVerticalDragEnd: (details) {
+            // Check if swipe is from top to bottom
+            if (details.primaryVelocity! > 0) {
+              Navigator.pop(context);
+            }
+          },
           onTapUp: (details) {
             double screenWidth = MediaQuery.of(context).size.width;
 
