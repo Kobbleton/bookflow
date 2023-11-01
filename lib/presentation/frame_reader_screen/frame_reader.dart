@@ -20,9 +20,7 @@ class FrameReaderScreen extends StatefulWidget {
 class _FrameReaderScreenState extends State<FrameReaderScreen> {
   final double fontSize = 26.0;
   late PageController _pageController;
-  int currentPage = 0;
-  late VoidCallback
-      _pageControllerListener; // Step 1: Define a reference for the listener
+  late VoidCallback _pageControllerListener;
 
   @override
   void initState() {
@@ -33,47 +31,63 @@ class _FrameReaderScreenState extends State<FrameReaderScreen> {
 
   @override
   void dispose() {
-    _pageController.removeListener(
-        _pageControllerListener); // Step 2: Remove the listener using the reference
+    _pageController.removeListener(_pageControllerListener);
     _disposePageController();
     resetPreferredOrientations();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _dispatchLayoutChangedEvent();
   }
 
   void _initializePageController() {
     _pageController = PageController();
 
     _pageControllerListener = () {
-      // Step 1: Assign the listener to the reference
-      setState(() {
-        currentPage = _pageController.page!.toInt();
-      });
+      // This listener can be left empty since the currentPage is now managed by the BLoC
     };
 
-    _pageController.addListener(
-        _pageControllerListener); // Add listener using the reference
+    _pageController.addListener(_pageControllerListener);
   }
 
-  void _disposePageController() => _pageController.dispose();
+  void _disposePageController() {
+    _pageController.dispose();
+  }
+
+  void _dispatchLayoutChangedEvent() {
+    final readerBloc = BlocProvider.of<ReaderBloc>(context);
+    readerBloc.add(LayoutChangedEvent(
+      words: widget.words,
+      fontSize: fontSize,
+      maxWidth: MediaQuery.of(context).size.width,
+      maxHeight: MediaQuery.of(context).size.height,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
+    final readerBloc = BlocProvider.of<ReaderBloc>(context);
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final readerBloc = BlocProvider.of<ReaderBloc>(context);
+        return GestureDetector(
+          onTapUp: (details) {
+            double screenWidth = MediaQuery.of(context).size.width;
 
-        return BlocListener<ReaderBloc, ReaderState>(
-          listener: (context, state) {
-            // Your listener code here
+            if (details.localPosition.dx < screenWidth / 2) {
+              readerBloc.add(PreviousPageEvent());
+            } else {
+              readerBloc.add(NextPageEvent());
+            }
           },
           child: BlocBuilder<ReaderBloc, ReaderState>(
             builder: (context, state) {
-              readerBloc.add(LayoutChangedEvent(
-                words: widget.words,
-                fontSize: fontSize,
-                maxWidth: constraints.maxWidth,
-                maxHeight: constraints.maxHeight,
-              ));
+              if (state is PageChangedState) {
+                _pageController.jumpToPage(state.currentPage - 1);
+              }
 
               return Scaffold(
                 backgroundColor: ColorConstant.dark2,
@@ -82,7 +96,9 @@ class _FrameReaderScreenState extends State<FrameReaderScreen> {
                   pages: state.pages,
                   pageController: _pageController,
                   fontSize: fontSize,
-                  currentPage: currentPage,
+                  currentPage: state is PageChangedState
+                      ? state.currentPage
+                      : 0, // Update the current page based on the state
                 ),
               );
             },

@@ -1,25 +1,38 @@
-import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'frame_navigation_event.dart';
 import 'frame_navigation_state.dart';
 
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
-  NavigationBloc() : super(NavigationInitialState());
+  NavigationBloc() : super(NavigationInitialState()) {
+    on<NavigateToPageEvent>((event, emit) {
+      emit(NavigationToPageState(page: event.page));
+    });
 
-  Stream<NavigationState> mapEventToState(NavigationEvent event) async* {
-    if (event is NavigateToPageEvent) {
-      // Logic for navigating to a specific page
-      yield NavigationToPageState(page: event.page);
-    } else if (event is ChangePageEvent) {
-      // Logic for changing the current page number
-      yield PageChangedState(currentPage: event.newPageNumber);
-    } else if (event is NavigateChapterEvent) {
-      // Logic for navigating to a specific chapter
-      yield ChapterNavigatedState(chapterNumber: event.chapterNumber);
-    } else if (event is JumpToPageOrPercentageEvent) {
-      // Logic for jumping to a specific page or percentage
-      yield PageOrPercentageJumpedState(
-          page: event.page, percentage: event.percentage);
-    }
+    on<ChangePageEvent>((event, emit) {
+      emit(PageChangedState(currentPage: event.newPageNumber));
+    });
+
+    on<NavigateChapterEvent>((event, emit) {
+      emit(ChapterNavigatedState(chapterNumber: event.chapterNumber));
+    });
+
+    on<JumpToPageOrPercentageEvent>((event, emit) {
+      emit(PageOrPercentageJumpedState(
+          page: event.page, percentage: event.percentage));
+    });
+
+    on<NavigateNextPageEvent>((event, emit) {
+      if (state is PageChangedState) {
+        int newPageNumber = (state as PageChangedState).currentPage + 1;
+        emit(PageChangedState(currentPage: newPageNumber));
+      }
+    });
+
+    on<NavigatePreviousPageEvent>((event, emit) {
+      if (state is PageChangedState) {
+        int newPageNumber = (state as PageChangedState).currentPage - 1;
+        emit(PageChangedState(currentPage: newPageNumber));
+      }
+    });
   }
 }

@@ -16,7 +16,6 @@ class NavigateToPageEvent extends NavigationEvent {
   List<Object> get props => [page];
 }
 
-
 class ChangePageEvent extends NavigationEvent {
   final int newPageNumber;
 
@@ -45,3 +44,7 @@ class JumpToPageOrPercentageEvent extends NavigationEvent {
   List<Object> get props =>
       [page ?? 1, percentage ?? 0]; // Providing default values
 }
+
+class NavigateNextPageEvent extends NavigationEvent {}
+
+class NavigatePreviousPageEvent extends NavigationEvent {}

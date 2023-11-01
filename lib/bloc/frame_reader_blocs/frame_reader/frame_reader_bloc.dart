@@ -19,6 +19,21 @@ class ReaderBloc extends Bloc<ReaderEvent, ReaderState> {
       emit(LastPageSyncedState(pages: state.pages, lastReadPage: lastReadPage));
     });
 
+    on<NextPageEvent>((event, emit) {
+  if (currentPage < state.pages.length) {
+    currentPage++;
+    emit(PageChangedState(pages: state.pages, currentPage: currentPage));
+  }
+});
+
+on<PreviousPageEvent>((event, emit) {
+  if (currentPage > 1) {
+    currentPage--;
+    emit(PageChangedState(pages: state.pages, currentPage: currentPage));
+  }
+});
+
+
     print("ReaderBloc Constructor invoked");
   }
   // Replace ReaderInitialState with your initial state

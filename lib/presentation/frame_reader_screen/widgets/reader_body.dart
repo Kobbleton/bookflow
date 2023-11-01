@@ -27,7 +27,7 @@ Widget buildBody({
         right: 0,
         child: Center(
           child: Text(
-            '${currentPage + 1}/${pages.length}',
+            '$currentPage /${pages.length}',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

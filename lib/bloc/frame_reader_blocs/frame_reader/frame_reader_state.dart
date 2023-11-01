@@ -28,3 +28,14 @@ class ReaderLayoutChangedState extends ReaderState {
   const ReaderLayoutChangedState({required List<String> pages})
       : super(pages: pages);
 }
+class PageChangedState extends ReaderState {
+  final int currentPage;
+
+  const PageChangedState({
+    required List<String> pages,
+    required this.currentPage,
+  }) : super(pages: pages);
+
+  @override
+  List<Object> get props => [...super.props, currentPage];
+}

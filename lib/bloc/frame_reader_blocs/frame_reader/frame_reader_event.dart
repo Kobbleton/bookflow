@@ -22,3 +22,7 @@ class LayoutChangedEvent extends ReaderEvent {
     required this.maxHeight,
   });
 }
+
+class NextPageEvent extends ReaderEvent {}
+
+class PreviousPageEvent extends ReaderEvent {}
