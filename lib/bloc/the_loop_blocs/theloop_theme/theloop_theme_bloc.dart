@@ -102,16 +102,13 @@ class TheloopThemeBloc extends Bloc<TheloopThemeEvent, TheloopThemeState> {
     on<UpdateProgressEvent>((event, emit) {
       int index = (event.progress * 10).toInt();
 
-      print('Event Progress: ${event.progress}'); // Debug line
-      print('Calculated Index: $index'); // Debug line
-
       // Check if index is different from the last index
       if (lastIndex != index) {
         // Update lastIndex to the current index
         lastIndex = index;
 
         String newImagePath = backgroundImages[index % backgroundImages.length];
-        print('New Image Path: $newImagePath'); // Debug line
+
         final currentState = state;
 
         if (currentState.allowImageSwitch) {

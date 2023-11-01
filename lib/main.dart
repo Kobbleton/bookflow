@@ -6,6 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'bloc/frame_reader_blocs/frame_reader/frame_reader_bloc.dart';
+import 'bloc/frame_reader_blocs/navigation/frame_navigation_bloc.dart';
+import 'bloc/frame_reader_blocs/reader_ui/reader_ui_bloc.dart';
 import 'bloc/reg_auth_blocs/authentification/authentication_bloc.dart';
 import 'bloc/reg_auth_blocs/authentification/authentication_event.dart';
 import 'bloc/personal_settings/personal_settings_bloc.dart';
@@ -61,6 +64,15 @@ void main() async {
             ),
             BlocProvider<TheloopThemeBloc>(
               create: (context) => TheloopThemeBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ReaderBloc(),
+            ),
+            BlocProvider(
+              create: (context) => NavigationBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ReaderUIBloc(),
             ),
           ],
           child: MultiProvider(

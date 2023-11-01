@@ -140,7 +140,7 @@ class LibraryGridView extends StatelessWidget {
                         text: bookName,
                         onCardTap: (filePath) {
                           // assuming you get filePath from somewhere or it's the same as bookName
-                          logic.onBookClicked(bookName, context);
+                          logic.showReaderSelectionDialog(bookName, context);
                         },
                       ),
                     ),

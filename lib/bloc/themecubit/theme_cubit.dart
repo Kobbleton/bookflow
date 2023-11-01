@@ -52,8 +52,6 @@ class ThemeCubit extends Cubit<ThemeState> {
 
     ThemeData theme = isDarkTheme ? getDarkThemeData() : getLightThemeData();
 
-    print(isDarkTheme ? "Set dark theme: $theme" : "Set light theme: $theme");
-
     // Emit the new state
     emit(ThemeState(themeData: theme, isDarkTheme: isDarkTheme));
   }

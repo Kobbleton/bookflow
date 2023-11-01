@@ -9,7 +9,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
   NoteBloc() : super(NoteInitial());
 
-  @override
+
   Stream<NoteState> mapEventToState(NoteEvent event) async* {
     if (event is AddNote) {
       notes.add(event.note);

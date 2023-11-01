@@ -62,20 +62,20 @@ class AuthenticationBloc
       SignInWithGoogle event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoading());
     try {
-      print("Starting Sign In");
+
       await _authRepository.signInWithGoogle();
-      print("Finished Sign In");
+
       emit(AuthenticationAuthenticated());
     } catch (e) {
-      print("Error in _onSignInWithGoogle: $e"); // Add debug print here
+
       emit(AuthenticationError('Failed to sign in with Google.'));
     }
   }
 
   Future<void> _onSignInWithApple(
       SignInWithAppleEvent event, Emitter<AuthenticationState> emit) async {
-    print(
-        "Starting Sign In with Apple"); // This will print when the function is called
+
+
     emit(AuthenticationLoading());
     try {
       await _authRepository.signInWithApple();

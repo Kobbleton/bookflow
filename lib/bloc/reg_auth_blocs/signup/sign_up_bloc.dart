@@ -61,26 +61,20 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc({required AuthRepository authRepository})
       : _authRepository = authRepository,
         super(SignUpInitial()) {
-    print('SignUpBloc created');
-
     on<Submitted>(_mapSubmittedToState);
     // handle other events...
   }
 
   void _mapSubmittedToState(Submitted event, Emitter<SignUpState> emit) async {
-    print('SignUpBloc: Starting _mapSubmittedToState...');
     emit(SignUpLoading());
     try {
-      print('SignUpBloc: Attempting signup...');
       final userCredential = await _authRepository.signUp(
         email: event.email,
         password: event.password,
       );
-      print(
-          'SignUpBloc: Signup successful! User id: ${userCredential.user!.uid}');
 
       // Saving the additional data
-      print('SignUpBloc: Saving additional data...');
+
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCredential.user!.uid)
@@ -91,25 +85,19 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         'username': event.username,
         'email': event.email,
       });
-      print('SignUpBloc: Additional data saved successfully!');
 
       emit(SignUpSuccess(userCredential: userCredential));
     } on WeakPasswordException catch (_) {
-      print('SignUpBloc: Weak password exception caught');
       emit(const SignUpFailure(error: 'Weak password. Try a stronger one.'));
     } on EmailAlreadyInUseException catch (_) {
-      print('SignUpBloc: Email already in use exception caught');
       emit(const SignUpFailure(
           error: 'Email already in use. Please use a different email.'));
     } on UserNotFoundException catch (_) {
-      print('SignUpBloc: User not found exception caught');
       emit(const SignUpFailure(error: 'No user found for that email.'));
     } on WrongPasswordException catch (_) {
-      print('SignUpBloc: Wrong password exception caught');
       emit(
           const SignUpFailure(error: 'Wrong password provided for that user.'));
     } catch (e) {
-      print('SignUpBloc: Unknown exception caught: $e');
       emit(SignUpFailure(
           error:
               'An unknown error occurred. Please try again. Error: ${e.toString()}'));
