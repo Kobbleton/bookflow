@@ -209,7 +209,7 @@ class TheloopScreenState extends State<TheloopScreen>
               transitionBuilder: (Widget child, Animation<double> animation) {
                 var curvedAnimation = CurvedAnimation(
                   parent: animation,
-                  curve: Curves.easeInOutQuart,
+                  curve: Curves.easeInOutQuart, 
                 );
                 return SizeTransition(
                   axis: Axis.horizontal,
