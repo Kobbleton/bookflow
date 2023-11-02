@@ -133,52 +133,63 @@ class LibraryScreenLogic extends ChangeNotifier {
       context: context,
       builder: (context) {
         return Dialog(
-          backgroundColor: ColorConstant.dark2.withOpacity(0.9),
+          backgroundColor: ColorConstant.dark2.withOpacity(0.7),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
           ),
           child: Container(
             height: MediaQuery.of(context).size.height * 0.18,
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.of(context).size.width * 0.6,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: ColorConstant.dark2.withOpacity(0.95),
+              color: ColorConstant.dark2.withOpacity(0.7),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
+                // const SizedBox(height: 20),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: ColorConstant.dark4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    SizedBox(
+                      width: 170,
+                      height: 46,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: ColorConstant.cyan500,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
+                        child: const Text("The Loop Reader"),
+                        onPressed: () {
+                          onBookClicked(bookName, context);
+                          Navigator.pop(context);
+                        },
                       ),
-                      child: const Text("Frame Reader"),
-                      onPressed: () {
-                        onFrameReaderBookClicked(bookName, context);
-                        Navigator.pop(context);
-                      },
                     ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: ColorConstant.cyan500,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    const SizedBox(
+                      height: 14,
+                    ),
+                    SizedBox(
+                      width: 170,
+                      height: 46,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: ColorConstant.dark4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
+                        child: const Text("Frame Reader"),
+                        onPressed: () {
+                          onFrameReaderBookClicked(bookName, context);
+                          Navigator.pop(context);
+                        },
                       ),
-                      child: const Text("The Loop Reader"),
-                      onPressed: () {
-                        onBookClicked(bookName, context);
-                        Navigator.pop(context);
-                      },
                     ),
                   ],
                 ),
