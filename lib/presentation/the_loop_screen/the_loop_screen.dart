@@ -162,14 +162,16 @@ class TheloopScreenState extends State<TheloopScreen>
     }
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isPaused = !isPaused;
-          if (isPaused) {
-            timerManager?.stop();
-          } else {
-            timerManager?.start();
-          }
-        });
+        if (!isFrameView) {
+          setState(() {
+            isPaused = !isPaused;
+            if (isPaused) {
+              timerManager?.stop();
+            } else {
+              timerManager?.start();
+            }
+          });
+        }
       },
       onDoubleTap: () {
         // Toggle the view mode
@@ -178,26 +180,32 @@ class TheloopScreenState extends State<TheloopScreen>
         });
       },
       onHorizontalDragUpdate: (DragUpdateDetails details) {
-        dragHandler.handle(details);
+        if (!isFrameView) {
+          dragHandler.handle(details);
+        }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
-        setState(() {
-          isDragging = true;
-          durationMilliseconds += details.delta.dy.toInt();
-          if (durationMilliseconds < 100) durationMilliseconds = 100;
-          durationController.add(durationMilliseconds);
-          _saveLastDuration(durationMilliseconds);
-          wpmCounter = WPMCounterWidget(
-            durationMilliseconds: durationMilliseconds,
-            isPaused: isPaused,
-          );
-          // timerManager.updateDuration(durationMilliseconds);
-        });
+        if (!isFrameView) {
+          setState(() {
+            isDragging = true;
+            durationMilliseconds += details.delta.dy.toInt();
+            if (durationMilliseconds < 100) durationMilliseconds = 100;
+            durationController.add(durationMilliseconds);
+            _saveLastDuration(durationMilliseconds);
+            wpmCounter = WPMCounterWidget(
+              durationMilliseconds: durationMilliseconds,
+              isPaused: isPaused,
+            );
+            // timerManager.updateDuration(durationMilliseconds);
+          });
+        }
       },
       onVerticalDragEnd: (DragEndDetails details) {
-        setState(() {
-          isDragging = false;
-        });
+        if (!isFrameView) {
+          setState(() {
+            isDragging = false;
+          });
+        }
       },
       child: BlocBuilder<TheloopThemeBloc, TheloopThemeState>(
         builder: (context, state) {
@@ -209,7 +217,7 @@ class TheloopScreenState extends State<TheloopScreen>
               transitionBuilder: (Widget child, Animation<double> animation) {
                 var curvedAnimation = CurvedAnimation(
                   parent: animation,
-                  curve: Curves.easeInOutQuart, 
+                  curve: Curves.easeInOutQuart,
                 );
                 return SizeTransition(
                   axis: Axis.horizontal,
@@ -250,7 +258,11 @@ class TheloopScreenState extends State<TheloopScreen>
           padding: const EdgeInsets.all(32.0),
           child: Text(
             paragraph,
-            style: const TextStyle(fontSize: 32, color: Colors.white),
+            style: TextStyle(
+              fontSize: mapFontSizeEnumToDouble(state.fontSize) - 16,
+              color: state.mainTextColor,
+              fontFamily: state.fontName,
+            ),
           ),
         ),
       ),
