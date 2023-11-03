@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
@@ -255,7 +256,14 @@ class TheloopScreenState extends State<TheloopScreen>
       backgroundColor: state.backgroundColor,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: Platform.isIOS
+              ? getPadding(
+                  top: 32,
+                  bottom: 32,
+                  left: 32,
+                  right: 52,
+                )
+              : const EdgeInsets.all(32.0),
           child: Text(
             paragraph,
             style: TextStyle(

@@ -18,7 +18,8 @@ class LoopText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: getPadding(top: 40),
+      //top padding
+      padding: getPadding(top: 50),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -27,10 +28,11 @@ class LoopText extends StatelessWidget {
             Container(
               color: Colors.grey.shade500,
               width: 1,
-              height: 65,
+              height: 72,
             ), // Line above text
             Padding(
-              padding: getPadding(top: 50),
+              //padding between upper line and text
+              padding: getPadding(top: 42),
             ),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 50),
@@ -54,12 +56,12 @@ class LoopText extends StatelessWidget {
               ),
             ), // Text display
             Padding(
-              padding: getPadding(bottom: 50),
+              padding: getPadding(bottom: 42),
             ),
             Container(
               color: Colors.grey.shade500,
               width: 1,
-              height: 65,
+              height: 72,
             ), // Line below text
           ],
         ),
