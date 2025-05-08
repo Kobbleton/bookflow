@@ -120,16 +120,35 @@ class LibraryScreenLogic extends ChangeNotifier {
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(type: FileType.custom, allowedExtensions: ['txt']);
 
-    if (result != null) {
+    if (result != null && result.files.first.path != null) {
       PlatformFile file = result.files.first;
+      final tempFile = File(file.path!);
 
-      onBookAdded(file.name, file.name);
+      final appDir = await getApplicationDocumentsDirectory();
+      final savedFile = await tempFile.copy('${appDir.path}/${file.name}');
+
+      // Reformat the file content: one word per line
+      final content = await savedFile.readAsString();
+      final words = content
+          .split(RegExp(r'\s+'))
+          .where((word) => word.trim().isNotEmpty)
+          .toList();
+      final formattedContent = words.join('\n');
+      await savedFile.writeAsString(formattedContent);
+
+      final cleanBookName = file.name.replaceFirst('.txt', '');
+
+      onBookAdded(cleanBookName, savedFile.path.split('/').last);
+
       print('Picked file: ${file.name}');
+      print('✅ Файл сохранён в директорию приложения: ${savedFile.path}');
 
       showDialog(
         context: context,
         builder: (BuildContext context) => const BookAddSuccessDialog(),
       );
+    } else {
+      print('❌ Файл не выбран или путь null');
     }
   }
 
