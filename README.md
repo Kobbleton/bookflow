@@ -65,6 +65,12 @@ _📌 Coming soon..._
 - Used Provider & Bloc for clean state management
 - Worked with file uploads, sorting logic, user preferences
 - Modularized and documented codebase
+- Created immersive, landscape-only reading screen using Spritz method
+- Built advanced gesture controls for reading speed and navigation
+- Added customizable themes, fonts, and backgrounds
+- Ensured persistent state management for user preferences
+- Designed animated UI for smooth, intuitive user experience
+
 
 ---
 
