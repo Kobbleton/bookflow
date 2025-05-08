@@ -1,12 +1,12 @@
 // Importing necessary libraries and modules
 import 'dart:io' show Platform;
-import 'package:bookflow/bloc/reg_auth_blocs/authentification/authentication_state.dart';
+import 'package:bookflow/bloc/authentification/authentication_state.dart';
 import 'package:bookflow/presentation/login_and_registration_screens/sign_in_screen/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import '../../../bloc/reg_auth_blocs/authentification/authentication_bloc.dart';
-import '../../../bloc/reg_auth_blocs/authentification/authentication_event.dart';
+import '../../../bloc/authentification/authentication_bloc.dart';
+import '../../../bloc/authentification/authentication_event.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';

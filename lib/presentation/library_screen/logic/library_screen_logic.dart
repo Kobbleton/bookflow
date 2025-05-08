@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../core/utils/color_constant.dart';
-import '../../frame_reader_screen/frame_reader.dart';
 import '../../the_loop_screen/the_loop_screen.dart';
 
 class LibraryScreenLogic extends ChangeNotifier {
@@ -54,6 +52,7 @@ class LibraryScreenLogic extends ChangeNotifier {
   Future<void> loadSettings() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     currentCollection = prefs.getString('lastChosenCollection') ?? 'All';
+    print('Last chosen collection is: $currentCollection'); // debug print
   }
 
   // Setter for toggling grid view layout
@@ -67,6 +66,7 @@ class LibraryScreenLogic extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bookPaths = Map<String, String>.from(
         jsonDecode(prefs.getString('bookPaths') ?? "{}"));
+    print('Loaded Books: $bookPaths'); // debug print
 
     // bookToCollection = Map<String, String>.from(
     //     jsonDecode(prefs.getString('bookToCollection') ?? '{}'));
@@ -101,106 +101,6 @@ class LibraryScreenLogic extends ChangeNotifier {
     }
   }
 
-  //function to open Frame Reader Screen
-  void onFrameReaderBookClicked(String bookName, BuildContext context) async {
-    final directory = await getApplicationDocumentsDirectory();
-    String fileName = bookPaths[bookName] ?? '';
-    String filePath = '${directory.path}/$fileName';
-
-    if (filePath.isNotEmpty) {
-      List<String> words = await File(filePath).readAsLines();
-      Navigator.push(
-          context,
-          PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) =>
-                  FrameReaderScreen(words: words),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: child,
-                );
-              }));
-    } else {
-      // handle the error: show an alert dialog or something similar
-    }
-  }
-
-//Function to show dialog to choose reader
-  Future<void> showReaderSelectionDialog(
-      String bookName, BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: ColorConstant.dark2.withOpacity(0.7),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.18,
-            width: MediaQuery.of(context).size.width * 0.6,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: ColorConstant.dark2.withOpacity(0.7),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // const SizedBox(height: 20),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: 170,
-                      height: 46,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: ColorConstant.cyan500,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text("The Loop Reader"),
-                        onPressed: () {
-                          onBookClicked(bookName, context);
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    SizedBox(
-                      width: 170,
-                      height: 46,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: ColorConstant.dark4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text("Frame Reader"),
-                        onPressed: () {
-                          onFrameReaderBookClicked(bookName, context);
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   // Function to handle a tap event (to add a book)
   void handleTap(BuildContext context, String collection) async {
     HapticFeedback.heavyImpact(); // First tap
@@ -220,15 +120,35 @@ class LibraryScreenLogic extends ChangeNotifier {
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(type: FileType.custom, allowedExtensions: ['txt']);
 
-    if (result != null) {
+    if (result != null && result.files.first.path != null) {
       PlatformFile file = result.files.first;
+      final tempFile = File(file.path!);
 
-      onBookAdded(file.name, file.name);
+      final appDir = await getApplicationDocumentsDirectory();
+      final savedFile = await tempFile.copy('${appDir.path}/${file.name}');
+
+      // Reformat the file content: one word per line
+      final content = await savedFile.readAsString();
+      final words = content
+          .split(RegExp(r'\s+'))
+          .where((word) => word.trim().isNotEmpty)
+          .toList();
+      final formattedContent = words.join('\n');
+      await savedFile.writeAsString(formattedContent);
+
+      final cleanBookName = file.name.replaceFirst('.txt', '');
+
+      onBookAdded(cleanBookName, savedFile.path.split('/').last);
+
+      print('Picked file: ${file.name}');
+      print('✅ Файл сохранён в директорию приложения: ${savedFile.path}');
 
       showDialog(
         context: context,
         builder: (BuildContext context) => const BookAddSuccessDialog(),
       );
+    } else {
+      print('❌ Файл не выбран или путь null');
     }
   }
 
@@ -267,12 +187,14 @@ class LibraryScreenLogic extends ChangeNotifier {
   Future<void> saveBooks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList('addedBooks', addedBooks);
+    print('Saved Books: $addedBooks');
   }
 
   // Function to load saved books
   Future<void> loadBooks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     addedBooks = prefs.getStringList('addedBooks') ?? [];
+    print('Loaded Books: $addedBooks, SharedPreferences: $prefs');
 
     // bookIDs = Map<String, String>.from(
     //     jsonDecode(prefs.getString('bookIDs') ?? "{}"));
@@ -288,7 +210,8 @@ class LibraryScreenLogic extends ChangeNotifier {
 
     addedBooks.add(bookName);
     bookPaths[bookName] = filePath;
-
+    print(
+        'Added Book: $bookName, Updated addedBooks: $addedBooks, Updated bookPaths: $bookPaths');
     // bookIDs[bookName] = bookID; // Store bookID in the map
     addBookToCollection(collection, bookName);
 
@@ -309,6 +232,7 @@ class LibraryScreenLogic extends ChangeNotifier {
   Future<void> saveBookPaths() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('bookPaths', jsonEncode(bookPaths));
+    print('Saved Book Paths: $bookPaths');
   }
 
   // Function to get all books in a particular collection
@@ -319,6 +243,7 @@ class LibraryScreenLogic extends ChangeNotifier {
   void loadCollections() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     collections = prefs.getStringList('library_collection') ?? [];
+    print('Loaded Collections: $collections');
 
     for (var element in collections) {
       collectionChecklist[element] = false;
@@ -326,11 +251,17 @@ class LibraryScreenLogic extends ChangeNotifier {
 
     String? collectionBooksStr = prefs.getString('collectionBooks');
     if (collectionBooksStr != null) {
+      print('collectionBooksStr: $collectionBooksStr');
+
       final decoded = jsonDecode(collectionBooksStr);
       if (decoded is Map<String, dynamic>) {
         collectionBooks = decoded
             .map((key, value) => MapEntry(key, List<String>.from(value)));
+        print(decoded
+            .runtimeType); // Should now print Map<String, List<String>> if everything goes well
       } else {
+        print('Error: Unexpected type for collectionBooks');
+        print(decoded.runtimeType);
         // Handle the error appropriately
       }
     }
@@ -351,7 +282,7 @@ class LibraryScreenLogic extends ChangeNotifier {
       collectionBooks[collection]!.add(bookName);
     }
     // saveCollectionBooks();
-
+    print('Books in Collection after: ${collectionBooks[collection]}');
     notifyListeners();
   }
 
@@ -370,7 +301,7 @@ class LibraryScreenLogic extends ChangeNotifier {
     collections.add(collection);
     collectionChecklist[collection] = false;
     prefs.setStringList('library_collection', collections);
-
+    print('Saved Collections: $collections');
     notifyListeners();
   }
 
@@ -393,7 +324,7 @@ class LibraryScreenLogic extends ChangeNotifier {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList('library_collection', collections);
-
+    print('Saved Collections: $collections');
     notifyListeners();
   }
 

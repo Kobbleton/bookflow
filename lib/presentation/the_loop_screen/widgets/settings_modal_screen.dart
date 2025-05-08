@@ -8,9 +8,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../../bloc/the_loop_blocs/theloop_theme/theloop_theme_bloc.dart';
-import '../../../bloc/the_loop_blocs/theloop_theme/theloop_theme_event.dart';
-import '../../../bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
+import '../../../bloc/theloop_theme/theloop_theme_bloc.dart';
+import '../../../bloc/theloop_theme/theloop_theme_event.dart';
+import '../../../bloc/theloop_theme/theloop_theme_state.dart';
 import '../../../theme/fonts.dart';
 
 class SettingsModalScreen {

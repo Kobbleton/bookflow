@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bloc/reg_auth_blocs/signup/sign_up_bloc.dart';
-import '../../../bloc/reg_auth_blocs/signup/sign_up_event.dart';
-import '../../../bloc/reg_auth_blocs/signup/sign_up_state.dart';
+import '../../../bloc/signup/sign_up_bloc.dart';
+import '../../../bloc/signup/sign_up_event.dart';
+import '../../../bloc/signup/sign_up_state.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';

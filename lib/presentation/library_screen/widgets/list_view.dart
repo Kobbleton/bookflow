@@ -93,7 +93,8 @@ class BookListView extends StatelessWidget {
                           imagePath: 'assets/images/90dney_cover.png',
                           text: bookName,
                           onCardTap: (filePath) {
-                            logic.showReaderSelectionDialog(bookName, context);
+                            // assuming you get filePath from somewhere or it's the same as bookName
+                            logic.onBookClicked(bookName, context);
                           },
                         ),
                       ),

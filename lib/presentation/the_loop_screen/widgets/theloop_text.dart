@@ -1,5 +1,5 @@
-import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_bloc.dart';
-import 'package:bookflow/bloc/the_loop_blocs/theloop_theme/theloop_theme_state.dart';
+import 'package:bookflow/bloc/theloop_theme/theloop_theme_bloc.dart';
+import 'package:bookflow/bloc/theloop_theme/theloop_theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/size_utils.dart';
@@ -18,8 +18,7 @@ class LoopText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      //top padding
-      padding: getPadding(top: 50),
+      padding: getPadding(top: 40),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -28,11 +27,10 @@ class LoopText extends StatelessWidget {
             Container(
               color: Colors.grey.shade500,
               width: 1,
-              height: 72,
+              height: 65,
             ), // Line above text
             Padding(
-              //padding between upper line and text
-              padding: getPadding(top: 42),
+              padding: getPadding(top: 50),
             ),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 50),
@@ -56,12 +54,12 @@ class LoopText extends StatelessWidget {
               ),
             ), // Text display
             Padding(
-              padding: getPadding(bottom: 42),
+              padding: getPadding(bottom: 50),
             ),
             Container(
               color: Colors.grey.shade500,
               width: 1,
-              height: 72,
+              height: 65,
             ), // Line below text
           ],
         ),
