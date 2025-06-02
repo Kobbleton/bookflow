@@ -50,11 +50,46 @@ BookFlow is an innovative Flutter application designed to help users read faster
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshots & GIF Previews
 
-_📌 Coming soon..._
+Experience BookFlow in action through these short UI demos.
 
 ---
+
+### 🔥 Splash & Welcome
+
+| Splash Screen | Welcome Screen |
+|---------------|----------------|
+| ![](screenshots/splash.gif) | ![](screenshots/welcome.gif) |
+
+---
+
+### 🔐 Authentication Flow
+
+| Sign Up | Log In | Forgot Password |
+|--------|--------|-----------------|
+| ![](screenshots/signup.gif) | ![](screenshots/login.gif) | ![](screenshots/forgot_password.gif) |
+
+---
+
+### 📖 Library & Book Management
+
+| Reading Now | Add to Collection | Add New Book |
+|-------------|-------------------|---------------|
+| ![](screenshots/reading_now.gif) | ![](screenshots/add_to_collection.gif) | ![](screenshots/add_book.gif) |
+
+---
+
+### 🧭 App Experience
+
+| Logout | Reader Screen | Mode Switch (Light/Dark) |
+|--------|----------------|---------------------------|
+| ![](screenshots/logout.gif) | ![](screenshots/reader.gif) | ![](screenshots/mode_switch.gif) |
+
+---
+
+_🎥 For full experience, check out the [demo video](#🔗-links)_
+
 
 ## 🧠 What I Did
 
