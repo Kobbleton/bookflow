@@ -88,11 +88,48 @@ Experience BookFlow in action through these short UI demos.
 
 ---
 
-### 📖 Reader Screen
+## 📖 Reader Screen
 
-| Mode Switch (Light/Dark) | Personal Info | Logout |
-|--------|----------------|---------------------------|
-| ![](screenshots/mode_switch.gif) | ![](screenshots/personal_info.gif) | ![](screenshots/logout.gif) |
+Explore the immersive reading experience powered by Spritz — optimized for focus, speed, and customization.
+
+---
+
+### 📲 Open Reader Screen  
+![](screenshots/open_reader_screen.gif)
+
+---
+
+### 🟢 Start Reading  
+![](screenshots/reader_screen_start.gif)
+
+---
+
+### 🕐 Change Speed (WPM)  
+![](screenshots/reader_screen_speed_change.gif)
+
+---
+
+### 📍 Navigate Through Book  
+![](screenshots/reader_screen_navigation.gif)
+
+---
+
+### 🎨 Theme Switch (Light / Dark Modes)
+
+![](screenshots/reader_screen_theme_switch.gif)
+
+![](screenshots/reader_screen_theme_switch2.gif)
+
+![](screenshots/reader_screen_theme_switch3.gif)
+
+![](screenshots/reader_screen_theme_switch4.gif)
+
+![](screenshots/reader_screen_theme_switch5.gif)
+
+---
+
+### 🔤 Change Font  
+![](screenshots/reader_screen_font_change.gif)
 
 ---
 
