@@ -82,9 +82,17 @@ Experience BookFlow in action through these short UI demos.
 
 ### 🧭 App Experience
 
-| Logout | Reader Screen | Mode Switch (Light/Dark) |
+| Mode Switch (Light/Dark) | Personal Info | Logout |
 |--------|----------------|---------------------------|
-| ![](screenshots/logout.gif) | ![](screenshots/reader.gif) | ![](screenshots/mode_switch.gif) |
+| ![](screenshots/mode_switch.gif) | ![](screenshots/personal_info.gif) | ![](screenshots/logout.gif) |
+
+---
+
+### 📖 Reader Screen
+
+| Mode Switch (Light/Dark) | Personal Info | Logout |
+|--------|----------------|---------------------------|
+| ![](screenshots/mode_switch.gif) | ![](screenshots/personal_info.gif) | ![](screenshots/logout.gif) |
 
 ---
 
