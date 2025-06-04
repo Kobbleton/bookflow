@@ -157,7 +157,6 @@ _🎥 For full experience, check out the [demo video](https://youtu.be/8kCLanLIh
 ## 📚 Future Plans
 
 - Add real stats and reading progress
-- Refactor to use Riverpod or Cubit
 - Connect to backend for syncing book data
 - Publish on Play Store and App Store
 
@@ -166,5 +165,6 @@ _🎥 For full experience, check out the [demo video](https://youtu.be/8kCLanLIh
 ## 🔗 Links
 
 - 🧠 GitHub Repo: [this repo]
-- 📽 Demo video: _coming soon_
+- 📽 Demo video: [YouTube](https://youtu.be/8kCLanLIhLU)
+
 
