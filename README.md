@@ -133,7 +133,7 @@ Explore the immersive reading experience powered by Spritz — optimized for foc
 
 ---
 
-_🎥 For full experience, check out the [demo video](#🔗-links)_
+_🎥 For full experience, check out the [demo video](https://youtu.be/8kCLanLIhLU)_
 
 
 ## 🧠 What I Did
