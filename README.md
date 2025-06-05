@@ -210,7 +210,7 @@ _🎥 For full experience, check out the [demo video](https://youtu.be/8kCLanLIh
 - Developed full frontend architecture using Flutter
 - Integrated Firebase Authentication (Google, Apple, Email)
 - Implemented Spritz-based speed reading display
-- Designed and built UI/UX for all screens
+- Designed and built UI/UX for all screens in Figma
 - Used Provider & Bloc for clean state management
 - Worked with file uploads, sorting logic, user preferences
 - Modularized and documented codebase
@@ -233,7 +233,7 @@ _🎥 For full experience, check out the [demo video](https://youtu.be/8kCLanLIh
 
 ## 🔗 Links
 
-- 🧠 GitHub Repo: [this repo]
+- 🧠 GitHub Repo: [github.com/Kobbleton/bookflow](https://github.com/Kobbleton/bookflow)
 - 📽 Demo video: [YouTube](https://youtu.be/8kCLanLIhLU)
 
 
