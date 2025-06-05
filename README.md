@@ -1,3 +1,8 @@
+![Flutter](https://img.shields.io/badge/Made%20with-Flutter-blue)
+![Status](https://img.shields.io/badge/Status-In%20Progress-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
+
 # 📚 BookFlow – Flutter app for speed reading
 
 BookFlow is an innovative Flutter application designed to help users read faster using the **Spritz** technique — a word-at-a-time reading experience optimized for focus and speed.
@@ -37,15 +42,79 @@ BookFlow is an innovative Flutter application designed to help users read faster
 
 ## 💡 Tech Stack
 
-- **Flutter & Dart**
+- **Language:** Dart
+- **Framework:** Flutter
 - **State Management:** Provider, Bloc
-- **Firebase Auth**
-- **FilePicker plugin**
-- **Custom UI animations & transitions**
+- **Authentication:** Firebase Auth, Sign in with Google & Apple
+- **Animations:** Flutter built-in animations, Hero transitions, AnimatedContainer, Custom UI animations & transitions
+- **File Handling:** FilePicker plugin (for importing books)
+- **Theming:** Light/Dark theme switch, dynamic theming with Bloc
+- **Routing:** Navigator 2.0 
+- **Architecture:** Modular folder structure, separation of concerns
+- **Responsive UI:** MediaQuery & LayoutBuilder-based scaling
+- **Platform:** Android and iOS-ready (with iOS sign-in support)
+
+---
+
+## 💼 Project Role
+
+Solo Flutter Developer — from UI design in Figma to complete frontend implementation.  
+10-month build of a real startup MVP prototype with Firebase Auth, advanced UI, and full UX polish.  
 
 ---
 
 ## 🧩 Project Structure (simplified)
+
+The project follows a modular architecture for clarity and scalability:
+
+- `bloc/` — All business logic and state management (organized by feature)
+- `core/` — Constants, shared utilities, and exports
+- `presentation/` — UI screens grouped by purpose and flow
+- `repository/` — Data access and authentication abstraction
+- `routes/` — Centralized route definitions
+- `theme/` — App-wide styles, fonts, and decorations
+- `exceptions/` — Custom error handling
+- `main.dart` — App entry point
+- `firebase_options.dart` — Firebase initialization
+
+```
+lib/
+├── main.dart
+├── firebase_options.dart
+├── bloc/
+│   ├── authentification/
+│   ├── personal_settings/
+│   ├── signup/
+│   ├── theloop_theme/
+│   └── themecubit/
+├── core/
+│   ├── app_export.dart
+│   ├── constants/
+│   └── utils/
+├── exceptions/
+│   └── custom_exception.dart
+├── presentation/
+│   ├── splash_screen/
+│   ├── welcome_screen/
+│   ├── login_and_registration_screens/
+│   ├── _Feature_otp_code_verification_screen/
+│   ├── app_navigation_screen/
+│   ├── home_screen/
+│   ├── library_screen/
+│   ├── the_loop_screen/
+│   ├── profile_screen/
+│   ├── settings_screen/
+│   ├── settings_personal_info_screen/
+│   └── widgets/
+├── repository/
+│   └── auth_repository.dart
+├── routes/
+│   └── app_routes.dart
+└── theme/
+    ├── app_decoration.dart
+    ├── app_style.dart
+    └── fonts.dart
+```
 
 
 ---
